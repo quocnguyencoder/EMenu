@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
+    "export": "next export",
     "precommit": "pretty-quick --staged"
   },
   "dependencies": {
