@@ -1,9 +1,14 @@
 import Layout from "../components/Layout";
 
+import Banners from "../components/Homepage/Banners";
+import { Container } from "@material-ui/core";
+
 export default function Home() {
   return (
     <Layout title="Homepage">
-      <h1>welcome </h1>
+      <Container maxWidth="lg">
+        <Banners />
+      </Container>
     </Layout>
   );
 }
