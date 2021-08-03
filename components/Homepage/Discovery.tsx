@@ -2,6 +2,7 @@ import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "./TabPanel";
+import Newest from "./Newest";
 import React, { useState } from "react";
 
 const Discovery = () => {
@@ -25,7 +26,7 @@ const Discovery = () => {
         </Tabs>
       </Paper>
       <TabPanel value={value} index="one">
-        Item One
+        <Newest />
       </TabPanel>
       <TabPanel value={value} index="two">
         Item 2

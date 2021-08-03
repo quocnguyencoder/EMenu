@@ -1,6 +1,9 @@
 import { alpha, makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
+  layout: {
+    flex: 1,
+  },
   title: {
     flexGrow: 0.2,
     display: "none",

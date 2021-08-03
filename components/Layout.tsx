@@ -7,7 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import { useStyles } from "../styles/layout.styles";
+import { useStyles } from "../styles/layout";
 
 interface Props {
   title: string;

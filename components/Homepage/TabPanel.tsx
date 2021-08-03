@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 interface TabPanelProps {
@@ -19,11 +18,7 @@ export default function TabPanel(props: TabPanelProps) {
       aria-labelledby={`wrapped-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box mt={3}>{children}</Box>}
     </div>
   );
 }
