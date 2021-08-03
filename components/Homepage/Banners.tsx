@@ -13,7 +13,7 @@ function Item(props: any) {
   );
 }
 
-export default function Banners() {
+const Banners = () => {
   var items = [
     {
       name: "Random Name #1",
@@ -31,4 +31,6 @@ export default function Banners() {
       ))}
     </Carousel>
   );
-}
+};
+
+export default Banners;
