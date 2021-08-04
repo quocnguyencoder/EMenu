@@ -20,6 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     marginLeft: 0,
     width: "40%",
+    flexGrow: 1,
   },
   searchIcon: {
     padding: theme.spacing(0, 2),

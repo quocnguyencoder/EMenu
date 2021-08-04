@@ -45,7 +45,7 @@ export default function Layout({ title, children }: Props) {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit">Đăng nhập</Button>
           </Toolbar>
         </Container>
       </AppBar>
