@@ -31,12 +31,7 @@ export default function Layout({ title, children }: Props) {
         <Container maxWidth="lg">
           <Toolbar>
             <Box className={classes.title}>
-              <Image
-                src={`${prefix}/logo.png`}
-                alt="logo"
-                width={100}
-                height={50}
-              />
+              <Image src="/logo.png" alt="logo" width={100} height={50} />
             </Box>
 
             <div className={classes.search}>
