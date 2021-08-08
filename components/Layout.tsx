@@ -4,10 +4,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
+import Image from "next/image";
 import SearchIcon from "@material-ui/icons/Search";
 import { useStyles } from "../styles/layout";
+import { Box } from "@material-ui/core";
 
 interface Props {
   title: string;
@@ -21,7 +22,7 @@ export default function Layout({ title, children }: Props) {
   return (
     <div>
       <Head>
-        <title>{`EMenu: ${title}`}</title>
+        <title>{title}</title>
         <meta name="description" content="Welcome to EMenu" />
         <link rel="icon" href={`${prefix}/favicon.ico`} />
       </Head>
@@ -29,9 +30,15 @@ export default function Layout({ title, children }: Props) {
       <AppBar color="transparent" position="static">
         <Container maxWidth="lg">
           <Toolbar>
-            <Typography className={classes.title} variant="h6" noWrap>
-              EMenu
-            </Typography>
+            <Box className={classes.title}>
+              <Image
+                src={`${prefix}/logo.png`}
+                alt="logo"
+                width={100}
+                height={50}
+              />
+            </Box>
+
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />

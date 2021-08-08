@@ -13,7 +13,7 @@ const Discovery = () => {
   };
   return (
     <>
-      <Paper>
+      <Paper style={{ marginTop: 10 }}>
         <Tabs
           value={value}
           onChange={handleChange}

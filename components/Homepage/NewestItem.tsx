@@ -24,7 +24,8 @@ const NewestItem = () => {
     <Card>
       <CardActionArea>
         <CardMedia
-          style={{ height: 150 }}
+          component="img"
+          height="150"
           image={`${prefix}/food.jpg`}
           title="Contemplative Reptile"
         />

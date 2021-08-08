@@ -5,8 +5,8 @@ import { Container } from "@material-ui/core";
 export default function Home() {
   return (
     <Layout title="Homepage">
+      <Banners />
       <Container maxWidth="lg">
-        <Banners />
         <Discovery />
       </Container>
     </Layout>
