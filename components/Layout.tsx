@@ -6,8 +6,6 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
-  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
   return (
     <>
       <Meta />
