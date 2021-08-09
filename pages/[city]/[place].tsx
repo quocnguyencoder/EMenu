@@ -16,7 +16,9 @@ export default function Place() {
         <List component="nav">
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
-            <ListItem button>{category}</ListItem>
+            <ListItem key={category} button>
+              {category}
+            </ListItem>
           ))}
         </List>
         <Box flex="1">
@@ -29,7 +31,9 @@ export default function Place() {
                   <Typography>{category}</Typography>
                   {menu.map((m) =>
                     m.category === category ? (
-                      <ListItem button>{m.name}</ListItem>
+                      <ListItem key={m.name} button>
+                        {m.name}
+                      </ListItem>
                     ) : null
                   )}
                 </>
