@@ -28,7 +28,9 @@ export default function SearchBar() {
         }
         endAdornment={
           <InputAdornment position="end">
-            {searchTerm === "" ? null : (
+            {searchTerm === "" ? (
+              <></>
+            ) : (
               <IconButton size="small" onClick={() => clearSearch()}>
                 <ClearIcon fontSize="small" color="disabled" />
               </IconButton>

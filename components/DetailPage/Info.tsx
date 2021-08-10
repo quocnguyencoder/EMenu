@@ -1,7 +1,8 @@
-import { Box, Typography, Breadcrumbs, Link } from "@material-ui/core";
+import { Box, Typography, Breadcrumbs } from "@material-ui/core";
 import MonetizationOnOutlinedIcon from "@material-ui/icons/MonetizationOnOutlined";
 import { useRouter } from "next/router";
 import Rate from "./Rate";
+import Link from "next/link";
 
 export default function Info() {
   const router = useRouter();
@@ -9,21 +10,24 @@ export default function Info() {
   return (
     <Box maxWidth="60%" display="flex" flexDirection="column">
       <Breadcrumbs separator="››" aria-label="breadcrumb">
-        <Link color="inherit" href="/">
-          Home
+        <Link as="/" href="/">
+          <a>Home</a>
         </Link>
-        <Link color="inherit" href={`/${router.query.city}`}>
-          {router.query.city}
+        <Link as={`/${router.query.city}`} href="/[city]">
+          <a>{router.query.city}</a>
         </Link>
         <Link
-          color="inherit"
-          href={`/${router.query.city}/${router.query.place}`}
+          as={`/${router.query.city}/${router.query.place}`}
+          href="/[city]/[place]"
         >
-          {router.query.place}
+          <a>{router.query.place}</a>
         </Link>
       </Breadcrumbs>
       <Typography>
-        Shop/Cua Hang/Quan An - <Link href="/">Chi nhanh</Link>
+        Shop/Cua Hang/Quan An -{" "}
+        <Link as="/" href="/">
+          <a>Chi nhanh</a>
+        </Link>
       </Typography>
 
       <Typography variant="h4">{router.query.place}</Typography>
