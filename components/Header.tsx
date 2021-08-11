@@ -17,7 +17,7 @@ export default function Header() {
       <Container maxWidth="lg">
         <Toolbar>
           <Box className={classes.title}>
-            <Image src="/logo.png" alt="logo" width={100} height={50} />
+            <Image src="../logo.png" alt="logo" width={100} height={50} />
           </Box>
 
           <div className={classes.search}>
