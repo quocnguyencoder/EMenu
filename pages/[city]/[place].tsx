@@ -1,5 +1,6 @@
+import React from "react";
 import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
-import SearchBar from "../../components/DetailPage/SearchBar";
+// import SearchBar from "../../components/DetailPage/SearchBar";
 import Image from "next/image";
 import Info from "../../components/DetailPage/Info";
 
@@ -7,12 +8,12 @@ export default function Place() {
   const categories = Array.from(new Set(menu.map((m) => m.category)));
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" style={{ marginTop: "80px" }}>
       <Box display="flex" mt={1} style={{ gap: "1%" }}>
         <Image src="../chicken.jpg" alt="logo" width={480} height={300} />
         <Info />
       </Box>
-      <Box display="flex" mt={2} style={{ gap: "2%" }}>
+      <Box display="flex" mt={2} style={{ gap: "1%" }}>
         <List component="nav">
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
@@ -24,7 +25,7 @@ export default function Place() {
         <Box flex="1">
           <Typography>promotions</Typography>
           {/* <SearchBar /> */}
-          <List>
+          {/* <List>
             {categories.map((category) =>
               menu
                 .filter((item) => item.category === category)
@@ -34,6 +35,22 @@ export default function Place() {
                   </ListItem>
                 ))
             )}
+          </List> */}
+          <List>
+            {categories.map((category) => {
+              return (
+                <React.Fragment key={`list${category}`}>
+                  <Typography>{category}</Typography>
+                  {menu.map((m) =>
+                    m.category === category ? (
+                      <ListItem key={m.name} button>
+                        {m.name}
+                      </ListItem>
+                    ) : null
+                  )}
+                </React.Fragment>
+              );
+            })}
           </List>
         </Box>
       </Box>

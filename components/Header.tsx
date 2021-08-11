@@ -8,16 +8,19 @@ import Image from "next/image";
 import SearchIcon from "@material-ui/icons/Search";
 import { useStyles } from "../styles/header";
 import { Box } from "@material-ui/core";
+import Link from "@material-ui/core/Link";
 
 export default function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar color="transparent" position="static">
+    <AppBar color="primary" position="fixed">
       <Container maxWidth="lg">
         <Toolbar>
           <Box className={classes.title}>
-            <Image src="../logo.png" alt="logo" width={100} height={50} />
+            <Link href="/">
+              <Image src="../logo.png" alt="logo" width={100} height={50} />
+            </Link>
           </Box>
 
           <div className={classes.search}>
