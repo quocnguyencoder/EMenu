@@ -8,7 +8,7 @@ export default function Info() {
   const router = useRouter();
   const price = "10b";
   return (
-    <Box maxWidth="60%" display="flex" flexDirection="column">
+    <Box maxWidth="60%" style={{ flexDirection: "column" }}>
       <Breadcrumbs separator="››" aria-label="breadcrumb">
         <Link as="/" href="/">
           <a>Home</a>

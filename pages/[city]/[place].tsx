@@ -11,7 +11,7 @@ export default function Place() {
         <Image src="../chicken.jpg" alt="food" width={480} height={300} />
         <Info />
       </Box>
-      <Box display="flex" mt={2} style={{ gap: "2%" }}>
+      <Box mt={2} style={{ display: "flex", gap: "2%" }}>
         <List component="nav">
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
