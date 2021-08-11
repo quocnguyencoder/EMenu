@@ -16,29 +16,24 @@ export default function Place() {
         <List component="nav">
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
-            <ListItem key={category} button>
+            <ListItem key={`menu${category}`} button>
               {category}
             </ListItem>
           ))}
         </List>
         <Box flex="1">
           <Typography>promotions</Typography>
-          <SearchBar />
+          {/* <SearchBar /> */}
           <List>
-            {categories.map((category) => {
-              return (
-                <>
-                  <Typography>{category}</Typography>
-                  {menu.map((m) =>
-                    m.category === category ? (
-                      <ListItem key={m.name} button>
-                        {m.name}
-                      </ListItem>
-                    ) : null
-                  )}
-                </>
-              );
-            })}
+            {categories.map((category) =>
+              menu
+                .filter((item) => item.category === category)
+                .map((m) => (
+                  <ListItem key={m.name} button>
+                    {m.name}
+                  </ListItem>
+                ))
+            )}
           </List>
         </Box>
       </Box>
