@@ -22,6 +22,6 @@ export default function Meta({ title, description }: Props) {
 }
 
 Meta.defaultProps = {
-  title: "E-menu",
+  title: "Emenu",
   description: "Welcome to EMenu",
 };
