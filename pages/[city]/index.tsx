@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Box } from "@material-ui/core";
 
-export default function index() {
+export default function City() {
   const router = useRouter();
   console.log(router.query);
 
