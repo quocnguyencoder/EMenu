@@ -14,31 +14,38 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar color="primary" position="fixed">
-      <Container maxWidth="lg">
-        <Toolbar>
-          <Box className={classes.title}>
-            <Link href="/">
-              <Image src="../logo.png" alt="logo" width={100} height={50} />
-            </Link>
-          </Box>
+    <>
+      <AppBar color="primary" position="fixed" style={{ marginBottom: "80px" }}>
+        <Container maxWidth="lg">
+          <Toolbar>
+            <Box className={classes.title}>
+              <Link href="/">
+                <Image src="../logo.png" alt="logo" width={100} height={50} />
+              </Link>
+            </Box>
 
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Địa điểm, món ăn, loại hình..."
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
-            <InputBase
-              placeholder="Địa điểm, món ăn, loại hình..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-          <Button color="inherit">Đăng nhập</Button>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            <Button color="inherit">
+              <Link color="secondary" href="/login">
+                Đăng nhập
+              </Link>
+            </Button>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Toolbar />
+    </>
   );
 }

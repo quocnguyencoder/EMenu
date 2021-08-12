@@ -8,7 +8,7 @@ export default function Place() {
   const categories = Array.from(new Set(menu.map((m) => m.category)));
 
   return (
-    <Container maxWidth="lg" style={{ marginTop: "80px" }}>
+    <Container maxWidth="lg">
       <Box display="flex" mt={1} style={{ gap: "1%" }}>
         <Image src="../chicken.jpg" alt="logo" width={480} height={300} />
         <Info />
