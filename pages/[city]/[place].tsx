@@ -5,14 +5,13 @@ import Info from "../../components/DetailPage/Info";
 
 export default function Place() {
   const categories = Array.from(new Set(menu.map((m) => m.category)));
-
   return (
     <Container maxWidth="lg">
       <Box display="flex" mt={1} style={{ gap: "1%" }}>
-        <Image src="../chicken.jpg" alt="logo" width={480} height={300} />
+        <Image src="../chicken.jpg" alt="food" width={480} height={300} />
         <Info />
       </Box>
-      <Box display="flex" mt={2} style={{ gap: "2%" }}>
+      <Box mt={2} style={{ display: "flex", gap: "2%" }}>
         <List component="nav">
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
@@ -34,7 +33,9 @@ export default function Place() {
                       <ListItem key={m.name} button>
                         {m.name}
                       </ListItem>
-                    ) : null
+                    ) : (
+                      <></>
+                    )
                   )}
                 </>
               );
