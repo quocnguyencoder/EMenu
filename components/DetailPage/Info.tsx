@@ -6,7 +6,8 @@ import Link from "next/link";
 
 export default function Info() {
   const router = useRouter();
-  const price = "10b";
+  const cityName = router.query.city || "none";
+  const placeName = router.query.place || "none";
   return (
     <Box maxWidth="60%" style={{ flexDirection: "column" }}>
       <Breadcrumbs separator="››" aria-label="breadcrumb">
@@ -38,7 +39,7 @@ export default function Info() {
       <Typography variant="body1">Closed</Typography>
       <Typography>
         <MonetizationOnOutlinedIcon />
-        {price}
+        100.000đ
       </Typography>
     </Box>
   );
