@@ -4,7 +4,6 @@ import { Box } from "@material-ui/core";
 
 export default function City() {
   const router = useRouter();
-  console.log(router.query);
 
   return (
     <Box display="flex" flexDirection="column">
