@@ -1,6 +1,5 @@
-import React from "react";
 import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
-// import SearchBar from "../../components/DetailPage/SearchBar";
+import SearchBar from "../../components/DetailPage/SearchBar";
 import Image from "next/image";
 import Info from "../../components/DetailPage/Info";
 
@@ -12,33 +11,22 @@ export default function Place() {
         <Image src="../chicken.jpg" alt="food" width={480} height={300} />
         <Info />
       </Box>
-      <Box display="flex" mt={2} style={{ gap: "1%" }}>
+      <Box mt={2} style={{ display: "flex", gap: "2%" }}>
         <List component="nav">
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
-            <ListItem key={`menu${category}`} button>
+            <ListItem key={category} button>
               {category}
             </ListItem>
           ))}
         </List>
         <Box flex="1">
           <Typography>promotions</Typography>
-          {/* <SearchBar /> */}
-          {/* <List>
-            {categories.map((category) =>
-              menu
-                .filter((item) => item.category === category)
-                .map((m) => (
-                  <ListItem key={m.name} button>
-                    {m.name}
-                  </ListItem>
-                ))
-            )}
-          </List> */}
+          <SearchBar />
           <List>
             {categories.map((category) => {
               return (
-                <React.Fragment key={`list${category}`}>
+                <>
                   <Typography>{category}</Typography>
                   {menu.map((m) =>
                     m.category === category ? (
@@ -49,7 +37,7 @@ export default function Place() {
                       <></>
                     )
                   )}
-                </React.Fragment>
+                </>
               );
             })}
           </List>

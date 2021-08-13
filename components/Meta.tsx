@@ -16,12 +16,12 @@ export default function Meta({ title, description }: Props) {
       <meta charSet="utf-8" />
       <title>{title}</title>
       <meta name="description" content={description} />
-      <link rel="icon" href={`${prefix}/newfavicon.ico`} />
+      <link rel="icon" href={`${prefix}/favicon.ico`} />
     </Head>
   );
 }
 
 Meta.defaultProps = {
-  title: "Emenu",
+  title: "E-menu",
   description: "Welcome to EMenu",
 };
