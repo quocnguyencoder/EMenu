@@ -9,13 +9,24 @@ import SearchIcon from "@material-ui/icons/Search";
 import { useStyles } from "../styles/header";
 import { Box } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
+import { useRouter } from "next/router";
+import useUser from "../firebase/useUser";
+import UserMenu from "./UserMenu";
 
 export default function Header() {
   const classes = useStyles();
+  const router = useRouter();
+  const { user, logout } = useUser();
+
+  const handleClick = () => {
+    router.push("/login");
+  };
+
+  const isLoggedIn = user.id !== null;
 
   return (
     <>
-      <AppBar color="primary" position="fixed" style={{ marginBottom: "80px" }}>
+      <AppBar color="primary" position="fixed">
         <Container maxWidth="lg">
           <Toolbar>
             <Box className={classes.title}>
@@ -37,11 +48,13 @@ export default function Header() {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <Button color="inherit">
-              <Link color="secondary" href="/login">
+            {isLoggedIn ? (
+              <UserMenu user={user} logout={logout} />
+            ) : (
+              <Button color="inherit" onClick={() => handleClick()}>
                 Đăng nhập
-              </Link>
-            </Button>
+              </Button>
+            )}
           </Toolbar>
         </Container>
       </AppBar>

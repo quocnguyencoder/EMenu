@@ -31,7 +31,7 @@ const useUser = () => {
       .signOut()
       .then(() => {
         // Sign-out successful.
-        router.push("/auth");
+        router.push("/");
       })
       .catch((e) => {
         console.error(e);
@@ -54,8 +54,9 @@ const useUser = () => {
     });
 
     const userFromCookie = getUserFromCookie();
+
     if (!userFromCookie) {
-      router.push("/");
+      router.push("/login");
       return;
     }
     setUser(userFromCookie);
@@ -69,4 +70,4 @@ const useUser = () => {
   return { user, logout };
 };
 
-export { useUser };
+export default useUser;

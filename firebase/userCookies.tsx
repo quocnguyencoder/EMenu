@@ -3,8 +3,15 @@ import User from "../models/user";
 
 export const getUserFromCookie = () => {
   const cookie = cookies.get("auth");
+
   if (!cookie) {
     return;
+  }
+
+  try {
+    return JSON.parse(JSON.stringify(cookie));
+  } catch {
+    console.log("cookie");
   }
   return JSON.parse(cookie);
 };
