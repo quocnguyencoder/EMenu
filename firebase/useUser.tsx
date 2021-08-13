@@ -56,7 +56,7 @@ const useUser = () => {
     const userFromCookie = getUserFromCookie();
 
     if (!userFromCookie) {
-      router.push("/login");
+      router.push("/");
       return;
     }
     setUser(userFromCookie);
