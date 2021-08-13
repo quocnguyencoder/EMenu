@@ -17,8 +17,6 @@ import React from "react";
 
 const NewestItem = () => {
   const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
-  const preventDefault = (event: React.SyntheticEvent) =>
-    event.preventDefault();
 
   return (
     <Card>
@@ -35,8 +33,7 @@ const NewestItem = () => {
         <ListItemText
           primary={
             <Link
-              href="#"
-              onClick={preventDefault}
+              href="/nha-trang/quan-net-ong-tien"
               color="inherit"
               variant="body1"
               style={{ fontWeight: "bold" }}
@@ -57,7 +54,6 @@ const NewestItem = () => {
         title={
           <Link
             href="#"
-            onClick={preventDefault}
             color="inherit"
             variant="body2"
             style={{ fontWeight: "bold" }}
