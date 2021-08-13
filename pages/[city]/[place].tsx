@@ -2,6 +2,7 @@ import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
 import SearchBar from "../../components/DetailPage/SearchBar";
 import Image from "next/image";
 import Info from "../../components/DetailPage/Info";
+import * as React from "react";
 
 export default function Place() {
   const categories = Array.from(new Set(menu.map((m) => m.category)));
@@ -26,18 +27,16 @@ export default function Place() {
           <List>
             {categories.map((category) => {
               return (
-                <>
+                <React.Fragment key={`menu ${category}`}>
                   <Typography>{category}</Typography>
-                  {menu.map((m) =>
-                    m.category === category ? (
-                      <ListItem key={m.name} button>
-                        {m.name}
+                  {menu
+                    .filter((m) => m.category === category)
+                    .map((n) => (
+                      <ListItem key={n.name} button>
+                        {n.name}
                       </ListItem>
-                    ) : (
-                      <></>
-                    )
-                  )}
-                </>
+                    ))}
+                </React.Fragment>
               );
             })}
           </List>
