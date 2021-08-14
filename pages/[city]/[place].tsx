@@ -2,10 +2,11 @@ import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
 import SearchBar from "../../components/DetailPage/SearchBar";
 import Image from "next/image";
 import Info from "../../components/DetailPage/Info";
-import * as React from "react";
+import { Fragment } from "react";
 
 export default function Place() {
   const categories = Array.from(new Set(menu.map((m) => m.category)));
+  const handleOnClick = (input: string) => (location.hash = `${input}`);
   return (
     <Container maxWidth="lg">
       <Box display="flex" mt={1} style={{ gap: "1%" }}>
@@ -16,7 +17,11 @@ export default function Place() {
         <List component="nav">
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
-            <ListItem key={category} button>
+            <ListItem
+              key={category}
+              button
+              onClick={() => handleOnClick(category)}
+            >
               {category}
             </ListItem>
           ))}
@@ -27,16 +32,16 @@ export default function Place() {
           <List>
             {categories.map((category) => {
               return (
-                <React.Fragment key={`menu ${category}`}>
-                  <Typography>{category}</Typography>
+                <Fragment key={`menu ${category}`}>
+                  <Typography id={`${category}`}>{category}</Typography>
                   {menu
                     .filter((m) => m.category === category)
-                    .map((n) => (
-                      <ListItem key={n.name} button>
-                        {n.name}
+                    .map((item) => (
+                      <ListItem key={item.name} button>
+                        {item.name}
                       </ListItem>
                     ))}
-                </React.Fragment>
+                </Fragment>
               );
             })}
           </List>

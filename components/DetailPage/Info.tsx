@@ -6,21 +6,20 @@ import Link from "next/link";
 
 export default function Info() {
   const router = useRouter();
-  const price = "10b";
+  const price = "100.000 VNĐ";
+  const address = "22 Hoàng Văn Thụ, Nha Trang, Khánh Hòa";
+  const { city, place } = router.query;
   return (
     <Box maxWidth="60%">
       <Breadcrumbs separator="››" aria-label="breadcrumb">
         <Link as="/" href="/">
           <a>Home</a>
         </Link>
-        <Link as={`/${router.query.city}`} href="/[city]">
-          <a>{router.query.city}</a>
+        <Link as={`/${city}`} href="/[city]">
+          <a>{city}</a>
         </Link>
-        <Link
-          as={`/${router.query.city}/${router.query.place}`}
-          href="/[city]/[place]"
-        >
-          <a>{router.query.place}</a>
+        <Link as={`/${city}/${place}`} href="/[city]/[place]">
+          <a>{place}</a>
         </Link>
       </Breadcrumbs>
       <Typography>
@@ -30,8 +29,8 @@ export default function Info() {
         </Link>
       </Typography>
 
-      <Typography variant="h4">{router.query.place}</Typography>
-      <Typography variant="body2">Dia Chi</Typography>
+      <Typography variant="h4">{place}</Typography>
+      <Typography variant="body2">{address}</Typography>
 
       <Rate />
 
