@@ -44,6 +44,7 @@ const FirebaseAuth = () => {
     <div>
       {renderAuth ? (
         <StyledFirebaseAuth
+          // @ts-expect-error
           uiConfig={firebaseAuthConfig}
           firebaseAuth={firebase.auth()}
         />
