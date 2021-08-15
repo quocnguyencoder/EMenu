@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export default function Info() {
   const router = useRouter();
-  const cityName = router.query.city || "none";
-  const placeName = router.query.place || "none";
+  // const cityName = router.query.city || "none";
+  // const placeName = router.query.place || "none";
   return (
     <Box maxWidth="60%" style={{ flexDirection: "column" }}>
       <Breadcrumbs separator="››" aria-label="breadcrumb">
