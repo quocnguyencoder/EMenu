@@ -77,7 +77,7 @@ export default function UserMenu({ user, logout }: Props) {
           aria-controls={open ? "menu-list-grow" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-          endIcon={<Avatar src={profilePic} alt={`${displayName}'logo`} />}
+          endIcon={<Avatar src={profilePic!} alt={`${displayName}'logo`} />}
         >
           {displayName}
         </Button>
