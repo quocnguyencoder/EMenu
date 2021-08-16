@@ -1,15 +1,23 @@
 import React from "react";
 import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
 // import SearchBar from "../../components/DetailPage/SearchBar";
-import Image from "next/image";
 import Info from "../../components/DetailPage/Info";
+import { prefix } from "../../constants";
+import { CardMedia } from "@material-ui/core";
 
 export default function Place() {
   const categories = Array.from(new Set(menu.map((m) => m.category)));
   return (
     <Container maxWidth="lg">
       <Box display="flex" mt={1} style={{ gap: "1%" }}>
-        <Image src="../chicken.jpg" alt="food" width={480} height={300} />
+        <CardMedia
+          component="img"
+          image={`${prefix}/chicken.jpg`}
+          title="img"
+          height={300}
+          style={{ maxWidth: "50vw" }}
+        />
+
         <Info />
       </Box>
       <Box display="flex" mt={2} style={{ gap: "1%" }}>

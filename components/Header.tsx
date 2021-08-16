@@ -2,16 +2,17 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+import CardMedia from "@material-ui/core/CardMedia";
 import Toolbar from "@material-ui/core/Toolbar";
 import InputBase from "@material-ui/core/InputBase";
-import Image from "next/image";
 import SearchIcon from "@material-ui/icons/Search";
+
 import { useStyles } from "../styles/header";
 import { Box } from "@material-ui/core";
-import Link from "@material-ui/core/Link";
 import { useRouter } from "next/router";
 import useUser from "../firebase/useUser";
 import UserMenu from "./UserMenu";
+import { prefix } from "../constants";
 
 export default function Header() {
   const classes = useStyles();
@@ -22,6 +23,10 @@ export default function Header() {
     router.push("/login");
   };
 
+  const gotoHomepage = () => {
+    router.push("/");
+  };
+
   const isLoggedIn = user.id !== null;
 
   return (
@@ -30,9 +35,32 @@ export default function Header() {
         <Container maxWidth="lg">
           <Toolbar>
             <Box className={classes.title}>
-              <Link href="/">
-                <Image src="../logo.png" alt="logo" width={100} height={50} />
-              </Link>
+              <CardMedia
+                component="img"
+                image={`${prefix}/logo.png`}
+                title="logo"
+                style={{
+                  height: "7vh",
+                  width: "9vw",
+                  maxWidth: "90",
+                  maxHeight: "30",
+                  cursor: "pointer",
+                }}
+                onClick={() => gotoHomepage()}
+              />
+
+              {/* <Button
+                style={{
+                  background: `url('${prefix}/logo.png') no-repeat`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  height: "7vh",
+                  width: "9vw",
+                  maxWidth: "90",
+                  maxHeight: "30",
+                }}
+                onClick={() => gotoHomepage()}
+              /> */}
             </Box>
 
             <div className={classes.search}>
