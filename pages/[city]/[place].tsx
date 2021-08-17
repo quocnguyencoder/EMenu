@@ -1,7 +1,6 @@
 import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
-import SearchBar from "../../components/DetailPage/SearchBar";
 import Image from "next/image";
-import Info from "../../components/DetailPage/Info";
+import { Info, SearchBar, Item } from "../../components/DetailPage";
 import { Fragment } from "react";
 
 export default function Place() {
@@ -14,7 +13,7 @@ export default function Place() {
         <Info />
       </Box>
       <Box display="flex" mt={2} style={{ gap: "2%" }}>
-        <List component="nav">
+        <List component="nav" style={{ maxWidth: "20%" }}>
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
             <ListItem
@@ -22,23 +21,47 @@ export default function Place() {
               button
               onClick={() => handleOnClick(category)}
             >
-              {category}
+              <Typography
+                variant="body2"
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  textTransform: "uppercase",
+                }}
+              >
+                {category}
+              </Typography>
             </ListItem>
           ))}
         </List>
-        <Box flex="1">
+        <Box flex="1" maxWidth="75%">
           <Typography>promotions</Typography>
           <SearchBar />
           <List>
             {categories.map((category) => {
               return (
                 <Fragment key={`menu ${category}`}>
-                  <Typography id={`${category}`}>{category}</Typography>
+                  <Typography
+                    id={`${category}`}
+                    style={{
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {category}
+                  </Typography>
                   {menu
                     .filter((m) => m.category === category)
                     .map((item) => (
                       <ListItem key={item.name} button>
-                        {item.name}
+                        <Item
+                          name={item.name}
+                          description={item.description}
+                          price={item.price}
+                        />
                       </ListItem>
                     ))}
                 </Fragment>
@@ -53,13 +76,25 @@ export default function Place() {
 
 const menu = [
   {
-    category: "meatttttttttttttttttttttttttttttttttttttttttt",
+    category: "meatttttttttttttttttttttttttttttttttttt",
     name: "beef",
-    price: "7$",
+    description:
+      "thịt tươi ngon hơn khi dùng lạnh, nướng lên làm mồi thì ngon hết sảy",
+    price: 100000000,
   },
-  { category: "meat", name: "steak", price: "8$" },
-  { category: "meat", name: "goat", price: "9$" },
-  { category: "fruit", name: "apple", price: "10$" },
-  { category: "fruit", name: "weed", price: "11$" },
-  { category: "cake", name: "pipe", price: "12$" },
+  { category: "meat", name: "steak", description: "thịt tươi", price: 8 },
+  { category: "meat", name: "goat", description: "thịt tươi", price: 9 },
+  {
+    category: "fruit",
+    name: "apple",
+    description: "trái cây tươi",
+    price: 10,
+  },
+  {
+    category: "fruit",
+    name: "weed",
+    description: "mới hái còn thơm",
+    price: 11,
+  },
+  { category: "cake", name: "pipe", description: "bánh ngon", price: 12 },
 ];
