@@ -40,7 +40,7 @@ jobs:
       - run: yarn run build
         env:
           NEXT_PUBLIC_BASE_PATH: /EMenu
-      - run: yarn run export
+      - run: yarn start
         env:
           NEXT_PUBLIC_BASE_PATH: /EMenu
       - run: touch ./out/.nojekyll
