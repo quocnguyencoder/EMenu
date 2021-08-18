@@ -1,43 +1,49 @@
+import React from "react";
 import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
-import SearchBar from "../../components/DetailPage/SearchBar";
-import Image from "next/image";
+// import SearchBar from "../../components/DetailPage/SearchBar";
 import Info from "../../components/DetailPage/Info";
+import { prefix } from "../../constants";
+import { CardMedia } from "@material-ui/core";
 
 export default function Place() {
   const categories = Array.from(new Set(menu.map((m) => m.category)));
   return (
     <Container maxWidth="lg">
       <Box display="flex" mt={1} style={{ gap: "1%" }}>
-        <Image src="../chicken.jpg" alt="food" width={480} height={300} />
+        <CardMedia
+          component="img"
+          image={`${prefix}/chicken.jpg`}
+          title="img"
+          height={300}
+          style={{ maxWidth: "50vw" }}
+        />
+
         <Info />
       </Box>
-      <Box mt={2} style={{ display: "flex", gap: "2%" }}>
+      <Box display="flex" mt={2} style={{ gap: "1%" }}>
         <List component="nav">
           <Typography variant="h4">Menu</Typography>
           {categories.map((category) => (
-            <ListItem key={category} button>
+            <ListItem key={`menu${category}`} button>
               {category}
             </ListItem>
           ))}
         </List>
         <Box flex="1">
           <Typography>promotions</Typography>
-          <SearchBar />
           <List>
             {categories.map((category) => {
               return (
-                <>
+                <React.Fragment key={`list${category}`}>
                   <Typography>{category}</Typography>
                   {menu.map((m) =>
                     m.category === category ? (
                       <ListItem key={m.name} button>
                         {m.name}
                       </ListItem>
-                    ) : (
-                      <></>
-                    )
+                    ) : null
                   )}
-                </>
+                </React.Fragment>
               );
             })}
           </List>
