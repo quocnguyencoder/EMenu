@@ -10,8 +10,6 @@ export default function Place() {
   const [filterCategories, setFilterCategories] = useState(categories);
   const scroll = useScroll();
 
-  const handleOnClick = (input: string) => (location.hash = `${input}`);
-
   return (
     <Container maxWidth="lg">
       <Box display="flex" mt={1} style={{ gap: "1%" }}>
@@ -33,7 +31,7 @@ export default function Place() {
                 <ListItem
                   key={category}
                   button
-                  onClick={() => handleOnClick(category)}
+                  onClick={() => setScrollTo(category)}
                 >
                   <Typography
                     variant="body2"
@@ -55,7 +53,7 @@ export default function Place() {
                 <ListItem
                   key={category}
                   button
-                  onClick={() => handleOnClick(category)}
+                  onClick={() => setScrollTo(category)}
                 >
                   <Typography
                     variant="body2"
@@ -94,6 +92,7 @@ export default function Place() {
                   >
                     {category}
                   </Typography>
+
                   {menu
                     .filter((m) => m.category.toLowerCase() === category)
                     .map((item) => (
@@ -111,47 +110,6 @@ export default function Place() {
           </List>
         </Box>
       </Box>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
     </Container>
   );
 }
@@ -192,4 +150,9 @@ function useScroll() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return scrollY;
+}
+
+function setScrollTo(id: string) {
+  var element = document.getElementById(`${id}`);
+  element?.scrollIntoView({ behavior: "smooth" });
 }
