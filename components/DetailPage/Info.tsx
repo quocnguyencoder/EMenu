@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Info() {
   const router = useRouter();
-  const price = "100.000 VNĐ";
+  const price = 100000;
   const address = "22 Hoàng Văn Thụ, Nha Trang, Khánh Hòa";
   const { city, place } = router.query;
   return (
@@ -37,7 +37,11 @@ export default function Info() {
       <Typography variant="body1">Closed</Typography>
       <Typography>
         <MonetizationOnOutlinedIcon />
-        {price}
+        {price
+          .toFixed(2)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        $
       </Typography>
     </Box>
   );
