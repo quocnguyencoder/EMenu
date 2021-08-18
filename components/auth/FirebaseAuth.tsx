@@ -5,6 +5,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { setUserCookie } from "../../firebase/userCookies";
 import { mapUserData } from "../../firebase/mapUserData";
+import { prefix } from "../../constants";
 
 initFirebase(); // initialize firebase
 
@@ -21,7 +22,7 @@ const firebaseAuthConfig = {
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
   ],
-  signInSuccessUrl: "/",
+  signInSuccessUrl: `${prefix}/`,
   credentialHelper: "none",
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }: any) => {
