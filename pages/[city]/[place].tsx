@@ -4,7 +4,10 @@ import { Info, SearchBar, Item } from "../../components/DetailPage";
 import { Fragment, useEffect, useState } from "react";
 
 export default function Place() {
-  const categories = Array.from(new Set(menu.map((m) => m.category)));
+  const categories = Array.from(
+    new Set(menu.map((m) => m.category.toLowerCase()))
+  );
+  const [filterCategories, setFilterCategories] = useState(categories);
   const scroll = useScroll();
 
   const handleOnClick = (input: string) => (location.hash = `${input}`);
@@ -19,8 +22,14 @@ export default function Place() {
         <List component="nav" style={{ minWidth: "20%", maxWidth: "20%" }}>
           <Typography variant="h4">Menu</Typography>
           {scroll > 370 ? (
-            <Box position="fixed" maxWidth="20%" top={0} pr="24px">
-              {categories.map((category) => (
+            <Box
+              position="fixed"
+              minWidth="20%"
+              maxWidth="20%"
+              top={0}
+              pr="24px"
+            >
+              {filterCategories.map((category) => (
                 <ListItem
                   key={category}
                   button
@@ -42,7 +51,7 @@ export default function Place() {
             </Box>
           ) : (
             <Box>
-              {categories.map((category) => (
+              {filterCategories.map((category) => (
                 <ListItem
                   key={category}
                   button
@@ -66,9 +75,12 @@ export default function Place() {
         </List>
         <Box flex="1" maxWidth="75%">
           <Typography>promotions</Typography>
-          <SearchBar />
+          <SearchBar
+            categories={categories}
+            setFilterCategories={setFilterCategories}
+          />
           <List>
-            {categories.map((category) => {
+            {filterCategories.map((category) => {
               return (
                 <Fragment key={`menu ${category}`}>
                   <Typography
@@ -83,7 +95,7 @@ export default function Place() {
                     {category}
                   </Typography>
                   {menu
-                    .filter((m) => m.category === category)
+                    .filter((m) => m.category.toLowerCase() === category)
                     .map((item) => (
                       <ListItem key={item.name} button>
                         <Item
@@ -99,6 +111,47 @@ export default function Place() {
           </List>
         </Box>
       </Box>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
     </Container>
   );
 }
@@ -111,7 +164,7 @@ const menu = [
       "thịt tươi ngon hơn khi dùng lạnh, nướng lên làm mồi thì ngon hết sảy",
     price: 100000000,
   },
-  { category: "meat", name: "steak", description: "thịt tươi", price: 8 },
+  { category: "meAt", name: "steak", description: "thịt tươi", price: 8 },
   { category: "meat", name: "goat", description: "thịt tươi", price: 9 },
   {
     category: "fruit",
