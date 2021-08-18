@@ -42,25 +42,12 @@ export default function Header() {
                 style={{
                   height: "7vh",
                   width: "9vw",
-                  maxWidth: "90",
-                  maxHeight: "30",
+                  maxWidth: "110px",
+                  maxHeight: "50px",
                   cursor: "pointer",
                 }}
                 onClick={() => gotoHomepage()}
               />
-
-              {/* <Button
-                style={{
-                  background: `url('${prefix}/logo.png') no-repeat`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  height: "7vh",
-                  width: "9vw",
-                  maxWidth: "90",
-                  maxHeight: "30",
-                }}
-                onClick={() => gotoHomepage()}
-              /> */}
             </Box>
 
             <div className={classes.search}>

@@ -31,18 +31,6 @@ export default function Place() {
         </List>
         <Box flex="1">
           <Typography>promotions</Typography>
-          {/* <SearchBar /> */}
-          {/* <List>
-            {categories.map((category) =>
-              menu
-                .filter((item) => item.category === category)
-                .map((m) => (
-                  <ListItem key={m.name} button>
-                    {m.name}
-                  </ListItem>
-                ))
-            )}
-          </List> */}
           <List>
             {categories.map((category) => {
               return (
@@ -53,9 +41,7 @@ export default function Place() {
                       <ListItem key={m.name} button>
                         {m.name}
                       </ListItem>
-                    ) : (
-                      <></>
-                    )
+                    ) : null
                   )}
                 </React.Fragment>
               );

@@ -21,7 +21,7 @@ const NewestItem = () => {
   const router = useRouter();
 
   const gotoDeital = () => {
-    router.push(`${prefix}/nha-trang/quan-net-ong-tien`);
+    router.push(`/nha-trang/quan-net-ong-tien`);
   };
 
   return (
