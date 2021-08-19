@@ -1,33 +1,33 @@
-import { Box, InputBase, InputAdornment, IconButton } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import ClearIcon from "@material-ui/icons/Clear";
-import { useState } from "react";
+import { Box, InputBase, InputAdornment, IconButton } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
+import ClearIcon from '@material-ui/icons/Clear'
+import { useState } from 'react'
 
 interface Props {
-  categories: string[];
-  setFilterCategories: any;
+  categories: string[]
+  setFilterCategories: any
 }
 export default function SearchBar({ categories, setFilterCategories }: Props) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleOnChange = (e: any) => {
-    setSearchTerm(e.target.value);
+    setSearchTerm(e.target.value)
     setFilterCategories(
       categories.filter((category) =>
         category.toLowerCase().includes(e.target.value.toLowerCase())
       )
-    );
-  };
+    )
+  }
 
   const clearSearch = () => {
-    setSearchTerm("");
-    setFilterCategories(categories);
-  };
+    setSearchTerm('')
+    setFilterCategories(categories)
+  }
 
   return (
     <Box display="flex" boxShadow="none">
       <InputBase
-        style={{ backgroundColor: "#DADDE0", flex: 1 }}
+        style={{ backgroundColor: '#DADDE0', flex: 1 }}
         onChange={handleOnChange}
         placeholder="Search"
         value={searchTerm}
@@ -38,7 +38,7 @@ export default function SearchBar({ categories, setFilterCategories }: Props) {
         }
         endAdornment={
           <InputAdornment position="end">
-            {searchTerm === "" ? (
+            {searchTerm === '' ? (
               <></>
             ) : (
               <IconButton size="small" onClick={() => clearSearch()}>
@@ -49,5 +49,5 @@ export default function SearchBar({ categories, setFilterCategories }: Props) {
         }
       />
     </Box>
-  );
+  )
 }

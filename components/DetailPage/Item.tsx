@@ -1,11 +1,11 @@
-import React from "react";
-import { Typography, Box, CardMedia } from "@material-ui/core";
-import { prefix } from "../../constants";
+import React from 'react'
+import { Typography, Box, CardMedia } from '@material-ui/core'
+import { prefix } from '../../constants'
 
 interface Props {
-  name: string;
-  description: string;
-  price: number;
+  name: string
+  description: string
+  price: number
 }
 export default function Item({ name, description, price }: Props) {
   return (
@@ -15,7 +15,7 @@ export default function Item({ name, description, price }: Props) {
           component="img"
           image={`${prefix}/chicken.jpg`}
           title="img"
-          style={{ objectFit: "scale-down" }}
+          style={{ objectFit: 'scale-down' }}
           width={60}
           height={60}
         />
@@ -33,10 +33,10 @@ export default function Item({ name, description, price }: Props) {
           {price
             .toFixed(2)
             .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           $
         </Typography>
       </Box>
     </Box>
-  );
+  )
 }

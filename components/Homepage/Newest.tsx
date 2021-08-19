@@ -1,6 +1,6 @@
-import { Grid } from "@material-ui/core";
-import NewestItem from "./NewestItem";
-import React from "react";
+import { Grid } from '@material-ui/core'
+import NewestItem from './NewestItem'
+import React from 'react'
 
 const Newest = () => {
   return (
@@ -18,7 +18,7 @@ const Newest = () => {
         <NewestItem />
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export default Newest;
+export default Newest

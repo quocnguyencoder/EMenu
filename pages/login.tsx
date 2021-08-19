@@ -1,7 +1,7 @@
-import FirebaseAuth from "../components/auth/FirebaseAuth";
+import FirebaseAuth from '../components/auth/FirebaseAuth'
 
 const Login = () => {
-  return <FirebaseAuth />;
-};
+  return <FirebaseAuth />
+}
 
-export default Login;
+export default Login
