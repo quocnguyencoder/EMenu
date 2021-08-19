@@ -3,8 +3,7 @@ import Carousel from "react-material-ui-carousel";
 import { Card, CardMedia } from "@material-ui/core";
 import { CardActionArea } from "@material-ui/core";
 import { Container } from "@material-ui/core";
-
-const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+import { prefix } from "../../constants";
 
 function Item(props: any) {
   return (

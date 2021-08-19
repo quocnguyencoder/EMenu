@@ -1,7 +1,8 @@
 import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
-import Image from "next/image";
 import { Info, SearchBar, Item } from "../../components/DetailPage";
 import { Fragment, useEffect, useState } from "react";
+import { prefix } from "../../constants";
+import { CardMedia } from "@material-ui/core";
 
 export default function Place() {
   const categories = Array.from(
@@ -13,7 +14,13 @@ export default function Place() {
   return (
     <Container maxWidth="lg">
       <Box display="flex" mt={1} style={{ gap: "1%" }}>
-        <Image src="../chicken.jpg" alt="food" width={480} height={300} />
+        <CardMedia
+          component="img"
+          image={`${prefix}/chicken.jpg`}
+          title="img"
+          height={300}
+          style={{ maxWidth: "50vw" }}
+        />
         <Info />
       </Box>
       <Box display="flex" mt={2} style={{ gap: "2%" }}>
@@ -92,7 +99,6 @@ export default function Place() {
                   >
                     {category}
                   </Typography>
-
                   {menu
                     .filter((m) => m.category.toLowerCase() === category)
                     .map((item) => (
