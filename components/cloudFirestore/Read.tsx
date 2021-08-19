@@ -1,16 +1,19 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import useUser from '../../firebase/useUser'
 
 const ReadDataFromCloudFirestore = () => {
+  const { user } = useUser()
   const readData = () => {
     try {
-      firebase
-        .firestore()
-        .collection('myCollection')
-        .doc('test-doc')
-        .onSnapshot(function () {
-          ///console.log(doc.data());
-        })
+      user.id !== null &&
+        firebase
+          .firestore()
+          .collection('myCollection')
+          .doc(user.id)
+          .onSnapshot(function () {
+            ///console.log(doc.data());
+          })
       // .onSnapshot(function (doc) {
       //   console.log(doc.data());
       // })
