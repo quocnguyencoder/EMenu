@@ -1,19 +1,19 @@
-import React from "react";
-import Head from "next/head";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Layout from "../components/Layout";
-import theme from "../styles/theme";
-import type { AppProps } from "next/app";
+import React from 'react'
+import Head from 'next/head'
+import { ThemeProvider } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Layout from '../components/Layout'
+import theme from '../styles/theme'
+import type { AppProps } from 'next/app'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
+    const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles != null) {
-      jssStyles.parentElement?.removeChild(jssStyles);
+      jssStyles.parentElement?.removeChild(jssStyles)
     }
-  }, []);
+  }, [])
 
   return (
     <>
@@ -32,5 +32,5 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </Layout>
       </ThemeProvider>
     </>
-  );
+  )
 }

@@ -1,33 +1,33 @@
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import CardMedia from "@material-ui/core/CardMedia";
-import Toolbar from "@material-ui/core/Toolbar";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
+import React from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
+import CardMedia from '@material-ui/core/CardMedia'
+import Toolbar from '@material-ui/core/Toolbar'
+import InputBase from '@material-ui/core/InputBase'
+import SearchIcon from '@material-ui/icons/Search'
 
-import { useStyles } from "../styles/header";
-import { Box } from "@material-ui/core";
-import { useRouter } from "next/router";
-import useUser from "../firebase/useUser";
-import UserMenu from "./UserMenu";
-import { prefix } from "../constants";
+import { useStyles } from '../styles/header'
+import { Box } from '@material-ui/core'
+import { useRouter } from 'next/router'
+import useUser from '../firebase/useUser'
+import UserMenu from './UserMenu'
+import { prefix } from '../constants'
 
 export default function Header() {
-  const classes = useStyles();
-  const router = useRouter();
-  const { user, logout } = useUser();
+  const classes = useStyles()
+  const router = useRouter()
+  const { user, logout } = useUser()
 
   const handleClick = () => {
-    router.push("/login");
-  };
+    router.push('/login')
+  }
 
   const gotoHomepage = () => {
-    router.push("/");
-  };
+    router.push('/')
+  }
 
-  const isLoggedIn = user.id !== null;
+  const isLoggedIn = user.id !== null
 
   return (
     <>
@@ -40,11 +40,11 @@ export default function Header() {
                 image={`${prefix}/logo.png`}
                 title="logo"
                 style={{
-                  height: "7vh",
-                  width: "9vw",
-                  maxWidth: "110px",
-                  maxHeight: "50px",
-                  cursor: "pointer",
+                  height: '7vh',
+                  width: '9vw',
+                  maxWidth: '110px',
+                  maxHeight: '50px',
+                  cursor: 'pointer',
                 }}
                 onClick={() => gotoHomepage()}
               />
@@ -60,7 +60,7 @@ export default function Header() {
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
-                inputProps={{ "aria-label": "search" }}
+                inputProps={{ 'aria-label': 'search' }}
               />
             </div>
             {isLoggedIn ? (
@@ -75,5 +75,5 @@ export default function Header() {
       </AppBar>
       <Toolbar />
     </>
-  );
+  )
 }

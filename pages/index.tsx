@@ -1,5 +1,5 @@
-import { Banners, Discovery } from "../components/Homepage";
-import { Container } from "@material-ui/core";
+import { Banners, Discovery } from '../components/Homepage'
+import { Container } from '@material-ui/core'
 
 export default function Home() {
   return (
@@ -9,5 +9,5 @@ export default function Home() {
         <Discovery />
       </Container>
     </>
-  );
+  )
 }

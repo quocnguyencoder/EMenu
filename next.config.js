@@ -3,7 +3,7 @@ module.exports = {
   assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
   trailingSlash: true,
   images: {
-    loader: "imgix",
-    path: "",
+    loader: 'imgix',
+    path: '',
   },
-};
+}

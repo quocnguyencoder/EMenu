@@ -1,12 +1,12 @@
-import Head from "next/head";
+import Head from 'next/head'
 
 interface Props {
-  title: string;
-  description: string;
+  title: string
+  description: string
 }
 
 export default function Meta({ title, description }: Props) {
-  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || ''
   return (
     <Head>
       <meta
@@ -18,10 +18,10 @@ export default function Meta({ title, description }: Props) {
       <meta name="description" content={description} />
       <link rel="icon" href={`${prefix}/newfavicon.ico`} />
     </Head>
-  );
+  )
 }
 
 Meta.defaultProps = {
-  title: "Emenu",
-  description: "Welcome to EMenu",
-};
+  title: 'Emenu',
+  description: 'Welcome to EMenu',
+}

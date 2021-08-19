@@ -1,7 +1,7 @@
-import { ListItem, Typography } from "@material-ui/core";
+import { ListItem, Typography } from '@material-ui/core'
 
 interface Props {
-  filterCategories: string[];
+  filterCategories: string[]
 }
 
 export default function Categories({ filterCategories }: Props) {
@@ -12,10 +12,10 @@ export default function Categories({ filterCategories }: Props) {
           <Typography
             variant="body2"
             style={{
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              textTransform: "uppercase",
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              textTransform: 'uppercase',
             }}
           >
             {category}
@@ -23,12 +23,13 @@ export default function Categories({ filterCategories }: Props) {
         </ListItem>
       ))}
     </>
-  );
+  )
 }
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
 function setScrollTo(id: string) {
-  var element = document.getElementById(`${id}`);
-  var menuItems = document.getElementById(`menu items`)?.offsetTop;
-  var headerHeight = document.querySelector("header")?.offsetHeight;
-  const scrollToSection = menuItems! + element!.offsetTop - headerHeight!;
-  window.scrollTo({ top: scrollToSection, behavior: "smooth" });
+  const element = document.getElementById(`${id}`)
+  const menuItems = document.getElementById(`menu items`)!.offsetTop
+  const headerHeight = document.querySelector('header')!.offsetHeight
+  const scrollToSection = menuItems! + element!.offsetTop - headerHeight!
+  window.scrollTo({ top: scrollToSection, behavior: 'smooth' })
 }
