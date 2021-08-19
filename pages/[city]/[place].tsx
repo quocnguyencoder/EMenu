@@ -31,7 +31,7 @@ export default function Place() {
               position="fixed"
               minWidth="20%"
               maxWidth="20%"
-              top={0}
+              top={64}
               pr="24px"
             >
               {filterCategories.map((category) => (

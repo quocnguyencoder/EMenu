@@ -1,6 +1,6 @@
 import React from "react";
-import { Typography, Box } from "@material-ui/core";
-import Image from "next/image";
+import { Typography, Box, CardMedia } from "@material-ui/core";
+import { prefix } from "../../constants";
 
 interface Props {
   name: string;
@@ -11,12 +11,13 @@ export default function Item({ name, description, price }: Props) {
   return (
     <Box display="flex">
       <Box maxWidth={60} mr={2}>
-        <Image
-          src="../chicken.jpg"
-          alt="food"
+        <CardMedia
+          component="img"
+          image={`${prefix}/chicken.jpg`}
+          title="img"
+          style={{ objectFit: "scale-down" }}
           width={60}
           height={60}
-          objectFit="scale-down"
         />
       </Box>
       <Box maxWidth="80%" mr={2}>
