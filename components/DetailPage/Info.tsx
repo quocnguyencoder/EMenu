@@ -42,6 +42,7 @@ export default function Info() {
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         $
+
       </Typography>
     </Box>
   );
