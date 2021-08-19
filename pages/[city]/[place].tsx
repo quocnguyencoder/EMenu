@@ -1,8 +1,14 @@
-import { Box, Typography, Container, List, ListItem } from "@material-ui/core";
-import { Info, SearchBar, Item } from "../../components/DetailPage";
+import {
+  Box,
+  Typography,
+  Container,
+  List,
+  ListItem,
+  CardMedia,
+} from "@material-ui/core";
+import { Info, SearchBar, Item, Categories } from "../../components/DetailPage";
 import { Fragment, useEffect, useState } from "react";
 import { prefix } from "../../constants";
-import { CardMedia } from "@material-ui/core";
 
 export default function Place() {
   const categories = Array.from(
@@ -34,47 +40,11 @@ export default function Place() {
               top={64}
               pr="24px"
             >
-              {filterCategories.map((category) => (
-                <ListItem
-                  key={category}
-                  button
-                  onClick={() => setScrollTo(category)}
-                >
-                  <Typography
-                    variant="body2"
-                    style={{
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {category}
-                  </Typography>
-                </ListItem>
-              ))}
+              <Categories filterCategories={filterCategories} />
             </Box>
           ) : (
             <Box>
-              {filterCategories.map((category) => (
-                <ListItem
-                  key={category}
-                  button
-                  onClick={() => setScrollTo(category)}
-                >
-                  <Typography
-                    variant="body2"
-                    style={{
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {category}
-                  </Typography>
-                </ListItem>
-              ))}
+              <Categories filterCategories={filterCategories} />
             </Box>
           )}
         </List>
@@ -84,7 +54,7 @@ export default function Place() {
             categories={categories}
             setFilterCategories={setFilterCategories}
           />
-          <List>
+          <List id={`menu items`}>
             {filterCategories.map((category) => {
               return (
                 <Fragment key={`menu ${category}`}>
@@ -156,9 +126,4 @@ function useScroll() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return scrollY;
-}
-
-function setScrollTo(id: string) {
-  var element = document.getElementById(`${id}`);
-  element?.scrollIntoView({ behavior: "smooth" });
 }
