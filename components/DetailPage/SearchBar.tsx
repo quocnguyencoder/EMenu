@@ -3,15 +3,25 @@ import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
 import { useState } from "react";
 
-export default function SearchBar() {
+interface Props {
+  categories: string[];
+  setFilterCategories: any;
+}
+export default function SearchBar({ categories, setFilterCategories }: Props) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleOnChange = (e: any) => {
     setSearchTerm(e.target.value);
+    setFilterCategories(
+      categories.filter((category) =>
+        category.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
   };
 
   const clearSearch = () => {
     setSearchTerm("");
+    setFilterCategories(categories);
   };
 
   return (
