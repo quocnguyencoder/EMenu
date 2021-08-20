@@ -10,15 +10,19 @@ import {
   ListItem,
   ListItemText,
   Typography,
-} from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import React from "react";
+} from '@material-ui/core'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import ShareIcon from '@material-ui/icons/Share'
+import React from 'react'
+import { prefix } from '../../constants'
+import { useRouter } from 'next/router'
 
 const NewestItem = () => {
-  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
-  const preventDefault = (event: React.SyntheticEvent) =>
-    event.preventDefault();
+  const router = useRouter()
+
+  const gotoDeital = () => {
+    router.push(`/nha-trang/quan-net-ong-tien`)
+  }
 
   return (
     <Card>
@@ -36,10 +40,10 @@ const NewestItem = () => {
           primary={
             <Link
               href="#"
-              onClick={preventDefault}
               color="inherit"
               variant="body1"
-              style={{ fontWeight: "bold" }}
+              onClick={() => gotoDeital()}
+              style={{ fontWeight: 'bold' }}
             >
               Quán net Ông Tiến
             </Link>
@@ -57,10 +61,9 @@ const NewestItem = () => {
         title={
           <Link
             href="#"
-            onClick={preventDefault}
             color="inherit"
             variant="body2"
-            style={{ fontWeight: "bold" }}
+            style={{ fontWeight: 'bold' }}
           >
             Quoc Nguyen
           </Link>
@@ -76,7 +79,7 @@ const NewestItem = () => {
         </IconButton>
       </CardActions>
     </Card>
-  );
-};
+  )
+}
 
-export default NewestItem;
+export default NewestItem
