@@ -23,7 +23,6 @@ export default function Place() {
         <CardMedia
           component="img"
           image={`${prefix}/chicken.jpg`}
-          title="img"
           height={300}
           style={{ maxWidth: '50vw' }}
         />
@@ -55,34 +54,32 @@ export default function Place() {
             setFilterCategories={setFilterCategories}
           />
           <List id={`menu items`}>
-            {filterCategories.map((category) => {
-              return (
-                <Fragment key={`menu ${category}`}>
-                  <Typography
-                    id={`${category}`}
-                    style={{
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    {category}
-                  </Typography>
-                  {menu
-                    .filter((m) => m.category.toLowerCase() === category)
-                    .map((item) => (
-                      <ListItem key={item.name} button>
-                        <Item
-                          name={item.name}
-                          description={item.description}
-                          price={item.price}
-                        />
-                      </ListItem>
-                    ))}
-                </Fragment>
-              )
-            })}
+            {filterCategories.map((category) => (
+              <Fragment key={`menu ${category}`}>
+                <Typography
+                  id={`${category}`}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {category}
+                </Typography>
+                {menu
+                  .filter((m) => m.category.toLowerCase() === category)
+                  .map((item) => (
+                    <ListItem key={item.name} button>
+                      <Item
+                        name={item.name}
+                        description={item.description}
+                        price={item.price}
+                      />
+                    </ListItem>
+                  ))}
+              </Fragment>
+            ))}
           </List>
         </Box>
       </Box>

@@ -1,11 +1,11 @@
-import { Grid } from "@material-ui/core";
-import { useState } from "react";
-import { Dashboards, HeaderBar, Nav } from "../components/AdminPage";
-import TabPanel from "../components/Homepage/TabPanel";
-import Meta from "../components/Meta";
+import { Grid } from '@material-ui/core'
+import { useState } from 'react'
+import { Dashboards, HeaderBar, Nav, Menu } from '../components/AdminPage'
+import TabPanel from '../components/Homepage/TabPanel'
+import Meta from '../components/Meta'
 
 export default function Admin() {
-  const [value, setValue] = useState("Dashboards");
+  const [value, setValue] = useState('Dashboards')
 
   return (
     <>
@@ -28,8 +28,11 @@ export default function Admin() {
           <TabPanel value={value} index="Maps">
             {value}
           </TabPanel>
+          <TabPanel value={value} index="Menu management">
+            <Menu />
+          </TabPanel>
         </Grid>
       </Grid>
     </>
-  );
+  )
 }

@@ -14,7 +14,7 @@ export default function Item({ name, description, price }: Props) {
         <CardMedia
           component="img"
           image={`${prefix}/chicken.jpg`}
-          title="img"
+          alt={`${name}`}
           style={{ objectFit: 'scale-down' }}
           width={60}
           height={60}
