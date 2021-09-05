@@ -1,6 +1,12 @@
 import { Grid } from '@material-ui/core'
 import { useState } from 'react'
-import { Dashboards, HeaderBar, Nav, Menu } from '../components/AdminPage'
+import {
+  Dashboards,
+  HeaderBar,
+  Nav,
+  Menu,
+  ProfileRestaurant,
+} from '../components/AdminPage'
 import TabPanel from '../components/Homepage/TabPanel'
 import Meta from '../components/Meta'
 
@@ -30,6 +36,9 @@ export default function Admin() {
           </TabPanel>
           <TabPanel value={value} index="Menu management">
             <Menu />
+          </TabPanel>
+          <TabPanel value={value} index="Profile">
+            <ProfileRestaurant />
           </TabPanel>
         </Grid>
       </Grid>
