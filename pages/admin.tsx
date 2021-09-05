@@ -6,6 +6,7 @@ import {
   Nav,
   Menu,
   ProfileRestaurant,
+  Maps,
 } from '../components/AdminPage'
 import TabPanel from '../components/Homepage/TabPanel'
 import Meta from '../components/Meta'
@@ -26,19 +27,16 @@ export default function Admin() {
             <Dashboards />
           </TabPanel>
           <TabPanel value={value} index="Profile Restaurant">
-            {value}
+            <ProfileRestaurant />
           </TabPanel>
           <TabPanel value={value} index="Staff management">
             {value}
           </TabPanel>
           <TabPanel value={value} index="Maps">
-            {value}
+            <Maps />
           </TabPanel>
           <TabPanel value={value} index="Menu management">
             <Menu />
-          </TabPanel>
-          <TabPanel value={value} index="Profile">
-            <ProfileRestaurant />
           </TabPanel>
         </Grid>
       </Grid>

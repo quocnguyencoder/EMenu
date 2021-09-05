@@ -37,5 +37,4 @@ const categories = [
   'Staff management',
   'Maps',
   'Menu management',
-  'Profile',
 ]
