@@ -14,15 +14,20 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import React from 'react'
-import { prefix } from '../../constants'
 import { useRouter } from 'next/router'
+import { Place } from '../../models/place'
 
-const NewestItem = () => {
+interface Props {
+  info: Place
+}
+const NewestItem = ({ info }: Props) => {
   const router = useRouter()
 
-  const gotoDeital = () => {
+  const gotoDetail = () => {
     router.push(`/nha-trang/quan-net-ong-tien`)
   }
+
+  // console.log('newest', info)
 
   return (
     <Card>
@@ -30,7 +35,7 @@ const NewestItem = () => {
         <CardMedia
           component="img"
           height="150"
-          image={`${prefix}/food.jpg`}
+          image={info.image}
           title="Contemplative Reptile"
         />
       </CardActionArea>
@@ -42,15 +47,15 @@ const NewestItem = () => {
               href="#"
               color="inherit"
               variant="body1"
-              onClick={() => gotoDeital()}
+              onClick={() => gotoDetail()}
               style={{ fontWeight: 'bold' }}
             >
-              Quán net Ông Tiến
+              {info.name}
             </Link>
           }
           secondary={
             <Typography variant="body2">
-              22 Hoàng Văn Thụ, Nha Trang, Khánh Hòa
+              {`${info.address.street}, P.${info.address.ward},  ${info.address.city}, ${info.address.province}`}
             </Typography>
           }
         />

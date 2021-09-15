@@ -1,22 +1,29 @@
 import { Grid } from '@material-ui/core'
 import NewestItem from './NewestItem'
-import React from 'react'
+import { Place } from '../../models/place'
+import { useEffect, useState } from 'react'
 
-const Newest = () => {
+interface Props {
+  places_data: Place[]
+}
+
+const Newest = ({ places_data }: Props) => {
+  const [places, setPlaces] = useState<Place[]>([])
+
+  useEffect(() => {
+    setPlaces(places_data)
+  }, [places_data])
+
+  const status = places === undefined ? 'isLoading' : 'ok'
+
   return (
     <Grid container spacing={2}>
-      <Grid item md={3}>
-        <NewestItem />
-      </Grid>
-      <Grid item md={3}>
-        <NewestItem />
-      </Grid>
-      <Grid item md={3}>
-        <NewestItem />
-      </Grid>
-      <Grid item md={3}>
-        <NewestItem />
-      </Grid>
+      {status === 'ok' &&
+        places.map((info) => (
+          <Grid key={info.name} item md={3}>
+            <NewestItem info={info} />
+          </Grid>
+        ))}
     </Grid>
   )
 }

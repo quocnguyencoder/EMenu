@@ -31,6 +31,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@types/js-cookie": "^2.2.7",
+    "cross-env": "^7.0.3",
     "firebase": "^8.9.1",
     "firebase-admin": "^9.11.0",
     "js-cookie": "^3.0.0",
@@ -53,12 +54,12 @@
     "eslint-config-next": "11.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.19.0",
-    "prettier": "^2.3.2",
     "husky": "^4.2.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.4",
     "jest-watch-typeahead": "^0.6.1",
     "lint-staged": "^10.0.10",
+    "prettier": "^2.3.2",
     "typescript": "4.3.5"
   }
 }

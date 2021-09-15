@@ -3,9 +3,14 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import TabPanel from './TabPanel'
 import Newest from './Newest'
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { Place } from '../../models/place'
 
-const Discovery = () => {
+interface Props {
+  places_data: Place[]
+}
+
+const Discovery = ({ places_data }: Props) => {
   const [value, setValue] = useState('one')
 
   const handleChange = (
@@ -29,7 +34,7 @@ const Discovery = () => {
         </Tabs>
       </Paper>
       <TabPanel value={value} index="one">
-        <Newest />
+        <Newest places_data={places_data} />
       </TabPanel>
       <TabPanel value={value} index="two">
         Item 2
