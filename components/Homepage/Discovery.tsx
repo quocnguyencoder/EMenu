@@ -34,7 +34,7 @@ const Discovery = ({ places_data }: Props) => {
         </Tabs>
       </Paper>
       <TabPanel value={value} index="one">
-        <Newest places_data={places_data} />
+        <Newest places={places_data} />
       </TabPanel>
       <TabPanel value={value} index="two">
         Item 2

@@ -3,7 +3,7 @@ import { Container } from '@material-ui/core'
 import React from 'react'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { Place } from '../models/place'
 // import Write from '../components/cloudFirestore/Write'
 
@@ -24,7 +24,7 @@ export default function Home({ places_data }: Props) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const querySnapshot = await firebase.firestore().collection('place').get()
 
   const places_data = querySnapshot.docs.map((doc) => {
@@ -35,5 +35,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: { places_data },
+    revalidate: 600,
   }
 }

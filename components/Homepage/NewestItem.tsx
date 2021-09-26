@@ -1,9 +1,7 @@
 import {
-  Avatar,
   Card,
   CardActionArea,
   CardActions,
-  CardHeader,
   CardMedia,
   IconButton,
   Link,
@@ -23,8 +21,9 @@ interface Props {
 const NewestItem = ({ info }: Props) => {
   const router = useRouter()
 
-  const gotoDetail = () => {
-    router.push(`/nha-trang/quan-net-ong-tien`)
+  const gotoDetail = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    router.push(`/nha-trang/1sfXtIdNJOzFvD15kMLl`)
   }
 
   // console.log('newest', info)
@@ -44,10 +43,10 @@ const NewestItem = ({ info }: Props) => {
         <ListItemText
           primary={
             <Link
-              href="#"
+              href="/nha-trang/1sfXtIdNJOzFvD15kMLl"
               color="inherit"
               variant="body1"
-              onClick={() => gotoDetail()}
+              onClick={(e) => gotoDetail(e)}
               style={{ fontWeight: 'bold' }}
             >
               {info.name}
@@ -61,7 +60,7 @@ const NewestItem = ({ info }: Props) => {
         />
       </ListItem>
       {/* Lastest user cmt region */}
-      <CardHeader
+      {/* <CardHeader
         avatar={<Avatar aria-label="recipe">Q</Avatar>}
         title={
           <Link
@@ -74,7 +73,7 @@ const NewestItem = ({ info }: Props) => {
           </Link>
         }
         subheader="This place is awesome :)"
-      />
+      /> */}
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
