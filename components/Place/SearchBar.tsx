@@ -1,35 +1,26 @@
 import { Box, InputBase, InputAdornment, IconButton } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import ClearIcon from '@material-ui/icons/Clear'
-import { useState } from 'react'
 
 interface Props {
-  categories: string[]
-  setFilterCategories: any
+  searchTerm: string
+  setSearchTerm: (value: string) => void
 }
-export default function SearchBar({ categories, setFilterCategories }: Props) {
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const handleOnChange = (e: any) => {
-    setSearchTerm(e.target.value)
-    setFilterCategories(
-      categories.filter((category) =>
-        category.toLowerCase().includes(e.target.value.toLowerCase())
-      )
-    )
+export default function SearchBar({ searchTerm, setSearchTerm }: Props) {
+  const handleOnChange = (userInput: string) => {
+    setSearchTerm(userInput)
   }
 
   const clearSearch = () => {
     setSearchTerm('')
-    setFilterCategories(categories)
   }
 
   return (
-    <Box display="flex" boxShadow="none">
+    <Box display="flex" style={{ padding: '2%' }}>
       <InputBase
-        style={{ backgroundColor: '#DADDE0', flex: 1 }}
-        onChange={handleOnChange}
-        placeholder="Search"
+        style={{ flex: 1 }}
+        onChange={(e) => handleOnChange(e.target.value)}
+        placeholder="Tìm món"
         value={searchTerm}
         startAdornment={
           <InputAdornment position="start">

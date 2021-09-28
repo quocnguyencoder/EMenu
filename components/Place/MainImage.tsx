@@ -12,7 +12,7 @@ const MainImage = ({ url, name }: Props) => {
       image={url}
       alt={`${name}'s main image'`}
       height={300}
-      style={{ maxWidth: '50vw' }}
+      style={{ maxWidth: '40%' }}
     />
   )
 }
