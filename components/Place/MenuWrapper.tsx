@@ -54,7 +54,8 @@ const MenuWrapper = ({ place }: Props) => {
   return (
     <>
       <CategoriesNav
-        categories={filteredCategories}
+        categories={place.category}
+        filteredCategories={filteredCategories}
         selected={selectedCategory}
         setSelected={setSelectedCategory}
       />
@@ -64,6 +65,7 @@ const MenuWrapper = ({ place }: Props) => {
           categories={place.category}
           filteredCategories={filteredCategories}
           menu={filteredMenu}
+          setSelected={setSelectedCategory}
         />
       </Box>
     </>

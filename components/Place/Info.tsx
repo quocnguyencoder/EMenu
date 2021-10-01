@@ -27,7 +27,7 @@ export default function Info({ place }: Props) {
         color: 'gray',
       }
 
-  const formatter = new Intl.NumberFormat('de-DE', {
+  const formatter = new Intl.NumberFormat('vi-VI', {
     style: 'currency',
     currency: 'VND',
   })
