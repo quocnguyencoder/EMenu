@@ -5,6 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { GetStaticProps } from 'next'
 import { Place } from '../models/place'
+import { motion } from 'framer-motion'
 // import Write from '../components/cloudFirestore/Write'
 
 interface Props {
@@ -14,13 +15,17 @@ interface Props {
 export default function Home({ places_data }: Props) {
   // console.log('home', places_data)
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <Banners />
       <Container maxWidth="lg">
         {/* <Write /> */}
         <Discovery places_data={places_data} />
       </Container>
-    </>
+    </motion.div>
   )
 }
 
