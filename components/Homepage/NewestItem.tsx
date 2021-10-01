@@ -23,7 +23,7 @@ const NewestItem = ({ info }: Props) => {
 
   const gotoDetail = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    router.push(`/nha-trang/1sfXtIdNJOzFvD15kMLl`)
+    router.push(`/khanh-hoa/1sfXtIdNJOzFvD15kMLl`)
   }
 
   // console.log('newest', info)
@@ -43,7 +43,7 @@ const NewestItem = ({ info }: Props) => {
         <ListItemText
           primary={
             <Link
-              href="/nha-trang/1sfXtIdNJOzFvD15kMLl"
+              href="/khanh-hoa/1sfXtIdNJOzFvD15kMLl"
               color="inherit"
               variant="body1"
               onClick={(e) => gotoDetail(e)}

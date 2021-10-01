@@ -6,6 +6,7 @@ import PlaceRating from './PlaceRating'
 import Link from 'next/link'
 import { Place } from '../../models/place'
 import moment from 'moment'
+import nonAccentVietnamese from '../../functions/nonAccentVietnamese'
 
 interface Props {
   place: Place
@@ -13,6 +14,11 @@ interface Props {
 
 export default function Info({ place }: Props) {
   const now = moment([])
+
+  // Khánh Hòa -> khanh-hoa
+  const normalizeText = (text: string) =>
+    nonAccentVietnamese(text).toLowerCase().replace(' ', '-')
+
   const isOpen = now.isBetween(
     moment(place.time.open, 'h:mma'),
     moment(place.time.close, 'h:mma')
@@ -53,10 +59,16 @@ export default function Info({ place }: Props) {
         <Link as="/" href="/">
           <a>Home</a>
         </Link>
-        <Link as={`/${place.address.city}`} href="/[city]">
-          <a>{place.address.city}</a>
+        <Link
+          as={`/${normalizeText(place.address.province)}`}
+          href="/[location]"
+        >
+          <a>{place.address.province}</a>
         </Link>
-        <Link as={`/nha-trang/${place.id}`} href="/[city]/[place]">
+        <Link
+          as={`/${normalizeText(place.address.province)}/${place.id}`}
+          href="/[location]/[place]"
+        >
           <a>{place.name}</a>
         </Link>
       </Breadcrumbs>

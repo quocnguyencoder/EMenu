@@ -40,7 +40,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   //   }
   // })
   return {
-    paths: [{ params: { city: 'nha-trang', placeID: '1sfXtIdNJOzFvD15kMLl' } }],
+    paths: [
+      { params: { location: 'khanh-hoa', placeID: '1sfXtIdNJOzFvD15kMLl' } },
+    ],
     fallback: 'blocking',
   }
 }

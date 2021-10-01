@@ -18,13 +18,18 @@ export default function SearchBar({ searchTerm, setSearchTerm }: Props) {
   return (
     <Box display="flex" style={{ padding: '2%' }}>
       <InputBase
-        style={{ flex: 1 }}
+        style={{
+          flex: 1,
+          border: '1.3px ridge',
+          borderColor: '#f2f2f2',
+          padding: '0.5%',
+        }}
         onChange={(e) => handleOnChange(e.target.value)}
         placeholder="Tìm món"
         value={searchTerm}
         startAdornment={
           <InputAdornment position="start">
-            <SearchIcon color="disabled" />
+            <SearchIcon style={{ color: 'gray' }} />
           </InputAdornment>
         }
         endAdornment={

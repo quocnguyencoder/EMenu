@@ -31,17 +31,20 @@ const MenuWrapper = ({ place }: Props) => {
       normalizeText(m.name).includes(normalizeText(text))
     )
 
-    let categories: string[] = []
+    // get all categories in filtered menu
+    const categoriesList: number[] = []
     for (let i = 0; i < menu.length; i++) {
       for (let j = 0; j < menu[i].category.length; j++) {
-        const category = place.category[menu[i].category[j]]
-        if (!categories.includes(category)) {
-          categories.push(category)
+        const category = menu[i].category[j]
+        if (!categoriesList.includes(category)) {
+          categoriesList.push(category)
         }
       }
     }
 
-    categories = place.category.filter((c) => categories.includes(c))
+    const categories: string[] = place.category.filter((c, index) =>
+      categoriesList.includes(index)
+    )
 
     setFilteredMenu(menu)
     setFilteredCategories(categories)
