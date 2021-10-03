@@ -8,16 +8,20 @@ interface Props {
   categories: string[]
   filteredCategories: string[]
   menu: Menu[]
+  filteredMenu: number[]
   setSelected: (selected: number) => void
+  addToOrders: (id: string) => void
 }
 
 const MainMenu = ({
   categories,
   filteredCategories,
   menu,
+  filteredMenu,
   setSelected,
+  addToOrders,
 }: Props) => {
-  const notFound = menu.length === 0
+  const notFound = filteredMenu.length === 0
 
   return (
     <List>
@@ -34,8 +38,10 @@ const MainMenu = ({
                 index={index}
                 category={category}
                 menu={menu}
+                filteredMenu={filteredMenu}
                 key={`${index}-${category}`}
                 setSelected={setSelected}
+                addToOrders={addToOrders}
               />
             )
         )

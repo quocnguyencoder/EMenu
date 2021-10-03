@@ -20,8 +20,7 @@ export default function SearchBar({ searchTerm, setSearchTerm }: Props) {
       <InputBase
         style={{
           flex: 1,
-          border: '1.3px ridge',
-          borderColor: '#f2f2f2',
+          border: '1.3px ridge #f2f2f2',
           padding: '0.5%',
         }}
         onChange={(e) => handleOnChange(e.target.value)}

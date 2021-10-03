@@ -23,15 +23,6 @@ export default function Info({ place }: Props) {
     moment(place.time.open, 'h:mma'),
     moment(place.time.close, 'h:mma')
   )
-  const status = isOpen
-    ? {
-        text: 'Mở cửa',
-        color: '#6CC942',
-      }
-    : {
-        text: 'Đã đóng',
-        color: 'gray',
-      }
 
   const formatter = new Intl.NumberFormat('vi-VI', {
     style: 'currency',
@@ -87,10 +78,17 @@ export default function Info({ place }: Props) {
         <Typography variant="body1">{`${place.time.open} - ${place.time.close}`}</Typography>
       </Box>
 
-      <Box display="flex" style={{ color: `${status.color}` }}>
-        <FiberManualRecordIcon fontSize="small" />
-        <Typography variant="body1">{status.text}</Typography>
-      </Box>
+      {isOpen ? (
+        <Box display="flex" style={{ color: '#6CC942' }}>
+          <FiberManualRecordIcon fontSize="small" />
+          <Typography variant="body1">Đang mở</Typography>
+        </Box>
+      ) : (
+        <Box display="flex" style={{ color: 'grey' }}>
+          <FiberManualRecordIcon fontSize="small" />
+          <Typography variant="body1">Đã đóng</Typography>
+        </Box>
+      )}
 
       <Box display="flex" style={{ color: 'gray' }}>
         <MonetizationOnOutlinedIcon />

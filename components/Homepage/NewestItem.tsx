@@ -14,6 +14,7 @@ import ShareIcon from '@material-ui/icons/Share'
 import React from 'react'
 import { useRouter } from 'next/router'
 import { Place } from '../../models/place'
+import nonAccentVietnamese from '../../functions/nonAccentVietnamese'
 
 interface Props {
   info: Place
@@ -21,12 +22,16 @@ interface Props {
 const NewestItem = ({ info }: Props) => {
   const router = useRouter()
 
+  // Khánh Hòa -> khanh-hoa
+  const normalizeText = (text: string) =>
+    nonAccentVietnamese(text).toLowerCase().replace(' ', '-')
+
+  const detailURL = `/${normalizeText(info.address.province)}/${info.id}`
+
   const gotoDetail = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    router.push(`/khanh-hoa/1sfXtIdNJOzFvD15kMLl`)
+    router.push(detailURL)
   }
-
-  // console.log('newest', info)
 
   return (
     <Card>
@@ -43,7 +48,7 @@ const NewestItem = ({ info }: Props) => {
         <ListItemText
           primary={
             <Link
-              href="/khanh-hoa/1sfXtIdNJOzFvD15kMLl"
+              href={detailURL}
               color="inherit"
               variant="body1"
               onClick={(e) => gotoDetail(e)}
@@ -59,21 +64,6 @@ const NewestItem = ({ info }: Props) => {
           }
         />
       </ListItem>
-      {/* Lastest user cmt region */}
-      {/* <CardHeader
-        avatar={<Avatar aria-label="recipe">Q</Avatar>}
-        title={
-          <Link
-            href="#"
-            color="inherit"
-            variant="body2"
-            style={{ fontWeight: 'bold' }}
-          >
-            Quoc Nguyen
-          </Link>
-        }
-        subheader="This place is awesome :)"
-      /> */}
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />

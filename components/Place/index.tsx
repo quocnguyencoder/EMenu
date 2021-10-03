@@ -1,6 +1,5 @@
 import Info from './Info'
 import SearchBar from './SearchBar'
-import Item from './Item'
 import CategoriesNav from './CategoriesNav'
 import MainImage from './MainImage'
 import MainMenu from './MainMenu'
@@ -14,6 +13,5 @@ export {
   MenuWrapper,
   Info,
   SearchBar,
-  Item,
   CategoriesNav,
 }

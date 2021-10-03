@@ -41,3 +41,11 @@ export interface Place {
   location: Coordinate
   show: boolean
 }
+
+export interface Order {
+  [id: string]: {
+    name: string
+    price: number
+    quantity: number
+  }
+}

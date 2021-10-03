@@ -6,7 +6,6 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Toolbar from '@material-ui/core/Toolbar'
 import InputBase from '@material-ui/core/InputBase'
 import SearchIcon from '@material-ui/icons/Search'
-
 import { useStyles } from '../styles/header'
 import { Box } from '@material-ui/core'
 import { useRouter } from 'next/router'
@@ -31,7 +30,7 @@ export default function Header() {
 
   return (
     <>
-      <AppBar color="primary" position="fixed">
+      <AppBar position="fixed" style={{ backgroundColor: '#fff' }}>
         <Container maxWidth="lg">
           <Toolbar>
             <Box className={classes.title}>
@@ -66,7 +65,10 @@ export default function Header() {
             {isLoggedIn ? (
               <UserMenu user={user} logout={logout} />
             ) : (
-              <Button color="inherit" onClick={() => handleClick()}>
+              <Button
+                style={{ color: 'grey', marginLeft: '50%' }}
+                onClick={() => handleClick()}
+              >
                 Đăng nhập
               </Button>
             )}

@@ -37,10 +37,10 @@ const Discovery = ({ places_data }: Props) => {
         <Newest places={places_data} />
       </TabPanel>
       <TabPanel value={value} index="two">
-        Item 2
+        <Newest places={places_data} />
       </TabPanel>
       <TabPanel value={value} index="three">
-        Item 3
+        <Newest places={places_data} />
       </TabPanel>
     </>
   )
