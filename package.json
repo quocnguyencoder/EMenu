@@ -44,6 +44,7 @@
     "react-firebaseui": "^5.0.2",
     "react-loader-spinner": "^4.0.0",
     "react-material-ui-carousel": "^2.2.7",
+    "react-qr-code": "^2.0.2",
     "react-scroll": "^1.8.4"
   },
   "devDependencies": {

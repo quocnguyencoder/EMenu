@@ -2,6 +2,8 @@ import React from 'react'
 import { Box, List, ListItem, Paper, Typography } from '@material-ui/core'
 import FastfoodIcon from '@material-ui/icons/Fastfood'
 import { Link } from 'react-scroll'
+import { useStyles } from '../../styles/place'
+
 interface Props {
   categories: string[]
   filteredCategories: string[]
@@ -15,21 +17,15 @@ const CategoriesNav = ({
   selected,
   setSelected,
 }: Props) => {
+  const classes = useStyles()
+
   const handleListItemClick = (index: number) => {
     setSelected(index)
   }
 
   return (
     <Box width="20%">
-      <Paper
-        style={{
-          backgroundColor: '#fff',
-          padding: '1%',
-          alignSelf: 'flex-start',
-          position: 'sticky',
-          top: 70,
-        }}
-      >
+      <Paper className={classes.categoriesNavWrapper}>
         <Typography
           variant="h5"
           style={{

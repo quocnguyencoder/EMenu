@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ import formatter from '../../functions/moneyFormatter'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 import { Order } from '../../models/place'
+import ModalQR from './ModalQR'
 
 interface Props {
   ordersList: Order
@@ -32,12 +33,22 @@ const OrdersForm = ({
   clearOrders,
 }: Props) => {
   const classes = useStyles()
+  const [openModal, setOpenModal] = useState(false)
 
   const total = Object.keys(ordersList).reduce(
     (result, curr) =>
       result + ordersList[curr].price * ordersList[curr].quantity,
     0
   )
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
+  const handleOpenModal = () => {
+    Object.keys(ordersList).length === 0
+      ? alert('Vui lòng chọn món!')
+      : setOpenModal(true)
+  }
 
   return (
     <Box width="25%">
@@ -141,10 +152,19 @@ const OrdersForm = ({
           </ListItem>
         </List>
 
-        <Button className={classes.orderSubmitBtn}>
+        <Button
+          className={classes.orderSubmitBtn}
+          onClick={() => handleOpenModal()}
+        >
           <CheckCircleIcon fontSize="small" />
           <Typography variant="body2">Gọi món</Typography>
         </Button>
+
+        <ModalQR
+          ordersList={ordersList}
+          openModal={openModal}
+          handleCloseModal={handleCloseModal}
+        />
       </Paper>
     </Box>
   )

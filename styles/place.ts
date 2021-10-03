@@ -30,4 +30,20 @@ export const useStyles = makeStyles(() => ({
     paddingLeft: '3px',
     paddingRight: '3px',
   },
+  categoriesNavWrapper: {
+    backgroundColor: '#fff',
+    padding: '1%',
+    alignSelf: 'flex-start',
+    position: 'sticky',
+    top: 70,
+  },
+  QRNoticeWrapper: {
+    backgroundColor: '#fff',
+    padding: '3%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    gap: '10px',
+  },
 }))
