@@ -3,17 +3,18 @@ import { Box, List, ListItem, Paper, Typography } from '@material-ui/core'
 import FastfoodIcon from '@material-ui/icons/Fastfood'
 import { Link } from 'react-scroll'
 import { useStyles } from '../../styles/place'
+import { Category } from '../../models/place'
 
 interface Props {
-  categories: string[]
-  filteredCategories: string[]
+  categories: Category
+  filteredMenu: number[]
   selected: number
   setSelected: (selected: number) => void
 }
 
 const CategoriesNav = ({
   categories,
-  filteredCategories,
+  filteredMenu,
   selected,
   setSelected,
 }: Props) => {
@@ -22,6 +23,9 @@ const CategoriesNav = ({
   const handleListItemClick = (index: number) => {
     setSelected(index)
   }
+
+  const hasResultItem = (categoryID: number) =>
+    categories[categoryID].items.some((itemID) => filteredMenu.includes(itemID))
 
   return (
     <Box width="20%">
@@ -37,37 +41,39 @@ const CategoriesNav = ({
           Menu
         </Typography>
         <List component="nav">
-          {categories.map(
-            (category, index) =>
-              filteredCategories.includes(category) && (
-                <Link
-                  activeClass="active"
-                  to={`${index}-${category}`}
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                  key={`nav${index}${category}`}
-                >
-                  <ListItem
-                    button
-                    selected={selected === index}
-                    onClick={() => handleListItemClick(index)}
+          {Object.keys(categories)
+            .map(Number)
+            .map(
+              (categoryID) =>
+                hasResultItem(categoryID) && (
+                  <Link
+                    key={`nav-category-${categoryID}`}
+                    activeClass="active"
+                    to={`menu-category-${categoryID}`}
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
                   >
-                    <Typography
-                      variant="body2"
-                      style={{
-                        color: 'gray',
-                        fontWeight: 600,
-                        textTransform: 'uppercase',
-                      }}
+                    <ListItem
+                      button
+                      selected={selected === categoryID}
+                      onClick={() => handleListItemClick(categoryID)}
                     >
-                      {category}
-                    </Typography>
-                  </ListItem>
-                </Link>
-              )
-          )}
+                      <Typography
+                        variant="body2"
+                        style={{
+                          color: 'gray',
+                          fontWeight: 600,
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {categories[categoryID].name}
+                      </Typography>
+                    </ListItem>
+                  </Link>
+                )
+            )}
         </List>
       </Paper>
     </Box>

@@ -1,3 +1,5 @@
+import { Category } from '@material-ui/icons'
+
 export interface Address {
   ward: string
   street: string
@@ -6,11 +8,12 @@ export interface Address {
 }
 
 export interface Menu {
-  category: number[]
-  description: string
-  image: string
-  name: string
-  price: number
+  [id: number]: {
+    description: string
+    image: string
+    name: string
+    price: number
+  }
 }
 
 export interface Time {
@@ -27,25 +30,54 @@ export interface Discount {
   name: string
 }
 
+export interface Rating {
+  1: number
+  2: number
+  3: number
+  4: number
+  5: number
+}
+
+export interface CategoryInfo {
+  name: string
+  items: number[]
+}
+
+export interface Category {
+  [id: number]: CategoryInfo
+}
+
 export interface Place {
   id: string
   address: Address
-  category: string[]
+  categories: Category
   review: string[]
   image: string
   name: string
   rating: number
   type: string
-  menu: Menu[]
+  menu: Menu
   time: Time
   location: Coordinate
   show: boolean
+  phone: string
+  createdDate: string
+  activeDate: string
 }
 
 export interface Order {
-  [id: string]: {
+  [id: number]: {
     name: string
     price: number
     quantity: number
+  }
+}
+
+export interface Reviews {
+  [userID: string]: {
+    content: string
+    date: Date
+    media: string[]
+    rating: number
   }
 }

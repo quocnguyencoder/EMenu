@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { Place } from '../../models/place'
 import moment from 'moment'
 import nonAccentVietnamese from '../../functions/nonAccentVietnamese'
+import formatter from '../../functions/moneyFormatter'
 
 interface Props {
   place: Place
@@ -24,21 +25,19 @@ export default function Info({ place }: Props) {
     moment(place.time.close, 'h:mma')
   )
 
-  const formatter = new Intl.NumberFormat('vi-VI', {
-    style: 'currency',
-    currency: 'VND',
-  })
+  const menu = place.menu
+  const menuItems = Object.keys(menu).map(Number)
 
-  const maxPriceReducer = place.menu.reduce((prev, curr) =>
-    prev.price > curr.price ? prev : curr
+  const maxItemID = menuItems.reduce((prev, curr) =>
+    menu[prev].price > menu[curr].price ? prev : curr
   )
 
-  const minPriceReducer = place.menu.reduce((prev, curr) =>
-    prev.price < curr.price ? prev : curr
+  const minItemID = menuItems.reduce((prev, curr) =>
+    menu[prev].price < menu[curr].price ? prev : curr
   )
 
-  const maxPrice = formatter.format(maxPriceReducer.price)
-  const minPrice = formatter.format(minPriceReducer.price)
+  const maxPrice = formatter.format(menu[maxItemID].price)
+  const minPrice = formatter.format(menu[minItemID].price)
 
   return (
     <Box maxWidth="60%">

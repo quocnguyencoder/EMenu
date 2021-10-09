@@ -21,8 +21,8 @@ import ModalQR from './ModalQR'
 
 interface Props {
   ordersList: Order
-  addToOrders: (id: string) => void
-  removeFromOrders: (id: string) => void
+  addToOrders: (itemID: number) => void
+  removeFromOrders: (itemID: number) => void
   clearOrders: () => void
 }
 
@@ -35,7 +35,9 @@ const OrdersForm = ({
   const classes = useStyles()
   const [openModal, setOpenModal] = useState(false)
 
-  const total = Object.keys(ordersList).reduce(
+  const orderItemsIDArr = Object.keys(ordersList).map(Number)
+
+  const total = orderItemsIDArr.reduce(
     (result, curr) =>
       result + ordersList[curr].price * ordersList[curr].quantity,
     0
@@ -45,7 +47,7 @@ const OrdersForm = ({
     setOpenModal(false)
   }
   const handleOpenModal = () => {
-    Object.keys(ordersList).length === 0
+    orderItemsIDArr.length === 0
       ? alert('Vui lòng chọn món!')
       : setOpenModal(true)
   }
@@ -77,7 +79,7 @@ const OrdersForm = ({
             </ListItemSecondaryAction>
           </ListSubheader>
 
-          {Object.keys(ordersList).length === 0 && (
+          {orderItemsIDArr.length === 0 && (
             <ListItem className={classes.orderEmptyNotice}>
               <Typography variant="subtitle2">
                 (*)Thêm món ăn từ menu
@@ -85,31 +87,31 @@ const OrdersForm = ({
             </ListItem>
           )}
 
-          {Object.keys(ordersList).map((key, index) => (
-            <ListItem key={`order-${index}`}>
+          {orderItemsIDArr.map((itemID) => (
+            <ListItem key={`orderItem-${itemID}`}>
               <ListItemText
                 primary={
                   <Typography
                     variant="body2"
                     style={{ fontWeight: 700, maxWidth: '80%' }}
                   >
-                    {ordersList[key].name}
+                    {ordersList[itemID].name}
                   </Typography>
                 }
                 secondary={
                   <Box display="flex">
                     <AddBoxIcon
-                      onClick={() => addToOrders(key)}
+                      onClick={() => addToOrders(itemID)}
                       style={{ color: 'green', cursor: 'pointer' }}
                     />
                     <Typography
                       variant="body1"
                       style={{ fontWeight: 700, color: 'black' }}
                     >
-                      {ordersList[key].quantity}
+                      {ordersList[itemID].quantity}
                     </Typography>
                     <IndeterminateCheckBoxIcon
-                      onClick={() => removeFromOrders(key)}
+                      onClick={() => removeFromOrders(itemID)}
                       style={{ color: 'red', cursor: 'pointer' }}
                     />
                   </Box>
@@ -120,7 +122,7 @@ const OrdersForm = ({
                   primary={
                     <Typography variant="body2">
                       {formatter.format(
-                        ordersList[key].price * ordersList[key].quantity
+                        ordersList[itemID].price * ordersList[itemID].quantity
                       )}
                     </Typography>
                   }

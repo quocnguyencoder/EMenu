@@ -10,21 +10,22 @@ import {
   Typography,
 } from '@material-ui/core'
 import AddBoxIcon from '@material-ui/icons/AddBox'
-import { Menu } from '../../models/place'
+import { Menu, CategoryInfo } from '../../models/place'
 import useInView from 'react-cool-inview'
 import { useEffect } from 'react'
+import formatter from '../../functions/moneyFormatter'
 
 interface Props {
-  index: number
-  category: string
-  menu: Menu[]
+  categoryID: number
+  category: CategoryInfo
+  menu: Menu
   filteredMenu: number[]
   setSelected: (selected: number) => void
-  addToOrders: (id: string) => void
+  addToOrders: (itemID: number) => void
 }
 
 const MenuItem = ({
-  index,
+  categoryID,
   category,
   menu,
   filteredMenu,
@@ -36,17 +37,17 @@ const MenuItem = ({
     threshold: 0.5,
   })
 
-  const formatter = new Intl.NumberFormat('vi-VI', {
-    style: 'currency',
-    currency: 'VND',
-  })
-
   useEffect(() => {
-    inView && setSelected(index)
+    inView && setSelected(categoryID)
   }, [inView])
 
-  return (
-    <div id={`${index}-${category}`} ref={observe}>
+  const hasResultItem = () =>
+    category.items.some((itemID) => filteredMenu.includes(itemID))
+
+  const isInResult = (itemID: number) => filteredMenu.includes(itemID)
+
+  return hasResultItem() ? (
+    <div id={`menu-category-${categoryID}`} ref={observe}>
       <ListSubheader>
         <Typography
           variant="body2"
@@ -55,18 +56,17 @@ const MenuItem = ({
             textTransform: 'uppercase',
           }}
         >
-          {category}
+          {category.name}
         </Typography>
       </ListSubheader>
-      {menu.map(
-        (item, id) =>
-          item.category.includes(index) &&
-          filteredMenu.includes(id) && (
-            <ListItem key={`${category}-${item.name}`}>
+      {category.items.map(
+        (itemID) =>
+          isInResult(itemID) && (
+            <ListItem key={`category-${categoryID}-item-${itemID}`}>
               <ListItemAvatar>
                 <Avatar
-                  alt={item.name}
-                  src={item.image}
+                  alt={menu[itemID].name}
+                  src={menu[itemID].image}
                   variant="square"
                   style={{ height: '80px', width: '80px' }}
                 />
@@ -75,10 +75,10 @@ const MenuItem = ({
                 style={{ marginLeft: '2%', maxWidth: '60%' }}
                 primary={
                   <Typography variant="body1" style={{ fontWeight: 700 }}>
-                    {item.name}
+                    {menu[itemID].name}
                   </Typography>
                 }
-                secondary={item.description}
+                secondary={menu[itemID].description}
               />
               <ListItemSecondaryAction style={{ display: 'flex' }}>
                 <ListItemText
@@ -90,7 +90,7 @@ const MenuItem = ({
                         textDecorationStyle: 'solid',
                       }}
                     >
-                      {formatter.format(item.price * 1.5)}
+                      {formatter.format(menu[itemID].price * 1.5)}
                     </Typography>
                   }
                   secondary={
@@ -101,14 +101,14 @@ const MenuItem = ({
                         color: '#58B1E1',
                       }}
                     >
-                      {formatter.format(item.price)}
+                      {formatter.format(menu[itemID].price)}
                     </Typography>
                   }
                 />
                 <IconButton
                   edge="end"
                   style={{ color: '#D14B28' }}
-                  onClick={() => addToOrders(`${id}`)}
+                  onClick={() => addToOrders(itemID)}
                 >
                   <AddBoxIcon fontSize="large" />
                 </IconButton>
@@ -118,6 +118,8 @@ const MenuItem = ({
       )}
       <Divider variant="inset" component="li" />
     </div>
+  ) : (
+    <> </>
   )
 }
 

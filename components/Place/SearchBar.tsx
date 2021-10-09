@@ -1,3 +1,4 @@
+import React from 'react'
 import { Box, InputBase, InputAdornment, IconButton } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import ClearIcon from '@material-ui/icons/Clear'
@@ -6,7 +7,7 @@ interface Props {
   searchTerm: string
   setSearchTerm: (value: string) => void
 }
-export default function SearchBar({ searchTerm, setSearchTerm }: Props) {
+const SearchBar = ({ searchTerm, setSearchTerm }: Props) => {
   const handleOnChange = (userInput: string) => {
     setSearchTerm(userInput)
   }
@@ -46,3 +47,5 @@ export default function SearchBar({ searchTerm, setSearchTerm }: Props) {
     </Box>
   )
 }
+
+export default React.memo(SearchBar)

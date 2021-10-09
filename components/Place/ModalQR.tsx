@@ -24,8 +24,6 @@ const ModalQR = ({ ordersList, openModal, handleCloseModal }: Props) => {
 
   return (
     <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
       open={openModal}
       onClose={handleCloseModal}
       closeAfterTransition
