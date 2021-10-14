@@ -1,9 +1,9 @@
 import GoogleMapReact from 'google-map-react'
 
 interface Props {
-  formatted_address: string | null
-  lat: number | null
-  lng: number | null
+  formatted_address: string
+  lat: number
+  lng: number
 }
 
 export default function GoogleMaps({ lat, lng, formatted_address }: Props) {
@@ -15,7 +15,7 @@ export default function GoogleMaps({ lat, lng, formatted_address }: Props) {
     })
 
   return (
-    <div style={{ height: '75vh', width: '100%' }}>
+    <div style={{ height: '75vh', width: '95%' }}>
       <GoogleMapReact
         // bootstrapURLKeys={{ key: `${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}` }}
         defaultCenter={{ lat: lat, lng: lng }}

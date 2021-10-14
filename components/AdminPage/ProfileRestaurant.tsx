@@ -1,21 +1,14 @@
 import { Box, Typography, CardMedia, Button } from '@material-ui/core'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
-import { prefix } from '../../constants'
+import { Maps } from '.'
+import { Place } from '../../models/place'
 
 interface Props {
-  owner: string | null
-  name: string | null
-  address: string | null
-  coordinates: {
-    lat: number | null
-    lng: number | null
-  }
-  openTime: string | null
-  closeTime: string | null
+  place: Place
 }
 
-export default function ProfileRestaurant() {
+export default function ProfileRestaurant({ place }: Props) {
   const [status, setStatus] = useState('')
   const [now, setNow] = useState(moment().format('LT'))
   const timer = () => setNow(moment().format('LT'))
@@ -23,8 +16,8 @@ export default function ProfileRestaurant() {
   useEffect(() => {
     const clock = setInterval(timer, 1000)
     const checkStatus = () => {
-      moment(place.openTime, 'hh:mmA').isBefore(moment(now, 'hh:mmA')) &&
-      moment(now, 'hh:mmA').isBefore(moment(place.closeTime, 'hh:mmA'))
+      moment(place.time.open, 'hh:mmA').isBefore(moment(now, 'hh:mmA')) &&
+      moment(now, 'hh:mmA').isBefore(moment(place.time.close, 'hh:mmA'))
         ? setStatus('Open')
         : setStatus('Close')
     }
@@ -33,37 +26,31 @@ export default function ProfileRestaurant() {
   }, [now])
 
   return (
-    <Box display="flex">
+    <Box display="flex" style={{ gap: '3%' }}>
       <Box flex={1}>
         <Typography>Name: {place.name}</Typography>
-        <Typography>Address: {place.address}</Typography>
         <Typography>
-          Open Time: {place.openTime} - {place.closeTime}
+          Address: {place.address.street}, {place.address.ward},{' '}
+          {place.address.city}, {place.address.province}
+        </Typography>
+        <Typography>Phone: {place.phone}</Typography>
+        <Typography>
+          Open Time: {place.time.open} - {place.time.close}
         </Typography>
         <Typography>Status: {status}</Typography>
+        <Typography>Type: {place.type}</Typography>
+        <CardMedia
+          component="img"
+          image={`${place.image}`}
+          style={{ objectFit: 'scale-down' }}
+        />
         <Button variant="outlined" size="medium" color="secondary">
           Edit
         </Button>
       </Box>
-      <Box flex={2}>
-        <CardMedia
-          component="img"
-          image={`${prefix}/chicken.jpg`}
-          style={{ objectFit: 'scale-down' }}
-        />
+      <Box flex={1}>
+        <Maps location={place.location} address={place.address} />
       </Box>
     </Box>
   )
-}
-
-const place: Props = {
-  owner: '1',
-  name: 'a',
-  address: '1 vo van ngan',
-  coordinates: {
-    lat: 21.027763,
-    lng: 105.83416,
-  },
-  openTime: '08:00 AM',
-  closeTime: '09:00 PM',
 }

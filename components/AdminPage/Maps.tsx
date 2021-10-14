@@ -1,25 +1,17 @@
 import GoogleMaps from '../googlemap/GoogleMaps'
+import { Coordinate, Address } from '../../models/place'
 
 interface Props {
-  formatted_address: string | null
-  coordinates: {
-    lat: number | null
-    lng: number | null
-  }
+  address: Address
+  location: Coordinate
 }
-const place: Props = {
-  formatted_address: 'Ha Noi',
-  coordinates: {
-    lat: 21.027763,
-    lng: 105.83416,
-  },
-}
-export default function Maps() {
+
+export default function Maps({ location, address }: Props) {
   return (
     <GoogleMaps
-      lat={place.coordinates.lat}
-      lng={place.coordinates.lng}
-      formatted_address={place.formatted_address}
+      lat={location.lat}
+      lng={location.lng}
+      formatted_address={`${address.street}, ${address.city}, ${address.province}`}
     />
   )
 }

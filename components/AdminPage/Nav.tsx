@@ -33,8 +33,7 @@ export default function Nav({ setValue }: Props) {
 
 const categories = [
   'Dashboards',
-  'Profile Restaurant',
+  'Profile',
   'Staff management',
-  'Maps',
   'Menu management',
 ]
