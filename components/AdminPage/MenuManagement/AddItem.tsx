@@ -32,7 +32,7 @@ export default function AddItem({
   const classes = useStyles()
   const [option, setOption] = useState('select')
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
-  const [previewImg, setPreviewImg] = useState<string>()
+  const [previewImg, setPreviewImg] = useState<string>('')
 
   const inputEl = useRef(null)
 
@@ -123,6 +123,11 @@ export default function AddItem({
                   })
                   alert(`Add item successfully`)
                   addToMenu(newItemID, data, cate)
+                  // @ts-expect-error: to stop error
+                  // eslint-disable-next-line
+                  inputEl.current!.value = null
+                  setSelectedCategories([])
+                  setPreviewImg('')
                 })
             })
         }
