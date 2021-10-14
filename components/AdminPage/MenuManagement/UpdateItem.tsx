@@ -105,7 +105,7 @@ const UpdateItem = ({
         image: itemInfo.image,
         name: e.target.Name.value,
         price: e.target.Price.value,
-      }
+      } as MenuItem
       firebase
         .firestore()
         .collection('place')
@@ -149,7 +149,7 @@ const UpdateItem = ({
                   image: fireBaseUrl,
                   name: e.target.Name.value,
                   price: e.target.Price.value,
-                }
+                } as MenuItem
                 firebase
                   .firestore()
                   .collection('place')

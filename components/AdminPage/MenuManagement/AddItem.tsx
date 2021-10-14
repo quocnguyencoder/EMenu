@@ -6,12 +6,13 @@ import {
   FormControlLabel,
   InputLabel,
   CardMedia,
+  InputBase,
 } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import { useState, useRef } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/storage'
-import { Category, Menu, MenuItem } from '../../../models/place'
+import { Category, CategoryInfo, Menu, MenuItem } from '../../../models/place'
 import ItemForm from './ItemForm'
 import SelectCategories from './SelectCategories'
 
@@ -29,7 +30,6 @@ export default function AddItem({
   addToMenu,
 }: Props) {
   const classes = useStyles()
-  // eslint-disable-next-line
   const [option, setOption] = useState('select')
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
   const [previewImg, setPreviewImg] = useState<string>()
@@ -56,7 +56,7 @@ export default function AddItem({
     e.preventDefault()
     const temp = Object.keys(adminMenu).map(Number).pop()
     const newItemID = temp === undefined ? 0 : temp + 1
-    const cate = { ...categories }
+    let cate = { ...categories }
 
     // @ts-expect-error: to stop error
     // eslint-disable-next-line
@@ -93,7 +93,7 @@ export default function AddItem({
                 image: fireBaseUrl,
                 name: e.target.Name.value,
                 price: e.target.Price.value,
-              }
+              } as MenuItem
               firebase
                 .firestore()
                 .collection('place')
@@ -102,8 +102,21 @@ export default function AddItem({
                   ['menu.' + `${newItemID}`]: data,
                 })
                 .then(() => {
-                  for (let i = 0; i < selectedCategories.length; i++) {
-                    cate[selectedCategories[i]].items.push(newItemID)
+                  if (option === 'select') {
+                    for (let i = 0; i < selectedCategories.length; i++) {
+                      cate[selectedCategories[i]].items.push(newItemID)
+                    }
+                  } else {
+                    const tempCategoryID = Object.keys(categories)
+                      .map(Number)
+                      .pop()
+                    const newCategoryID =
+                      tempCategoryID === undefined ? 0 : tempCategoryID + 1
+                    const cateInfo = {
+                      items: [newItemID],
+                      name: e.target.newCategory.value,
+                    } as CategoryInfo
+                    cate = { ...categories, [newCategoryID]: { ...cateInfo } }
                   }
                   firebase.firestore().collection('place').doc(placeID).update({
                     categories: cate,
@@ -141,11 +154,23 @@ export default function AddItem({
             />
           </RadioGroup>
           <InputLabel>Category</InputLabel>
-          <SelectCategories
-            selectedCategories={selectedCategories}
-            handleChangeCategory={handleChangeCategory}
-            categories={categories}
-          />
+          {option == 'select' ? (
+            <SelectCategories
+              selectedCategories={selectedCategories}
+              handleChangeCategory={handleChangeCategory}
+              categories={categories}
+            />
+          ) : (
+            <InputBase
+              style={{
+                border: '1px solid',
+                borderRadius: '5px',
+                padding: '0 1% 0 1%',
+              }}
+              required
+              name="newCategory"
+            />
+          )}
           <Box mt={2}>
             <Button
               className={classes.button}
