@@ -27,6 +27,7 @@ interface Props {
     item: MenuItem,
     updateCategories: Category
   ) => void
+  setItemCategoryList: any
   handleCloseModal: () => void
 }
 
@@ -38,10 +39,11 @@ const UpdateItem = ({
   placeID,
   openModal,
   updateMenu,
+  setItemCategoryList,
   handleCloseModal,
 }: Props) => {
   const classes = useStyles()
-
+  const [disableBtn, setDisableBtn] = useState(false)
   const [selectedCategories, setSelectedCategories] =
     useState<number[]>(itemCategoryList)
 
@@ -61,6 +63,17 @@ const UpdateItem = ({
     }
   }
 
+  const notChangeCategory = () => {
+    const deleteList = itemCategoryList.filter(
+      (categoryID) => !selectedCategories.includes(categoryID)
+    )
+    const updateList = selectedCategories.filter(
+      (categoryID) => !itemCategoryList.includes(categoryID)
+    )
+    if (deleteList.length === 0 && updateList.length === 0) return true
+    return false
+  }
+
   const handleUpdateCategory = (data: MenuItem) => {
     const deleteList = itemCategoryList.filter(
       (categoryID) => !selectedCategories.includes(categoryID)
@@ -70,10 +83,12 @@ const UpdateItem = ({
     )
     if (deleteList.length > 0 || updateList.length > 0) {
       for (let i = 0; i < deleteList.length; i++) {
-        cate[deleteList[i]].items.splice(
-          cate[deleteList[i]].items.indexOf(itemID),
-          1
-        )
+        if (cate[deleteList[i]].items.indexOf(itemID) >= 0) {
+          cate[deleteList[i]].items.splice(
+            cate[deleteList[i]].items.indexOf(itemID),
+            1
+          )
+        }
       }
       for (let i = 0; i < updateList.length; i++) {
         cate[updateList[i]].items.push(itemID)
@@ -87,14 +102,19 @@ const UpdateItem = ({
         .update({
           categories: cate,
         })
-        .then(() => updateMenu(itemID, data, cate))
+        .then(() => {
+          setItemCategoryList(selectedCategories)
+          updateMenu(itemID, data, cate)
+        })
     } else {
       updateMenu(itemID, data, cate)
     }
+    setDisableBtn(false)
   }
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
+    setDisableBtn(true)
 
     // @ts-expect-error: to stop error
     // eslint-disable-next-line
@@ -106,17 +126,27 @@ const UpdateItem = ({
         name: e.target.Name.value,
         price: e.target.Price.value,
       } as MenuItem
-      firebase
-        .firestore()
-        .collection('place')
-        .doc(placeID)
-        .update({
-          ['menu.' + itemID]: data,
-        })
-        .then(() => {
-          handleUpdateCategory(data)
-          alert(`Update successful`)
-        })
+      if (
+        itemInfo.description === data.description &&
+        itemInfo.name === data.name &&
+        itemInfo.price == data.price &&
+        notChangeCategory()
+      ) {
+        setDisableBtn(false)
+        alert(`Không thể cập nhật vì dữ liệu giống nhau`)
+      } else {
+        firebase
+          .firestore()
+          .collection('place')
+          .doc(placeID)
+          .update({
+            ['menu.' + itemID]: data,
+          })
+          .then(() => {
+            handleUpdateCategory(data)
+            alert(`Update successful`)
+          })
+      }
     } else {
       if (imageAsFile.type.includes('image')) {
         const uploadTask = firebase
@@ -165,7 +195,8 @@ const UpdateItem = ({
           }
         )
       } else {
-        alert(`File is not an image or gif`)
+        alert(`File không phải là hình ảnh hoặc gif`)
+        setDisableBtn(false)
       }
     }
   }
@@ -222,6 +253,7 @@ const UpdateItem = ({
                 className={classes.button}
                 type="submit"
                 variant="contained"
+                disabled={disableBtn}
               >
                 Submit
               </Button>

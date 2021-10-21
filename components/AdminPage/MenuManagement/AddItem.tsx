@@ -33,7 +33,7 @@ export default function AddItem({
   const [option, setOption] = useState('select')
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
   const [previewImg, setPreviewImg] = useState<string>('')
-
+  const [disableBtn, setDisableBtn] = useState(false)
   const inputEl = useRef(null)
 
   const handleChange = (selectedOption: string) => {
@@ -48,12 +48,13 @@ export default function AddItem({
     if (e.type.includes('image')) {
       setPreviewImg(URL.createObjectURL(e))
     } else {
-      alert(`File is not an image or gif`)
+      alert(`File không phải là hình ảnh hoặc gif`)
     }
   }
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
+    setDisableBtn(true)
     const temp = Object.keys(adminMenu).map(Number).pop()
     const newItemID = temp === undefined ? 0 : temp + 1
     let cate = { ...categories }
@@ -118,21 +119,31 @@ export default function AddItem({
                     } as CategoryInfo
                     cate = { ...categories, [newCategoryID]: { ...cateInfo } }
                   }
-                  firebase.firestore().collection('place').doc(placeID).update({
-                    categories: cate,
-                  })
-                  alert(`Add item successfully`)
-                  addToMenu(newItemID, data, cate)
-                  // @ts-expect-error: to stop error
-                  // eslint-disable-next-line
-                  inputEl.current!.value = null
-                  setSelectedCategories([])
-                  setPreviewImg('')
+                  firebase
+                    .firestore()
+                    .collection('place')
+                    .doc(placeID)
+                    .update({
+                      categories: cate,
+                    })
+                    .then(() => {
+                      alert(`Add item successfully`)
+                      addToMenu(newItemID, data, cate)
+                      // @ts-expect-error: to stop error
+                      // eslint-disable-next-line
+                      inputEl.current!.value = null
+                      setSelectedCategories([])
+                      setPreviewImg('')
+                      setDisableBtn(false)
+                    })
                 })
             })
         }
       )
-    } else alert(`File is not an image or gif`)
+    } else {
+      alert(`File không phải là hình ảnh hoặc gif`)
+      setDisableBtn(false)
+    }
   }
 
   return (
@@ -181,6 +192,7 @@ export default function AddItem({
               className={classes.button}
               type="submit"
               variant="contained"
+              disabled={disableBtn}
             >
               Submit
             </Button>

@@ -1,4 +1,4 @@
-import { Typography, ImageList, ImageListItem } from '@material-ui/core'
+import { Box, Typography, ImageList, ImageListItem } from '@material-ui/core'
 import { useState } from 'react'
 import { Category, Menu, MenuItem } from '../../../models/place'
 import Item from './Item'
@@ -75,17 +75,27 @@ export default function FilterByCategory({
             </Typography>
           </ImageListItem>
           {categories[categoryID].items.map((itemID) => (
-            <Item
+            <Box
               key={`category-${categoryID}-menuItem-${itemID}`}
-              categories={categories}
-              categoryID={categoryID}
-              itemID={itemID}
-              itemInfo={menu[itemID]}
-              placeID={placeID}
-              updateMenu={updateMenu}
-              handleOpenModalUpdate={handleOpenModalUpdate}
-              handleOpenModalRemove={handleOpenModalRemove}
-            />
+              style={{
+                width: '20%',
+                height: '20%',
+                background:
+                  'linear-gradient(rgb(5 159 137), transparent) #D14B28',
+                backgroundColor: '#D14B28',
+              }}
+            >
+              <Item
+                categories={categories}
+                categoryID={categoryID}
+                itemID={itemID}
+                itemInfo={menu[itemID]}
+                placeID={placeID}
+                updateMenu={updateMenu}
+                handleOpenModalUpdate={handleOpenModalUpdate}
+                handleOpenModalRemove={handleOpenModalRemove}
+              />
+            </Box>
           ))}
         </ImageList>
       ))}
@@ -98,6 +108,7 @@ export default function FilterByCategory({
           itemCategoryList={itemCategoryList}
           placeID={placeID}
           updateMenu={updateMenu}
+          setItemCategoryList={setItemCategoryList}
           openModal={openModalUpdate}
           handleCloseModal={handleCloseModal}
         />

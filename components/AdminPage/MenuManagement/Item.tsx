@@ -8,7 +8,7 @@ import {
   makeStyles,
 } from '@material-ui/core'
 import { Category, MenuItem } from '../../../models/place'
-import useCurrencyVND from '../../useCurrencyVND'
+import formatter from '../../../functions/moneyFormatter'
 
 interface Props {
   categories: Category
@@ -35,7 +35,7 @@ const Item = ({
   const classes = useStyles()
 
   return (
-    <Box style={{ width: '20%', height: '20%' }}>
+    <>
       <ImageListItem cols={4}>
         <CardMedia
           component="img"
@@ -51,7 +51,7 @@ const Item = ({
                 Description: {itemInfo.description}
               </Typography>
               <Typography variant="body2" className={classes.noOverFlowText}>
-                Price: {useCurrencyVND(itemInfo.price)}
+                Price: {formatter.format(itemInfo.price)}
               </Typography>
             </Box>
           }
@@ -77,7 +77,7 @@ const Item = ({
           Update
         </Button>
       </Box>
-    </Box>
+    </>
   )
 }
 

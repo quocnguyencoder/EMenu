@@ -40,19 +40,21 @@ const RemoveItemFromCategory = ({
 
   const handleRemove = () => {
     const cate = { ...categories }
-    cate[categoryID].items.splice(cate[categoryID].items.indexOf(itemID), 1)
-    firebase
-      .firestore()
-      .collection('place')
-      .doc(placeID)
-      .update({
-        categories: cate,
-      })
-      .then(() => {
-        updateMenu(itemID, itemInfo, cate)
-        handleCloseModal()
-        alert(`Remove successful`)
-      })
+    if (cate[categoryID].items.indexOf(itemID) >= 0) {
+      cate[categoryID].items.splice(cate[categoryID].items.indexOf(itemID), 1)
+      firebase
+        .firestore()
+        .collection('place')
+        .doc(placeID)
+        .update({
+          categories: cate,
+        })
+        .then(() => {
+          updateMenu(itemID, itemInfo, cate)
+          handleCloseModal()
+          alert(`Remove successful`)
+        })
+    }
   }
 
   return (
