@@ -42,6 +42,7 @@
     "react-cool-inview": "^2.0.7",
     "react-dom": "17.0.2",
     "react-firebaseui": "^5.0.2",
+    "react-google-charts": "^3.0.15",
     "react-loader-spinner": "^4.0.0",
     "react-material-ui-carousel": "^2.2.7",
     "react-qr-code": "^2.0.2",

@@ -1,17 +1,6 @@
 import Info from './Info'
-import SearchBar from './SearchBar'
-import CategoriesNav from './CategoriesNav'
 import MainImage from './MainImage'
-import MainMenu from './MainMenu'
 import MenuWrapper from './MenuWrapper'
-import MenuItem from './MenuItem'
+import ReviewsRatings from './ReviewsRatings'
 
-export {
-  MainImage,
-  MainMenu,
-  MenuItem,
-  MenuWrapper,
-  Info,
-  SearchBar,
-  CategoriesNav,
-}
+export { MainImage, MenuWrapper, Info, ReviewsRatings }

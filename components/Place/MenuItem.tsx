@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Divider,
   IconButton,
   ListItem,
   ListItemAvatar,
@@ -116,7 +115,6 @@ const MenuItem = ({
             </ListItem>
           )
       )}
-      <Divider variant="inset" component="li" />
     </div>
   ) : (
     <> </>

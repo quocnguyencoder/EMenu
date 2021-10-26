@@ -17,8 +17,8 @@ export interface Menu {
 }
 
 export interface Time {
-  open: number
-  close: number
+  open: string
+  close: string
 }
 
 export interface Coordinate {
@@ -51,7 +51,7 @@ export interface Place {
   id: string
   address: Address
   categories: Category
-  review: string[]
+  reviews: string[]
   image: string
   name: string
   rating: number
@@ -73,11 +73,23 @@ export interface Order {
   }
 }
 
+export interface Comment {
+  userID: string
+  content: string
+}
+
+export interface ReviewContent {
+  id: string
+  content: string
+  date: string
+  media: string[]
+  rating: number
+  likes: string[]
+  comments: Comment[]
+}
+
 export interface Reviews {
-  [userID: string]: {
-    content: string
-    date: Date
-    media: string[]
-    rating: number
+  [placeID: string]: {
+    reviews: string[]
   }
 }

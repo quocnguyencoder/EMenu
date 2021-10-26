@@ -99,12 +99,13 @@ const OrdersForm = ({
                   </Typography>
                 }
                 secondary={
-                  <Box display="flex">
+                  <Box component={'span'} display="flex">
                     <AddBoxIcon
                       onClick={() => addToOrders(itemID)}
                       style={{ color: 'green', cursor: 'pointer' }}
                     />
                     <Typography
+                      component={'span'}
                       variant="body1"
                       style={{ fontWeight: 700, color: 'black' }}
                     >
