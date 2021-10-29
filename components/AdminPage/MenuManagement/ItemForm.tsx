@@ -1,4 +1,4 @@
-import { Box, Typography } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import InputField from './InputField'
 import { MenuItem } from '../../../models/place'
 
@@ -8,20 +8,17 @@ interface Props {
 
 const ItemForm = ({ item }: Props) => {
   return (
-    <>
-      <Box alignItems="center" display="flex" marginBottom="1%">
-        <Typography style={{ marginRight: '1%' }}>Name:</Typography>
+    <Box mr={1}>
+      <Box marginBottom="1%">
         <InputField placeholder="Name" item={item} />
       </Box>
-      <Box alignItems="center" display="flex" marginBottom="1%">
-        <Typography style={{ marginRight: '1%' }}>Description:</Typography>
+      <Box marginBottom="1%">
         <InputField placeholder="Description" item={item} />
       </Box>
-      <Box alignItems="center" display="flex" marginBottom="1%">
-        <Typography style={{ marginRight: '1%' }}>Price:</Typography>
+      <Box marginBottom="1%">
         <InputField placeholder="Price" item={item} />
       </Box>
-    </>
+    </Box>
   )
 }
 

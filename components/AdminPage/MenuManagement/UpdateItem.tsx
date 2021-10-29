@@ -124,7 +124,7 @@ const UpdateItem = ({
         description: e.target.Description.value,
         image: itemInfo.image,
         name: e.target.Name.value,
-        price: e.target.Price.value,
+        price: Number(e.target.Price.value),
       } as MenuItem
       if (
         itemInfo.description === data.description &&
@@ -178,7 +178,7 @@ const UpdateItem = ({
                   description: e.target.Description.value,
                   image: fireBaseUrl,
                   name: e.target.Name.value,
-                  price: e.target.Price.value,
+                  price: Number(e.target.Price.value),
                 } as MenuItem
                 firebase
                   .firestore()

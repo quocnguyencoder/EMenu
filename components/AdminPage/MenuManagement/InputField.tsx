@@ -1,4 +1,9 @@
-import { InputAdornment, InputBase, makeStyles } from '@material-ui/core'
+import {
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from '@material-ui/core'
 import { useState } from 'react'
 import { MenuItem } from '../../../models/place'
 
@@ -8,7 +13,6 @@ interface Props {
 }
 
 export default function InputField({ placeholder, item }: Props) {
-  const classes = useStyles()
   const [description, setDescription] = useState<string>(item.description)
   const [price, setPrice] = useState<number>(item.price)
   const [name, setName] = useState<string>(item.name)
@@ -23,39 +27,48 @@ export default function InputField({ placeholder, item }: Props) {
     setName(input)
   }
 
-  return placeholder === 'Description' ? (
-    <InputBase
-      className={classes.input}
-      placeholder={placeholder}
-      multiline
-      minRows={2}
-      name={placeholder}
-      value={description}
-      onChange={(e) => handleOnChangeDescription(e.target.value)}
-    />
-  ) : placeholder === 'Price' ? (
-    <InputBase
-      className={classes.input}
-      placeholder={placeholder}
-      required
-      type="number"
-      endAdornment={<InputAdornment position="end">VNĐ</InputAdornment>}
-      name={placeholder}
-      value={price}
-      onChange={(e) => handleOnChangePrice(e.target.value as unknown as number)}
-    />
-  ) : (
-    <InputBase
-      className={classes.input}
-      placeholder={placeholder}
-      required
-      name={placeholder}
-      value={name}
-      onChange={(e) => handleOnChangeName(e.target.value)}
-    />
+  return (
+    <FormControl fullWidth margin="dense" variant="outlined" color="secondary">
+      {placeholder === 'Description' ? (
+        <>
+          <InputLabel>{placeholder}</InputLabel>
+          <OutlinedInput
+            value={description}
+            multiline
+            minRows={1}
+            name={placeholder}
+            label={placeholder}
+            onChange={(e) => handleOnChangeDescription(e.target.value)}
+          />
+        </>
+      ) : placeholder === 'Price' ? (
+        <>
+          <InputLabel>{placeholder}</InputLabel>
+          <OutlinedInput
+            value={price}
+            required
+            type="number"
+            inputProps={{ min: '0' }}
+            name={placeholder}
+            label={placeholder}
+            onChange={(e) =>
+              handleOnChangePrice(e.target.value as unknown as number)
+            }
+            endAdornment={<InputAdornment position="end">VNĐ</InputAdornment>}
+          />
+        </>
+      ) : (
+        <>
+          <InputLabel>{placeholder}</InputLabel>
+          <OutlinedInput
+            value={name}
+            required
+            name={placeholder}
+            label={placeholder}
+            onChange={(e) => handleOnChangeName(e.target.value)}
+          />
+        </>
+      )}
+    </FormControl>
   )
 }
-
-const useStyles = makeStyles(() => ({
-  input: { border: '1px solid', borderRadius: '5px', padding: '0 1% 0 1%' },
-}))
