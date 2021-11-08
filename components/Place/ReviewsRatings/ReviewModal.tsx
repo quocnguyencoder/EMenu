@@ -24,6 +24,7 @@ import CancelRoundedIcon from '@material-ui/icons/CancelRounded'
 import Divider from '@material-ui/core/Divider'
 import moment from 'moment'
 import Rating from '@material-ui/lab/Rating'
+import { useStyles } from '../../../styles/place'
 
 interface Props {
   openModal: boolean
@@ -32,6 +33,8 @@ interface Props {
 
 const ReviewModal = ({ openModal, handleCloseModal }: Props) => {
   const [selectedImages, setSelectedImages] = useState<File[]>([])
+  const classes = useStyles()
+
   const handleSelectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files[0] === undefined) {
       return
@@ -39,11 +42,13 @@ const ReviewModal = ({ openModal, handleCloseModal }: Props) => {
       setSelectedImages([...selectedImages, e.target.files[0]])
     }
   }
+
   const handleRemoveImage = (index: number) => {
     const newSelectedImages = [...selectedImages]
     newSelectedImages.splice(index, 1)
     setSelectedImages(newSelectedImages)
   }
+
   return (
     <Modal
       open={openModal}
@@ -53,25 +58,10 @@ const ReviewModal = ({ openModal, handleCloseModal }: Props) => {
       BackdropProps={{
         timeout: 500,
       }}
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+      className={classes.reviewModalWrapper}
     >
       <Fade in={openModal}>
-        <Paper
-          style={{
-            backgroundColor: '#fff',
-            display: 'flex',
-            flexDirection: 'column',
-            borderRadius: '15px',
-            width: '50%',
-            height: '80%',
-            maxWidth: '700px',
-            maxHeight: '500px',
-          }}
-        >
+        <Paper className={classes.reviewModalPaper}>
           <Box display="flex" alignItems="center" justifyContent="center">
             <IconButton style={{ marginRight: 'auto', visibility: 'hidden' }}>
               <CancelOutlinedIcon />
@@ -202,16 +192,7 @@ const ReviewModal = ({ openModal, handleCloseModal }: Props) => {
                 </ImageListItem>
               ))}
           </ImageList>
-          <Button
-            style={{
-              margin: '2% 3% 2% 3%',
-              backgroundColor: '#D14B28',
-              color: '#fff',
-              fontWeight: 600,
-            }}
-          >
-            Hoàn tất
-          </Button>
+          <Button className={classes.reviewModalSubmitButton}>Hoàn tất</Button>
         </Paper>
       </Fade>
     </Modal>

@@ -1,13 +1,12 @@
+import { Place } from '../../models/place'
 import { Box, Typography, Breadcrumbs } from '@material-ui/core'
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
+import { nonAccentVietnamese, moneyFormatter } from '../../functions'
 import AccessTimeIcon from '@material-ui/icons/AccessTime'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined'
 import PlaceRating from './PlaceRating'
 import Link from 'next/link'
-import { Place } from '../../models/place'
 import moment from 'moment'
-import nonAccentVietnamese from '../../functions/nonAccentVietnamese'
-import formatter from '../../functions/moneyFormatter'
 
 interface Props {
   place: Place
@@ -36,8 +35,8 @@ export default function Info({ place }: Props) {
     menu[prev].price < menu[curr].price ? prev : curr
   )
 
-  const maxPrice = formatter.format(menu[maxItemID].price)
-  const minPrice = formatter.format(menu[minItemID].price)
+  const maxPrice = moneyFormatter.format(menu[maxItemID].price)
+  const minPrice = moneyFormatter.format(menu[minItemID].price)
 
   return (
     <Box maxWidth="60%">

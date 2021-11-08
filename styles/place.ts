@@ -46,4 +46,25 @@ export const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     gap: '10px',
   },
+  reviewModalWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  reviewModalPaper: {
+    backgroundColor: '#fff',
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: '15px',
+    width: '50%',
+    height: '80%',
+    maxWidth: '700px',
+    maxHeight: '500px',
+  },
+  reviewModalSubmitButton: {
+    margin: '2% 3% 2% 3%',
+    backgroundColor: '#D14B28',
+    color: '#fff',
+    fontWeight: 600,
+  },
 }))

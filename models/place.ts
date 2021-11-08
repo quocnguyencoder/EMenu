@@ -78,18 +78,14 @@ export interface Comment {
   content: string
 }
 
-export interface ReviewContent {
+export interface Review {
   id: string
+  userID: string
+  subject: string
   content: string
   date: string
   media: string[]
   rating: number
   likes: string[]
   comments: Comment[]
-}
-
-export interface Reviews {
-  [placeID: string]: {
-    reviews: string[]
-  }
 }

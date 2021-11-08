@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import MenuList from '@material-ui/core/MenuList'
 import { Button } from '@material-ui/core'
 import User from '../models/user'
+import { useRouter } from 'next/router'
 
 interface Props {
   user: User
@@ -18,6 +19,7 @@ export default function UserMenu({ user, logout }: Props) {
   // const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   const anchorRef = React.useRef<HTMLButtonElement>(null)
+  const router = useRouter()
 
   const hasDisplayName = user.name !== null
   const hasProfilePic = user.profilePic !== null
@@ -39,6 +41,7 @@ export default function UserMenu({ user, logout }: Props) {
 
     setOpen(false)
   }
+  const gotoProfile = () => router.push(`/user/${user.id}/profile`)
 
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {
@@ -93,7 +96,7 @@ export default function UserMenu({ user, logout }: Props) {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={() => gotoProfile()}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
                   <MenuItem onClick={() => logout()}>Logout</MenuItem>
                 </MenuList>
