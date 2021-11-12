@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, List, Typography } from '@material-ui/core'
-import { Menu, Category } from '../../models/place'
+import { Menu, Category } from '@/models/place'
 import MenuItem from './MenuItem'
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 

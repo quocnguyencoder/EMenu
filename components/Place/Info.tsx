@@ -1,6 +1,6 @@
-import { Place } from '../../models/place'
+import { Place } from '@/models/place'
 import { Box, Typography, Breadcrumbs } from '@material-ui/core'
-import { nonAccentVietnamese, moneyFormatter } from '../../functions'
+import { nonAccentVietnamese, moneyFormatter } from '@/functions/index'
 import AccessTimeIcon from '@material-ui/icons/AccessTime'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined'

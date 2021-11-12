@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import QRCode from 'react-qr-code'
-import { Order } from '../../models/place'
+import { Order } from '@/models/place'
 import { useStyles } from '../../styles/place'
 
 interface Props {

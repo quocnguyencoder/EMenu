@@ -26,7 +26,7 @@ export default function Header() {
     router.push('/')
   }
 
-  const isLoggedIn = user.id !== null
+  const isLoggedIn = user.id !== ''
 
   return (
     <>

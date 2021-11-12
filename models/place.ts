@@ -30,14 +30,6 @@ export interface Discount {
   name: string
 }
 
-export interface Rating {
-  1: number
-  2: number
-  3: number
-  4: number
-  5: number
-}
-
 export interface CategoryInfo {
   name: string
   items: number[]
@@ -45,6 +37,15 @@ export interface CategoryInfo {
 
 export interface Category {
   [id: number]: CategoryInfo
+}
+
+export interface RatingInfo {
+  reviewID: string
+  rating: number
+  date: string
+}
+export interface Rating {
+  [userID: string]: RatingInfo[]
 }
 
 export interface Place {
@@ -76,6 +77,7 @@ export interface Order {
 export interface Comment {
   userID: string
   content: string
+  date: string
 }
 
 export interface Review {
@@ -84,7 +86,7 @@ export interface Review {
   subject: string
   content: string
   date: string
-  media: string[]
+  files: string[]
   rating: number
   likes: string[]
   comments: Comment[]

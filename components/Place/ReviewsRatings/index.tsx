@@ -7,17 +7,21 @@ import ReviewModal from './ReviewModal'
 import LoginRequiredDialog from '../../common/LoginRequiredDialog'
 import useUser from '../../../firebase/useUser'
 
-const ReviewsRatings = () => {
+interface Props {
+  placeID: string
+}
+
+const ReviewsRatings = ({ placeID }: Props) => {
   const { user } = useUser()
   const [openModal, setOpenModal] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
 
   const handleOpenModal = () => {
-    user.id !== null ? setOpenModal(true) : setOpenDialog(true)
+    user.id !== '' ? setOpenModal(true) : setOpenDialog(true)
   }
 
-  const handleCloseModal = () => {
-    setOpenModal(false)
+  const handleCloseModal = (isUploading: boolean) => {
+    !isUploading && setOpenModal(false)
   }
 
   const handleCloseDialog = () => {
@@ -30,7 +34,11 @@ const ReviewsRatings = () => {
         <UserReview />
       </Box>
       <ReviewsInfo handleOpenModal={handleOpenModal} />
-      <ReviewModal openModal={openModal} handleCloseModal={handleCloseModal} />
+      <ReviewModal
+        placeID={placeID}
+        openModal={openModal}
+        handleCloseModal={handleCloseModal}
+      />
       <LoginRequiredDialog open={openDialog} handleClose={handleCloseDialog} />
     </>
   )

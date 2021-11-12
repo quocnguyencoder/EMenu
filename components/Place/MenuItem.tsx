@@ -12,7 +12,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox'
 import { Menu, CategoryInfo } from '../../models/place'
 import useInView from 'react-cool-inview'
 import { useEffect } from 'react'
-import formatter from '../../functions/moneyFormatter'
+import formatter from '@/functions/moneyFormatter'
 
 interface Props {
   categoryID: number

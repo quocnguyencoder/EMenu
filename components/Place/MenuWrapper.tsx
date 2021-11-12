@@ -5,7 +5,7 @@ import SearchBar from './SearchBar'
 import MainMenu from './MainMenu'
 import OrdersForm from './OrdersForm'
 import { Paper } from '@material-ui/core'
-import nonAccentVietnamese from '../../functions/nonAccentVietnamese'
+import nonAccentVietnamese from '@/functions/nonAccentVietnamese'
 
 interface Props {
   place: Place

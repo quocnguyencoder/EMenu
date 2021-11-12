@@ -3,7 +3,7 @@ import { Box, List, ListItem, Paper, Typography } from '@material-ui/core'
 import FastfoodIcon from '@material-ui/icons/Fastfood'
 import { Link } from 'react-scroll'
 import { useStyles } from '../../styles/place'
-import { Category } from '../../models/place'
+import { Category } from '@/models/place'
 
 interface Props {
   categories: Category

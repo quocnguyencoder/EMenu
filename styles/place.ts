@@ -60,6 +60,7 @@ export const useStyles = makeStyles(() => ({
     height: '80%',
     maxWidth: '700px',
     maxHeight: '500px',
+    position: 'relative',
   },
   reviewModalSubmitButton: {
     margin: '2% 3% 2% 3%',

@@ -4,9 +4,9 @@ import {
   MenuWrapper,
   Info,
   ReviewsRatings,
-} from '../../components/Place'
+} from '@/components/Place'
 import firebase from 'firebase/app'
-import { Place } from '../../models/place'
+import { Place } from '@/models/place'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { motion } from 'framer-motion'
@@ -33,7 +33,7 @@ export default function PlaceDetail({ place_data }: Props) {
           <MenuWrapper place={place_data} />
         </Box>
         <Box display="flex" mt={2} marginLeft={'22%'} style={{ gap: '2%' }}>
-          <ReviewsRatings />
+          <ReviewsRatings placeID={place_data.id} />
         </Box>
       </Container>
     </motion.div>
