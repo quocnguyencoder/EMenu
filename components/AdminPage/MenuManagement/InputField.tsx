@@ -4,7 +4,6 @@ import {
   InputLabel,
   OutlinedInput,
 } from '@material-ui/core'
-import { useState } from 'react'
 import { MenuItem } from '../../../models/place'
 
 interface Props {
@@ -13,47 +12,29 @@ interface Props {
 }
 
 export default function InputField({ placeholder, item }: Props) {
-  const [description, setDescription] = useState<string>(item.description)
-  const [price, setPrice] = useState<number>(item.price)
-  const [name, setName] = useState<string>(item.name)
-
-  const handleOnChangeDescription = (input: string) => {
-    setDescription(input)
-  }
-  const handleOnChangePrice = (input: number) => {
-    setPrice(input)
-  }
-  const handleOnChangeName = (input: string) => {
-    setName(input)
-  }
-
   return (
     <FormControl fullWidth margin="dense" variant="outlined" color="secondary">
       {placeholder === 'Description' ? (
         <>
           <InputLabel>{placeholder}</InputLabel>
           <OutlinedInput
-            value={description}
+            defaultValue={item.description}
             multiline
             minRows={1}
             name={placeholder}
             label={placeholder}
-            onChange={(e) => handleOnChangeDescription(e.target.value)}
           />
         </>
       ) : placeholder === 'Price' ? (
         <>
           <InputLabel>{placeholder}</InputLabel>
           <OutlinedInput
-            value={price}
+            defaultValue={item.price}
             required
             type="number"
             inputProps={{ min: '0' }}
             name={placeholder}
             label={placeholder}
-            onChange={(e) =>
-              handleOnChangePrice(e.target.value as unknown as number)
-            }
             endAdornment={<InputAdornment position="end">VNĐ</InputAdornment>}
           />
         </>
@@ -61,11 +42,10 @@ export default function InputField({ placeholder, item }: Props) {
         <>
           <InputLabel>{placeholder}</InputLabel>
           <OutlinedInput
-            value={name}
+            defaultValue={item.name}
             required
             name={placeholder}
             label={placeholder}
-            onChange={(e) => handleOnChangeName(e.target.value)}
           />
         </>
       )}
