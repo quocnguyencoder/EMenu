@@ -1,27 +1,43 @@
 import { Grid } from '@material-ui/core'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Dashboards,
-  HeaderBar,
   Nav,
   ProfileRestaurant,
   MenuManagement,
 } from '../components/AdminPage'
-
 import TabPanel from '../components/Homepage/TabPanel'
 import Meta from '../components/Meta'
-import { GetServerSideProps } from 'next'
-import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { Place } from '../models/place'
+import { useRouter } from 'next/router'
+import * as getService from '@/firebase/getDocument'
+import * as ROUTES from '@/constants/routes'
+import isEqual from 'lodash/isEqual'
 
-interface Props {
-  place: Place
-}
-
-export default function Admin({ place }: Props) {
+export default function Admin() {
   const [value, setValue] = useState('Dashboards')
-  return (
+  const [place, setPlace] = useState<Place>()
+  const router = useRouter()
+
+  useEffect(() => {
+    const obj = JSON.parse(sessionStorage.getItem('userID') || '{}')
+    if (isEqual(obj, {})) {
+      router.push(ROUTES.LOGIN)
+    } else {
+      getService.default.getUserInfo(obj.userID).then((userData) => {
+        if (userData.placeID === '') {
+          router.push(ROUTES.HOME)
+        } else {
+          getService.default
+            .getPlaceInfo(userData.placeID)
+            .then((data) => setPlace(data))
+        }
+      })
+    }
+  }, [])
+
+  return place !== undefined ? (
     <>
       <Meta title="Admin page" />
       <Grid container>
@@ -29,7 +45,6 @@ export default function Admin({ place }: Props) {
           <Nav setValue={setValue} />
         </Grid>
         <Grid item xs={10}>
-          <HeaderBar />
           <TabPanel value={value} index="Dashboards">
             <Dashboards />
           </TabPanel>
@@ -49,31 +64,7 @@ export default function Admin({ place }: Props) {
         </Grid>
       </Grid>
     </>
+  ) : (
+    <></>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const place = await firebase
-    .firestore()
-    .collection('place')
-    .doc('1sfXtIdNJOzFvD15kMLl')
-    .get()
-    .then((doc) => {
-      const data = doc.data() as Place
-      data.id = doc.id
-      return data
-    })
-    .catch((error) => {
-      // eslint-disable-next-line
-      console.log(error)
-    })
-
-  if (!place) {
-    return {
-      notFound: true,
-    }
-  }
-
-  // Pass data to the page via props
-  return { props: { place } }
 }

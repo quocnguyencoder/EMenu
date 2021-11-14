@@ -17,7 +17,7 @@ export const mapUserData = (user: firebase.User) => {
           .set({
             email: email,
             name: displayName,
-            profilePic: photoURL,
+            profilePic: '',
             placeID: '',
             reviews: [] as string[],
           })

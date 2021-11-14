@@ -1,5 +1,4 @@
 import { Box, List, ListItem, CardMedia } from '@material-ui/core'
-import { prefix } from '../../constants'
 
 interface Props {
   setValue: any
@@ -14,7 +13,7 @@ export default function Nav({ setValue }: Props) {
     <Box ml={1} mt={1} mr={1}>
       <CardMedia
         component="img"
-        image={`${prefix}/logo.png`}
+        image={`/logo.png`}
         alt="logo"
         width={100}
         height={50}

@@ -3,18 +3,20 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined'
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
 import * as updateService from '@/firebase/updateDocument'
+import useUser from '@/firebase/useUser'
 
 interface Props {
-  userID: string
   reviewID: string
   likes: string[]
   setShowComments: (state: boolean) => void
 }
 
-const ReviewButtons = ({ userID, reviewID, likes, setShowComments }: Props) => {
-  const isAlreadyLiked = likes.includes(userID)
+const ReviewButtons = ({ reviewID, likes, setShowComments }: Props) => {
+  const { user } = useUser()
+  const isAlreadyLiked = likes.includes(user.id)
   const handleClick = (status: string) => {
-    updateService.default.updateReviewLikes(reviewID, userID, status)
+    user.id !== '' &&
+      updateService.default.updateReviewLikes(reviewID, user.id, status)
   }
 
   return (
