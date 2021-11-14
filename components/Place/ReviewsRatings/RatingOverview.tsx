@@ -29,13 +29,16 @@ const RatingOverview = ({ ratings }: Props) => {
     ratingDisplay[latestRating.rating] += 1
   })
 
-  const avgRating = (
-    Object.keys(ratingDisplay)
-      .map(Number)
-      .reduce((sum, star) => {
-        return star * ratingDisplay[star] + sum
-      }, 0) / ratingList.length
-  ).toFixed(1)
+  const avgRating =
+    ratingList.length !== 0
+      ? (
+          Object.keys(ratingDisplay)
+            .map(Number)
+            .reduce((sum, star) => {
+              return star * ratingDisplay[star] + sum
+            }, 0) / ratingList.length
+        ).toFixed(1)
+      : '0'
 
   return (
     <Paper

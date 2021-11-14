@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Place, Order } from '../../models/place'
+import { Place, Order } from '@/models/place'
 import CategoriesNav from './CategoriesNav'
 import SearchBar from './SearchBar'
 import MainMenu from './MainMenu'
@@ -11,7 +11,7 @@ interface Props {
   place: Place
 }
 
-const MenuWrapper = ({ place }: Props) => {
+const MenuSection = ({ place }: Props) => {
   const menuItemIDArr = Object.keys(place.menu).map(Number)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState(0)
@@ -110,7 +110,7 @@ const MenuWrapper = ({ place }: Props) => {
         selected={selectedCategory}
         setSelected={setSelectedCategory}
       />
-      <Paper style={{ flex: 1, backgroundColor: '#fff' }}>
+      <Paper style={{ flex: 1, backgroundColor: '#fff', minHeight: '60vh' }}>
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <MainMenu
           categories={place.categories}
@@ -130,4 +130,4 @@ const MenuWrapper = ({ place }: Props) => {
   )
 }
 
-export default MenuWrapper
+export default MenuSection

@@ -1,5 +1,5 @@
 import { Box, Container } from '@material-ui/core'
-import { MenuWrapper, PlaceInfo, ReviewsRatings } from '@/components/Place'
+import { MenuSection, PlaceInfo, ReviewsRatings } from '@/components/Place'
 import firebase from 'firebase/app'
 import { Place } from '@/models/place'
 import { GetStaticPaths, GetStaticProps } from 'next'
@@ -36,7 +36,7 @@ export default function PlaceDetail({ place_data }: Props) {
         <PlaceInfo place={place} />
       </Box>
       <Box display="flex" mt={2} style={{ gap: '2%' }}>
-        <MenuWrapper place={place} />
+        <MenuSection place={place} />
       </Box>
       <Box display="flex" mt={2} marginLeft={'22%'} style={{ gap: '2%' }}>
         <ReviewsRatings place={place} />

@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, List, ListItem, Paper, Typography } from '@material-ui/core'
 import FastfoodIcon from '@material-ui/icons/Fastfood'
 import { Link } from 'react-scroll'
-import { useStyles } from '../../styles/place'
+import { useStyles } from '../../../styles/place'
 import { Category } from '@/models/place'
 
 interface Props {

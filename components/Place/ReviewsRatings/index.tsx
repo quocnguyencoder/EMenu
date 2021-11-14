@@ -66,6 +66,7 @@ const ReviewsRatings = ({ place }: Props) => {
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         onClose={handleCloseSnackBar}
       >
         <Alert onClose={handleCloseSnackBar} severity="success">

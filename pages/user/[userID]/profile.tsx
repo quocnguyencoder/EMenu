@@ -1,18 +1,21 @@
 import { Box, Button, Container, TextField } from '@material-ui/core'
-import React from 'react'
+import { useState } from 'react'
 import firebase from 'firebase/app'
-import useUser from '../../../firebase/useUser'
+import useUser from '@/firebase/useUser'
 
 const profile = () => {
   const { user } = useUser()
+
+  const [displayName, setDisplayName] = useState(user.name)
+  const [profilePic, setProfilePic] = useState(user.profilePic)
+
   const updateUserProfile = () => {
     const userNow = firebase.auth().currentUser
     userNow != null &&
       userNow
         .updateProfile({
-          displayName: 'Quoc',
-          photoURL:
-            'https://c1-ebgames.eb-cdn.com.au/merchandising/images/packshots/4b2e6822cad242c6bef586c29129fe83_Large.jpg',
+          displayName: displayName,
+          photoURL: profilePic,
         })
         .then()
   }
@@ -45,14 +48,16 @@ const profile = () => {
           multiline
           rows={2}
           variant="outlined"
-          value={user.name}
+          value={displayName}
+          onChange={(e) => setDisplayName(e.target.value)}
         />
         <TextField
           label="profilePic"
           multiline
           rows={2}
           variant="outlined"
-          value={user.profilePic}
+          value={profilePic}
+          onChange={(e) => setProfilePic(e.target.value)}
         />
         <Button
           onClick={updateUserProfile}

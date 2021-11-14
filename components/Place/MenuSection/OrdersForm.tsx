@@ -12,7 +12,7 @@ import {
   ButtonBase,
 } from '@material-ui/core'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
-import { useStyles } from '../../styles/place'
+import { useStyles } from '../../../styles/place'
 import formatter from '@/functions/moneyFormatter'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'

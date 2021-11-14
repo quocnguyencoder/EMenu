@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import AddBoxIcon from '@material-ui/icons/AddBox'
-import { Menu, CategoryInfo } from '../../models/place'
+import { Menu, CategoryInfo } from '@/models/place'
 import useInView from 'react-cool-inview'
 import { useEffect } from 'react'
 import formatter from '@/functions/moneyFormatter'

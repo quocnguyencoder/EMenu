@@ -41,11 +41,6 @@ interface Props {
   setOpenSnackBar: (state: boolean) => void
 }
 
-interface UserInputs {
-  subject: string
-  content: string
-}
-
 const ReviewModal = ({
   placeID,
   openModal,
@@ -55,11 +50,19 @@ const ReviewModal = ({
   moment.locale('vi')
   const { user } = useUser()
   const [selectedImages, setSelectedImages] = useState<File[]>([])
-  const [inputs, setInputs] = useState({})
+  const [inputSubject, setInputSubject] = useState('')
+  const [inputContent, setInputContent] = useState('')
   const [ratingValue, setRatingValue] = useState(0)
   const [isUploading, setIsUploading] = useState(false)
   const [openTooltip, setOpenTooltip] = useState(false)
   const classes = useStyles()
+
+  const resetStates = () => {
+    setSelectedImages([])
+    setInputContent('')
+    setInputSubject('')
+    setRatingValue(0)
+  }
 
   const handleSelectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files[0] === undefined) {
@@ -77,16 +80,10 @@ const ReviewModal = ({
     setSelectedImages(newSelectedImages)
   }
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const name = event.target.name
-    const value = event.target.value
-    setInputs((values) => ({ ...values, [name]: value }))
-  }
-
   const handleUploadReview = async (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault()
-    const userInputs = inputs as UserInputs
-    if (userInputs.subject !== '') {
+
+    if (inputSubject !== '') {
       setIsUploading(true)
       try {
         const imgURLs =
@@ -98,8 +95,8 @@ const ReviewModal = ({
 
         const userReview = {
           userID: user.id,
-          subject: userInputs.subject,
-          content: userInputs.content || '',
+          subject: inputSubject,
+          content: inputContent,
           date: moment().format('DD MM YYYY, h:mm:ss a'),
           files: imgURLs,
           rating: ratingValue,
@@ -122,6 +119,7 @@ const ReviewModal = ({
           })
       } finally {
         setIsUploading(false)
+        resetStates()
         handleCloseModal(isUploading)
         setOpenSnackBar(true)
       }
@@ -213,7 +211,8 @@ const ReviewModal = ({
                     required
                     autoComplete="false"
                     inputProps={{ maxLength: 50 }}
-                    onChange={handleInputChange}
+                    value={inputSubject}
+                    onChange={(e) => setInputSubject(e.target.value)}
                     style={{
                       fontWeight: 'bold',
                       fontSize: 'large',
@@ -224,7 +223,8 @@ const ReviewModal = ({
                     name="content"
                     placeholder="Nội dung (tùy chọn)"
                     autoComplete="false"
-                    onChange={handleInputChange}
+                    value={inputContent}
+                    onChange={(e) => setInputContent(e.target.value)}
                     multiline
                     inputProps={{ maxLength: 1000 }}
                     rows={5}

@@ -11,7 +11,7 @@ import {
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import QRCode from 'react-qr-code'
 import { Order } from '@/models/place'
-import { useStyles } from '../../styles/place'
+import { useStyles } from '../../../styles/place'
 
 interface Props {
   ordersList: Order

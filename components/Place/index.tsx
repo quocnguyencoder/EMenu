@@ -1,5 +1,5 @@
 import PlaceInfo from './PlaceInfo'
-import MenuWrapper from './MenuWrapper'
+import MenuSection from './MenuSection'
 import ReviewsRatings from './ReviewsRatings'
 
-export { MenuWrapper, PlaceInfo, ReviewsRatings }
+export { MenuSection, PlaceInfo, ReviewsRatings }
