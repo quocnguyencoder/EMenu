@@ -16,9 +16,9 @@ export default function Info({ place }: Props) {
   const now = moment([])
 
   // Khánh Hòa -> khanh-hoa
-  const normalizeText = (text: string) =>
-    nonAccentVietnamese(text).toLowerCase().replace(' ', '-')
-
+  const normalizeText = (text: string) => {
+    nonAccentVietnamese(text).toLowerCase().split(' ').join('-')
+  }
   const isOpen = now.isBetween(
     moment(place.time.open, 'h:mma'),
     moment(place.time.close, 'h:mma')

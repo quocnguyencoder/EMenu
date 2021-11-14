@@ -4,14 +4,15 @@ import UserReview from './UserReview'
 import RatingOverview from './RatingOverview'
 import ReviewsInfo from './ReviewsInfo'
 import ReviewModal from './ReviewModal'
-import LoginRequiredDialog from '../../common/LoginRequiredDialog'
-import useUser from '../../../firebase/useUser'
+import LoginRequiredDialog from '@/components/common/LoginRequiredDialog'
+import useUser from '@/firebase/useUser'
+import { Place } from '@/models/place'
 
 interface Props {
-  placeID: string
+  place: Place
 }
 
-const ReviewsRatings = ({ placeID }: Props) => {
+const ReviewsRatings = ({ place }: Props) => {
   const { user } = useUser()
   const [openModal, setOpenModal] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
@@ -27,15 +28,18 @@ const ReviewsRatings = ({ placeID }: Props) => {
   const handleCloseDialog = () => {
     setOpenDialog(false)
   }
+
   return (
     <>
       <Box display="flex" flexDirection="column" flex={1}>
-        <RatingOverview />
-        <UserReview />
+        <RatingOverview ratings={place.rating} />
+        {place.reviews.reverse().map((reviewID) => (
+          <UserReview key={reviewID} reviewID={reviewID} />
+        ))}
       </Box>
       <ReviewsInfo handleOpenModal={handleOpenModal} />
       <ReviewModal
-        placeID={placeID}
+        placeID={place.id}
         openModal={openModal}
         handleCloseModal={handleCloseModal}
       />

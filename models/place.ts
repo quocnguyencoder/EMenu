@@ -44,7 +44,7 @@ export interface RatingInfo {
   rating: number
   date: string
 }
-export interface Rating {
+export interface RatingList {
   [userID: string]: RatingInfo[]
 }
 
@@ -55,7 +55,7 @@ export interface Place {
   reviews: string[]
   image: string
   name: string
-  rating: number
+  rating: RatingList
   type: string
   menu: Menu
   time: Time

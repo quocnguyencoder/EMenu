@@ -2,8 +2,41 @@ import { Box, Paper, Typography } from '@material-ui/core'
 import { Chart } from 'react-google-charts'
 import Rating from '@material-ui/lab/Rating'
 import PermIdentityIcon from '@material-ui/icons/PermIdentity'
+import { RatingList } from '@/models/place'
 
-const RatingOverview = () => {
+interface Props {
+  ratings: RatingList
+}
+
+interface RatingDisplay {
+  [star: number]: number
+}
+
+const RatingOverview = ({ ratings }: Props) => {
+  const ratingDisplay: RatingDisplay = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  }
+
+  const ratingList = Object.keys(ratings)
+
+  ratingList.map((userID) => {
+    const userRatings = ratings[userID]
+    const latestRating = userRatings[userRatings.length - 1]
+    ratingDisplay[latestRating.rating] += 1
+  })
+
+  const avgRating = (
+    Object.keys(ratingDisplay)
+      .map(Number)
+      .reduce((sum, star) => {
+        return star * ratingDisplay[star] + sum
+      }, 0) / ratingList.length
+  ).toFixed(1)
+
   return (
     <Paper
       elevation={3}
@@ -16,7 +49,7 @@ const RatingOverview = () => {
       }}
     >
       <Typography variant="h6" style={{ marginLeft: '3%', paddingTop: '1%' }}>
-        {'Reviews'}
+        {'Xếp hạng và đánh giá'}
       </Typography>
       <Box display="flex">
         <Box
@@ -26,11 +59,16 @@ const RatingOverview = () => {
           justifyContent="center"
           ml="5%"
         >
-          <Typography variant="h2">{'4.5'}</Typography>
-          <Rating name="read-only" value={4.5} readOnly precision={0.5} />
+          <Typography variant="h2">{avgRating}</Typography>
+          <Rating
+            name="read-only"
+            value={Number(avgRating)}
+            readOnly
+            precision={0.5}
+          />
           <Box display="flex">
             <PermIdentityIcon fontSize="small" />
-            <Typography variant="subtitle2">{'10,000 total'}</Typography>
+            <Typography variant="subtitle2">{`${ratingList.length} total`}</Typography>
           </Box>
         </Box>
         <Chart
@@ -38,11 +76,11 @@ const RatingOverview = () => {
           loader={<div>Loading Chart</div>}
           data={[
             ['Rating', 'Total', { role: 'style' }],
-            ['5*', 60, '#79C9A1'],
-            ['4*', 40, '#AED888'],
-            ['3*', 20, '#FFD935'],
-            ['2*', 10, '#FFB235'],
-            ['1*', 1, '#FF8C5A'],
+            ['5*', ratingDisplay[5], '#79C9A1'],
+            ['4*', ratingDisplay[4], '#AED888'],
+            ['3*', ratingDisplay[3], '#FFD935'],
+            ['2*', ratingDisplay[2], '#FFB235'],
+            ['1*', ratingDisplay[1], '#FF8C5A'],
           ]}
           options={{
             bar: { groupWidth: '80%' },

@@ -9,7 +9,7 @@ import firebase from 'firebase/app'
 import { Place } from '@/models/place'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 interface IParams extends ParsedUrlQuery {
   placeID: string
@@ -18,25 +18,36 @@ interface Props {
   place_data: Place
 }
 export default function PlaceDetail({ place_data }: Props) {
+  const [place, setPlace] = useState<Place>(place_data)
+
+  // update place's data when sth change in database
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('place')
+      .doc(place_data.id)
+      .onSnapshot((snapshot) => {
+        const storedID = place_data.id
+        place_data = snapshot.data() as Place
+        place_data.id = storedID
+        setPlace(place_data)
+        //console.log('change')
+      })
+  }, [])
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <Container maxWidth="lg">
-        <Box display="flex" mt={1} bgcolor="#fff" style={{ gap: '5%' }}>
-          <MainImage url={place_data.image} name={place_data.name} />
-          <Info place={place_data} />
-        </Box>
-        <Box display="flex" mt={2} style={{ gap: '2%' }}>
-          <MenuWrapper place={place_data} />
-        </Box>
-        <Box display="flex" mt={2} marginLeft={'22%'} style={{ gap: '2%' }}>
-          <ReviewsRatings placeID={place_data.id} />
-        </Box>
-      </Container>
-    </motion.div>
+    <Container maxWidth="lg">
+      <Box display="flex" mt={1} bgcolor="#fff" style={{ gap: '5%' }}>
+        <MainImage url={place.image} name={place.name} />
+        <Info place={place} />
+      </Box>
+      <Box display="flex" mt={2} style={{ gap: '2%' }}>
+        <MenuWrapper place={place} />
+      </Box>
+      <Box display="flex" mt={2} marginLeft={'22%'} style={{ gap: '2%' }}>
+        <ReviewsRatings place={place} />
+      </Box>
+    </Container>
   )
 }
 
@@ -49,7 +60,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // })
   return {
     paths: [
-      { params: { location: 'khanh-hoa', placeID: '1sfXtIdNJOzFvD15kMLl' } },
+      {
+        params: { location: 'tinh-khanh-hoa', placeID: '1sfXtIdNJOzFvD15kMLl' },
+      },
     ],
     fallback: 'blocking',
   }

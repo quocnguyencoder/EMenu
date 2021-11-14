@@ -77,7 +77,8 @@ const ReviewModal = ({ placeID, openModal, handleCloseModal }: Props) => {
     setInputs((values) => ({ ...values, [name]: value }))
   }
 
-  const handleUploadReview = async () => {
+  const handleUploadReview = async (e: React.FormEvent<HTMLDivElement>) => {
+    e.preventDefault()
     const userInputs = inputs as UserInputs
     if (userInputs.subject !== '') {
       setIsUploading(true)
@@ -102,7 +103,9 @@ const ReviewModal = ({ placeID, openModal, handleCloseModal }: Props) => {
           .then((reviewID) => {
             //console.log('reviewID: ', reviewID)
             updateService.default.updatePlaceReview(reviewID, placeID)
+
             updateService.default.updateUserReview(reviewID, user.id)
+
             updateService.default.updatePlaceRating(
               placeID,
               user.id,
@@ -124,7 +127,6 @@ const ReviewModal = ({ placeID, openModal, handleCloseModal }: Props) => {
     setOpenTooltip(false)
   }
 
-  // moment(now, 'DD MM YYYY, h:mm:ss a').fromNow()
   return (
     <Modal
       open={openModal}
@@ -138,7 +140,7 @@ const ReviewModal = ({ placeID, openModal, handleCloseModal }: Props) => {
     >
       <Fade in={openModal}>
         <Paper
-          onSubmit={handleUploadReview}
+          onSubmit={(e) => handleUploadReview(e)}
           className={classes.reviewModalPaper}
           component="form"
         >

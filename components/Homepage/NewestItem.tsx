@@ -24,7 +24,7 @@ const NewestItem = ({ info }: Props) => {
 
   // Khánh Hòa -> khanh-hoa
   const normalizeText = (text: string) =>
-    nonAccentVietnamese(text).toLowerCase().replace(' ', '-')
+    nonAccentVietnamese(text).toLowerCase().split(' ').join('-')
 
   const detailURL = `/${normalizeText(info.address.province)}/${info.id}`
 
