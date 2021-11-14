@@ -8,5 +8,7 @@ export const mapUserData = (user: firebase.User) => {
     token: refreshToken,
     name: displayName != null ? displayName : '',
     profilePic: photoURL != null ? photoURL : '',
+    placeID: '',
+    reviews: [],
   }
 }

@@ -4,4 +4,6 @@ export default interface User {
   token: string
   name: string
   profilePic: string
+  placeID: string
+  reviews: string[]
 }
