@@ -21,7 +21,6 @@ interface Props {
 
 export default function Admin({ place }: Props) {
   const [value, setValue] = useState('Dashboards')
-
   return (
     <>
       <Meta title="Admin page" />

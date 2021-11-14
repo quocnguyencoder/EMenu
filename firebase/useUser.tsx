@@ -19,6 +19,8 @@ const initialState: User = {
   token: '',
   name: '',
   profilePic: '',
+  placeID: '',
+  reviews: [],
 }
 
 const useUser = () => {
