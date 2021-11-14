@@ -37,12 +37,19 @@
     "google-map-react": "^2.1.10",
     "js-cookie": "^3.0.0",
     "lodash": "^4.17.21",
+    "cross-env": "^7.0.3",
+    "framer-motion": "^4.1.17",
     "moment": "^2.29.1",
     "next": "11.0.1",
     "react": "17.0.2",
+    "react-cool-inview": "^2.0.7",
     "react-dom": "17.0.2",
     "react-firebaseui": "^5.0.2",
-    "react-material-ui-carousel": "^2.2.7"
+    "react-google-charts": "^3.0.15",
+    "react-loader-spinner": "^4.0.0",
+    "react-material-ui-carousel": "^2.2.7",
+    "react-qr-code": "^2.0.2",
+    "react-scroll": "^1.8.4"
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.5",

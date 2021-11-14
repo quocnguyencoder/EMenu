@@ -1,4 +1,4 @@
-import { alpha, makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
   layout: {
@@ -14,15 +14,13 @@ export const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
+    backgroundColor: '#fff',
     marginLeft: 0,
-    width: '40%',
+    maxWidth: '40%',
     flexGrow: 1,
   },
   searchIcon: {
+    color: 'gray',
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -32,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: 'inherit',
+    color: 'black',
     width: '100%',
   },
   inputInput: {

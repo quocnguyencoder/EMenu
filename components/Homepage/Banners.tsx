@@ -3,7 +3,6 @@ import Carousel from 'react-material-ui-carousel'
 import { Card, CardMedia } from '@material-ui/core'
 import { CardActionArea } from '@material-ui/core'
 import { Container } from '@material-ui/core'
-import { prefix } from '../../constants'
 
 function Item(props: any) {
   return (
@@ -31,12 +30,12 @@ const Banners = () => {
     {
       name: 'Random Name #1',
       description: 'Probably the most random thing you have ever seen!',
-      image: `${prefix}/banner3.jpg`,
+      image: `banner3.jpg`,
     },
     {
       name: 'Random Name #2',
       description: 'Hello World!',
-      image: `${prefix}/banner4.jpg`,
+      image: `/banner4.jpg`,
     },
   ]
   return (

@@ -1,11 +1,10 @@
-import initFirebase from '../../firebase/initFirebase'
+import initFirebase from '@/firebase/initFirebase'
 import { useEffect, useState } from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import { setUserCookie } from '../../firebase/userCookies'
-import { mapUserData } from '../../firebase/mapUserData'
-import { prefix } from '../../constants'
+import { setUserCookie } from '@/firebase/userCookies'
+import { mapUserData } from '@/firebase/mapUserData'
 
 initFirebase() // initialize firebase
 
@@ -16,13 +15,13 @@ const firebaseAuthConfig = {
   signInOptions: [
     {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      requireDisplayName: false,
+      requireDisplayName: true,
     },
     // add additional auth flows below
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
   ],
-  signInSuccessUrl: `${prefix}/`,
+  signInSuccessUrl: `/`,
   credentialHelper: 'none',
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }: any) => {
