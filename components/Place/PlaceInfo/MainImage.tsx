@@ -2,15 +2,15 @@ import { CardMedia } from '@material-ui/core'
 
 interface Props {
   url: string
-  name: string
+  alt: string
 }
 
-const MainImage = ({ url, name }: Props) => {
+const MainImage = ({ url, alt }: Props) => {
   return (
     <CardMedia
       component="img"
       image={url}
-      alt={`${name}'s main image'`}
+      alt={alt}
       height={300}
       style={{ maxWidth: '40%' }}
     />

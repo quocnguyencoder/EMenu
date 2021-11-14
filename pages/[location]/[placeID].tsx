@@ -1,10 +1,5 @@
 import { Box, Container } from '@material-ui/core'
-import {
-  MainImage,
-  MenuWrapper,
-  Info,
-  ReviewsRatings,
-} from '@/components/Place'
+import { MenuWrapper, PlaceInfo, ReviewsRatings } from '@/components/Place'
 import firebase from 'firebase/app'
 import { Place } from '@/models/place'
 import { GetStaticPaths, GetStaticProps } from 'next'
@@ -38,8 +33,7 @@ export default function PlaceDetail({ place_data }: Props) {
   return (
     <Container maxWidth="lg">
       <Box display="flex" mt={1} bgcolor="#fff" style={{ gap: '5%' }}>
-        <MainImage url={place.image} name={place.name} />
-        <Info place={place} />
+        <PlaceInfo place={place} />
       </Box>
       <Box display="flex" mt={2} style={{ gap: '2%' }}>
         <MenuWrapper place={place} />

@@ -1,6 +1,5 @@
-import Info from './Info'
-import MainImage from './MainImage'
+import PlaceInfo from './PlaceInfo'
 import MenuWrapper from './MenuWrapper'
 import ReviewsRatings from './ReviewsRatings'
 
-export { MainImage, MenuWrapper, Info, ReviewsRatings }
+export { MenuWrapper, PlaceInfo, ReviewsRatings }

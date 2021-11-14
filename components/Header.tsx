@@ -9,9 +9,9 @@ import SearchIcon from '@material-ui/icons/Search'
 import { useStyles } from '../styles/header'
 import { Box } from '@material-ui/core'
 import { useRouter } from 'next/router'
-import useUser from '../firebase/useUser'
+import useUser from '@/firebase/useUser'
 import UserMenu from './UserMenu'
-import { prefix } from '../constants'
+import * as ROUTES from '@/constants/routes'
 
 export default function Header() {
   const classes = useStyles()
@@ -19,11 +19,11 @@ export default function Header() {
   const { user, logout } = useUser()
 
   const handleClick = () => {
-    router.push('/login')
+    router.push(ROUTES.LOGIN)
   }
 
   const gotoHomepage = () => {
-    router.push('/')
+    router.push(ROUTES.HOME)
   }
 
   const isLoggedIn = user.id !== ''
@@ -36,7 +36,7 @@ export default function Header() {
             <Box className={classes.title}>
               <CardMedia
                 component="img"
-                image={`${prefix}/logo.png`}
+                image={`/logo.png`}
                 title="logo"
                 style={{
                   height: '7vh',

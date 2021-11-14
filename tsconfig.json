@@ -18,7 +18,8 @@
       "@/components/*": ["components/*"],
       "@/models/*": ["models/*"],
       "@/functions/*": ["functions/*"],
-      "@/firebase/*": ["firebase/*"]
+      "@/firebase/*": ["firebase/*"],
+      "@/constants/*": ["constants/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

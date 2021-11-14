@@ -6,7 +6,8 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@material-ui/core'
-import React from 'react'
+import * as ROUTES from '@/constants/routes'
+import { useRouter } from 'next/router'
 
 interface Props {
   open: boolean
@@ -14,6 +15,10 @@ interface Props {
 }
 
 const LoginRequiredDialog = ({ open, handleClose }: Props) => {
+  const router = useRouter()
+  const gotoLogin = () => {
+    router.push(ROUTES.LOGIN)
+  }
   return (
     <Dialog
       open={open}
@@ -31,7 +36,7 @@ const LoginRequiredDialog = ({ open, handleClose }: Props) => {
         <Button onClick={handleClose} color="primary">
           Hủy
         </Button>
-        <Button onClick={handleClose} color="primary" autoFocus>
+        <Button onClick={gotoLogin} color="primary" autoFocus>
           Đăng nhập
         </Button>
       </DialogActions>

@@ -33,6 +33,7 @@ const ReviewsInfo = ({ handleOpenModal }: Props) => {
         />
         <Rating
           name="rating"
+          onClick={() => handleOpenModal()}
           style={{
             fontSize: 'clamp(16px, 3vw, 32px)',
             gap: '3%',
