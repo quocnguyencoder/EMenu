@@ -14,11 +14,11 @@ import User from '../models/user'
 initFirebase()
 
 const initialState: User = {
-  id: null,
-  email: null,
-  token: null,
-  name: null,
-  profilePic: null,
+  id: '',
+  email: '',
+  token: '',
+  name: '',
+  profilePic: '',
 }
 
 const useUser = () => {

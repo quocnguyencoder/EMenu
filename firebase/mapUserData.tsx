@@ -4,9 +4,9 @@ export const mapUserData = (user: firebase.User) => {
   const { uid, email, refreshToken, displayName, photoURL } = user
   return {
     id: uid,
-    email: email,
+    email: email != null ? email : '',
     token: refreshToken,
-    name: displayName,
-    profilePic: photoURL,
+    name: displayName != null ? displayName : '',
+    profilePic: photoURL != null ? photoURL : '',
   }
 }

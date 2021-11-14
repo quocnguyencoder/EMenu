@@ -1,9 +1,7 @@
 import {
-  Avatar,
   Card,
   CardActionArea,
   CardActions,
-  CardHeader,
   CardMedia,
   IconButton,
   Link,
@@ -14,14 +12,25 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import React from 'react'
-import { prefix } from '../../constants'
 import { useRouter } from 'next/router'
+import { Place } from '../../models/place'
+import nonAccentVietnamese from '../../functions/nonAccentVietnamese'
 
-const NewestItem = () => {
+interface Props {
+  info: Place
+}
+const NewestItem = ({ info }: Props) => {
   const router = useRouter()
 
-  const gotoDeital = () => {
-    router.push(`/nha-trang/quan-net-ong-tien`)
+  // Khánh Hòa -> khanh-hoa
+  const normalizeText = (text: string) =>
+    nonAccentVietnamese(text).toLowerCase().split(' ').join('-')
+
+  const detailURL = `/${normalizeText(info.address.province)}/${info.id}`
+
+  const gotoDetail = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    router.push(detailURL)
   }
 
   return (
@@ -30,7 +39,7 @@ const NewestItem = () => {
         <CardMedia
           component="img"
           height="150"
-          image={`${prefix}/food.jpg`}
+          image={info.image}
           title="Contemplative Reptile"
         />
       </CardActionArea>
@@ -39,37 +48,22 @@ const NewestItem = () => {
         <ListItemText
           primary={
             <Link
-              href="#"
+              href={detailURL}
               color="inherit"
               variant="body1"
-              onClick={() => gotoDeital()}
+              onClick={(e) => gotoDetail(e)}
               style={{ fontWeight: 'bold' }}
             >
-              Quán net Ông Tiến
+              {info.name}
             </Link>
           }
           secondary={
             <Typography variant="body2">
-              22 Hoàng Văn Thụ, Nha Trang, Khánh Hòa
+              {`${info.address.street}, P.${info.address.ward},  ${info.address.city}, ${info.address.province}`}
             </Typography>
           }
         />
       </ListItem>
-      {/* Lastest user cmt region */}
-      <CardHeader
-        avatar={<Avatar aria-label="recipe">Q</Avatar>}
-        title={
-          <Link
-            href="#"
-            color="inherit"
-            variant="body2"
-            style={{ fontWeight: 'bold' }}
-          >
-            Quoc Nguyen
-          </Link>
-        }
-        subheader="This place is awesome :)"
-      />
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />

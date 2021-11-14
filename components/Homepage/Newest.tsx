@@ -1,22 +1,19 @@
 import { Grid } from '@material-ui/core'
 import NewestItem from './NewestItem'
-import React from 'react'
+import { Place } from '../../models/place'
 
-const Newest = () => {
+interface Props {
+  places: Place[]
+}
+
+const Newest = ({ places }: Props) => {
   return (
     <Grid container spacing={2}>
-      <Grid item md={3}>
-        <NewestItem />
-      </Grid>
-      <Grid item md={3}>
-        <NewestItem />
-      </Grid>
-      <Grid item md={3}>
-        <NewestItem />
-      </Grid>
-      <Grid item md={3}>
-        <NewestItem />
-      </Grid>
+      {places.map((info) => (
+        <Grid key={info.name} item md={3}>
+          <NewestItem info={info} />
+        </Grid>
+      ))}
     </Grid>
   )
 }

@@ -31,14 +31,22 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@types/js-cookie": "^2.2.7",
+    "cross-env": "^7.0.3",
     "firebase": "^8.9.1",
     "firebase-admin": "^9.11.0",
+    "framer-motion": "^4.1.17",
     "js-cookie": "^3.0.0",
+    "moment": "^2.29.1",
     "next": "11.0.1",
     "react": "17.0.2",
+    "react-cool-inview": "^2.0.7",
     "react-dom": "17.0.2",
     "react-firebaseui": "^5.0.2",
-    "react-material-ui-carousel": "^2.2.7"
+    "react-google-charts": "^3.0.15",
+    "react-loader-spinner": "^4.0.0",
+    "react-material-ui-carousel": "^2.2.7",
+    "react-qr-code": "^2.0.2",
+    "react-scroll": "^1.8.4"
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.5",
@@ -53,12 +61,12 @@
     "eslint-config-next": "11.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.19.0",
-    "prettier": "^2.3.2",
     "husky": "^4.2.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.4",
     "jest-watch-typeahead": "^0.6.1",
     "lint-staged": "^10.0.10",
+    "prettier": "^2.3.2",
     "typescript": "4.3.5"
   }
 }

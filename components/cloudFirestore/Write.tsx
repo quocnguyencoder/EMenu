@@ -1,29 +1,59 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import useUser from '../../firebase/useUser'
+// import useUser from '../../firebase/useUser'
 
 const WriteToCloudFirestore = () => {
-  const { user } = useUser()
+  // const { user } = useUser()
   const sendData = () => {
     try {
-      user.id !== null &&
-        firebase
-          .firestore()
-          .collection('myCollection')
-          .doc(user.id) // leave as .doc() for a random unique doc name to be assigned
-          .set({
-            string_data: 'Benjamin Carlson',
-            number_data: 2,
-            boolean_data: true,
-            map_data: { stringInMap: 'Hi', numberInMap: 7 },
-            array_data: ['text', 4],
-            null_data: null,
-            time_stamp: firebase.firestore.Timestamp.fromDate(
-              new Date('December 17, 1995 03:24:00')
-            ),
-            geo_point: new firebase.firestore.GeoPoint(34.714322, -131.468435),
-          })
-          .then(() => alert('Data was successfully sent to cloud firestore!'))
+      firebase
+        .firestore()
+        .collection('place')
+        .doc() // leave as .doc() for a random unique doc name to be assigned
+        .set({
+          name: 'Cơm Tấm Sườn Que - Yết Kiêu',
+          type: 'Quán ăn',
+          address: {
+            street: '3 Yết Kiêu',
+            ward: 'Vạn Thắng',
+            city: 'Nha Trang',
+            province: 'Khánh Hòa',
+          },
+          rating: 4,
+          time: {
+            open: '08:00 AM',
+            close: '08:00 PM',
+          },
+          image:
+            'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/place_pictures%2FRl2KBm5pkobdVhYEBEJU%2Fmain%20pic.jpeg?alt=media&token=f21a70b5-ee5c-4d69-9f34-c51fabfd1f90',
+          category: ['Món đang giảm', 'Combo', 'Cơm', 'Gọi thêm'],
+          menu: [
+            {
+              name: 'Cơm tấm sườn miếng sốt Maki mật ong',
+              category: [0, 2],
+              description: 'Sườn ướp đượm vị cùng sốt siêu ngon',
+              image:
+                'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/place_pictures%2FRl2KBm5pkobdVhYEBEJU%2F1.jpeg?alt=media&token=a1c3c888-686d-4d1a-8cc7-b32274c9e014',
+              price: 38000,
+            },
+            {
+              name: 'Combo ăn ngon',
+              category: [1],
+              description:
+                '1 Cơm sườn que sốt Maki + 1 Cơm sườn que Maki + ốp la',
+              image:
+                'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/place_pictures%2FRl2KBm5pkobdVhYEBEJU%2F2.jpeg?alt=media&token=2bc112bc-6499-4080-a99a-7ed0b61529d8',
+              price: 85000,
+            },
+          ],
+          location: {
+            lat: 10.1023,
+            lng: 105.2344237,
+          },
+          review: [],
+          show: true,
+        })
+        .then(() => alert('Data was successfully sent to cloud firestore!'))
     } catch (error) {
       //console.log(error);
       alert(error)
