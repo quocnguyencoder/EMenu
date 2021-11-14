@@ -9,6 +9,7 @@ import ReviewReactInfo from './ReviewReactInfo'
 import ReviewButtons from './ReviewButtons'
 import ReviewComment from './ReviewComment'
 import CommentInput from './CommentInput'
+import React from 'react'
 
 interface Props {
   reviewID: string
@@ -70,4 +71,4 @@ const UserReview = ({ reviewID }: Props) => {
   )
 }
 
-export default UserReview
+export default React.memo(UserReview)

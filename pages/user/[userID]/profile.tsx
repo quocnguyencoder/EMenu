@@ -1,6 +1,6 @@
 import { Box, Button, Container, TextField } from '@material-ui/core'
 import React from 'react'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import useUser from '../../../firebase/useUser'
 
 const profile = () => {
@@ -12,7 +12,7 @@ const profile = () => {
         .updateProfile({
           displayName: 'Quoc',
           photoURL:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgWmvX9sTMK9-lpU512G_nBYam-tINPJJtqw&usqp=CAU',
+            'https://c1-ebgames.eb-cdn.com.au/merchandising/images/packshots/4b2e6822cad242c6bef586c29129fe83_Large.jpg',
         })
         .then()
   }

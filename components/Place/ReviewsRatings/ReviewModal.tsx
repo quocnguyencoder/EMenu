@@ -38,6 +38,7 @@ interface Props {
   placeID: string
   openModal: boolean
   handleCloseModal: (isUploading: boolean) => void
+  setOpenSnackBar: (state: boolean) => void
 }
 
 interface UserInputs {
@@ -45,7 +46,12 @@ interface UserInputs {
   content: string
 }
 
-const ReviewModal = ({ placeID, openModal, handleCloseModal }: Props) => {
+const ReviewModal = ({
+  placeID,
+  openModal,
+  handleCloseModal,
+  setOpenSnackBar,
+}: Props) => {
   moment.locale('vi')
   const { user } = useUser()
   const [selectedImages, setSelectedImages] = useState<File[]>([])
@@ -117,6 +123,7 @@ const ReviewModal = ({ placeID, openModal, handleCloseModal }: Props) => {
       } finally {
         setIsUploading(false)
         handleCloseModal(isUploading)
+        setOpenSnackBar(true)
       }
     }
   }
