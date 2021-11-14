@@ -8,12 +8,14 @@ export interface Address {
 }
 
 export interface Menu {
-  [id: number]: {
-    description: string
-    image: string
-    name: string
-    price: number
-  }
+  [id: number]: MenuItem
+}
+
+export interface MenuItem {
+  description: string
+  image: string
+  name: string
+  price: number
 }
 
 export interface Time {
