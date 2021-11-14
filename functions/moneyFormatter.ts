@@ -1,6 +1,6 @@
-const moneyFormatter = new Intl.NumberFormat('vi-VI', {
+const formatter = new Intl.NumberFormat('vi-VI', {
   style: 'currency',
   currency: 'VND',
 })
 
-export default moneyFormatter
+export default formatter

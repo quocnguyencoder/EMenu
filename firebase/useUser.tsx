@@ -19,6 +19,8 @@ const initialState: User = {
   token: '',
   name: '',
   profilePic: '',
+  placeID: '',
+  reviews: [],
 }
 
 const useUser = () => {
@@ -47,9 +49,12 @@ const useUser = () => {
         const userData = mapUserData(user)
         setUserCookie(userData)
         setUser(userData)
+        const userID = { userID: userData.id }
+        sessionStorage.setItem('userID', JSON.stringify(userID))
       } else {
         removeUserCookie()
         setUser({ ...initialState })
+        sessionStorage.clear()
       }
     })
 

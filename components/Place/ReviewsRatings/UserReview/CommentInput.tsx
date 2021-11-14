@@ -24,12 +24,13 @@ const CommentInput = ({ reviewID }: Props) => {
 
   const handleUploadComment = (key: string, shiftKey: boolean) => {
     if (key === 'Enter' && !shiftKey) {
-      updateService.default.updateReviewComment(
-        reviewID,
-        user.id,
-        moment().format('DD MM YYYY, h:mm:ss a'),
-        input
-      )
+      user.id !== '' &&
+        updateService.default.updateReviewComment(
+          reviewID,
+          user.id,
+          moment().format('DD MM YYYY, h:mm:ss a'),
+          input
+        )
       setInput('')
     }
   }

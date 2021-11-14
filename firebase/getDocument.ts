@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import User from '@/models/user'
+import { Place } from '@/models/place'
 
 const getUserInfo = async (userID: string) => {
   const userData = await firebase
@@ -13,4 +14,18 @@ const getUserInfo = async (userID: string) => {
   return userData
 }
 
-export default { getUserInfo }
+const getPlaceInfo = async (placeID: string) => {
+  const placeData = await firebase
+    .firestore()
+    .collection('place')
+    .doc(placeID)
+    .get()
+    .then((snapshot) => {
+      const data = snapshot.data() as Place
+      data.id = snapshot.id
+      return data
+    })
+  return placeData
+}
+
+export default { getUserInfo, getPlaceInfo }

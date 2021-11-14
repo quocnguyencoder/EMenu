@@ -48,7 +48,6 @@ const UserReview = ({ reviewID }: Props) => {
         />
         <Divider variant="middle" />
         <ReviewButtons
-          userID={userReview.userID}
           reviewID={reviewID}
           likes={userReview.likes}
           setShowComments={setShowComments}
@@ -56,7 +55,7 @@ const UserReview = ({ reviewID }: Props) => {
         {showComments && (
           <>
             <CommentInput reviewID={reviewID} />
-            {userReview.comments.reverse().map((comment, index) => (
+            {userReview.comments.map((comment, index) => (
               <ReviewComment
                 key={`comment-${index}-review-${reviewID}`}
                 comment={comment}
