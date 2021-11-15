@@ -27,6 +27,7 @@ const useGeocoding = (address: string | null) => {
           key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
         },
       })
+      // @ts-expect-error - set type later
       .then((res) => {
         setPlace({
           formatted_address: res.data.results[0].formatted_address,
@@ -37,7 +38,7 @@ const useGeocoding = (address: string | null) => {
         })
       })
       // eslint-disable-next-line
-      .catch((error) => console.log(error))
+      .catch()
   }, [])
   return place
 }

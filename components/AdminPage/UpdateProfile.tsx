@@ -71,6 +71,7 @@ const UpdateProfile = ({
         //     format: 'json',
         //   },
         // })
+        // @ts-expect-error - set type later
         .then((res) => {
           firebase
             .firestore()
@@ -94,9 +95,9 @@ const UpdateProfile = ({
               })
             })
         })
-        .catch((error) => {
+        .catch(() => {
           // eslint-disable-next-line
-          console.log(error)
+          //console.log(error)
           setAdminPlace({
             ...place,
             name: data.name,
