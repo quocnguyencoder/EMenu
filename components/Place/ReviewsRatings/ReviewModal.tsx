@@ -54,7 +54,10 @@ const ReviewModal = ({
   const [inputContent, setInputContent] = useState('')
   const [ratingValue, setRatingValue] = useState(0)
   const [isUploading, setIsUploading] = useState(false)
-  const [openTooltip, setOpenTooltip] = useState(false)
+  const [openImageTooltip, setOpenImageTooltip] = useState(false)
+  const [tooltipContent, setTooltipContent] = useState('')
+  const [openSubmitTooltip, setOpenSubmitTooltip] = useState(false)
+  const [submitTooltipContent, setSubmitTooltipContent] = useState('')
   const classes = useStyles()
 
   const resetStates = () => {
@@ -67,10 +70,14 @@ const ReviewModal = ({
   const handleSelectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files[0] === undefined) {
       return
+    } else if (!e.target.files[0].type.includes('image')) {
+      setTooltipContent('Vui lòng chỉ chọn file ảnh')
+      setOpenImageTooltip(true)
+    } else if (selectedImages.length > 3) {
+      setOpenImageTooltip(true)
+      setTooltipContent('Bạn chỉ có thể chọn tối đa 10 ảnh')
     } else {
-      selectedImages.length < 11
-        ? setSelectedImages([...selectedImages, e.target.files[0]])
-        : setOpenTooltip(true)
+      setSelectedImages([...selectedImages, e.target.files[0]])
     }
   }
 
@@ -82,14 +89,14 @@ const ReviewModal = ({
 
   const handleUploadReview = async (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault()
-
-    if (inputSubject !== '') {
+    if (inputSubject !== '' && ratingValue !== 0 && user.id !== '') {
       setIsUploading(true)
       try {
         const imgURLs =
           await uploadService.default.handleFilesUploadOnFirebaseStorage(
             user.id,
-            selectedImages
+            selectedImages,
+            placeID
           )
         //console.log('urls: ', imgURLs)
 
@@ -123,13 +130,21 @@ const ReviewModal = ({
         handleCloseModal(isUploading)
         setOpenSnackBar(true)
       }
+    } else {
+      inputSubject === '' &&
+        setSubmitTooltipContent('Vui lòng nhập đánh giá chung')
+      ratingValue === 0 &&
+        setSubmitTooltipContent('Vui lòng xếp hạng ít nhất 1 sao')
+      setOpenSubmitTooltip(true)
     }
   }
-  const handleTooltipOpen = () => {
-    selectedImages.length === 10 && setOpenTooltip(true)
+
+  const handleImageTooltipClose = () => {
+    setOpenImageTooltip(false)
   }
-  const handleTooltipClose = () => {
-    setOpenTooltip(false)
+
+  const handleSubmitTooltipClose = () => {
+    setOpenSubmitTooltip(false)
   }
 
   return (
@@ -208,7 +223,6 @@ const ReviewModal = ({
                   <InputBase
                     name="subject"
                     placeholder="Đánh giá chung (bắt buộc)"
-                    required
                     autoComplete="false"
                     inputProps={{ maxLength: 50 }}
                     value={inputSubject}
@@ -251,20 +265,19 @@ const ReviewModal = ({
                 style={{ display: 'none' }}
                 onChange={(e) => handleSelectImage(e)}
               />
-              <ClickAwayListener onClickAway={handleTooltipClose}>
+              <ClickAwayListener onClickAway={handleImageTooltipClose}>
                 <label htmlFor="select-image">
                   <Tooltip
                     PopperProps={{
                       disablePortal: true,
                     }}
-                    onClose={handleTooltipClose}
-                    onOpen={handleTooltipOpen}
-                    open={openTooltip}
+                    onClose={handleImageTooltipClose}
+                    open={openImageTooltip}
                     placement="top"
                     disableFocusListener
                     disableHoverListener
                     disableTouchListener
-                    title="Bạn chỉ có thể thêm tối đa 10 ảnh"
+                    title={tooltipContent}
                   >
                     <ButtonBase
                       component="span"
@@ -315,9 +328,24 @@ const ReviewModal = ({
                 </ImageListItem>
               ))}
           </ImageList>
-          <Button type="submit" className={classes.reviewModalSubmitButton}>
-            Hoàn tất
-          </Button>
+          <ClickAwayListener onClickAway={handleSubmitTooltipClose}>
+            <Tooltip
+              PopperProps={{
+                disablePortal: true,
+              }}
+              onClose={handleSubmitTooltipClose}
+              open={openSubmitTooltip}
+              placement="top"
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener
+              title={submitTooltipContent}
+            >
+              <Button type="submit" className={classes.reviewModalSubmitButton}>
+                Hoàn tất
+              </Button>
+            </Tooltip>
+          </ClickAwayListener>
           {isUploading && <Loading />}
         </Paper>
       </Fade>

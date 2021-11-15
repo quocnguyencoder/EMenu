@@ -54,13 +54,13 @@ const UserReview = ({ reviewID }: Props) => {
         />
         {showComments && (
           <>
-            <CommentInput reviewID={reviewID} />
             {userReview.comments.map((comment, index) => (
               <ReviewComment
                 key={`comment-${index}-review-${reviewID}`}
                 comment={comment}
               />
             ))}
+            <CommentInput reviewID={reviewID} />
           </>
         )}
       </Paper>

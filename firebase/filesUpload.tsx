@@ -1,17 +1,23 @@
 import firebase from 'firebase/app'
 import 'firebase/storage'
+import moment from 'moment'
 
 const handleFileUploadOnFirebaseStorage = async (
   bucketName: string,
-  file: File
+  file: File,
+  placeID: string,
+  index: number
 ) => {
   // 1. If no file, return
   if (file == null) return ''
 
   // 2. Put the file into bucketName
+  const fileExtension = file.name.split('.').pop()
+  const datetime = moment().format().replace(/\D/g, '')
+  const fileName = `${placeID}-${index}-${datetime}.${fileExtension}`
   const uploadTask = await firebase
     .storage()
-    .ref(`user_uploads/${bucketName}/${file.name}`)
+    .ref(`user_uploads/${bucketName}/${fileName}`)
     .put(file)
 
   // 3. Get download URL and return it as
@@ -20,7 +26,8 @@ const handleFileUploadOnFirebaseStorage = async (
 
 const handleFilesUploadOnFirebaseStorage = async (
   bucketName: string,
-  files: File[]
+  files: File[],
+  placeID: string
 ) => {
   // 1. If no file, return
   if (files.length === 0) return []
@@ -36,7 +43,9 @@ const handleFilesUploadOnFirebaseStorage = async (
     // 3B. handleFileUploadOnFirebaseStorage function is in above section
     const downloadFileResponse = await handleFileUploadOnFirebaseStorage(
       bucketName,
-      file
+      file,
+      placeID,
+      i
     )
 
     // 3C. Push the download url to URLs array
