@@ -71,8 +71,8 @@ const UpdateProfile = ({
         //     format: 'json',
         //   },
         // })
-        // @ts-expect-error - set type later
-        .then((res) => {
+
+        .then((res: any) => {
           firebase
             .firestore()
             .collection('place')
