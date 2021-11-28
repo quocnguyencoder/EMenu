@@ -28,4 +28,16 @@ const getPlaceInfo = async (placeID: string) => {
   return placeData
 }
 
-export default { getUserInfo, getPlaceInfo }
+const getNewImage = async (placeID: string, name: string) => {
+  const url = await firebase
+    .storage()
+    .ref(`/place_pictures/${placeID}/`)
+    .child(name)
+    .getDownloadURL()
+    .then((res) => {
+      return res as string
+    })
+  return url
+}
+
+export default { getUserInfo, getPlaceInfo, getNewImage }

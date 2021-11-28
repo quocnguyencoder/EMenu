@@ -41,6 +41,7 @@ const NewestItem = ({ info }: Props) => {
           height="150"
           image={info.image}
           title="Contemplative Reptile"
+          style={{ objectFit: 'scale-down' }}
         />
       </CardActionArea>
       {/* Place info region */}
@@ -59,7 +60,7 @@ const NewestItem = ({ info }: Props) => {
           }
           secondary={
             <Typography variant="body2">
-              {`${info.address.street}, P.${info.address.ward},  ${info.address.city}, ${info.address.province}`}
+              {`${info.address.street}, ${info.address.ward},  ${info.address.city}, ${info.address.province}`}
             </Typography>
           }
         />

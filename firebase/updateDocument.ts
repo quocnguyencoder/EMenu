@@ -1,5 +1,7 @@
+import { Category, MenuItem, Place } from '@/models/place'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import moment from 'moment'
 
 const updatePlaceReview = (reviewID: string, placeID: string) => {
   const placeRef = firebase.firestore().collection('place').doc(placeID)
@@ -81,6 +83,13 @@ const updateBackup = () => {
       '3': { items: [3, 6], name: 'Gọi thêm' },
     },
     createdDate: 'October 8th 2021, 9:12:29 pm',
+    activeDate: moment(
+      moment(
+        'October 8th 2021, 09:12:29 PM',
+        'MMMM Do YYYY, hh:mm:ss A'
+      ).format('LLL'),
+      'MMMM Do YYYY, hh:mm:ss A'
+    ).fromNow(),
     reviews: [
       'ZTpYg3ue8bY2D4ltNodi',
       'oFqsS7vsC9RPG0ZAvM3R',
@@ -188,6 +197,74 @@ const updateReviewComment = (
   })
 }
 
+const updateMenuCategory = async (placeID: string, category: Category) => {
+  firebase.firestore().collection('place').doc(placeID).update({
+    categories: category,
+  })
+}
+
+const updateMenuItem = async (
+  placeID: string,
+  itemID: number,
+  item: MenuItem
+) => {
+  firebase
+    .firestore()
+    .collection('place')
+    .doc(placeID)
+    .update({
+      [`menu.${itemID}`]: item,
+      activeDate: moment(
+        moment().format('LLL'),
+        'MMMM Do YYYY, hh:mm:ss A'
+      ).fromNow(),
+    })
+}
+
+const updatePlaceInfo = async (
+  placeID: string,
+  placeInfo: Place,
+  imgUrl: string
+) => {
+  firebase
+    .firestore()
+    .collection('place')
+    .doc(placeID)
+    .update({
+      address: placeInfo.address,
+      name: placeInfo.name,
+      phone: placeInfo.phone,
+      type: placeInfo.type,
+      time: placeInfo.time,
+      image: imgUrl,
+      activeDate: moment(
+        moment().format('LLL'),
+        'MMMM Do YYYY, hh:mm:ss A'
+      ).fromNow(),
+    })
+}
+const updatePlaceLocation = async (placeID: string, res: any) => {
+  firebase.firestore().collection('place').doc(placeID).update({
+    location: res.data.results[0].geometry.location,
+    // ['location.lat']: Number(res.data[0].lat),
+    // ['location.lng']: Number(res.data[0].lon),
+  })
+}
+
+const deleteMenuItem = async (placeID: string, itemID: number) => {
+  firebase
+    .firestore()
+    .collection('place')
+    .doc(placeID)
+    .update({
+      [`menu.${itemID}`]: firebase.firestore.FieldValue.delete(),
+      activeDate: moment(
+        moment().format('LLL'),
+        'MMMM Do YYYY, hh:mm:ss A'
+      ).fromNow(),
+    })
+}
+
 export default {
   updatePlaceReview,
   updateUserReview,
@@ -195,4 +272,9 @@ export default {
   updateBackup,
   updateReviewLikes,
   updateReviewComment,
+  updateMenuCategory,
+  updateMenuItem,
+  updatePlaceInfo,
+  updatePlaceLocation,
+  deleteMenuItem,
 }

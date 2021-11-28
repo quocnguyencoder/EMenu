@@ -9,6 +9,8 @@ import MenuList from '@material-ui/core/MenuList'
 import { Button } from '@material-ui/core'
 import User from '../models/user'
 import { useRouter } from 'next/router'
+import isEqual from 'lodash/isEqual'
+import * as ROUTES from '@/constants/routes'
 
 interface Props {
   user: User
@@ -27,6 +29,8 @@ export default function UserMenu({ user, logout }: Props) {
   const displayName = hasDisplayName ? user.name : user.email
   const profilePic = hasProfilePic ? user.profilePic : displayName
 
+  const userInfo = JSON.parse(sessionStorage.getItem('userInfo') || '{}')
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen)
   }
@@ -42,6 +46,8 @@ export default function UserMenu({ user, logout }: Props) {
     setOpen(false)
   }
   const gotoProfile = () => router.push(`/user/${user.id}/profile`)
+  const gotoRegisterPlace = () => router.push(`/user/${user.id}/register-place`)
+  const gotoMyPlace = () => router.push(ROUTES.ADMIN)
 
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {
@@ -60,7 +66,6 @@ export default function UserMenu({ user, logout }: Props) {
 
     prevOpen.current = open
   }, [open])
-
   return (
     <div style={{ marginLeft: '50%' }}>
       <Button
@@ -98,6 +103,19 @@ export default function UserMenu({ user, logout }: Props) {
                 >
                   <MenuItem onClick={() => gotoProfile()}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
+                  {!isEqual(userInfo, {}) ? (
+                    userInfo.placeID === '' ? (
+                      <MenuItem onClick={() => gotoRegisterPlace()}>
+                        Register place
+                      </MenuItem>
+                    ) : (
+                      <MenuItem onClick={() => gotoMyPlace()}>
+                        My place
+                      </MenuItem>
+                    )
+                  ) : (
+                    <></>
+                  )}
                   <MenuItem onClick={() => logout()}>Logout</MenuItem>
                 </MenuList>
               </ClickAwayListener>

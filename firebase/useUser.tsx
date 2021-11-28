@@ -10,7 +10,7 @@ import {
 } from './userCookies'
 import { mapUserData } from './mapUserData'
 import User from '../models/user'
-
+import * as getService from './getDocument'
 initFirebase()
 
 const initialState: User = {
@@ -49,6 +49,9 @@ const useUser = () => {
         const userData = mapUserData(user)
         setUserCookie(userData)
         setUser(userData)
+        getService.default.getUserInfo(userData.id).then((userInfo) => {
+          sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+        })
         const userID = { userID: userData.id }
         sessionStorage.setItem('userID', JSON.stringify(userID))
       } else {

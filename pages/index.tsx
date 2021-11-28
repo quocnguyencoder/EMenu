@@ -13,11 +13,16 @@ interface Props {
 
 export default function Home({ places_data }: Props) {
   // console.log('home', places_data)
+  const placeCanShow = places_data.reduce(
+    (pre, curr) => (curr.show ? [...pre, curr] : pre),
+    [] as Place[]
+  )
+
   return (
     <>
       <Banners />
       <Container maxWidth="lg">
-        <Discovery places_data={places_data} />
+        <Discovery places_data={placeCanShow} />
       </Container>
     </>
   )

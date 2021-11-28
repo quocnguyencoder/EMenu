@@ -9,17 +9,23 @@ interface Props {
 
 const PriceRange = ({ menu }: Props) => {
   const menuItems = Object.keys(menu).map(Number)
+  let maxPrice = moneyFormatter.format(0)
+  let minPrice = moneyFormatter.format(0)
+  if (menuItems.length > 0) {
+    const maxItemID = menuItems.reduce((prev, curr) =>
+      menu[prev].price > menu[curr].price ? prev : curr
+    )
 
-  const maxItemID = menuItems.reduce((prev, curr) =>
-    menu[prev].price > menu[curr].price ? prev : curr
-  )
+    const minItemID = menuItems.reduce((prev, curr) =>
+      menu[prev].price < menu[curr].price ? prev : curr
+    )
 
-  const minItemID = menuItems.reduce((prev, curr) =>
-    menu[prev].price < menu[curr].price ? prev : curr
-  )
-
-  const maxPrice = moneyFormatter.format(menu[maxItemID].price)
-  const minPrice = moneyFormatter.format(menu[minItemID].price)
+    maxPrice = moneyFormatter.format(menu[maxItemID].price)
+    minPrice = moneyFormatter.format(menu[minItemID].price)
+  } else {
+    maxPrice = moneyFormatter.format(0)
+    minPrice = moneyFormatter.format(0)
+  }
   return (
     <Box display="flex" style={{ color: 'gray' }}>
       <MonetizationOnOutlinedIcon />
