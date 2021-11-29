@@ -13,9 +13,10 @@ import React from 'react'
 
 interface Props {
   reviewID: string
+  setOpenDialog: (state: boolean) => void
 }
 
-const UserReview = ({ reviewID }: Props) => {
+const UserReview = ({ reviewID, setOpenDialog }: Props) => {
   const [userReview, setUserReview] = useState<Review>()
   const [showComments, setShowComments] = useState(false)
 
@@ -51,6 +52,7 @@ const UserReview = ({ reviewID }: Props) => {
           reviewID={reviewID}
           likes={userReview.likes}
           setShowComments={setShowComments}
+          setOpenDialog={setOpenDialog}
         />
         {showComments && (
           <>
@@ -60,7 +62,7 @@ const UserReview = ({ reviewID }: Props) => {
                 comment={comment}
               />
             ))}
-            <CommentInput reviewID={reviewID} />
+            <CommentInput reviewID={reviewID} setOpenDialog={setOpenDialog} />
           </>
         )}
       </Paper>
