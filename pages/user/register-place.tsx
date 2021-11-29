@@ -10,7 +10,7 @@ import { Address, Place, Time } from '@/models/place'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 import PlaceForm from '@/components/AdminPage/PlaceForm'
 import moment from 'moment'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Color } from '@material-ui/lab/Alert'
 import Alert from '@material-ui/lab/Alert'
 import * as createService from '@/firebase/createDocument'
@@ -20,6 +20,7 @@ import axios from 'axios'
 import useUser from '@/firebase/useUser'
 import { useRouter } from 'next/router'
 import * as ROUTES from '@/constants/routes'
+import isEqual from 'lodash/isEqual'
 
 interface State extends SnackbarOrigin {
   open: boolean
@@ -74,6 +75,15 @@ const RegisterPlace = () => {
   const [previewImg, setPreviewImg] = useState<string>('')
   const inputEl = useRef(null)
   const [disableBtn, setDisableBtn] = useState(false)
+
+  useEffect(() => {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo') || '{}')
+    if (isEqual(userInfo, {})) {
+      router.push(ROUTES.LOGIN)
+    } else {
+      userInfo.placeID !== '' && router.push(ROUTES.ADMIN)
+    }
+  }, [])
 
   const handlePreviewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files[0] === undefined) {
