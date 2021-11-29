@@ -83,6 +83,7 @@ const RegisterPlace = () => {
         ? setPreviewImg(URL.createObjectURL(e.target.files[0]))
         : handleOpenAlert(`File không phải là hình ảnh hoặc gif`, `error`)
   }
+
   const handleOpenAlert = (text: string, severity: Color) => {
     setState({ ...state, open: true })
     setMessage({
@@ -179,17 +180,25 @@ const RegisterPlace = () => {
         </Alert>
       </Snackbar>
       <form onSubmit={handleSubmit}>
-        <Box display="flex" p={2} style={{ gap: '4%' }}>
+        <Box
+          display="flex"
+          p={2}
+          style={{
+            gap: '3%',
+            height: '75vh',
+            maxWidth: '98vw',
+          }}
+        >
           <Box flex={2}>
             <PlaceForm place={initialPlace} />
           </Box>
-          <Box flex={1}>
+          <Box flex={1} paddingTop={1}>
             <CardMedia
               component="img"
               image={`${previewImg}`}
               style={{
-                width: '70%',
-                height: '70%',
+                maxWidth: '100%',
+                height: '50%',
                 objectFit: 'scale-down',
               }}
             />
@@ -201,16 +210,13 @@ const RegisterPlace = () => {
               style={{ display: 'none' }}
               onChange={(e) => handlePreviewImg(e)}
             />
-            <Box style={{ height: '30%' }}>
+            <Box display="flex" flexDirection="column">
               <label htmlFor="icon-button-file">
                 <ButtonBase
                   component="span"
                   style={{
                     backgroundColor: '#e7e7e7',
-                    height: '100%',
                     width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
                   }}
                 >
                   <AddAPhotoIcon fontSize="large" />
@@ -227,7 +233,7 @@ const RegisterPlace = () => {
             variant="contained"
             disabled={disableBtn}
           >
-            Submit
+            Xác nhận
           </Button>
         </Box>
       </form>

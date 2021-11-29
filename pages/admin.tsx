@@ -16,7 +16,7 @@ import * as ROUTES from '@/constants/routes'
 import isEqual from 'lodash/isEqual'
 
 export default function Admin() {
-  const [value, setValue] = useState('Dashboards')
+  const [value, setValue] = useState({ val: 'Dashboards', selected: 0 })
   const [place, setPlace] = useState<Place>()
   const router = useRouter()
 
@@ -42,19 +42,19 @@ export default function Admin() {
       <Meta title="Admin page" />
       <Grid container>
         <Grid item xs={2}>
-          <Nav setValue={setValue} />
+          <Nav setValue={setValue} selected={value.selected} />
         </Grid>
         <Grid item xs={10}>
-          <TabPanel value={value} index="Dashboards">
+          <TabPanel value={value.val} index="Tổng quan">
             <Dashboards />
           </TabPanel>
-          <TabPanel value={value} index="Profile">
+          <TabPanel value={value.val} index="Thông tin địa điểm">
             <ProfileRestaurant place={place} />
           </TabPanel>
-          <TabPanel value={value} index="Staff management">
-            {value}
+          <TabPanel value={value.val} index="Quản lí nhân viên">
+            {value.val}
           </TabPanel>
-          <TabPanel value={value} index="Menu management">
+          <TabPanel value={value.val} index="Quản lí thực đơn">
             <MenuManagement
               categories={place.categories}
               menu={place.menu}

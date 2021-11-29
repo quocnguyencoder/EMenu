@@ -5,8 +5,11 @@ import {
   Backdrop,
   CardMedia,
   Button,
+  ButtonBase,
+  Typography,
   Snackbar,
 } from '@material-ui/core'
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 import { SnackbarOrigin } from '@material-ui/core/Snackbar'
 import { useState, useRef } from 'react'
 import { useStyles } from '../../styles/modal'
@@ -66,12 +69,13 @@ const UpdateProfile = ({
     setState({ ...state, open: false })
   }
 
-  const handlePreviewImg = (e: any) => {
-    if (e.type.includes('image')) {
-      setPreviewImg(URL.createObjectURL(e))
-    } else {
-      handleOpenAlert(`File không phải là hình ảnh hoặc gif`, `error`)
-    }
+  const handlePreviewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files[0] === undefined) {
+      return
+    } else
+      e.target.files[0].type.includes('image')
+        ? setPreviewImg(URL.createObjectURL(e.target.files[0]))
+        : handleOpenAlert(`File không phải là hình ảnh hoặc gif`, `error`)
   }
 
   const handleUpdateLocation = (data: Place, imageUrl: string) => {
@@ -261,27 +265,48 @@ const UpdateProfile = ({
         <Fade in={openModal}>
           <Box className={classes.paper}>
             <form onSubmit={handleSubmit}>
-              <Box display="flex" style={{ gap: '4%' }}>
+              <Box
+                display="flex"
+                style={{
+                  gap: '3%',
+                  width: '90vw',
+                  height: '60vh',
+                }}
+              >
                 <Box flex={2}>
                   <PlaceForm place={place} />
                 </Box>
-                <Box flex={1}>
+                <Box flex={1} paddingTop={1}>
                   <CardMedia
                     component="img"
                     image={`${previewImg}`}
                     style={{
-                      width: '70%',
-                      height: '70%',
+                      width: '100%',
+                      height: '50%',
                       objectFit: 'scale-down',
                     }}
                   />
                   <input
+                    id="icon-button-file"
                     type="file"
                     ref={inputEl}
-                    // @ts-expect-error: to stop error
-                    // eslint-disable-next-line
-                    onChange={(e) => handlePreviewImg(e.target.files[0])}
+                    style={{ display: 'none' }}
+                    onChange={(e) => handlePreviewImg(e)}
                   />
+                  <Box display="flex" flexDirection="column">
+                    <label htmlFor="icon-button-file">
+                      <ButtonBase
+                        component="span"
+                        style={{
+                          backgroundColor: '#e7e7e7',
+                          width: '100%',
+                        }}
+                      >
+                        <AddAPhotoIcon fontSize="large" />
+                        <Typography variant="body2">Thêm ảnh</Typography>
+                      </ButtonBase>
+                    </label>
+                  </Box>
                 </Box>
               </Box>
               <Box style={{ textAlign: 'center' }}>
@@ -291,7 +316,7 @@ const UpdateProfile = ({
                   variant="contained"
                   disabled={disableBtn}
                 >
-                  Submit
+                  Xác nhận
                 </Button>
               </Box>
             </form>

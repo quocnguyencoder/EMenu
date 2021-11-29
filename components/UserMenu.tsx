@@ -46,7 +46,7 @@ export default function UserMenu({ user, logout }: Props) {
     setOpen(false)
   }
   const gotoProfile = () => router.push(`/user/${user.id}/profile`)
-  const gotoRegisterPlace = () => router.push(`/user/${user.id}/register-place`)
+  const gotoRegisterPlace = () => router.push(`/user/register-place`)
   const gotoMyPlace = () => router.push(ROUTES.ADMIN)
 
   function handleListKeyDown(event: React.KeyboardEvent) {
@@ -101,22 +101,24 @@ export default function UserMenu({ user, logout }: Props) {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={() => gotoProfile()}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={() => gotoProfile()}>
+                    Thông tin tài khoản
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>Tài khoản của tôi</MenuItem>
                   {!isEqual(userInfo, {}) ? (
                     userInfo.placeID === '' ? (
                       <MenuItem onClick={() => gotoRegisterPlace()}>
-                        Register place
+                        Đăng kí địa điểm
                       </MenuItem>
                     ) : (
                       <MenuItem onClick={() => gotoMyPlace()}>
-                        My place
+                        Địa điểm của tôi
                       </MenuItem>
                     )
                   ) : (
                     <></>
                   )}
-                  <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                  <MenuItem onClick={() => logout()}>Đăng xuất</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>

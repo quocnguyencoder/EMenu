@@ -37,14 +37,14 @@ const PlaceForm = ({ place }: Props) => {
         variant="outlined"
         color="secondary"
       >
-        <InputLabel>Name</InputLabel>
+        <InputLabel>Tên địa điểm</InputLabel>
         <OutlinedInput
           defaultValue={place.name}
           required
           multiline
           minRows={1}
           name="name"
-          label="Name"
+          label="Tên địa điểm"
         />
       </FormControl>
       <Box display="flex" style={{ gap: '1%' }}>
@@ -55,13 +55,13 @@ const PlaceForm = ({ place }: Props) => {
             variant="outlined"
             color="secondary"
           >
-            <InputLabel>Province/City</InputLabel>
+            <InputLabel>Tỉnh/Thành</InputLabel>
             <Select
               native
               defaultValue={province}
               required
               name="province"
-              label="Province/City"
+              label="Tỉnh/Thành"
               onChange={handleChangeProvince}
             >
               <option value="" />
@@ -84,13 +84,13 @@ const PlaceForm = ({ place }: Props) => {
             variant="outlined"
             color="secondary"
           >
-            <InputLabel>City/District</InputLabel>
+            <InputLabel>Quận/Huyện</InputLabel>
             <Select
               native
               defaultValue={city}
               required
               name="city"
-              label="City/District"
+              label="Quận/Huyện"
               onChange={handleChangeCity}
             >
               <option value="" />
@@ -116,13 +116,13 @@ const PlaceForm = ({ place }: Props) => {
             variant="outlined"
             color="secondary"
           >
-            <InputLabel>Ward/Town</InputLabel>
+            <InputLabel>Xã/Phường</InputLabel>
             <Select
               native
               defaultValue={ward}
               required
               name="ward"
-              label="Ward/Town"
+              label="Xã/Phường"
             >
               <option value="" />
               {province !== '' &&
@@ -145,14 +145,14 @@ const PlaceForm = ({ place }: Props) => {
         variant="outlined"
         color="secondary"
       >
-        <InputLabel>Street</InputLabel>
+        <InputLabel>Địa chỉ</InputLabel>
         <OutlinedInput
           defaultValue={place.address.street}
           multiline
           minRows={1}
           required
           name="street"
-          label="Street"
+          label="Địa chỉ"
         />
       </FormControl>
       <FormControl
@@ -161,12 +161,12 @@ const PlaceForm = ({ place }: Props) => {
         variant="outlined"
         color="secondary"
       >
-        <InputLabel>Phone</InputLabel>
+        <InputLabel>Số điện thoại</InputLabel>
         <OutlinedInput
           defaultValue={place.phone}
           required
           name="phone"
-          label="Phone"
+          label="Số điện thoại"
           inputProps={{
             pattern: '^[0-9]{10}$',
           }}
@@ -178,20 +178,28 @@ const PlaceForm = ({ place }: Props) => {
         variant="outlined"
         color="secondary"
       >
-        <InputLabel>Type</InputLabel>
+        <InputLabel>Loại hình kinh doanh</InputLabel>
         <OutlinedInput
           defaultValue={place.type}
           required
           name="type"
-          label="Type"
+          label="Loại hình kinh doanh"
         />
       </FormControl>
       <Box display="flex" style={{ gap: '4%' }}>
         <Box display="flex" flex={1} style={{ gap: '1%' }}>
-          <SelectTimeOpenClose status="Open" time={place.time.open} />
+          <SelectTimeOpenClose
+            status="Open"
+            label="mở"
+            time={place.time.open}
+          />
         </Box>
         <Box display="flex" flex={1} style={{ gap: '1%' }}>
-          <SelectTimeOpenClose status="Close" time={place.time.close} />
+          <SelectTimeOpenClose
+            status="Close"
+            label="đóng"
+            time={place.time.close}
+          />
         </Box>
       </Box>
     </>

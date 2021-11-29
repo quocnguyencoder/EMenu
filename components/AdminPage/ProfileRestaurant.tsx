@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Maps } from '.'
 import { Place } from '../../models/place'
 import UpdateProfile from './UpdateProfile'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 
 interface Props {
   place: Place
@@ -31,13 +32,13 @@ export default function ProfileRestaurant({ place }: Props) {
       if (open.isBefore(close)) {
         open.isBefore(moment(now, 'hh:mmA')) &&
         moment(now, 'hh:mmA').isBefore(close)
-          ? setStatus('Open')
-          : setStatus('Close')
+          ? setStatus('Đang mở')
+          : setStatus('Đã đóng')
       } else {
         open.isBefore(moment(now, 'hh:mmA')) ||
         moment(now, 'hh:mmA').isBefore(close)
-          ? setStatus('Open')
-          : setStatus('Close')
+          ? setStatus('Đang mở')
+          : setStatus('Đã đóng')
       }
     }
     checkStatus()
@@ -48,17 +49,27 @@ export default function ProfileRestaurant({ place }: Props) {
     <>
       <Box display="flex" style={{ gap: '3%' }}>
         <Box flex={1}>
-          <Typography>Name: {adminPlace.name}</Typography>
+          <Typography>Tên địa điểm: {adminPlace.name}</Typography>
           <Typography>
-            Address: {adminPlace.address.street}, {adminPlace.address.ward},{' '}
+            Địa chỉ: {adminPlace.address.street}, {adminPlace.address.ward},{' '}
             {adminPlace.address.city}, {adminPlace.address.province}
           </Typography>
-          <Typography>Phone: {adminPlace.phone}</Typography>
+          <Typography>Số điện thoại: {adminPlace.phone}</Typography>
           <Typography>
-            Open Time: {adminPlace.time.open} - {adminPlace.time.close}
+            Thời gian hoạt động: {adminPlace.time.open} -{' '}
+            {adminPlace.time.close}
           </Typography>
-          <Typography>Status: {status}</Typography>
-          <Typography>Type: {adminPlace.type}</Typography>
+          <Box display="flex">
+            <Typography>Trạng thái:</Typography>
+            <Box
+              display="flex"
+              style={{ color: status === 'Đang mở' ? '#6CC942' : 'grey' }}
+            >
+              <FiberManualRecordIcon fontSize="small" />
+              <Typography variant="body1">{status}</Typography>
+            </Box>
+          </Box>
+          <Typography>Loại hình kinh doanh: {adminPlace.type}</Typography>
           <CardMedia
             component="img"
             image={`${adminPlace.image}`}
@@ -70,7 +81,7 @@ export default function ProfileRestaurant({ place }: Props) {
             color="secondary"
             onClick={handleOpenModal}
           >
-            Edit
+            Chỉnh sửa thông tin
           </Button>
         </Box>
         <Box flex={1}>

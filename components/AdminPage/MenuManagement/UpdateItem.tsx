@@ -6,12 +6,14 @@ import {
   Typography,
   CardMedia,
   Button,
+  ButtonBase,
   Snackbar,
 } from '@material-ui/core'
 import { SnackbarOrigin } from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
-import { Category, MenuItem } from '../../../models/place'
-import { useStyles } from '../../../styles/modal'
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
+import { Category, MenuItem } from '@/models/place'
+import { useStyles } from '@/styles/modal'
 import { useRef, useState } from 'react'
 import ItemForm from './ItemForm'
 import SelectCategories from './SelectCategories'
@@ -87,12 +89,13 @@ const UpdateItem = ({
     setSelectedCategories(selectedList.sort((a, b) => (a > b ? 1 : -1)))
   }
 
-  const handlePreviewImg = (e: any) => {
-    if (e.type.includes('image')) {
-      setPreviewImg(URL.createObjectURL(e))
-    } else {
-      handleOpenAlert(`File không phải là hình ảnh hoặc gif`, `error`)
-    }
+  const handlePreviewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files[0] === undefined) {
+      return
+    } else
+      e.target.files[0].type.includes('image')
+        ? setPreviewImg(URL.createObjectURL(e.target.files[0]))
+        : handleOpenAlert(`File không phải là hình ảnh hoặc gif`, `error`)
   }
 
   const notChangeCategory = () => {
@@ -236,13 +239,18 @@ const UpdateItem = ({
         <Fade in={openModal}>
           <Box className={classes.paper}>
             <form onSubmit={handleSubmit}>
-              <Box display="flex" style={{ gap: '4%' }}>
-                <Box flex={1}>
+              <Box
+                display="flex"
+                style={{
+                  gap: '3%',
+                  height: '60vh',
+                  width: '90vw',
+                }}
+              >
+                <Box flex={2}>
                   <ItemForm item={itemInfo} />
                   <Box alignItems="center" display="flex" marginBottom="1%">
-                    <Typography style={{ marginRight: '1%' }}>
-                      Category:
-                    </Typography>
+                    <Typography style={{ marginRight: '1%' }}>Loại:</Typography>
                     <SelectCategories
                       selectedCategories={selectedCategories}
                       handleChangeCategory={handleChangeCategory}
@@ -255,18 +263,32 @@ const UpdateItem = ({
                     component="img"
                     image={`${previewImg}`}
                     style={{
-                      width: '70%',
-                      height: '70%',
+                      maxWidth: '100%',
+                      height: '50%',
                       objectFit: 'scale-down',
                     }}
                   />
                   <input
+                    id="icon-button-file"
                     type="file"
                     ref={inputEl}
-                    // @ts-expect-error: to stop error
-                    // eslint-disable-next-line
-                    onChange={(e) => handlePreviewImg(e.target.files[0])}
+                    style={{ display: 'none' }}
+                    onChange={(e) => handlePreviewImg(e)}
                   />
+                  <Box display="flex" flexDirection="column">
+                    <label htmlFor="icon-button-file">
+                      <ButtonBase
+                        component="span"
+                        style={{
+                          backgroundColor: '#e7e7e7',
+                          width: '100%',
+                        }}
+                      >
+                        <AddAPhotoIcon fontSize="large" />
+                        <Typography variant="body2">Thêm ảnh</Typography>
+                      </ButtonBase>
+                    </label>
+                  </Box>
                 </Box>
               </Box>
               <Box style={{ textAlign: 'center' }}>
@@ -276,7 +298,7 @@ const UpdateItem = ({
                   variant="contained"
                   disabled={disableBtn}
                 >
-                  Submit
+                  Xác nhận
                 </Button>
               </Box>
             </form>

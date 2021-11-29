@@ -124,7 +124,7 @@ const RemoveItemFromCategory = ({
                 color="primary"
                 style={{ margin: '0 3% 0 3%' }}
               >
-                OK
+                Có
               </Button>
               <Button
                 onClick={handleCloseModal}
@@ -133,7 +133,7 @@ const RemoveItemFromCategory = ({
                 color="primary"
                 style={{ margin: '0 3% 0 3%' }}
               >
-                Cancel
+                Không
               </Button>
             </Box>
           </Box>

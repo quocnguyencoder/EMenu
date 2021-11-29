@@ -59,7 +59,7 @@ export default function FilterByCategory({
         <ImageList
           key={`menu subheader ${categoryID}`}
           gap={10}
-          style={{ width: '100%', gap: '3%' }}
+          style={{ width: '100%', gap: '3%', margin: '0%' }}
         >
           <ImageListItem cols={2} style={{ height: 'auto' }}>
             <Typography
@@ -90,8 +90,6 @@ export default function FilterByCategory({
                 categoryID={categoryID}
                 itemID={itemID}
                 itemInfo={menu[itemID]}
-                placeID={placeID}
-                updateMenu={updateMenu}
                 handleOpenModalUpdate={handleOpenModalUpdate}
                 handleOpenModalRemove={handleOpenModalRemove}
               />

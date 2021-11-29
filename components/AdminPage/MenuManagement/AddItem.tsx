@@ -8,12 +8,14 @@ import {
   CardMedia,
   InputBase,
   Snackbar,
+  ButtonBase,
+  Typography,
 } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import { useState, useRef } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/storage'
-import { Category, CategoryInfo, Menu, MenuItem } from '../../../models/place'
+import { Category, CategoryInfo, Menu, MenuItem } from '@/models/place'
 import ItemForm from './ItemForm'
 import SelectCategories from './SelectCategories'
 import * as getService from '@/firebase/getDocument'
@@ -21,6 +23,7 @@ import * as updateService from '@/firebase/updateDocument'
 import { SnackbarOrigin } from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
 import type { Color } from '@material-ui/lab/Alert'
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 
 interface State extends SnackbarOrigin {
   open: boolean
@@ -56,6 +59,16 @@ export default function AddItem({
     text: '',
     severity: 'error' as Color,
   })
+
+  const handlePreviewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files[0] === undefined) {
+      return
+    } else
+      e.target.files[0].type.includes('image')
+        ? setPreviewImg(URL.createObjectURL(e.target.files[0]))
+        : handleOpenAlert(`File không phải là hình ảnh hoặc gif`, `error`)
+  }
+
   const handleOpenAlert = (text: string, severity: Color) => {
     setState({ ...state, open: true })
     setMessage({
@@ -74,14 +87,6 @@ export default function AddItem({
 
   const handleChangeCategory = (selectedList: number[]) => {
     setSelectedCategories(selectedList.sort((a, b) => (a > b ? 1 : -1)))
-  }
-
-  const handlePreviewImg = (e: any) => {
-    if (e.type.includes('image')) {
-      setPreviewImg(URL.createObjectURL(e))
-    } else {
-      handleOpenAlert(`File không phải là hình ảnh hoặc gif`, `error`)
-    }
   }
 
   const handleSubmit = (e: any) => {
@@ -179,8 +184,14 @@ export default function AddItem({
         </Alert>
       </Snackbar>
       <form onSubmit={handleSubmit}>
-        <Box display="flex">
-          <Box flex={1}>
+        <Box
+          display="flex"
+          style={{
+            gap: '3%',
+            height: '60vh',
+          }}
+        >
+          <Box flex={2}>
             <ItemForm
               item={{ name: '', description: '', price: 0 } as MenuItem}
             />
@@ -192,15 +203,15 @@ export default function AddItem({
               <FormControlLabel
                 value="select"
                 control={<Radio />}
-                label="Select Category"
+                label="Chọn loại có sẵn"
               />
               <FormControlLabel
                 value="new"
                 control={<Radio />}
-                label="New Category"
+                label="Loại món ăn mới"
               />
             </RadioGroup>
-            <InputLabel>Category</InputLabel>
+            <InputLabel>Loại</InputLabel>
             {option == 'select' ? (
               <SelectCategories
                 selectedCategories={selectedCategories}
@@ -225,7 +236,7 @@ export default function AddItem({
                 variant="contained"
                 disabled={disableBtn}
               >
-                Submit
+                Xác nhận
               </Button>
             </Box>
           </Box>
@@ -233,16 +244,34 @@ export default function AddItem({
             <CardMedia
               component="img"
               image={`${previewImg}`}
-              style={{ width: '70%', height: '70%', objectFit: 'scale-down' }}
+              style={{
+                maxWidth: '100%',
+                height: '50%',
+                objectFit: 'scale-down',
+              }}
             />
             <input
+              id="icon-button-file"
               type="file"
-              ref={inputEl}
               required
-              // @ts-expect-error: to stop error
-              // eslint-disable-next-line
-              onChange={(e) => handlePreviewImg(e.target.files[0])}
+              ref={inputEl}
+              style={{ display: 'none' }}
+              onChange={(e) => handlePreviewImg(e)}
             />
+            <Box display="flex" flexDirection="column">
+              <label htmlFor="icon-button-file">
+                <ButtonBase
+                  component="span"
+                  style={{
+                    backgroundColor: '#e7e7e7',
+                    width: '100%',
+                  }}
+                >
+                  <AddAPhotoIcon fontSize="large" />
+                  <Typography variant="body2">Thêm ảnh</Typography>
+                </ButtonBase>
+              </label>
+            </Box>
           </Box>
         </Box>
       </form>

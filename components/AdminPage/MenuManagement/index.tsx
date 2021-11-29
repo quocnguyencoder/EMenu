@@ -61,15 +61,16 @@ export default function MenuManagement({ categories, menu, placeID }: Props) {
           onChange={(e: any, newValue: number) => {
             setValue(newValue)
           }}
+          style={{ backgroundColor: '#FAFAFA' }}
         >
           <BottomNavigationAction
-            label="Menu"
+            label="Thực đơn"
             icon={
               <RestaurantMenuIcon color={value === 0 ? 'error' : 'secondary'} />
             }
           />
           <BottomNavigationAction
-            label="Add Item"
+            label="Thêm món ăn"
             icon={<AddBoxIcon color={value === 1 ? 'error' : 'secondary'} />}
           />
         </BottomNavigation>
@@ -101,7 +102,7 @@ export default function MenuManagement({ categories, menu, placeID }: Props) {
             updateMenu={updateMenu}
             deleteMenuItem={deleteMenuItem}
           />
-        ) : filter === 'Name Ascent' ? (
+        ) : filter === 'Tên Tăng dần' ? (
           <MenuItemList
             placeID={placeID}
             categories={adminCategories}
@@ -110,7 +111,7 @@ export default function MenuManagement({ categories, menu, placeID }: Props) {
             updateMenu={updateMenu}
             deleteMenuItem={deleteMenuItem}
           />
-        ) : filter === 'Name Descent' ? (
+        ) : filter === 'Tên Giảm dần' ? (
           <MenuItemList
             placeID={placeID}
             categories={adminCategories}
@@ -119,7 +120,7 @@ export default function MenuManagement({ categories, menu, placeID }: Props) {
             updateMenu={updateMenu}
             deleteMenuItem={deleteMenuItem}
           />
-        ) : filter === 'Price Ascent' ? (
+        ) : filter === 'Giá Tăng dần' ? (
           <MenuItemList
             placeID={placeID}
             categories={adminCategories}
@@ -128,7 +129,7 @@ export default function MenuManagement({ categories, menu, placeID }: Props) {
             updateMenu={updateMenu}
             deleteMenuItem={deleteMenuItem}
           />
-        ) : filter === 'Price Descent' ? (
+        ) : filter === 'Giá Giảm dần' ? (
           <MenuItemList
             placeID={placeID}
             categories={adminCategories}

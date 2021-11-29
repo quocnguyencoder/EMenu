@@ -4,9 +4,10 @@ import moment from 'moment'
 interface Props {
   status: string
   time: string
+  label: string
 }
 
-const SelectTimeOpenClose = ({ status, time }: Props) => {
+const SelectTimeOpenClose = ({ status, time, label }: Props) => {
   const hours: string[] = []
   const minutes: string[] = []
 
@@ -28,13 +29,13 @@ const SelectTimeOpenClose = ({ status, time }: Props) => {
         variant="outlined"
         color="secondary"
       >
-        <InputLabel>{status} Hour</InputLabel>
+        <InputLabel>Giờ {label} cửa</InputLabel>
         <Select
           native
           defaultValue={moment(time, 'hh:mm A').format('hh')}
           required
           name={`${status}Hour`}
-          label={`${status} Hour`}
+          label={`Giờ ${label} cửa`}
         >
           {hours.map((hour) => (
             <option key={`hour-${hour}`} value={`${hour}`}>
@@ -49,13 +50,13 @@ const SelectTimeOpenClose = ({ status, time }: Props) => {
         variant="outlined"
         color="secondary"
       >
-        <InputLabel>{status} Minute</InputLabel>
+        <InputLabel>Phút {label} cửa</InputLabel>
         <Select
           native
           defaultValue={moment(time, 'hh:mm A').format('mm')}
           required
           name={`${status}Minute`}
-          label={`${status} Minute`}
+          label={`Phút ${label} cửa`}
         >
           {minutes.map((minute) => (
             <option key={`minute-${minute}`} value={`${minute}`}>
@@ -70,13 +71,13 @@ const SelectTimeOpenClose = ({ status, time }: Props) => {
         variant="outlined"
         color="secondary"
       >
-        <InputLabel>Periods</InputLabel>
+        <InputLabel>Buổi</InputLabel>
         <Select
           native
           defaultValue={moment(time, 'hh:mm A').format('A')}
           required
           name={`${status}Period`}
-          label="Periods"
+          label="Buổi"
         >
           <option value="AM">AM</option>
           <option value="PM">PM</option>

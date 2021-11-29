@@ -77,7 +77,7 @@ const MenuItemList = ({
 
   return (
     <>
-      <ImageList gap={10} style={{ width: '100%', gap: '3%' }}>
+      <ImageList gap={10} style={{ width: '100%', gap: '3%', margin: '0' }}>
         {itemIDList.map((itemID) => (
           <Box
             key={`menuItem-name-${menu[itemID].name}-index-${itemID}`}
@@ -106,13 +106,13 @@ const MenuItemList = ({
                       variant="body2"
                       className={classes.noOverFlowText}
                     >
-                      Description: {menu[itemID].description}
+                      Mô tả: {menu[itemID].description}
                     </Typography>
                     <Typography
                       variant="body2"
                       className={classes.noOverFlowText}
                     >
-                      Price: {formatter.format(menu[itemID].price)}
+                      Giá: {formatter.format(menu[itemID].price)}
                     </Typography>
                   </Box>
                 }

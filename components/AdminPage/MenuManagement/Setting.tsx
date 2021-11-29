@@ -49,7 +49,7 @@ const Setting = ({ state, setState, filter, setFilter }: Props) => {
     }
   const list = (filterBy: string) => (
     <List>
-      {['Ascent', 'Descent'].map((value) => (
+      {['Tăng dần', 'Giảm dần'].map((value) => (
         <ListItem key={`Filter by ${filterBy} ${value}`}>
           <FormControlLabel
             value={`${filterBy} ${value}`}
@@ -75,39 +75,41 @@ const Setting = ({ state, setState, filter, setFilter }: Props) => {
             <FormControlLabel
               value="All"
               control={<Radio />}
-              label="All Menu Items"
+              label="Tất cả thực đơn"
               checked={filter === 'All' ? true : false}
             />
           </ListItem>
         </List>
         <Divider />
         <List
-          subheader={<ListSubheader component="div">Filter by</ListSubheader>}
+          subheader={
+            <ListSubheader component="div">Sắp xếp theo</ListSubheader>
+          }
         >
           <ListItem>
             <FormControlLabel
               value="Category"
               control={<Radio />}
-              label="Category"
+              label="Loại"
               checked={filter === 'Category' ? true : false}
             />
           </ListItem>
           <ListItem button onClick={handleName}>
-            <ListItemText primary="Name" />
+            <ListItemText primary="Tên" />
             {openName ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={openName} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem>{list(`Name`)}</ListItem>
+              <ListItem>{list(`Tên`)}</ListItem>
             </List>
           </Collapse>
           <ListItem button onClick={handlePrice}>
-            <ListItemText primary="Price" />
+            <ListItemText primary="Giá" />
             {openPrice ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={openPrice} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem>{list(`Price`)}</ListItem>
+              <ListItem>{list(`Giá`)}</ListItem>
             </List>
           </Collapse>
         </List>
