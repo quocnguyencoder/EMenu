@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import initFirebase from '../firebase/initFirebase'
@@ -25,19 +24,9 @@ const initialState: User = {
 
 const useUser = () => {
   const [user, setUser] = useState<User>(initialState)
-  const router = useRouter()
 
   const logout = async () => {
-    return firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        // Sign-out successful.
-        router.push('/')
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    return firebase.auth().signOut()
   }
 
   useEffect(() => {

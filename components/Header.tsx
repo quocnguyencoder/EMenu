@@ -19,7 +19,12 @@ export default function Header() {
   const { user, logout } = useUser()
 
   const handleClick = () => {
-    router.push(ROUTES.LOGIN)
+    router.push({
+      pathname: ROUTES.LOGIN,
+      query: {
+        returnURL: router.asPath,
+      },
+    })
   }
 
   const gotoHomepage = () => {
