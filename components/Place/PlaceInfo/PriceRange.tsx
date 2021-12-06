@@ -11,26 +11,13 @@ const PriceRange = ({ menu }: Props) => {
   const menuItems = Object.keys(menu).map(Number)
 
   const isEmptyMenu = menuItems.length === 0
+  const pricesArr = isEmptyMenu
+    ? [0]
+    : menuItems.map((itemID) => menu[itemID].price)
 
-  const maxPrice = moneyFormatter.format(
-    isEmptyMenu
-      ? 0
-      : menuItems.reduce((prev, curr) =>
-          menu[prev].price > menu[curr].price
-            ? menu[prev].price
-            : menu[curr].price
-        )
-  )
+  const maxPrice = moneyFormatter.format(Math.max(...pricesArr))
 
-  const minPrice = moneyFormatter.format(
-    isEmptyMenu
-      ? 0
-      : menuItems.reduce((prev, curr) =>
-          menu[prev].price < menu[curr].price
-            ? menu[prev].price
-            : menu[curr].price
-        )
-  )
+  const minPrice = moneyFormatter.format(Math.min(...pricesArr))
 
   return (
     <Box display="flex" style={{ color: 'gray' }}>
