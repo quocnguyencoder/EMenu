@@ -16,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: '#fff',
     marginLeft: 0,
-    maxWidth: '40%',
     flexGrow: 1,
   },
   searchIcon: {
@@ -32,10 +31,5 @@ export const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: 'black',
     width: '100%',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
   },
 }))

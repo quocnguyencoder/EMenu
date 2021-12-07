@@ -62,7 +62,7 @@ export default function UserMenu({ user, logout }: Props) {
   }, [open])
 
   return (
-    <div style={{ marginLeft: '50%' }}>
+    <div style={{ marginLeft: '40%' }}>
       <Button
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
@@ -96,9 +96,9 @@ export default function UserMenu({ user, logout }: Props) {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={() => gotoProfile()}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                  <MenuItem onClick={() => gotoProfile()}>Thông tin</MenuItem>
+
+                  <MenuItem onClick={() => logout()}>Đăng xuất</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
