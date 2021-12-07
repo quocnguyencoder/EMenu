@@ -265,6 +265,19 @@ const deleteMenuItem = async (placeID: string, itemID: number) => {
     })
 }
 
+const verifyPlace = (placeID: string, verify: boolean) => {
+  firebase.firestore().collection('place').doc(placeID).update({ show: verify })
+}
+
+const updateReviewsAfterDeletedPlace = (
+  userID: string,
+  newReviews: string[]
+) => {
+  firebase.firestore().collection('user').doc(userID).update({
+    reviews: newReviews,
+  })
+}
+
 export default {
   updatePlaceReview,
   updateUserReview,
@@ -277,4 +290,6 @@ export default {
   updatePlaceInfo,
   updatePlaceLocation,
   deleteMenuItem,
+  verifyPlace,
+  updateReviewsAfterDeletedPlace,
 }

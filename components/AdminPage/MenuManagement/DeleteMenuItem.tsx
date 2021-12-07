@@ -6,8 +6,8 @@ import {
   Typography,
   Button,
 } from '@material-ui/core'
-import { Category, Menu } from '../../../models/place'
-import { useStyles } from '../../../styles/modal'
+import { Category, Menu } from '@/models/place'
+import { useStyles } from '@/styles/modal'
 import 'firebase/storage'
 import * as updateService from '@/firebase/updateDocument'
 
@@ -82,7 +82,7 @@ const DeleteMenuItem = ({
               color="primary"
               style={{ margin: '0 3% 0 3%' }}
             >
-              OK
+              Có
             </Button>
             <Button
               onClick={handleCloseModal}
@@ -91,7 +91,7 @@ const DeleteMenuItem = ({
               color="primary"
               style={{ margin: '0 3% 0 3%' }}
             >
-              Cancel
+              Không
             </Button>
           </Box>
         </Box>

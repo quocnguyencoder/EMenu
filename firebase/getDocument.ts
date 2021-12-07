@@ -2,6 +2,11 @@ import firebase from 'firebase/app'
 import User from '@/models/user'
 import { Place } from '@/models/place'
 
+const getCollection = async (collection: string) => {
+  const querySnapshot = await firebase.firestore().collection(collection).get()
+  return querySnapshot
+}
+
 const getUserInfo = async (userID: string) => {
   const userData = await firebase
     .firestore()
@@ -28,6 +33,19 @@ const getPlaceInfo = async (placeID: string) => {
   return placeData
 }
 
+const getAllReviewsOfPlace = async (placeID: string) => {
+  const reviewsData = await firebase
+    .firestore()
+    .collection('place')
+    .doc(placeID)
+    .get()
+    .then((placeInfo) => {
+      const reviews = placeInfo.data() as Place
+      return reviews.reviews
+    })
+  return reviewsData
+}
+
 const getNewImage = async (placeID: string, name: string) => {
   const url = await firebase
     .storage()
@@ -40,4 +58,10 @@ const getNewImage = async (placeID: string, name: string) => {
   return url
 }
 
-export default { getUserInfo, getPlaceInfo, getNewImage }
+export default {
+  getCollection,
+  getUserInfo,
+  getPlaceInfo,
+  getAllReviewsOfPlace,
+  getNewImage,
+}

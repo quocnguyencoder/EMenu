@@ -7,8 +7,8 @@ import {
   Button,
   Snackbar,
 } from '@material-ui/core'
-import { Category, MenuItem } from '../../../models/place'
-import { useStyles } from '../../../styles/modal'
+import { Category, MenuItem } from '@/models/place'
+import { useStyles } from '@/styles/modal'
 import 'firebase/storage'
 import * as updateService from '@/firebase/updateDocument'
 import { SnackbarOrigin } from '@material-ui/core/Snackbar'
