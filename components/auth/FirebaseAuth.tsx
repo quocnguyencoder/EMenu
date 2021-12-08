@@ -44,7 +44,7 @@ const FirebaseAuth = () => {
     }
   }, [])
   return (
-    <div>
+    <div style={{ minWidth: '30vw' }}>
       {renderAuth ? (
         <StyledFirebaseAuth
           // @ts-expect-error: this is not typescript supported
