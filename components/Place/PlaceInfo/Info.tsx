@@ -21,7 +21,7 @@ export default function Info({ place }: Props) {
       <Typography>{place.type}</Typography>
       <Typography variant="h4">{place.name}</Typography>
       <Typography variant="body2">
-        {`${place.address.street}, P.${place.address.ward},  ${place.address.city}, ${place.address.province}`}
+        {`${place.address.street}, ${place.address.ward},  ${place.address.city}, ${place.address.province}`}
       </Typography>
 
       <PlaceRating ratings={place.rating} />

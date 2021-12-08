@@ -25,7 +25,7 @@ const CommentInput = ({ reviewID, setOpenDialog }: Props) => {
 
   const handleUploadComment = (key: string, shiftKey: boolean) => {
     if (key === 'Enter' && !shiftKey) {
-      user.id !== ''
+      user.id !== '' && input !== ''
         ? updateService.default.updateReviewComment(
             reviewID,
             user.id,

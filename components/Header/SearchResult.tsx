@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   ListItemAvatar,
-  ListItemSecondaryAction,
   ListItemText,
   Typography,
 } from '@material-ui/core'
@@ -28,29 +27,32 @@ const SearchResult = ({ option }: Props) => {
       </ListItemAvatar>
       <ListItemText
         primary={
-          <Typography variant="body2" style={{ fontWeight: 700 }}>
-            {option.name}
-          </Typography>
+          <Box>
+            <Typography
+              variant="body2"
+              style={{ fontWeight: 700, display: 'flex' }}
+            >
+              {option.name}
+            </Typography>
+            {isOpen(option.time.open, option.time.close) ? (
+              <Box display="flex" style={{ color: '#6CC942', float: 'right' }}>
+                <Typography variant="caption">Đang mở</Typography>
+                <FiberManualRecordIcon fontSize="small" />
+              </Box>
+            ) : (
+              <Box display="flex" style={{ color: 'grey', float: 'right' }}>
+                <Typography variant="caption">Chưa mở cửa</Typography>
+                <FiberManualRecordIcon fontSize="small" />
+              </Box>
+            )}
+          </Box>
         }
         secondary={
           <Typography variant="caption">
-            {`${option.address.street}, P.${option.address.ward}`}
+            {`${option.address.street}, ${option.address.ward}`}
           </Typography>
         }
       />
-      <ListItemSecondaryAction>
-        {isOpen(option.time.open, option.time.close) ? (
-          <Box display="flex" style={{ color: '#6CC942' }}>
-            <Typography variant="caption">Đang mở</Typography>
-            <FiberManualRecordIcon fontSize="small" />
-          </Box>
-        ) : (
-          <Box display="flex" style={{ color: 'grey' }}>
-            <Typography variant="caption">Chưa mở cửa</Typography>
-            <FiberManualRecordIcon fontSize="small" />
-          </Box>
-        )}
-      </ListItemSecondaryAction>
     </>
   )
 }
