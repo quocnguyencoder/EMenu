@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { GetStaticProps } from 'next'
 import { Place } from '@/models/place'
-import { Box } from '@material-ui/core'
+import { Box, Snackbar } from '@material-ui/core'
 import {
   DataGrid,
   GridColDef,
@@ -18,6 +18,13 @@ import { blue, orange, green, red } from '@material-ui/core/colors'
 import * as updateService from '@/firebase/updateDocument'
 import { useState } from 'react'
 import { DeletePlace } from '@/components/E-Menu/'
+import { SnackbarOrigin } from '@material-ui/core/Snackbar'
+import Alert from '@material-ui/lab/Alert'
+import type { Color } from '@material-ui/lab/Alert'
+
+interface State extends SnackbarOrigin {
+  open: boolean
+}
 
 interface Props {
   places_data: Place[]
@@ -103,6 +110,13 @@ const admin = ({ places_data }: Props) => {
             { ...placesData[index], show: verify },
             ...placesData.slice(index + 1),
           ]
+          setPlaceInfo({
+            id: params.row.id as string,
+            name: params.row.name as string,
+          })
+          verify
+            ? handleOpenAlert(`Xác nhận địa điểm`, `success`)
+            : handleOpenAlert(`Đã hủy xác nhận địa điểm`, `info`)
           setPlacesData(newPlacesData)
         }
         return (
@@ -151,6 +165,28 @@ const admin = ({ places_data }: Props) => {
   const [placesData, setPlacesData] = useState<Place[]>(places_data)
   const [placeInfo, setPlaceInfo] = useState({ id: '', name: '' })
   const [openModal, setOpenModal] = useState(false)
+
+  const [state, setState] = useState<State>({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  })
+  const { vertical, horizontal, open } = state
+  const [message, setMessage] = useState({
+    text: '',
+    severity: 'error' as Color,
+  })
+  const handleOpenAlert = (text: string, severity: Color) => {
+    setState({ ...state, open: true })
+    setMessage({
+      text: text,
+      severity: severity,
+    })
+  }
+  const handleCloseAlert = () => {
+    setState({ ...state, open: false })
+  }
+
   const handleCloseModal = () => {
     setOpenModal(false)
   }
@@ -166,13 +202,26 @@ const admin = ({ places_data }: Props) => {
           disableSelectionOnClick
         />
       </div>
-      <DeletePlace
-        placesData={placesData}
-        placeInfo={placeInfo}
-        openModal={openModal}
-        setPlacesData={setPlacesData}
-        handleCloseModal={handleCloseModal}
-      />
+      {openModal && (
+        <DeletePlace
+          placesData={placesData}
+          placeInfo={placeInfo}
+          openModal={openModal}
+          setPlacesData={setPlacesData}
+          handleCloseModal={handleCloseModal}
+        />
+      )}
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        autoHideDuration={2000}
+        open={open}
+        key={vertical + horizontal}
+        onClose={handleCloseAlert}
+      >
+        <Alert variant="filled" severity={message.severity}>
+          {message.text} <b style={{ color: '#FF99FF' }}>{placeInfo.name}</b>
+        </Alert>
+      </Snackbar>
     </>
   )
 }
