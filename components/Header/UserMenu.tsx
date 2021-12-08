@@ -7,7 +7,7 @@ import Popper from '@material-ui/core/Popper'
 import MenuItem from '@material-ui/core/MenuItem'
 import MenuList from '@material-ui/core/MenuList'
 import { Button } from '@material-ui/core'
-import User from '../models/user'
+import User from '@/models/user'
 import { useRouter } from 'next/router'
 
 interface Props {
@@ -62,7 +62,7 @@ export default function UserMenu({ user, logout }: Props) {
   }, [open])
 
   return (
-    <div style={{ marginLeft: '40%' }}>
+    <div style={{ float: 'right' }}>
       <Button
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
@@ -78,6 +78,7 @@ export default function UserMenu({ user, logout }: Props) {
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}
+        placement={'bottom-end'}
         transition
         disablePortal
       >
@@ -97,7 +98,6 @@ export default function UserMenu({ user, logout }: Props) {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem onClick={() => gotoProfile()}>Thông tin</MenuItem>
-
                   <MenuItem onClick={() => logout()}>Đăng xuất</MenuItem>
                 </MenuList>
               </ClickAwayListener>

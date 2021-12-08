@@ -5,18 +5,19 @@ export const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   title: {
-    flexGrow: 0.2,
+    flexGrow: 0.05,
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    cursor: 'pointer',
   },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: '#fff',
     marginLeft: 0,
-    flexGrow: 1,
+    flexGrow: 0.5,
   },
   searchIcon: {
     color: 'gray',

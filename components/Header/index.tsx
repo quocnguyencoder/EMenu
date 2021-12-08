@@ -4,13 +4,13 @@ import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import CardMedia from '@material-ui/core/CardMedia'
 import Toolbar from '@material-ui/core/Toolbar'
-import { useStyles } from '../styles/header'
+import { useStyles } from '../../styles/header'
 import { Box } from '@material-ui/core'
 import { useRouter } from 'next/router'
 import useUser from '@/firebase/useUser'
 import UserMenu from './UserMenu'
 import * as ROUTES from '@/constants/routes'
-import SearchBar from '@/components/SearchBar'
+import SearchBar from './SearchBar'
 
 export default function Header() {
   const classes = useStyles()
@@ -54,16 +54,18 @@ export default function Header() {
             </Box>
 
             <SearchBar />
-            {isLoggedIn ? (
-              <UserMenu user={user} logout={logout} />
-            ) : (
-              <Button
-                style={{ color: 'grey', marginLeft: '40%' }}
-                onClick={() => handleClick()}
-              >
-                Đăng nhập
-              </Button>
-            )}
+            <Box flex={1}>
+              {isLoggedIn ? (
+                <UserMenu user={user} logout={logout} />
+              ) : (
+                <Button
+                  style={{ color: 'grey', float: 'right' }}
+                  onClick={() => handleClick()}
+                >
+                  Đăng nhập
+                </Button>
+              )}
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
