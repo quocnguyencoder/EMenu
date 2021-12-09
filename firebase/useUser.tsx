@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import initFirebase from '../firebase/initFirebase'
+import initFirebase from '@/firebase/initFirebase'
 import {
   removeUserCookie,
   setUserCookie,
   getUserFromCookie,
 } from './userCookies'
 import { mapUserData } from './mapUserData'
-import User from '../models/user'
+import User from '@/models/user'
 
 initFirebase()
 
@@ -35,10 +35,20 @@ const useUser = () => {
     // both kept up to date
     const cancelAuthListener = firebase.auth().onIdTokenChanged((user) => {
       if (user) {
-        const userData = mapUserData(user)
-        setUserCookie(userData)
-        setUser(userData)
-        const userID = { userID: userData.id }
+        mapUserData(user)
+        firebase
+          .firestore()
+          .collection('user')
+          .doc(user.uid)
+          .onSnapshot((snapshot) => {
+            const userID = user.uid
+            const user_data = snapshot.data() as User
+            user_data.id = userID
+            setUser(user_data)
+            setUserCookie(user_data)
+          })
+
+        const userID = { userID: user.uid }
         sessionStorage.setItem('userID', JSON.stringify(userID))
       } else {
         removeUserCookie()

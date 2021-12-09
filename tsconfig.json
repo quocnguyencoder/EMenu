@@ -20,7 +20,7 @@
       "@/functions/*": ["functions/*"],
       "@/firebase/*": ["firebase/*"],
       "@/constants/*": ["constants/*"],
-      "@/contexts/*" : ["contexts/*"]
+      "@/contexts/*": ["contexts/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

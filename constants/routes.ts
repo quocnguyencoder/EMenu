@@ -1,9 +1,8 @@
 import { nonAccentVietnamese } from '@/functions/index'
 
 // Khánh Hòa -> khanh-hoa
-const normalizeText = (text: string) => {
+const normalizeText = (text: string) =>
   nonAccentVietnamese(text).toLowerCase().split(' ').join('-')
-}
 
 export const HOME = '/'
 export const LOGIN = '/login'

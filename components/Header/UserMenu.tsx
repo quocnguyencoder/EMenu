@@ -41,7 +41,10 @@ export default function UserMenu({ user, logout }: Props) {
 
     setOpen(false)
   }
-  const gotoProfile = () => router.push(`/user/${user.id}/profile`)
+  const gotoProfile = () => {
+    setOpen(false)
+    router.push(`/user/${user.id}`)
+  }
 
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {
@@ -68,7 +71,7 @@ export default function UserMenu({ user, logout }: Props) {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        style={{ color: 'grey' }}
+        style={{ color: 'grey', textTransform: 'capitalize', fontWeight: 600 }}
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         endIcon={<Avatar src={profilePic!} alt={`${displayName}'logo`} />}
       >
@@ -98,6 +101,17 @@ export default function UserMenu({ user, logout }: Props) {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem onClick={() => gotoProfile()}>Thông tin</MenuItem>
+                  {user.placeID === '' ? (
+                    <MenuItem
+                      onClick={() => router.push('/user/register-place')}
+                    >
+                      Đăng ký địa điểm
+                    </MenuItem>
+                  ) : (
+                    <MenuItem onClick={() => router.push('/admin')}>
+                      Địan điểm của bạn
+                    </MenuItem>
+                  )}
                   <MenuItem onClick={() => logout()}>Đăng xuất</MenuItem>
                 </MenuList>
               </ClickAwayListener>
