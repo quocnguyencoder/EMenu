@@ -44,6 +44,7 @@ const useUser = () => {
             const userID = user.uid
             const user_data = snapshot.data() as User
             user_data.id = userID
+            user_data.token = user.refreshToken
             setUser(user_data)
             setUserCookie(user_data)
           })
