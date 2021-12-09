@@ -121,7 +121,7 @@ const DeletePlace = ({
           <Box style={{ textAlign: 'center' }}>
             <Button
               onClick={handleDelete}
-              className={classes.button}
+              className={classes.buttonLineGradient}
               size="large"
               color="primary"
               style={{ margin: '0 3% 0 3%' }}
@@ -130,7 +130,7 @@ const DeletePlace = ({
             </Button>
             <Button
               onClick={handleCloseModal}
-              className={classes.button}
+              className={classes.buttonLineGradient}
               size="large"
               color="primary"
               style={{ margin: '0 3% 0 3%' }}

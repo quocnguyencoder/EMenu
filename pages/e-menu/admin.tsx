@@ -88,7 +88,7 @@ const admin = ({ places_data }: Props) => {
     },
     {
       field: 'action',
-      headerName: 'Action',
+      headerName: 'Hành động',
       sortable: false,
       flex: 2,
       renderCell: (params) => {
@@ -198,7 +198,7 @@ const admin = ({ places_data }: Props) => {
           rows={placesData}
           columns={columns}
           pageSize={5}
-          checkboxSelection
+          //checkboxSelection
           disableSelectionOnClick
         />
       </div>
