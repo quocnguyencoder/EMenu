@@ -21,6 +21,7 @@ import useUser from '@/firebase/useUser'
 import { useRouter } from 'next/router'
 import * as ROUTES from '@/constants/routes'
 import isEqual from 'lodash/isEqual'
+import shortcutAddress from '@/functions/shortcutAddress'
 
 interface State extends SnackbarOrigin {
   open: boolean
@@ -111,9 +112,9 @@ const RegisterPlace = () => {
     setDisableBtn(true)
 
     const address = {
-      province: e.target.province.value,
-      city: e.target.city.value,
-      ward: e.target.ward.value,
+      province: shortcutAddress(e.target.province.value),
+      city: shortcutAddress(e.target.city.value),
+      ward: shortcutAddress(e.target.ward.value),
       street: e.target.street.value.replace(/ +(?= )/g, '').trim(),
     } as Address
 

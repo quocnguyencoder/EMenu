@@ -23,6 +23,7 @@ import type { Color } from '@material-ui/lab/Alert'
 import Alert from '@material-ui/lab/Alert'
 import * as updateService from '@/firebase/updateDocument'
 import * as getService from '@/firebase/getDocument'
+import shortcutAddress from '@/functions/shortcutAddress'
 
 interface State extends SnackbarOrigin {
   open: boolean
@@ -152,9 +153,9 @@ const UpdateProfile = ({
     setDisableBtn(true)
 
     const address = {
-      province: e.target.province.value,
-      city: e.target.city.value,
-      ward: e.target.ward.value,
+      province: shortcutAddress(e.target.province.value),
+      city: shortcutAddress(e.target.city.value),
+      ward: shortcutAddress(e.target.ward.value),
       street: e.target.street.value.replace(/ +(?= )/g, '').trim(),
     } as Address
 

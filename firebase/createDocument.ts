@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import { Coordinate, Place } from '@/models/place'
 import * as getService from './getDocument'
+import User from '@/models/user'
 
 const createUserInfo = (
   uid: string,
@@ -49,7 +50,9 @@ const createPlaceInfo = async (
       firebase.firestore().collection('user').doc(uid).update({
         placeID: doc.id,
       })
-
+      const obj: User = JSON.parse(sessionStorage.getItem('userInfo') || '{}')
+      const userInfo: User = { ...obj, placeID: doc.id }
+      sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
       const uploadTask = firebase
         .storage()
         .ref(`/place_pictures/${doc.id}/${imageAsFile.name}`)

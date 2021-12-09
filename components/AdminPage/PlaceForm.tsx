@@ -6,18 +6,21 @@ import {
   Select,
 } from '@material-ui/core'
 import { useState } from 'react'
-import dvhcvn from '../../firebase/dvhcvn.json'
-import { Place } from '../../models/place'
+import dvhcvn from '@/firebase/dvhcvn.json'
+import { Place } from '@/models/place'
 import SelectTimeOpenClose from './SelectTimeOpenClose'
+import restoreAddress from '@/functions/restoreAddress'
 
 interface Props {
   place: Place
 }
 
 const PlaceForm = ({ place }: Props) => {
-  const [province, setProvince] = useState<string>(place.address.province)
-  const [city, setCity] = useState<string>(place.address.city)
-  const [ward, setWard] = useState<string>(place.address.ward)
+  const [province, setProvince] = useState<string>(
+    restoreAddress(place.address.province)
+  )
+  const [city, setCity] = useState<string>(restoreAddress(place.address.city))
+  const [ward, setWard] = useState<string>(restoreAddress(place.address.ward))
 
   const handleChangeProvince = (e: React.ChangeEvent<{ value: unknown }>) => {
     setProvince(e.target.value as string)
@@ -65,12 +68,12 @@ const PlaceForm = ({ place }: Props) => {
               onChange={handleChangeProvince}
             >
               <option value="" />
-              {dvhcvn.data.map((province) => (
+              {dvhcvn.map((province: any) => (
                 <option
-                  key={`Province/City ${province.name}`}
-                  value={province.name}
+                  key={`Province/City ${province.Name}`}
+                  value={province.Name}
                 >
-                  {province.name}
+                  {province.Name}
                 </option>
               ))}
             </Select>
@@ -95,14 +98,14 @@ const PlaceForm = ({ place }: Props) => {
             >
               <option value="" />
               {province !== '' &&
-                dvhcvn.data
-                  .filter((lvl1_id) => lvl1_id.name === province)[0]
-                  .level2s.map((city: any) => (
+                dvhcvn
+                  .filter((Id1: any) => Id1.Name === province)[0]
+                  .Districts.map((city: any) => (
                     <option
-                      key={`City/District ${city.name}`}
-                      value={city.name}
+                      key={`City/District ${city.Name}`}
+                      value={city.Name}
                     >
-                      {city.name}
+                      {city.Name}
                     </option>
                   ))}
             </Select>
@@ -127,12 +130,12 @@ const PlaceForm = ({ place }: Props) => {
               <option value="" />
               {province !== '' &&
                 city !== '' &&
-                dvhcvn.data
-                  .filter((lvl1_id) => lvl1_id.name === province)[0]
-                  .level2s.filter((lvl2_id) => lvl2_id.name === city)[0]
-                  .level3s.map((ward: any) => (
-                    <option key={`Ward/Town ${ward.name}`} value={ward.name}>
-                      {ward.name}
+                dvhcvn
+                  .filter((Id1: any) => Id1.Name === province)[0]
+                  .Districts.filter((Id2: any) => Id2.Name === city)[0]
+                  .Wards.map((ward: any) => (
+                    <option key={`Ward/Town ${ward.Name}`} value={ward.Name}>
+                      {ward.Name}
                     </option>
                   ))}
             </Select>
