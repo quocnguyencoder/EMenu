@@ -6,10 +6,10 @@ import {
   ProfileRestaurant,
   MenuManagement,
 } from '../components/AdminPage'
-import TabPanel from '../components/Homepage/TabPanel'
-import Meta from '../components/Meta'
+import TabPanel from '@/components/Homepage/TabPanel'
+import Meta from '@/components/Meta'
 import 'firebase/firestore'
-import { Place } from '../models/place'
+import { Place, Menu, Category, MenuItem } from '@/models/place'
 import { useRouter } from 'next/router'
 import * as getService from '@/firebase/getDocument'
 import * as ROUTES from '@/constants/routes'
@@ -18,7 +18,22 @@ import isEqual from 'lodash/isEqual'
 export default function Admin() {
   const [value, setValue] = useState({ val: 'Dashboards', selected: 0 })
   const [place, setPlace] = useState<Place>()
+  const [adminMenu, setAdminMenu] = useState<Menu>({})
+  const [adminCategories, setAdminCategories] = useState<Category>({})
   const router = useRouter()
+
+  const deleteMenuItem = (newMenu: Menu, category: Category) => {
+    setAdminMenu({ ...newMenu })
+    setAdminCategories({ ...category })
+  }
+  const updateMenu = (
+    index: number,
+    item: MenuItem,
+    updateCategories: Category
+  ) => {
+    setAdminMenu({ ...adminMenu, [index]: { ...item } })
+    setAdminCategories({ ...updateCategories })
+  }
 
   useEffect(() => {
     const obj = JSON.parse(sessionStorage.getItem('userID') || '{}')
@@ -29,9 +44,11 @@ export default function Admin() {
         if (userData.placeID === '') {
           router.push(ROUTES.HOME)
         } else {
-          getService.default
-            .getPlaceInfo(userData.placeID)
-            .then((data) => setPlace(data))
+          getService.default.getPlaceInfo(userData.placeID).then((data) => {
+            setPlace(data)
+            setAdminMenu(data.menu)
+            setAdminCategories(data.categories)
+          })
         }
       })
     }
@@ -56,9 +73,11 @@ export default function Admin() {
           </TabPanel>
           <TabPanel value={value.val} index="Quản lí thực đơn">
             <MenuManagement
-              categories={place.categories}
-              menu={place.menu}
+              adminCategories={adminCategories}
+              adminMenu={adminMenu}
               placeID={place.id}
+              deleteMenuItem={deleteMenuItem}
+              updateMenu={updateMenu}
             />
           </TabPanel>
         </Grid>

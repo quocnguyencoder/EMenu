@@ -8,7 +8,7 @@ import {
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import SettingsIcon from '@material-ui/icons/Settings'
-import { Category, Menu, MenuItem } from '../../../models/place'
+import { Category, Menu, MenuItem } from '@/models/place'
 import { useMemo, useState } from 'react'
 import FilterByCategory from './FilterByCategory'
 import AddItem from './AddItem'
@@ -17,16 +17,26 @@ import Setting from './Setting'
 import MenuItemList from './MenuItemList'
 
 interface Props {
-  categories: Category
-  menu: Menu
+  adminCategories: Category
+  adminMenu: Menu
   placeID: string
+  updateMenu: (
+    index: number,
+    item: MenuItem,
+    updateCategories: Category
+  ) => void
+  deleteMenuItem: (newMenu: Menu, categories: Category) => void
 }
 
-export default function MenuManagement({ categories, menu, placeID }: Props) {
+export default function MenuManagement({
+  adminCategories,
+  adminMenu,
+  placeID,
+  updateMenu,
+  deleteMenuItem,
+}: Props) {
   const classes = useStyles()
   const [value, setValue] = useState(0)
-  const [adminMenu, setAdminMenu] = useState<Menu>(menu)
-  const [adminCategories, setAdminCategories] = useState<Category>(categories)
   const [filter, setFilter] = useState<string>('All')
   const [settingOpen, setSettingOpen] = useState(false)
 
@@ -37,20 +47,6 @@ export default function MenuManagement({ categories, menu, placeID }: Props) {
     () => sortPriceDescent(adminMenu),
     [adminMenu]
   )
-
-  const deleteMenuItem = (newMenu: Menu, category: Category) => {
-    setAdminMenu({ ...newMenu })
-    setAdminCategories({ ...category })
-  }
-
-  const updateMenu = (
-    index: number,
-    item: MenuItem,
-    updateCategories: Category
-  ) => {
-    setAdminMenu({ ...adminMenu, [index]: { ...item } })
-    setAdminCategories({ ...updateCategories })
-  }
 
   return (
     <>
