@@ -13,16 +13,11 @@ import { Category } from '@/models/place'
 import DeleteCategory from './DeleteCategory'
 
 interface Props {
-  adminCategories: Category
+  categories: Category
   placeID: string
-  setAdminCategories: any
 }
 
-const CategoryManagement = ({
-  adminCategories,
-  placeID,
-  setAdminCategories,
-}: Props) => {
+const CategoryManagement = ({ categories, placeID }: Props) => {
   const classes = useStyles()
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
   const handleDeleteCategory = (selectedList: number[]) => {
@@ -69,9 +64,8 @@ const CategoryManagement = ({
         <DeleteCategory
           selectedCategories={selectedCategories}
           handleDeleteCategory={handleDeleteCategory}
-          categories={adminCategories}
+          categories={categories}
           placeID={placeID}
-          setAdminCategories={setAdminCategories}
         />
       </Card>
     </>

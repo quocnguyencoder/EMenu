@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Category, Menu, MenuItem } from '../../../models/place'
+import { Place } from '../../../models/place'
 import {
   Box,
   CardMedia,
@@ -11,30 +11,16 @@ import {
   IconButton,
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
-import formatter from '../../../functions/moneyFormatter'
+import formatter from '@/functions/moneyFormatter'
 import UpdateItem from './UpdateItem'
 import DeleteMenuItem from './DeleteMenuItem'
+
 interface Props {
-  placeID: string
-  categories: Category
-  menu: Menu
-  itemIDList: number[]
-  updateMenu: (
-    index: number,
-    item: MenuItem,
-    updateCategories: Category
-  ) => void
-  deleteMenuItem: (newMenu: Menu, categories: Category) => void
+  placeInfo: Place
+  filter: string
 }
 
-const MenuItemList = ({
-  placeID,
-  categories,
-  menu,
-  itemIDList,
-  updateMenu,
-  deleteMenuItem,
-}: Props) => {
+const MenuItemList = ({ placeInfo, filter }: Props) => {
   const classes = useStyles()
   const [itemCategoryList, setItemCategoryList] = useState<number[]>([])
   const [openModal, setOpenModal] = useState(false)
@@ -45,11 +31,13 @@ const MenuItemList = ({
     setOpenModal(true)
     setSelectedItemID(itemID)
     setItemCategoryList(
-      Object.keys(categories)
+      Object.keys(placeInfo.categories)
         .map(Number)
         .reduce(
           (pre: number[], curr) =>
-            categories[curr].items.includes(itemID) ? [...pre, curr] : pre,
+            placeInfo.categories[curr].items.includes(itemID)
+              ? [...pre, curr]
+              : pre,
           []
         )
     )
@@ -59,11 +47,13 @@ const MenuItemList = ({
     setModalDeleteMenuItem(true)
     setSelectedItemID(itemID)
     setItemCategoryList(
-      Object.keys(categories)
+      Object.keys(placeInfo.categories)
         .map(Number)
         .reduce(
           (pre: number[], curr) =>
-            categories[curr].items.includes(itemID) ? [...pre, curr] : pre,
+            placeInfo.categories[curr].items.includes(itemID)
+              ? [...pre, curr]
+              : pre,
           []
         )
     )
@@ -75,12 +65,28 @@ const MenuItemList = ({
     setSelectedItemID(-1)
   }
 
+  const sortByFilter = (filter: string) => {
+    const itemIDList = Object.keys(placeInfo.menu).map(Number)
+    if (filter === 'Tên Tăng dần' || filter === 'Tên Giảm dần') {
+      itemIDList.sort((a, b) =>
+        placeInfo.menu[a].name > placeInfo.menu[b].name ? 1 : -1
+      )
+      return filter === 'Tên Tăng dần' ? itemIDList : itemIDList.reverse()
+    } else if (filter === 'All') return itemIDList
+    else {
+      itemIDList.sort(
+        (a, b) => placeInfo.menu[a].price - placeInfo.menu[b].price
+      )
+      return filter === 'Giá Tăng dần' ? itemIDList : itemIDList.reverse()
+    }
+  }
+
   return (
     <>
       <ImageList gap={10} style={{ width: '100%', gap: '3%', margin: '0' }}>
-        {itemIDList.map((itemID) => (
+        {sortByFilter(filter).map((itemID) => (
           <Box
-            key={`menuItem-name-${menu[itemID].name}-index-${itemID}`}
+            key={`menuItem-name-${placeInfo.menu[itemID].name}-index-${itemID}`}
             mb={1}
             style={{
               width: '20%',
@@ -94,32 +100,32 @@ const MenuItemList = ({
               <CardMedia
                 component="img"
                 onClick={() => handleOpenModal(itemID)}
-                image={`${menu[itemID].image}`}
-                title={`${menu[itemID].name}`}
+                image={`${placeInfo.menu[itemID].image}`}
+                title={`${placeInfo.menu[itemID].name}`}
                 style={{ objectFit: 'cover' }}
               />
               <ImageListItemBar
-                title={menu[itemID].name}
+                title={placeInfo.menu[itemID].name}
                 subtitle={
                   <Box>
                     <Typography
                       variant="body2"
                       className={classes.noOverFlowText}
                     >
-                      Mô tả: {menu[itemID].description}
+                      Mô tả: {placeInfo.menu[itemID].description}
                     </Typography>
                     <Typography
                       variant="body2"
                       className={classes.noOverFlowText}
                     >
-                      Giá: {formatter.format(menu[itemID].price)}
+                      Giá: {formatter.format(placeInfo.menu[itemID].price)}
                     </Typography>
                   </Box>
                 }
                 actionIcon={
                   <IconButton
                     onClick={() => handleDeleteMenuItem(itemID)}
-                    title={`Xóa ${menu[itemID].name}`}
+                    title={`Xóa ${placeInfo.menu[itemID].name}`}
                     style={{ color: 'red' }}
                   >
                     <CloseIcon />
@@ -133,25 +139,22 @@ const MenuItemList = ({
       </ImageList>
       {openModal == true && (
         <UpdateItem
-          categories={categories}
+          categories={placeInfo.categories}
           itemID={selectedItemID}
-          itemInfo={menu[selectedItemID]}
+          itemInfo={placeInfo.menu[selectedItemID]}
           itemCategoryList={itemCategoryList}
-          placeID={placeID}
-          updateMenu={updateMenu}
-          setItemCategoryList={setItemCategoryList}
+          placeID={placeInfo.id}
           openModal={openModal}
           handleCloseModal={handleCloseModal}
         />
       )}
       {modalDeleteMenuItem == true && (
         <DeleteMenuItem
-          categories={categories}
-          menu={menu}
+          menu={placeInfo.menu}
+          categories={placeInfo.categories}
+          placeID={placeInfo.id}
           itemID={selectedItemID}
           itemCategoryList={itemCategoryList}
-          placeID={placeID}
-          deleteMenuItem={deleteMenuItem}
           modalDeleteMenuItem={modalDeleteMenuItem}
           handleCloseModal={handleCloseModal}
         />

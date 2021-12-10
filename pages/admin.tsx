@@ -9,32 +9,17 @@ import {
 import TabPanel from '@/components/Homepage/TabPanel'
 import Meta from '@/components/Meta'
 import 'firebase/firestore'
-import { Place, Menu, Category, MenuItem } from '@/models/place'
+import { Place } from '@/models/place'
 import { useRouter } from 'next/router'
 import * as getService from '@/firebase/getDocument'
 import * as ROUTES from '@/constants/routes'
 import isEqual from 'lodash/isEqual'
+import firebase from 'firebase/app'
 
 export default function Admin() {
   const [value, setValue] = useState({ val: 'Dashboards', selected: 0 })
   const [place, setPlace] = useState<Place>()
-  const [adminMenu, setAdminMenu] = useState<Menu>({})
-  const [adminCategories, setAdminCategories] = useState<Category>({})
   const router = useRouter()
-
-  const deleteMenuItem = (newMenu: Menu, category: Category) => {
-    setAdminMenu({ ...newMenu })
-    setAdminCategories({ ...category })
-  }
-  const updateMenu = (
-    index: number,
-    item: MenuItem,
-    updateCategories: Category
-  ) => {
-    setAdminMenu({ ...adminMenu, [index]: { ...item } })
-    setAdminCategories({ ...updateCategories })
-  }
-
   useEffect(() => {
     const obj = JSON.parse(sessionStorage.getItem('userID') || '{}')
     if (isEqual(obj, {})) {
@@ -44,11 +29,15 @@ export default function Admin() {
         if (userData.placeID === '') {
           router.push(ROUTES.HOME)
         } else {
-          getService.default.getPlaceInfo(userData.placeID).then((data) => {
-            setPlace(data)
-            setAdminMenu(data.menu)
-            setAdminCategories(data.categories)
-          })
+          firebase
+            .firestore()
+            .collection('place')
+            .doc(userData.placeID)
+            .onSnapshot((snapshot) => {
+              const place_data = snapshot.data() as Place
+              place_data.id = userData.placeID
+              setPlace(place_data)
+            })
         }
       })
     }
@@ -72,14 +61,7 @@ export default function Admin() {
             {value.val}
           </TabPanel>
           <TabPanel value={value.val} index="Quản lí thực đơn">
-            <MenuManagement
-              adminCategories={adminCategories}
-              adminMenu={adminMenu}
-              placeID={place.id}
-              deleteMenuItem={deleteMenuItem}
-              updateMenu={updateMenu}
-              setAdminCategories={setAdminCategories}
-            />
+            <MenuManagement placeInfo={place} />
           </TabPanel>
         </Grid>
       </Grid>

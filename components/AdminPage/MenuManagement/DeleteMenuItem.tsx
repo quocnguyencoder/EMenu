@@ -12,23 +12,21 @@ import 'firebase/storage'
 import * as updateService from '@/firebase/updateDocument'
 
 interface Props {
-  categories: Category
   menu: Menu
+  categories: Category
+  placeID: string
   itemID: number
   itemCategoryList: number[]
-  placeID: string
-  deleteMenuItem: (newMenu: Menu, categories: Category) => void
   modalDeleteMenuItem: boolean
   handleCloseModal: () => void
 }
 
 const DeleteMenuItem = ({
-  categories,
   menu,
+  categories,
+  placeID,
   itemID,
   itemCategoryList,
-  placeID,
-  deleteMenuItem,
   modalDeleteMenuItem,
   handleCloseModal,
 }: Props) => {
@@ -45,12 +43,9 @@ const DeleteMenuItem = ({
       }
     }
     updateService.default.updateMenuCategory(placeID, cate).then(() => {
-      // eslint-disable-next-line
-      const { [itemID]: _, ...newMenu } = menu
       updateService.default.deleteMenuItem(placeID, itemID).then(() => {
         handleCloseModal()
         alert(`Đã xóa món ${menu[itemID].name} ra khỏi menu`)
-        deleteMenuItem(newMenu, cate)
       })
     })
   }

@@ -32,20 +32,14 @@ interface State extends SnackbarOrigin {
 interface Props {
   categories: Category
   placeID: string
-  adminMenu: Menu
-  addToMenu: (index: number, item: MenuItem, updateCategories: Category) => void
+  menu: Menu
 }
 
-export default function AddItem({
-  categories,
-  placeID,
-  adminMenu,
-  addToMenu,
-}: Props) {
+export default function AddItem({ categories, placeID, menu }: Props) {
   const classes = useStyles()
   const [option, setOption] = useState('select')
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
-  const [previewImg, setPreviewImg] = useState<string>('')
+  const [previewImg, setPreviewImg] = useState('')
   const [disableBtn, setDisableBtn] = useState(false)
   const inputEl = useRef(null)
 
@@ -92,7 +86,7 @@ export default function AddItem({
   const handleSubmit = (e: any) => {
     e.preventDefault()
     setDisableBtn(true)
-    const temp = Object.keys(adminMenu).map(Number).pop()
+    const temp = Object.keys(menu).map(Number).pop()
     const newItemID = temp === undefined ? 0 : temp + 1
     let cate = { ...categories }
 
@@ -152,7 +146,6 @@ export default function AddItem({
                     .updateMenuCategory(placeID, cate)
                     .then(() => {
                       handleOpenAlert(`Thêm món ăn thành công`, `success`)
-                      addToMenu(newItemID, data, cate)
                       // @ts-expect-error: to stop error
                       // eslint-disable-next-line
                       inputEl.current!.value = null

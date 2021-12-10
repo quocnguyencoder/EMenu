@@ -9,8 +9,8 @@ import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import SettingsIcon from '@material-ui/icons/Settings'
 import ViewListIcon from '@material-ui/icons/ViewList'
-import { Category, Menu, MenuItem } from '@/models/place'
-import { useMemo, useState } from 'react'
+import { Place } from '@/models/place'
+import { useState } from 'react'
 import FilterByCategory from './FilterByCategory'
 import AddItem from './AddItem'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
@@ -19,38 +19,14 @@ import MenuItemList from './MenuItemList'
 import CategoryManagement from './CategoryManagement'
 
 interface Props {
-  adminCategories: Category
-  adminMenu: Menu
-  placeID: string
-  updateMenu: (
-    index: number,
-    item: MenuItem,
-    updateCategories: Category
-  ) => void
-  deleteMenuItem: (newMenu: Menu, categories: Category) => void
-  setAdminCategories: any
+  placeInfo: Place
 }
 
-export default function MenuManagement({
-  adminCategories,
-  adminMenu,
-  placeID,
-  updateMenu,
-  deleteMenuItem,
-  setAdminCategories,
-}: Props) {
+export default function MenuManagement({ placeInfo }: Props) {
   const classes = useStyles()
   const [value, setValue] = useState(0)
   const [filter, setFilter] = useState<string>('All')
   const [settingOpen, setSettingOpen] = useState(false)
-
-  const nameAscentList = useMemo(() => sortNameAscent(adminMenu), [adminMenu])
-  const nameDescentList = useMemo(() => sortNameDescent(adminMenu), [adminMenu])
-  const priceAscentList = useMemo(() => sortPriceAscent(adminMenu), [adminMenu])
-  const priceDescentList = useMemo(
-    () => sortPriceDescent(adminMenu),
-    [adminMenu]
-  )
 
   return (
     <>
@@ -97,71 +73,25 @@ export default function MenuManagement({
         </Tooltip>
       )}
       {value === 0 ? (
-        filter === 'All' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={Object.keys(adminMenu).map(Number)}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
-          />
-        ) : filter === 'Tên Tăng dần' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={nameAscentList}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
-          />
-        ) : filter === 'Tên Giảm dần' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={nameDescentList}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
-          />
-        ) : filter === 'Giá Tăng dần' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={priceAscentList}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
-          />
-        ) : filter === 'Giá Giảm dần' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={priceDescentList}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
+        filter === 'Category' ? (
+          <FilterByCategory
+            categories={placeInfo.categories}
+            menu={placeInfo.menu}
+            placeID={placeInfo.id}
           />
         ) : (
-          <FilterByCategory
-            categories={adminCategories}
-            menu={adminMenu}
-            placeID={placeID}
-            updateMenu={updateMenu}
-          />
+          <MenuItemList placeInfo={placeInfo} filter={filter} />
         )
       ) : value === 1 ? (
         <AddItem
-          categories={adminCategories}
-          placeID={placeID}
-          adminMenu={adminMenu}
-          addToMenu={updateMenu}
+          categories={placeInfo.categories}
+          menu={placeInfo.menu}
+          placeID={placeInfo.id}
         />
       ) : (
         <CategoryManagement
-          adminCategories={adminCategories}
-          placeID={placeID}
-          setAdminCategories={setAdminCategories}
+          categories={placeInfo.categories}
+          placeID={placeInfo.id}
         />
       )}
     </>
@@ -177,27 +107,3 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
-
-const sortNameAscent = (menu: Menu) => {
-  const itemIDList = Object.keys(menu).map(Number)
-  itemIDList.sort((a, b) => (menu[a].name > menu[b].name ? 1 : -1))
-  return itemIDList
-}
-
-const sortNameDescent = (menu: Menu) => {
-  const itemIDList = Object.keys(menu).map(Number)
-  itemIDList.sort((a, b) => (menu[a].name > menu[b].name ? -1 : 1))
-  return itemIDList
-}
-
-const sortPriceAscent = (menu: Menu) => {
-  const itemIDList = Object.keys(menu).map(Number)
-  itemIDList.sort((a, b) => menu[a].price - menu[b].price)
-  return itemIDList
-}
-
-const sortPriceDescent = (menu: Menu) => {
-  const itemIDList = Object.keys(menu).map(Number)
-  itemIDList.sort((a, b) => menu[b].price - menu[a].price)
-  return itemIDList
-}

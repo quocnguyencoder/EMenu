@@ -16,7 +16,6 @@ interface Props {
   handleDeleteCategory: (selectedList: number[]) => void
   categories: Category
   placeID: string
-  setAdminCategories: any
 }
 
 const DeleteCategory = ({
@@ -24,7 +23,6 @@ const DeleteCategory = ({
   handleDeleteCategory,
   categories,
   placeID,
-  setAdminCategories,
 }: Props) => {
   const classes = useStyles()
   const handleSubmit = () => {
@@ -37,7 +35,7 @@ const DeleteCategory = ({
       const { [deleteID]: _, ...newList } = pre
       return newList
     }, categories)
-    setAdminCategories(categoryListAfterDeleted)
+
     updateService.default.updateMenuCategory(placeID, categoryListAfterDeleted)
   }
   return (

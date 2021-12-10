@@ -30,12 +30,6 @@ interface Props {
   itemCategoryList: number[]
   placeID: string
   openModal: boolean
-  updateMenu: (
-    index: number,
-    item: MenuItem,
-    updateCategories: Category
-  ) => void
-  setItemCategoryList: any
   handleCloseModal: () => void
 }
 
@@ -45,13 +39,11 @@ interface State extends SnackbarOrigin {
 
 const UpdateItem = ({
   categories,
-  itemInfo,
   itemID,
+  itemInfo,
   itemCategoryList,
   placeID,
   openModal,
-  updateMenu,
-  setItemCategoryList,
   handleCloseModal,
 }: Props) => {
   const classes = useStyles()
@@ -109,7 +101,7 @@ const UpdateItem = ({
     return false
   }
 
-  const handleUpdateCategory = (data: MenuItem) => {
+  const handleUpdateCategory = () => {
     const deleteList = itemCategoryList.filter(
       (categoryID) => !selectedCategories.includes(categoryID)
     )
@@ -129,13 +121,7 @@ const UpdateItem = ({
         cate[updateList[i]].items.push(itemID)
         cate[updateList[i]].items.sort((a, b) => (a > b ? 1 : -1))
       }
-
-      updateService.default.updateMenuCategory(placeID, cate).then(() => {
-        setItemCategoryList(selectedCategories)
-        updateMenu(itemID, data, cate)
-      })
-    } else {
-      updateMenu(itemID, data, cate)
+      updateService.default.updateMenuCategory(placeID, cate)
     }
     handleOpenAlert(`Cập nhật thành công`, `success`)
     setDisableBtn(false)
@@ -165,7 +151,7 @@ const UpdateItem = ({
         handleOpenAlert(`Không thể cập nhật vì dữ liệu giống nhau`, `warning`)
       } else {
         updateService.default.updateMenuItem(placeID, itemID, data).then(() => {
-          handleUpdateCategory(data)
+          handleUpdateCategory()
         })
       }
     } else {
@@ -201,7 +187,7 @@ const UpdateItem = ({
                 updateService.default
                   .updateMenuItem(placeID, itemID, data)
                   .then(() => {
-                    handleUpdateCategory(data)
+                    handleUpdateCategory()
                   })
               })
           }

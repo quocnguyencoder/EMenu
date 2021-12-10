@@ -26,11 +26,6 @@ interface Props {
   itemID: number
   itemInfo: MenuItem
   placeID: string
-  updateMenu: (
-    index: number,
-    item: MenuItem,
-    updateCategories: Category
-  ) => void
   openModalRemove: boolean
   handleCloseModal: () => void
 }
@@ -41,7 +36,6 @@ const RemoveItemFromCategory = ({
   itemID,
   itemInfo,
   placeID,
-  updateMenu,
   openModalRemove,
   handleCloseModal,
 }: Props) => {
@@ -74,7 +68,6 @@ const RemoveItemFromCategory = ({
     if (cate[categoryID].items.indexOf(itemID) >= 0) {
       cate[categoryID].items.splice(cate[categoryID].items.indexOf(itemID), 1)
       updateService.default.updateMenuCategory(placeID, cate).then(() => {
-        updateMenu(itemID, itemInfo, cate)
         handleOpenAlert(`Bỏ món ăn ra khỏi loại thành công`, `success`)
         setTimeout(() => {
           handleCloseModal()

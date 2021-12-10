@@ -32,16 +32,10 @@ interface State extends SnackbarOrigin {
 interface Props {
   place: Place
   openModal: boolean
-  setAdminPlace: any
   handleCloseModal: () => void
 }
 
-const UpdateProfile = ({
-  place,
-  openModal,
-  setAdminPlace,
-  handleCloseModal,
-}: Props) => {
+const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
   const classes = useStyles()
   const [state, setState] = useState<State>({
     open: false,
@@ -79,7 +73,7 @@ const UpdateProfile = ({
         : handleOpenAlert(`File không phải là hình ảnh hoặc gif`, `error`)
   }
 
-  const handleUpdateLocation = (data: Place, imageUrl: string) => {
+  const handleUpdateLocation = (data: Place) => {
     if (!isEqual(data.address, place.address)) {
       axios
         .get('https://maps.googleapis.com/maps/api/geocode/json', {
@@ -110,39 +104,9 @@ const UpdateProfile = ({
         //   },
         // })
         .then((res: any) => {
-          updateService.default.updatePlaceLocation(place.id, res).then(() => {
-            setAdminPlace({
-              ...place,
-              name: data.name,
-              address: data.address,
-              type: data.type,
-              phone: data.phone,
-              time: data.time,
-              image: imageUrl,
-              location: res.data.results[0].geometry.location,
-            })
-          })
+          updateService.default.updatePlaceLocation(place.id, res)
         })
-        .catch(() => {
-          setAdminPlace({
-            ...place,
-            name: data.name,
-            address: data.address,
-            type: data.type,
-            phone: data.phone,
-            time: data.time,
-            image: imageUrl,
-          })
-        })
-    } else {
-      setAdminPlace({
-        ...place,
-        name: data.name,
-        type: data.type,
-        phone: data.phone,
-        time: data.time,
-        image: imageUrl,
-      })
+        .catch()
     }
     handleOpenAlert(`Cập nhật thông tin của địa điểm thành công`, `success`)
     setDisableBtn(false)
@@ -199,7 +163,7 @@ const UpdateProfile = ({
         updateService.default
           .updatePlaceInfo(place.id, data, place.image)
           .then(() => {
-            handleUpdateLocation(data, place.image)
+            handleUpdateLocation(data)
           })
       }
     } else {
@@ -229,7 +193,7 @@ const UpdateProfile = ({
                 updateService.default
                   .updatePlaceInfo(place.id, data, fireBaseUrl)
                   .then(() => {
-                    handleUpdateLocation(data, fireBaseUrl)
+                    handleUpdateLocation(data)
                   })
               })
           }

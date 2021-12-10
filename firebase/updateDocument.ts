@@ -208,6 +208,7 @@ const updateMenuItem = async (
   itemID: number,
   item: MenuItem
 ) => {
+  moment.locale('en')
   firebase
     .firestore()
     .collection('place')
@@ -226,6 +227,7 @@ const updatePlaceInfo = async (
   placeInfo: Place,
   imgUrl: string
 ) => {
+  moment.locale('en')
   firebase
     .firestore()
     .collection('place')
@@ -252,6 +254,7 @@ const updatePlaceLocation = async (placeID: string, res: any) => {
 }
 
 const deleteMenuItem = async (placeID: string, itemID: number) => {
+  moment.locale('en')
   firebase
     .firestore()
     .collection('place')
