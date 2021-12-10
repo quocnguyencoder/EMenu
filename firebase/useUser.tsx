@@ -28,7 +28,7 @@ const useUser = () => {
   const logout = async () => {
     return firebase.auth().signOut()
   }
-
+  let unsubscribe: () => void
   useEffect(() => {
     // Firebase updates the id token every hour, this
     // makes sure the react state and the cookie are
@@ -36,7 +36,7 @@ const useUser = () => {
     const cancelAuthListener = firebase.auth().onIdTokenChanged((user) => {
       if (user) {
         mapUserData(user)
-        firebase
+        unsubscribe = firebase
           .firestore()
           .collection('user')
           .doc(user.uid)
@@ -53,6 +53,7 @@ const useUser = () => {
         sessionStorage.setItem('userID', JSON.stringify(userID))
       } else {
         removeUserCookie()
+        unsubscribe()
         setUser({ ...initialState })
         sessionStorage.clear()
       }
