@@ -4,14 +4,13 @@ import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import CardMedia from '@material-ui/core/CardMedia'
 import Toolbar from '@material-ui/core/Toolbar'
-import InputBase from '@material-ui/core/InputBase'
-import SearchIcon from '@material-ui/icons/Search'
-import { useStyles } from '../styles/header'
+import { useStyles } from '../../styles/header'
 import { Box } from '@material-ui/core'
 import { useRouter } from 'next/router'
 import useUser from '@/firebase/useUser'
 import UserMenu from './UserMenu'
 import * as ROUTES from '@/constants/routes'
+import SearchBar from './SearchBar'
 
 export default function Header() {
   const classes = useStyles()
@@ -19,7 +18,12 @@ export default function Header() {
   const { user, logout } = useUser()
 
   const handleClick = () => {
-    router.push(ROUTES.LOGIN)
+    router.push({
+      pathname: ROUTES.LOGIN,
+      query: {
+        returnURL: router.asPath,
+      },
+    })
   }
 
   const gotoHomepage = () => {
@@ -49,29 +53,19 @@ export default function Header() {
               />
             </Box>
 
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Địa điểm, món ăn, loại hình..."
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
-            {isLoggedIn ? (
-              <UserMenu user={user} logout={logout} />
-            ) : (
-              <Button
-                style={{ color: 'grey', marginLeft: '50%' }}
-                onClick={() => handleClick()}
-              >
-                Đăng nhập
-              </Button>
-            )}
+            <SearchBar />
+            <Box flex={1}>
+              {isLoggedIn ? (
+                <UserMenu user={user} logout={logout} />
+              ) : (
+                <Button
+                  style={{ color: 'grey', float: 'right' }}
+                  onClick={() => handleClick()}
+                >
+                  Đăng nhập
+                </Button>
+              )}
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>

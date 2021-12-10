@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   CardActionArea,
   CardActions,
@@ -9,28 +10,23 @@ import {
   ListItemText,
   Typography,
 } from '@material-ui/core'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import ShareIcon from '@material-ui/icons/Share'
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Place } from '../../models/place'
-import nonAccentVietnamese from '../../functions/nonAccentVietnamese'
+import { Place } from '@/models/place'
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
+import PlaceRatings from './PlaceRatings'
+import * as ROUTES from '@/constants/routes'
+import PlaceDistance from './PlaceDistance'
 
 interface Props {
   info: Place
 }
-const NewestItem = ({ info }: Props) => {
+const PlaceCard = ({ info }: Props) => {
   const router = useRouter()
-
-  // Khánh Hòa -> khanh-hoa
-  const normalizeText = (text: string) =>
-    nonAccentVietnamese(text).toLowerCase().split(' ').join('-')
-
-  const detailURL = `/${normalizeText(info.address.province)}/${info.id}`
 
   const gotoDetail = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    router.push(detailURL)
+    router.push(ROUTES.PLACE_DETAIL(info.address.province, info.id))
   }
 
   return (
@@ -40,16 +36,15 @@ const NewestItem = ({ info }: Props) => {
           component="img"
           height="150"
           image={info.image}
-          title="Contemplative Reptile"
-          style={{ objectFit: 'scale-down' }}
+          title={info.name}
         />
       </CardActionArea>
       {/* Place info region */}
-      <ListItem>
+      <ListItem style={{ paddingBottom: 0 }}>
         <ListItemText
           primary={
             <Link
-              href={detailURL}
+              href={ROUTES.PLACE_DETAIL(info.address.province, info.id)}
               color="inherit"
               variant="body1"
               onClick={(e) => gotoDetail(e)}
@@ -65,16 +60,19 @@ const NewestItem = ({ info }: Props) => {
           }
         />
       </ListItem>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+      <CardActions disableSpacing style={{ paddingTop: 0, paddingBottom: 0 }}>
+        <Box style={{ display: 'flex', width: '50%', alignItems: 'center' }}>
+          <PlaceRatings ratings={info.rating} />
+          <PlaceDistance placeCoord={info.location} />
+        </Box>
+        <Box style={{ width: '50%' }}>
+          <IconButton aria-label="add to favorites" style={{ float: 'right' }}>
+            <BookmarkBorderIcon />
+          </IconButton>
+        </Box>
       </CardActions>
     </Card>
   )
 }
 
-export default NewestItem
+export default PlaceCard

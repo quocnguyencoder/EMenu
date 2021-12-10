@@ -1,9 +1,8 @@
 import firebase from 'firebase/app'
-import User from '../models/user'
 import * as createService from './createDocument'
 
 export const mapUserData = (user: firebase.User) => {
-  const { uid, email, refreshToken, displayName, photoURL } = user
+  const { uid, email, displayName, photoURL } = user
   firebase
     .firestore()
     .collection('user')
@@ -11,17 +10,7 @@ export const mapUserData = (user: firebase.User) => {
     .get()
     .then((doc) => {
       if (!doc.exists) {
-        createService.default.createUserInfo(uid, email, displayName)
+        createService.default.createUserInfo(uid, email, displayName, photoURL)
       }
     })
-
-  return {
-    id: uid,
-    email: email != null ? email : '',
-    token: refreshToken,
-    name: displayName != null ? displayName : '',
-    profilePic: photoURL != null ? photoURL : '',
-    placeID: '',
-    reviews: [],
-  } as User
 }

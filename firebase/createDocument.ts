@@ -6,7 +6,8 @@ import User from '@/models/user'
 const createUserInfo = (
   uid: string,
   email: string | null,
-  displayName: string | null
+  displayName: string | null,
+  photoURL: string | null
 ) => {
   firebase
     .firestore()
@@ -15,7 +16,7 @@ const createUserInfo = (
     .set({
       email: email != null ? email : '',
       name: displayName != null ? displayName : '',
-      profilePic: '',
+      profilePic: photoURL != null ? photoURL : '',
       placeID: '',
       reviews: [] as string[],
     })

@@ -12,9 +12,10 @@ import * as updateService from '@/firebase/updateDocument'
 
 interface Props {
   reviewID: string
+  setOpenDialog: (state: boolean) => void
 }
 
-const CommentInput = ({ reviewID }: Props) => {
+const CommentInput = ({ reviewID, setOpenDialog }: Props) => {
   const [input, setInput] = useState('')
   const { user } = useUser()
 
@@ -24,13 +25,14 @@ const CommentInput = ({ reviewID }: Props) => {
 
   const handleUploadComment = (key: string, shiftKey: boolean) => {
     if (key === 'Enter' && !shiftKey) {
-      user.id !== '' &&
-        updateService.default.updateReviewComment(
-          reviewID,
-          user.id,
-          moment().format('DD MM YYYY, h:mm:ss a'),
-          input
-        )
+      user.id !== '' && input !== ''
+        ? updateService.default.updateReviewComment(
+            reviewID,
+            user.id,
+            moment().format('DD MM YYYY, h:mm:ss a'),
+            input
+          )
+        : setOpenDialog(true)
       setInput('')
     }
   }

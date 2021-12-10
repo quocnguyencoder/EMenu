@@ -5,19 +5,19 @@ export const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   title: {
-    flexGrow: 0.2,
+    flexGrow: 0.05,
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    cursor: 'pointer',
   },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: '#fff',
     marginLeft: 0,
-    maxWidth: '40%',
-    flexGrow: 1,
+    flexGrow: 0.5,
   },
   searchIcon: {
     color: 'gray',
@@ -32,10 +32,5 @@ export const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: 'black',
     width: '100%',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
   },
 }))

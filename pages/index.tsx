@@ -1,10 +1,9 @@
 import { Banners, Discovery } from '../components/Homepage'
 import { Container } from '@material-ui/core'
-import React from 'react'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { GetStaticProps } from 'next'
-import { Place } from '../models/place'
+import { Place } from '@/models/place'
 // import { motion } from 'framer-motion'
 
 interface Props {
