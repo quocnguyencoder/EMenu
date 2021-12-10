@@ -78,6 +78,7 @@ export default function Admin() {
               placeID={place.id}
               deleteMenuItem={deleteMenuItem}
               updateMenu={updateMenu}
+              setAdminCategories={setAdminCategories}
             />
           </TabPanel>
         </Grid>

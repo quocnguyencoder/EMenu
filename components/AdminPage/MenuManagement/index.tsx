@@ -8,6 +8,7 @@ import {
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import SettingsIcon from '@material-ui/icons/Settings'
+import ViewListIcon from '@material-ui/icons/ViewList'
 import { Category, Menu, MenuItem } from '@/models/place'
 import { useMemo, useState } from 'react'
 import FilterByCategory from './FilterByCategory'
@@ -15,6 +16,7 @@ import AddItem from './AddItem'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import Setting from './Setting'
 import MenuItemList from './MenuItemList'
+import CategoryManagement from './CategoryManagement'
 
 interface Props {
   adminCategories: Category
@@ -26,6 +28,7 @@ interface Props {
     updateCategories: Category
   ) => void
   deleteMenuItem: (newMenu: Menu, categories: Category) => void
+  setAdminCategories: any
 }
 
 export default function MenuManagement({
@@ -34,6 +37,7 @@ export default function MenuManagement({
   placeID,
   updateMenu,
   deleteMenuItem,
+  setAdminCategories,
 }: Props) {
   const classes = useStyles()
   const [value, setValue] = useState(0)
@@ -68,6 +72,10 @@ export default function MenuManagement({
           <BottomNavigationAction
             label="Thêm món ăn"
             icon={<AddBoxIcon color={value === 1 ? 'error' : 'secondary'} />}
+          />
+          <BottomNavigationAction
+            label="Quản lý loại"
+            icon={<ViewListIcon color={value === 2 ? 'error' : 'secondary'} />}
           />
         </BottomNavigation>
       </Box>
@@ -142,12 +150,18 @@ export default function MenuManagement({
             updateMenu={updateMenu}
           />
         )
-      ) : (
+      ) : value === 1 ? (
         <AddItem
           categories={adminCategories}
           placeID={placeID}
           adminMenu={adminMenu}
           addToMenu={updateMenu}
+        />
+      ) : (
+        <CategoryManagement
+          adminCategories={adminCategories}
+          placeID={placeID}
+          setAdminCategories={setAdminCategories}
         />
       )}
     </>
