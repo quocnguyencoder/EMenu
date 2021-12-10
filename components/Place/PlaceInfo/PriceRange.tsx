@@ -10,20 +10,23 @@ interface Props {
 const PriceRange = ({ menu }: Props) => {
   const menuItems = Object.keys(menu).map(Number)
 
-  const maxItemID = menuItems.reduce((prev, curr) =>
-    menu[prev].price > menu[curr].price ? prev : curr
-  )
+  const isEmptyMenu = menuItems.length === 0
+  const pricesArr = isEmptyMenu
+    ? [0]
+    : menuItems.map((itemID) => menu[itemID].price)
 
-  const minItemID = menuItems.reduce((prev, curr) =>
-    menu[prev].price < menu[curr].price ? prev : curr
-  )
+  const maxPrice = moneyFormatter.format(Math.max(...pricesArr))
 
-  const maxPrice = moneyFormatter.format(menu[maxItemID].price)
-  const minPrice = moneyFormatter.format(menu[minItemID].price)
+  const minPrice = moneyFormatter.format(Math.min(...pricesArr))
+
   return (
     <Box display="flex" style={{ color: 'gray' }}>
       <MonetizationOnOutlinedIcon />
-      <Typography variant="body1">{`${minPrice} - ${maxPrice}`}</Typography>
+      {isEmptyMenu ? (
+        <Typography variant="body1">{`${minPrice}`}</Typography>
+      ) : (
+        <Typography variant="body1">{`${minPrice} - ${maxPrice}`}</Typography>
+      )}
     </Box>
   )
 }

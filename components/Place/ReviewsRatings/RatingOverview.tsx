@@ -3,6 +3,7 @@ import { Chart } from 'react-google-charts'
 import Rating from '@material-ui/lab/Rating'
 import PermIdentityIcon from '@material-ui/icons/PermIdentity'
 import { RatingList } from '@/models/place'
+import React from 'react'
 
 interface Props {
   ratings: RatingList
@@ -21,12 +22,12 @@ const RatingOverview = ({ ratings }: Props) => {
     5: 0,
   }
 
-  const ratingList = Object.keys(ratings)
-
-  ratingList.map((userID) => {
+  const ratingList = Object.keys(ratings).map((userID) => {
     const userRatings = ratings[userID]
     const latestRating = userRatings[userRatings.length - 1]
-    ratingDisplay[latestRating.rating] += 1
+    if (latestRating !== undefined && latestRating.rating !== undefined) {
+      ratingDisplay[latestRating.rating] += 1
+    }
   })
 
   const avgRating =
@@ -49,6 +50,7 @@ const RatingOverview = ({ ratings }: Props) => {
         backgroundColor: '#fff',
         display: 'flex',
         flexDirection: 'column',
+        marginBottom: '2%',
       }}
     >
       <Typography variant="h6" style={{ marginLeft: '3%', paddingTop: '1%' }}>
@@ -102,4 +104,4 @@ const RatingOverview = ({ ratings }: Props) => {
   )
 }
 
-export default RatingOverview
+export default React.memo(RatingOverview)

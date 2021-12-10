@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import initFirebase from '../firebase/initFirebase'
+import initFirebase from '@/firebase/initFirebase'
 import {
   removeUserCookie,
   setUserCookie,
   getUserFromCookie,
 } from './userCookies'
 import { mapUserData } from './mapUserData'
-import User from '../models/user'
+import User from '@/models/user'
 
 initFirebase()
 
@@ -25,34 +24,36 @@ const initialState: User = {
 
 const useUser = () => {
   const [user, setUser] = useState<User>(initialState)
-  const router = useRouter()
 
   const logout = async () => {
-    return firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        // Sign-out successful.
-        router.push('/')
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    return firebase.auth().signOut()
   }
-
+  let unsubscribe: () => void
   useEffect(() => {
     // Firebase updates the id token every hour, this
     // makes sure the react state and the cookie are
     // both kept up to date
     const cancelAuthListener = firebase.auth().onIdTokenChanged((user) => {
       if (user) {
-        const userData = mapUserData(user)
-        setUserCookie(userData)
-        setUser(userData)
-        const userID = { userID: userData.id }
+        mapUserData(user)
+        unsubscribe = firebase
+          .firestore()
+          .collection('user')
+          .doc(user.uid)
+          .onSnapshot((snapshot) => {
+            const userID = user.uid
+            const user_data = snapshot.data() as User
+            user_data.id = userID
+            user_data.token = user.refreshToken
+            setUser(user_data)
+            setUserCookie(user_data)
+          })
+
+        const userID = { userID: user.uid }
         sessionStorage.setItem('userID', JSON.stringify(userID))
       } else {
         removeUserCookie()
+        unsubscribe()
         setUser({ ...initialState })
         sessionStorage.clear()
       }

@@ -52,7 +52,14 @@ const ReviewsRatings = ({ place }: Props) => {
           .slice(0)
           .reverse()
           .map((reviewID) => (
-            <UserReview key={reviewID} reviewID={reviewID} />
+            <UserReview
+              key={reviewID}
+              reviewID={reviewID}
+              setOpenDialog={setOpenDialog}
+              ratings={place.rating}
+              userID={user.id}
+              placeID={place.id}
+            />
           ))}
       </Box>
       <ReviewsInfo handleOpenModal={handleOpenModal} />

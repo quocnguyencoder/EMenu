@@ -188,6 +188,19 @@ const updateReviewComment = (
   })
 }
 
+const updateUserProfile = (
+  userID: string,
+  displayName: string,
+  profilePic: string
+) => {
+  const userRef = firebase.firestore().collection('user').doc(userID)
+
+  userRef.update({
+    name: displayName,
+    profilePic: profilePic,
+  })
+}
+
 export default {
   updatePlaceReview,
   updateUserReview,
@@ -195,4 +208,5 @@ export default {
   updateBackup,
   updateReviewLikes,
   updateReviewComment,
+  updateUserProfile,
 }

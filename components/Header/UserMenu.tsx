@@ -7,7 +7,7 @@ import Popper from '@material-ui/core/Popper'
 import MenuItem from '@material-ui/core/MenuItem'
 import MenuList from '@material-ui/core/MenuList'
 import { Button } from '@material-ui/core'
-import User from '../models/user'
+import User from '@/models/user'
 import { useRouter } from 'next/router'
 
 interface Props {
@@ -41,7 +41,10 @@ export default function UserMenu({ user, logout }: Props) {
 
     setOpen(false)
   }
-  const gotoProfile = () => router.push(`/user/${user.id}/profile`)
+  const gotoProfile = () => {
+    setOpen(false)
+    router.push(`/user/${user.id}`)
+  }
 
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {
@@ -62,13 +65,13 @@ export default function UserMenu({ user, logout }: Props) {
   }, [open])
 
   return (
-    <div style={{ marginLeft: '50%' }}>
+    <div style={{ float: 'right' }}>
       <Button
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        style={{ color: 'grey' }}
+        style={{ color: 'grey', textTransform: 'none', fontWeight: 600 }}
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         endIcon={<Avatar src={profilePic!} alt={`${displayName}'logo`} />}
       >
@@ -78,6 +81,7 @@ export default function UserMenu({ user, logout }: Props) {
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}
+        placement={'bottom-end'}
         transition
         disablePortal
       >
@@ -96,9 +100,19 @@ export default function UserMenu({ user, logout }: Props) {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={() => gotoProfile()}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                  <MenuItem onClick={() => gotoProfile()}>Thông tin</MenuItem>
+                  {user.placeID === '' ? (
+                    <MenuItem
+                      onClick={() => router.push('/user/register-place')}
+                    >
+                      Đăng ký địa điểm
+                    </MenuItem>
+                  ) : (
+                    <MenuItem onClick={() => router.push('/admin')}>
+                      Địa điểm của bạn
+                    </MenuItem>
+                  )}
+                  <MenuItem onClick={() => logout()}>Đăng xuất</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>

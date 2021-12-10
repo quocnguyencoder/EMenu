@@ -17,7 +17,12 @@ interface Props {
 const LoginRequiredDialog = ({ open, handleClose }: Props) => {
   const router = useRouter()
   const gotoLogin = () => {
-    router.push(ROUTES.LOGIN)
+    router.push({
+      pathname: ROUTES.LOGIN,
+      query: {
+        returnURL: router.asPath,
+      },
+    })
   }
   return (
     <Dialog

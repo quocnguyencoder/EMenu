@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core'
-import NewestItem from './NewestItem'
-import { Place } from '../../models/place'
+import PlaceCard from './PlaceCard'
+import { Place } from '@/models/place'
 
 interface Props {
   places: Place[]
@@ -11,7 +11,7 @@ const Newest = ({ places }: Props) => {
     <Grid container spacing={2}>
       {places.map((info) => (
         <Grid key={info.name} item md={3}>
-          <NewestItem info={info} />
+          <PlaceCard info={info} />
         </Grid>
       ))}
     </Grid>

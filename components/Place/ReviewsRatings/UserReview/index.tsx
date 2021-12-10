@@ -1,5 +1,6 @@
 import { Divider, Paper } from '@material-ui/core'
-import { Review } from '@/models/place'
+import React from 'react'
+import { RatingInfo, Review } from '@/models/place'
 import { useState, useEffect } from 'react'
 import firebase from 'firebase/app'
 import ReviewHeader from './ReviewHeader'
@@ -9,13 +10,23 @@ import ReviewReactInfo from './ReviewReactInfo'
 import ReviewButtons from './ReviewButtons'
 import ReviewComment from './ReviewComment'
 import CommentInput from './CommentInput'
-import React from 'react'
+import { RatingList } from '@/models/place'
 
 interface Props {
   reviewID: string
+  setOpenDialog: (state: boolean) => void
+  ratings: RatingList
+  userID: string
+  placeID: string
 }
 
-const UserReview = ({ reviewID }: Props) => {
+const UserReview = ({
+  reviewID,
+  setOpenDialog,
+  ratings,
+  userID,
+  placeID,
+}: Props) => {
   const [userReview, setUserReview] = useState<Review>()
   const [showComments, setShowComments] = useState(false)
 
@@ -30,10 +41,24 @@ const UserReview = ({ reviewID }: Props) => {
       })
   }, [])
 
+  const getRatingObj = (userID: string, reviewID: string) => {
+    const rating =
+      ratings[`${userID}`] !== undefined
+        ? ratings[`${userID}`].filter((info) => info.reviewID === reviewID)
+        : ([{}] as RatingInfo[])
+    return rating[0]
+  }
+
   return userReview !== undefined ? (
     <>
       <Paper style={{ backgroundColor: '#fff', marginBottom: '20px' }}>
-        <ReviewHeader userID={userReview.userID} date={userReview.date} />
+        <ReviewHeader
+          userID={userReview.userID}
+          date={userReview.date}
+          ratingObj={getRatingObj(userID, reviewID)}
+          reviewID={reviewID}
+          placeID={placeID}
+        />
         <ReviewContent
           rating={userReview.rating}
           subject={userReview.subject}
@@ -51,6 +76,7 @@ const UserReview = ({ reviewID }: Props) => {
           reviewID={reviewID}
           likes={userReview.likes}
           setShowComments={setShowComments}
+          setOpenDialog={setOpenDialog}
         />
         {showComments && (
           <>
@@ -60,7 +86,7 @@ const UserReview = ({ reviewID }: Props) => {
                 comment={comment}
               />
             ))}
-            <CommentInput reviewID={reviewID} />
+            <CommentInput reviewID={reviewID} setOpenDialog={setOpenDialog} />
           </>
         )}
       </Paper>

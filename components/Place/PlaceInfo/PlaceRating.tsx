@@ -23,7 +23,9 @@ export default function PlaceRating({ ratings }: Props) {
   ratingList.map((userID) => {
     const userRatings = ratings[userID]
     const latestRating = userRatings[userRatings.length - 1]
-    ratingDisplay[latestRating.rating] += 1
+    if (latestRating !== undefined && latestRating.rating !== undefined) {
+      ratingDisplay[latestRating.rating] += 1
+    }
   })
 
   const avgRating = (

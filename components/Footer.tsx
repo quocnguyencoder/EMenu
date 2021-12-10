@@ -2,7 +2,13 @@ import { AppBar, Container, Toolbar, Typography } from '@material-ui/core'
 
 export default function Footer() {
   return (
-    <AppBar position="static" color="transparent" style={{ boxShadow: 'none' }}>
+    <AppBar
+      position="static"
+      color="transparent"
+      style={{
+        boxShadow: 'none',
+      }}
+    >
       <Container
         maxWidth="md"
         style={{

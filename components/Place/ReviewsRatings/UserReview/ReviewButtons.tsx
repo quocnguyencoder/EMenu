@@ -9,14 +9,21 @@ interface Props {
   reviewID: string
   likes: string[]
   setShowComments: (state: boolean) => void
+  setOpenDialog: (state: boolean) => void
 }
 
-const ReviewButtons = ({ reviewID, likes, setShowComments }: Props) => {
+const ReviewButtons = ({
+  reviewID,
+  likes,
+  setShowComments,
+  setOpenDialog,
+}: Props) => {
   const { user } = useUser()
   const isAlreadyLiked = likes.includes(user.id)
   const handleClick = (status: string) => {
-    user.id !== '' &&
-      updateService.default.updateReviewLikes(reviewID, user.id, status)
+    user.id !== ''
+      ? updateService.default.updateReviewLikes(reviewID, user.id, status)
+      : setOpenDialog(true)
   }
 
   return (
