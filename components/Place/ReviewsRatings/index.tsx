@@ -56,6 +56,9 @@ const ReviewsRatings = ({ place }: Props) => {
               key={reviewID}
               reviewID={reviewID}
               setOpenDialog={setOpenDialog}
+              ratings={place.rating}
+              userID={user.id}
+              placeID={place.id}
             />
           ))}
       </Box>

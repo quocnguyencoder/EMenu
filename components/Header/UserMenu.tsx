@@ -71,7 +71,7 @@ export default function UserMenu({ user, logout }: Props) {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        style={{ color: 'grey', textTransform: 'capitalize', fontWeight: 600 }}
+        style={{ color: 'grey', textTransform: 'none', fontWeight: 600 }}
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         endIcon={<Avatar src={profilePic!} alt={`${displayName}'logo`} />}
       >
@@ -109,7 +109,7 @@ export default function UserMenu({ user, logout }: Props) {
                     </MenuItem>
                   ) : (
                     <MenuItem onClick={() => router.push('/admin')}>
-                      Địan điểm của bạn
+                      Địa điểm của bạn
                     </MenuItem>
                   )}
                   <MenuItem onClick={() => logout()}>Đăng xuất</MenuItem>
