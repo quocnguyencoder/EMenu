@@ -9,6 +9,7 @@ import MenuList from '@material-ui/core/MenuList'
 import { Button } from '@material-ui/core'
 import User from '@/models/user'
 import { useRouter } from 'next/router'
+import * as ROUTES from '@/constants/routes'
 
 interface Props {
   user: User
@@ -16,7 +17,6 @@ interface Props {
 }
 
 export default function UserMenu({ user, logout }: Props) {
-  // const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   const anchorRef = React.useRef<HTMLButtonElement>(null)
   const router = useRouter()
@@ -41,6 +41,9 @@ export default function UserMenu({ user, logout }: Props) {
 
     setOpen(false)
   }
+
+  const gotoRegisterPlace = () => router.push(`/user/register-place`)
+  const gotoMyPlace = () => router.push(ROUTES.ADMIN)
   const gotoProfile = () => {
     setOpen(false)
     router.push(`/user/${user.id}`)
@@ -63,7 +66,6 @@ export default function UserMenu({ user, logout }: Props) {
 
     prevOpen.current = open
   }, [open])
-
   return (
     <div style={{ float: 'right' }}>
       <Button
@@ -100,17 +102,13 @@ export default function UserMenu({ user, logout }: Props) {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={() => gotoProfile()}>Thông tin</MenuItem>
+                  <MenuItem onClick={gotoProfile}>Thông tin</MenuItem>
                   {user.placeID === '' ? (
-                    <MenuItem
-                      onClick={() => router.push('/user/register-place')}
-                    >
+                    <MenuItem onClick={gotoRegisterPlace}>
                       Đăng ký địa điểm
                     </MenuItem>
                   ) : (
-                    <MenuItem onClick={() => router.push('/admin')}>
-                      Địa điểm của bạn
-                    </MenuItem>
+                    <MenuItem onClick={gotoMyPlace}>Địa điểm của bạn</MenuItem>
                   )}
                   <MenuItem onClick={() => logout()}>Đăng xuất</MenuItem>
                 </MenuList>

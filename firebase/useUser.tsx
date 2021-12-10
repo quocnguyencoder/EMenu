@@ -9,6 +9,7 @@ import {
 } from './userCookies'
 import { mapUserData } from './mapUserData'
 import User from '@/models/user'
+import router from 'next/router'
 
 initFirebase()
 
@@ -26,7 +27,8 @@ const useUser = () => {
   const [user, setUser] = useState<User>(initialState)
 
   const logout = async () => {
-    return firebase.auth().signOut()
+    firebase.auth().signOut()
+    router.push('/')
   }
   let unsubscribe: () => void
   useEffect(() => {
@@ -45,10 +47,10 @@ const useUser = () => {
             const user_data = snapshot.data() as User
             user_data.id = userID
             user_data.token = user.refreshToken
+            sessionStorage.setItem('userInfo', JSON.stringify(user_data))
             setUser(user_data)
             setUserCookie(user_data)
           })
-
         const userID = { userID: user.uid }
         sessionStorage.setItem('userID', JSON.stringify(userID))
       } else {
@@ -62,7 +64,6 @@ const useUser = () => {
     const userFromCookie = getUserFromCookie()
 
     if (!userFromCookie) {
-      // router.push("/");
       return
     }
     setUser(userFromCookie)

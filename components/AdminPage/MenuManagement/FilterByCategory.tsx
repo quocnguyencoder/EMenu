@@ -1,6 +1,6 @@
 import { Box, Typography, ImageList, ImageListItem } from '@material-ui/core'
 import { useState } from 'react'
-import { Category, Menu, MenuItem } from '../../../models/place'
+import { Category, Menu } from '@/models/place'
 import Item from './Item'
 import UpdateItem from './UpdateItem'
 import RemoveItemFromCategory from './RemoveItemFromCategory'
@@ -9,19 +9,9 @@ interface Props {
   categories: Category
   menu: Menu
   placeID: string
-  updateMenu: (
-    index: number,
-    item: MenuItem,
-    updateCategories: Category
-  ) => void
 }
 
-export default function FilterByCategory({
-  categories,
-  menu,
-  placeID,
-  updateMenu,
-}: Props) {
+export default function FilterByCategory({ categories, menu, placeID }: Props) {
   const categoryList = Object.keys(categories).map(Number)
   const [openModalRemove, setOpenModalRemove] = useState(false)
   const [selectedItemID, setSelectedItemID] = useState<number>(-1)
@@ -59,7 +49,7 @@ export default function FilterByCategory({
         <ImageList
           key={`menu subheader ${categoryID}`}
           gap={10}
-          style={{ width: '100%', gap: '3%' }}
+          style={{ width: '100%', gap: '3%', margin: '0%' }}
         >
           <ImageListItem cols={2} style={{ height: 'auto' }}>
             <Typography
@@ -90,8 +80,6 @@ export default function FilterByCategory({
                 categoryID={categoryID}
                 itemID={itemID}
                 itemInfo={menu[itemID]}
-                placeID={placeID}
-                updateMenu={updateMenu}
                 handleOpenModalUpdate={handleOpenModalUpdate}
                 handleOpenModalRemove={handleOpenModalRemove}
               />
@@ -107,8 +95,6 @@ export default function FilterByCategory({
           itemInfo={menu[selectedItemID]}
           itemCategoryList={itemCategoryList}
           placeID={placeID}
-          updateMenu={updateMenu}
-          setItemCategoryList={setItemCategoryList}
           openModal={openModalUpdate}
           handleCloseModal={handleCloseModal}
         />
@@ -121,7 +107,6 @@ export default function FilterByCategory({
           itemID={selectedItemID}
           itemInfo={menu[selectedItemID]}
           placeID={placeID}
-          updateMenu={updateMenu}
           openModalRemove={openModalRemove}
           handleCloseModal={handleCloseModal}
         />

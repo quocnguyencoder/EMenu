@@ -8,49 +8,25 @@ import {
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import SettingsIcon from '@material-ui/icons/Settings'
-import { Category, Menu, MenuItem } from '../../../models/place'
-import { useMemo, useState } from 'react'
+import ViewListIcon from '@material-ui/icons/ViewList'
+import { Place } from '@/models/place'
+import { useState } from 'react'
 import FilterByCategory from './FilterByCategory'
 import AddItem from './AddItem'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import Setting from './Setting'
 import MenuItemList from './MenuItemList'
+import CategoryManagement from './CategoryManagement'
 
 interface Props {
-  categories: Category
-  menu: Menu
-  placeID: string
+  placeInfo: Place
 }
 
-export default function MenuManagement({ categories, menu, placeID }: Props) {
+export default function MenuManagement({ placeInfo }: Props) {
   const classes = useStyles()
   const [value, setValue] = useState(0)
-  const [adminMenu, setAdminMenu] = useState<Menu>(menu)
-  const [adminCategories, setAdminCategories] = useState<Category>(categories)
   const [filter, setFilter] = useState<string>('All')
   const [settingOpen, setSettingOpen] = useState(false)
-
-  const nameAscentList = useMemo(() => sortNameAscent(adminMenu), [adminMenu])
-  const nameDescentList = useMemo(() => sortNameDescent(adminMenu), [adminMenu])
-  const priceAscentList = useMemo(() => sortPriceAscent(adminMenu), [adminMenu])
-  const priceDescentList = useMemo(
-    () => sortPriceDescent(adminMenu),
-    [adminMenu]
-  )
-
-  const deleteMenuItem = (newMenu: Menu, category: Category) => {
-    setAdminMenu({ ...newMenu })
-    setAdminCategories({ ...category })
-  }
-
-  const updateMenu = (
-    index: number,
-    item: MenuItem,
-    updateCategories: Category
-  ) => {
-    setAdminMenu({ ...adminMenu, [index]: { ...item } })
-    setAdminCategories({ ...updateCategories })
-  }
 
   return (
     <>
@@ -61,16 +37,21 @@ export default function MenuManagement({ categories, menu, placeID }: Props) {
           onChange={(e: any, newValue: number) => {
             setValue(newValue)
           }}
+          style={{ backgroundColor: '#FAFAFA' }}
         >
           <BottomNavigationAction
-            label="Menu"
+            label="Thực đơn"
             icon={
               <RestaurantMenuIcon color={value === 0 ? 'error' : 'secondary'} />
             }
           />
           <BottomNavigationAction
-            label="Add Item"
+            label="Thêm món ăn"
             icon={<AddBoxIcon color={value === 1 ? 'error' : 'secondary'} />}
+          />
+          <BottomNavigationAction
+            label="Quản lý loại"
+            icon={<ViewListIcon color={value === 2 ? 'error' : 'secondary'} />}
           />
         </BottomNavigation>
       </Box>
@@ -92,65 +73,25 @@ export default function MenuManagement({ categories, menu, placeID }: Props) {
         </Tooltip>
       )}
       {value === 0 ? (
-        filter === 'All' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={Object.keys(adminMenu).map(Number)}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
-          />
-        ) : filter === 'Name Ascent' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={nameAscentList}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
-          />
-        ) : filter === 'Name Descent' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={nameDescentList}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
-          />
-        ) : filter === 'Price Ascent' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={priceAscentList}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
-          />
-        ) : filter === 'Price Descent' ? (
-          <MenuItemList
-            placeID={placeID}
-            categories={adminCategories}
-            menu={adminMenu}
-            itemIDList={priceDescentList}
-            updateMenu={updateMenu}
-            deleteMenuItem={deleteMenuItem}
+        filter === 'Category' ? (
+          <FilterByCategory
+            categories={placeInfo.categories}
+            menu={placeInfo.menu}
+            placeID={placeInfo.id}
           />
         ) : (
-          <FilterByCategory
-            categories={adminCategories}
-            menu={adminMenu}
-            placeID={placeID}
-            updateMenu={updateMenu}
-          />
+          <MenuItemList placeInfo={placeInfo} filter={filter} />
         )
-      ) : (
+      ) : value === 1 ? (
         <AddItem
-          categories={adminCategories}
-          placeID={placeID}
-          adminMenu={adminMenu}
-          addToMenu={updateMenu}
+          categories={placeInfo.categories}
+          menu={placeInfo.menu}
+          placeID={placeInfo.id}
+        />
+      ) : (
+        <CategoryManagement
+          categories={placeInfo.categories}
+          placeID={placeInfo.id}
         />
       )}
     </>
@@ -166,27 +107,3 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
-
-const sortNameAscent = (menu: Menu) => {
-  const itemIDList = Object.keys(menu).map(Number)
-  itemIDList.sort((a, b) => (menu[a].name > menu[b].name ? 1 : -1))
-  return itemIDList
-}
-
-const sortNameDescent = (menu: Menu) => {
-  const itemIDList = Object.keys(menu).map(Number)
-  itemIDList.sort((a, b) => (menu[a].name > menu[b].name ? -1 : 1))
-  return itemIDList
-}
-
-const sortPriceAscent = (menu: Menu) => {
-  const itemIDList = Object.keys(menu).map(Number)
-  itemIDList.sort((a, b) => menu[a].price - menu[b].price)
-  return itemIDList
-}
-
-const sortPriceDescent = (menu: Menu) => {
-  const itemIDList = Object.keys(menu).map(Number)
-  itemIDList.sort((a, b) => menu[b].price - menu[a].price)
-  return itemIDList
-}

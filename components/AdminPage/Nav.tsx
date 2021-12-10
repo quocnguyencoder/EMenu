@@ -1,27 +1,25 @@
-import { Box, List, ListItem, CardMedia } from '@material-ui/core'
+import { Box, List, ListItem } from '@material-ui/core'
 
 interface Props {
   setValue: any
+  selected: number
 }
 
-export default function Nav({ setValue }: Props) {
-  const handleClick = (newValue: string) => {
-    setValue(newValue)
+export default function Nav({ setValue, selected }: Props) {
+  const handleClick = (newValue: string, newSelected: number) => {
+    setValue({ val: newValue, selected: newSelected })
   }
 
   return (
     <Box ml={1} mt={1} mr={1}>
-      <CardMedia
-        component="img"
-        image={`/logo.png`}
-        alt="logo"
-        width={100}
-        height={50}
-        style={{ objectFit: 'scale-down' }}
-      />
       <List component="nav">
-        {categories.map((category) => (
-          <ListItem key={category} button onClick={() => handleClick(category)}>
+        {categories.map((category, i) => (
+          <ListItem
+            selected={selected === i}
+            key={category}
+            button
+            onClick={() => handleClick(category, i)}
+          >
             {category}
           </ListItem>
         ))}
@@ -31,8 +29,8 @@ export default function Nav({ setValue }: Props) {
 }
 
 const categories = [
-  'Dashboards',
-  'Profile',
-  'Staff management',
-  'Menu management',
+  'Tổng quan',
+  'Thông tin địa điểm',
+  'Quản lí nhân viên',
+  'Quản lí thực đơn',
 ]

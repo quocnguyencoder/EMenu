@@ -6,6 +6,7 @@ const normalizeText = (text: string) =>
 
 export const HOME = '/'
 export const LOGIN = '/login'
+export const ADMIN = '/admin'
 export const PLACE_DETAIL = (province: string, placeID: string) =>
   `/${normalizeText(province)}/${placeID}`
 export const LOCATION = (province: string) => `/${normalizeText(province)}`
