@@ -198,9 +198,18 @@ const updateReviewComment = (
 }
 
 const updateMenuCategory = async (placeID: string, category: Category) => {
-  firebase.firestore().collection('place').doc(placeID).update({
-    categories: category,
-  })
+  moment.locale('en')
+  firebase
+    .firestore()
+    .collection('place')
+    .doc(placeID)
+    .update({
+      categories: category,
+      activeDate: moment(
+        moment().format('LLL'),
+        'MMMM Do YYYY, hh:mm:ss A'
+      ).fromNow(),
+    })
 }
 
 const updateMenuItem = async (

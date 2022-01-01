@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import {
   Box,
   Button,
@@ -11,6 +10,7 @@ import {
 import { useStyles } from '@/styles/modal'
 import { Category } from '@/models/place'
 import DeleteCategory from './DeleteCategory'
+import UpdateCategory from './UpdateCategory'
 
 interface Props {
   categories: Category
@@ -19,10 +19,7 @@ interface Props {
 
 const CategoryManagement = ({ categories, placeID }: Props) => {
   const classes = useStyles()
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([])
-  const handleDeleteCategory = (selectedList: number[]) => {
-    setSelectedCategories(selectedList.sort((a, b) => (a > b ? 1 : -1)))
-  }
+
   return (
     <>
       <Card variant="outlined" style={{ margin: '1% 1% 1% 0' }}>
@@ -47,26 +44,11 @@ const CategoryManagement = ({ categories, placeID }: Props) => {
       </Card>
       <Card variant="outlined" style={{ margin: '1% 1% 1% 0' }}>
         <CardHeader title="Sửa loại" />
-        <Box display="flex" style={{ margin: '0 0 1% 1%' }}>
-          <CardActions>
-            <Button
-              size="large"
-              className={classes.buttonLineGradient}
-              variant="contained"
-            >
-              Xác nhận
-            </Button>
-          </CardActions>
-        </Box>
+        <UpdateCategory categories={categories} placeID={placeID} />
       </Card>
       <Card variant="outlined" style={{ margin: '1% 1% 1% 0' }}>
         <CardHeader title="Xóa loại" />
-        <DeleteCategory
-          selectedCategories={selectedCategories}
-          handleDeleteCategory={handleDeleteCategory}
-          categories={categories}
-          placeID={placeID}
-        />
+        <DeleteCategory categories={categories} placeID={placeID} />
       </Card>
     </>
   )
