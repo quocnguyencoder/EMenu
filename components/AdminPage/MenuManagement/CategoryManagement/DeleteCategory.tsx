@@ -49,12 +49,12 @@ const DeleteCategory = ({ categories, placeID }: Props) => {
       <FormControl
         margin="dense"
         variant="outlined"
-        style={{ minWidth: '15%' }}
+        style={{ minWidth: '25%' }}
       >
-        <InputLabel>Chọn loại</InputLabel>
+        <InputLabel>Các loại món ăn cần xóa</InputLabel>
         <Select
           multiple
-          label="Chọn loại"
+          label="Các loại món ăn cần xóa"
           value={selectedCategories}
           onChange={(e) => handleDeleteCategory(e.target.value as number[])}
           renderValue={(selected) => (

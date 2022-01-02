@@ -13,15 +13,15 @@ const CategoryManagement = ({ categories, placeID }: Props) => {
   return (
     <>
       <Card variant="outlined" style={{ margin: '1% 1% 1% 0' }}>
-        <CardHeader title="Thêm loại" />
+        <CardHeader title="Thêm loại món ăn" />
         <AddCategory categories={categories} placeID={placeID} />
       </Card>
       <Card variant="outlined" style={{ margin: '1% 1% 1% 0' }}>
-        <CardHeader title="Sửa loại" />
+        <CardHeader title="Sửa tên loại món ăn" />
         <UpdateCategory categories={categories} placeID={placeID} />
       </Card>
       <Card variant="outlined" style={{ margin: '1% 1% 1% 0' }}>
-        <CardHeader title="Xóa loại" />
+        <CardHeader title="Xóa loại món ăn" />
         <DeleteCategory categories={categories} placeID={placeID} />
       </Card>
     </>
