@@ -15,9 +15,10 @@ import 'firebase/auth'
 import { SnackbarOrigin } from '@material-ui/core/Snackbar'
 import type { Color } from '@material-ui/lab/Alert'
 import Alert from '@material-ui/lab/Alert'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import router from 'next/router'
 import * as ROUTES from '@/constants/routes'
+import isEqual from 'lodash/isEqual'
 
 initFirebase()
 
@@ -32,6 +33,16 @@ interface Error {
 }
 
 const Login = () => {
+  const [userID, setUserID] = useState()
+
+  useEffect(() => {
+    const objUserID = JSON.parse(sessionStorage.getItem('userID') || '{}')
+    if (!isEqual(objUserID, {})) {
+      router.push(ROUTES.HOME)
+    } else {
+      setUserID(objUserID)
+    }
+  }, [])
   const [state, setState] = useState<State>({
     open: false,
     vertical: 'top',
@@ -86,7 +97,8 @@ const Login = () => {
         }
       })
   }
-  return (
+
+  return userID !== undefined ? (
     <>
       <Box
         component="main"
@@ -189,6 +201,8 @@ const Login = () => {
         </Alert>
       </Snackbar>
     </>
+  ) : (
+    <></>
   )
 }
 
