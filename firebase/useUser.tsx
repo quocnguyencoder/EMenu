@@ -54,8 +54,8 @@ const useUser = () => {
         const userID = { userID: user.uid }
         sessionStorage.setItem('userID', JSON.stringify(userID))
       } else {
+        unsubscribe && unsubscribe()
         removeUserCookie()
-        unsubscribe()
         setUser({ ...initialState })
         sessionStorage.clear()
       }
