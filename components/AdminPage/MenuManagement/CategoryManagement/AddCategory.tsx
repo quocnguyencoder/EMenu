@@ -4,7 +4,6 @@ import {
   CardActions,
   FormControl,
   OutlinedInput,
-  Select,
   InputLabel,
   Snackbar,
 } from '@material-ui/core'
@@ -25,10 +24,8 @@ interface Props {
   placeID: string
 }
 
-const UpdateCategory = ({ categories, placeID }: Props) => {
+const AddCategory = ({ categories, placeID }: Props) => {
   const classes = useStyles()
-  const categoryList = Object.keys(categories).map(Number)
-
   const [state, setState] = useState<State>({
     open: false,
     vertical: 'top',
@@ -55,25 +52,21 @@ const UpdateCategory = ({ categories, placeID }: Props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const target = e.target as typeof e.target & {
-      categoryID: { value: number }
-      newName: { value: string }
+      newCategory: { value: string }
     }
 
-    if (categories[target.categoryID.value].name === target.newName.value) {
-      handleOpenAlert(`Không thể cập nhật vì tên trùng nhau`, `error`)
-    } else {
-      updateService.default.updateMenuCategory(placeID, {
-        ...categories,
-        [Number(target.categoryID.value)]: {
-          name: target.newName.value,
-          items: categories[Number(target.categoryID.value)].items,
-        },
-      })
-      target.newName.value = ''
-      handleOpenAlert(`Cập nhật loại món ăn thành công`, `success`)
-    }
+    const temp = Object.keys(categories).map(Number).pop()
+    const newCategoryID = temp === undefined ? 0 : temp + 1
+    updateService.default.updateMenuCategory(placeID, {
+      ...categories,
+      [newCategoryID]: {
+        name: target.newCategory.value,
+        items: [] as number[],
+      },
+    })
+    target.newCategory.value = ''
+    handleOpenAlert(`Thêm loại món ăn thành công`, `success`)
   }
-
   return (
     <>
       <Snackbar
@@ -87,44 +80,26 @@ const UpdateCategory = ({ categories, placeID }: Props) => {
           {message.text}
         </Alert>
       </Snackbar>
-      <Box style={{ margin: '0 0 1% 1%' }}>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <FormControl
-            margin="dense"
-            variant="outlined"
-            style={{ marginRight: '8px' }}
-          >
-            <InputLabel>Chọn loại</InputLabel>
-            <Select native required name="categoryID" label="Chọn loại">
-              <option value="" />
-              {categoryList.map((categoryID: number) => (
-                <option
-                  key={`Category-${categoryID}-${categories[categoryID].name}`}
-                  value={categoryID}
-                >
-                  {categories[categoryID].name}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <Box display="flex" style={{ margin: '0 0 1% 1%' }}>
           <FormControl margin="dense" variant="outlined">
             <InputLabel>Tên loại</InputLabel>
-            <OutlinedInput required name="newName" label="Tên loại" />
+            <OutlinedInput required name="newCategory" label="Tên loại" />
           </FormControl>
           <CardActions>
             <Button
               size="large"
+              type="submit"
               className={classes.buttonLineGradient}
               variant="contained"
-              type="submit"
             >
               Xác nhận
             </Button>
           </CardActions>
-        </form>
-      </Box>
+        </Box>
+      </form>
     </>
   )
 }
 
-export default UpdateCategory
+export default AddCategory

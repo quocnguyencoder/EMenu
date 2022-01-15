@@ -7,21 +7,33 @@
       "ward": "WARD_NAME",
       "street": "STREET_NAME"
     },
-    "category": ["CATEGORY_NAME 1", "CATEGORY_NAME 2"],
-    "review": ["REVIEW_ID 1", "REVIEW_ID 2"],
+    "categories": {
+      "0": {
+        "items": ["INDEX_MENUITEM_0", "INDEX_MENUITEM_1"],
+        "name": "CATEGORY_NAME"
+      }
+    },
+    "reviews": ["REVIEW_ID 1", "REVIEW_ID 2"],
     "image": "URL_OF_IMAGE",
     "name": "PLACE_NAME",
-    "rating": "RATING_VALUE_OF_PLACE",
+    "rating": {
+      "USER_ID_RATING": [
+        {
+          "date": "RATING TIME",
+          "rating": "VALUE OF RATING",
+          "reviewID": "REVIEW_ID_1"
+        }
+      ]
+    },
     "type": "PLACE_TYPE",
-    "menu": [
-      {
-        "category": ["CATEGORY_ID 1", "CATEGORY_ID 2"],
+    "menu": {
+      "0": {
         "description": "DESCRIPTION_OF_MENU_ITEM",
         "image": "URL_OF_ITEM_IMAGE",
         "name": "ITEM_NAME",
         "price": "ITEM_PRICE"
       }
-    ],
+    },
     "time": {
       "open": "OPEN_TIME",
       "close": "CLOSE_TIME"
@@ -30,34 +42,36 @@
       "lat": "LATITUDE_OF_PLACE",
       "lng": "LONGITUDE_OF_PLACE"
     },
-    "show": "SHOWING_STATUS_OF_PLACE"
+    "show": "SHOWING_STATUS_OF_PLACE",
+    "activeDate": "LAST_TIME_PLACE_UPDATE",
+    "phone": "PLACE_PHONE",
+    "createdDate": "TIME_OF_PLACE_IS_CREATED"
   },
 
   {
     "id": "REVIEW_ID",
     "userID": "ID_OF_REVIEWER",
-    "placeID": "ID_OF_REVIEWED_PLACE",
-    "reply": [
+    "comments": [
       {
         "userID": "REPLIER_ID",
-        "content": "CONTENT_OF_REPLY"
+        "content": "CONTENT_OF_REPLY",
+        "date": "TIMESTAMP_OF_COMMENTS"
       }
     ],
     "content": "REVIEW_CONTENT",
-    "media": ["MEDIA_URL 1", "MEDIA_URL 2"],
-    "time": "TIMESTAMP_OF_REVIEW",
+    "subject": "REVIEW_SUBJECT",
+    "files": ["MEDIA_URL 1", "MEDIA_URL 2"],
+    "date": "TIMESTAMP_OF_REVIEW",
     "rating": "RATING_VALUE_OF_REVIEW",
-    "like": ["USER_ID 1", "USER_ID 3"],
-    "dislike": ["USER_ID 2"]
+    "likes": ["USER_ID 1", "USER_ID 3"]
   },
 
   {
     "id": "USER_ID",
     "name": "USER_NAME",
     "email": "EMAIL_OF_USER",
-    "token": "USER_TOKEN",
     "profilePic": "AVATAR_URL",
     "placeID": "OWNED_PLACE_ID",
-    "review": ["REVIEW_ID 1", "REVIEW_ID 2"]
+    "reviews": ["REVIEW_ID 1", "REVIEW_ID 2"]
   }
 ]

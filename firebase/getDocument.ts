@@ -70,6 +70,19 @@ const getAllPlaces = async () => {
   return places_data
 }
 
+const verifyAdmin = async (userID: string) => {
+  const isAdmin = await firebase
+    .firestore()
+    .collection('admin')
+    .doc(userID)
+    .get()
+    .then((userData) => {
+      if (userData.exists) return true
+      else return false
+    })
+  return isAdmin
+}
+
 export default {
   getCollection,
   getUserInfo,
@@ -77,4 +90,5 @@ export default {
   getAllReviewsOfPlace,
   getNewImage,
   getAllPlaces,
+  verifyAdmin,
 }
