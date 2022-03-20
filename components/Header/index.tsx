@@ -1,30 +1,18 @@
-import React from 'react'
+import * as ROUTES from '@/constants/routes'
 import AppBar from '@material-ui/core/AppBar'
-import Button from '@material-ui/core/Button'
-import Container from '@material-ui/core/Container'
-import CardMedia from '@material-ui/core/CardMedia'
 import Toolbar from '@material-ui/core/Toolbar'
 import { useStyles } from '../../styles/header'
 import { Box } from '@material-ui/core'
 import { useRouter } from 'next/router'
 import useUser from '@/firebase/useUser'
-import UserMenu from './UserMenu'
-import * as ROUTES from '@/constants/routes'
-import SearchBar from './SearchBar'
+import Image from 'next/image'
+import IconWithDrawer from './IconWithDrawer'
+import SignInSignUpButtons from './SignInSignUpButtons'
 
 export default function Header() {
   const classes = useStyles()
   const router = useRouter()
-  const { user, logout } = useUser()
-
-  const handleClick = () => {
-    router.push({
-      pathname: ROUTES.LOGIN,
-      query: {
-        returnURL: router.asPath,
-      },
-    })
-  }
+  const { user } = useUser()
 
   const gotoHomepage = () => {
     router.push(ROUTES.HOME)
@@ -34,42 +22,27 @@ export default function Header() {
 
   return (
     <>
-      <AppBar position="fixed" style={{ backgroundColor: '#fff' }}>
-        <Container maxWidth="lg">
-          <Toolbar>
-            <Box className={classes.title}>
-              <CardMedia
-                component="img"
-                image={`/logo.png`}
-                title="logo"
-                style={{
-                  height: '7vh',
-                  width: '9vw',
-                  maxWidth: '110px',
-                  maxHeight: '50px',
-                  cursor: 'pointer',
-                }}
-                onClick={() => gotoHomepage()}
-              />
-            </Box>
-
-            <SearchBar />
-            <Box flex={1}>
-              {isLoggedIn ? (
-                <UserMenu user={user} logout={logout} />
-              ) : (
-                <Button
-                  style={{ color: 'grey', float: 'right' }}
-                  onClick={() => handleClick()}
-                >
-                  Đăng nhập
-                </Button>
-              )}
-            </Box>
-          </Toolbar>
-        </Container>
+      <AppBar position="fixed" color="inherit" elevation={1}>
+        <Toolbar
+          variant="dense"
+          style={{
+            display: 'flex',
+          }}
+        >
+          <IconWithDrawer />
+          <Box
+            display="block"
+            onClick={gotoHomepage}
+            style={{ cursor: 'pointer' }}
+          >
+            <Image src="/logo.png" height="45px" width="115px" />
+          </Box>
+          <Box className={classes.sideBox} justifyContent="flex-end">
+            {!isLoggedIn && <SignInSignUpButtons />}
+          </Box>
+        </Toolbar>
       </AppBar>
-      <Toolbar />
+      <Toolbar variant="dense" />
     </>
   )
 }

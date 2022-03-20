@@ -12,3 +12,4 @@ export const EMenuLogin = '/e-menu/login'
 export const PLACE_DETAIL = (province: string, placeID: string) =>
   `/${normalizeText(province)}/${placeID}`
 export const LOCATION = (province: string) => `/${normalizeText(province)}`
+export const USER_PROFILE = '/user/profile'

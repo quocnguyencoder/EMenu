@@ -4,14 +4,24 @@ export const useStyles = makeStyles((theme) => ({
   layout: {
     flex: 1,
   },
-  title: {
-    flexGrow: 0.05,
+  drawerButtonIcon: {
+    color: '#000000',
+    fontSize: '4vh',
+  },
+  hideButtons: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
+      display: 'flex',
+      justifyContent: 'space-between',
+      gap: '5px',
     },
-    cursor: 'pointer',
   },
+  sideBox: {
+    flex: 1,
+    display: 'flex',
+    minWidth: '-webkit-min-content',
+  },
+
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
