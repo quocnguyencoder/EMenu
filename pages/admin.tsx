@@ -5,6 +5,7 @@ import {
   Nav,
   ProfileRestaurant,
   MenuManagement,
+  OrderManagement,
 } from '../components/AdminPage'
 import TabPanel from '@/components/Homepage/TabPanel'
 import Meta from '@/components/Meta'
@@ -62,6 +63,9 @@ export default function Admin() {
           </TabPanel>
           <TabPanel value={value.val} index="Quản lí thực đơn">
             <MenuManagement placeInfo={place} />
+          </TabPanel>
+          <TabPanel value={value.val} index="Quản lí hóa đơn">
+            <OrderManagement place={place} />
           </TabPanel>
         </Grid>
       </Grid>

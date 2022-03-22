@@ -1,5 +1,3 @@
-import { Category } from '@material-ui/icons'
-
 export interface Address {
   ward: string
   street: string
@@ -16,6 +14,7 @@ export interface MenuItem {
   image: string
   name: string
   price: number
+  discount: number
 }
 
 export interface Time {
@@ -66,6 +65,19 @@ export interface Place {
   phone: string
   createdDate: string
   activeDate: string
+  order: string[]
+}
+
+export interface Bill {
+  billID: string
+  items: Order[]
+  note: string
+  datetime: string
+  payment: string
+  placeID: string
+  status: string
+  userID: string
+  total: number
 }
 
 export interface Order {
@@ -73,6 +85,7 @@ export interface Order {
     name: string
     price: number
     quantity: number
+    discount: number
   }
 }
 

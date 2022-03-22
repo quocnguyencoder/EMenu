@@ -57,6 +57,7 @@ const initialPlace: Place = {
     'MMMM Do YYYY, hh:mm:ss A'
   ).fromNow(),
   show: false,
+  order: [],
 }
 
 const RegisterPlace = () => {

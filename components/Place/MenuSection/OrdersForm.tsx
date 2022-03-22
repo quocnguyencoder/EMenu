@@ -17,9 +17,12 @@ import formatter from '@/functions/moneyFormatter'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 import { Order } from '@/models/place'
-import ModalQR from './ModalQR'
+//import ModalQR from './ModalQR'
+import ModalPayments from './ModalPayments'
 
 interface Props {
+  placeID: string
+  placeOrders: string[]
   ordersList: Order
   addToOrders: (itemID: number) => void
   removeFromOrders: (itemID: number) => void
@@ -27,6 +30,8 @@ interface Props {
 }
 
 const OrdersForm = ({
+  placeID,
+  placeOrders,
   ordersList,
   addToOrders,
   removeFromOrders,
@@ -39,7 +44,9 @@ const OrdersForm = ({
 
   const total = orderItemsIDArr.reduce(
     (result, curr) =>
-      result + ordersList[curr].price * ordersList[curr].quantity,
+      result +
+      (ordersList[curr].price - ordersList[curr].discount) *
+        ordersList[curr].quantity,
     0
   )
 
@@ -163,8 +170,11 @@ const OrdersForm = ({
           <Typography variant="body2">Gọi món</Typography>
         </Button>
 
-        <ModalQR
+        <ModalPayments
+          placeID={placeID}
+          placeOrders={placeOrders}
           ordersList={ordersList}
+          total={total}
           openModal={openModal}
           handleCloseModal={handleCloseModal}
         />
