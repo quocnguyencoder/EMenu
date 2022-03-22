@@ -1,4 +1,4 @@
-import { Banners, Discovery } from '../components/Homepage'
+import { Discovery, HeroWithAddressInput } from '@/components/Homepage'
 import { Container } from '@material-ui/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -19,7 +19,7 @@ export default function Home({ places_data }: Props) {
 
   return (
     <>
-      <Banners />
+      <HeroWithAddressInput />
       <Container maxWidth="lg">
         <Discovery places_data={placeCanShow} />
       </Container>
