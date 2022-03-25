@@ -64,7 +64,7 @@ export default function Admin() {
           <TabPanel value={value.val} index="Quản lí thực đơn">
             <MenuManagement placeInfo={place} />
           </TabPanel>
-          <TabPanel value={value.val} index="Quản lí hóa đơn">
+          <TabPanel value={value.val} index="Quản lí đơn hàng">
             <OrderManagement place={place} />
           </TabPanel>
         </Grid>

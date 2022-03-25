@@ -6,7 +6,7 @@ import {
   Select,
 } from '@material-ui/core'
 import { useState } from 'react'
-import dvhcvn from '@/firebase/dvhcvn.json'
+import dvhcvn from '@/assets/dvhcvn.json'
 import { Place } from '@/models/place'
 import SelectTimeOpenClose from './SelectTimeOpenClose'
 import restoreAddress from '@/functions/restoreAddress'

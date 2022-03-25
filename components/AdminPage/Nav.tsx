@@ -33,5 +33,5 @@ const categories = [
   'Thông tin địa điểm',
   'Quản lí nhân viên',
   'Quản lí thực đơn',
-  'Quản lí hóa đơn',
+  'Quản lí đơn hàng',
 ]
