@@ -7,10 +7,7 @@ import {
   CardMedia,
   Button,
   ButtonBase,
-  Snackbar,
 } from '@material-ui/core'
-import { SnackbarOrigin } from '@material-ui/core/Snackbar'
-import Alert from '@material-ui/lab/Alert'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 import { Category, MenuItem } from '@/models/place'
 import { useStyles } from '@/styles/modal'
@@ -22,6 +19,7 @@ import * as getService from '@/firebase/getDocument'
 import firebase from 'firebase/app'
 import 'firebase/storage'
 import type { Color } from '@material-ui/lab/Alert'
+import SnackBar from '@/components/common/SnackBar'
 
 interface Props {
   categories: Category
@@ -31,10 +29,6 @@ interface Props {
   placeID: string
   openModal: boolean
   handleCloseModal: () => void
-}
-
-interface State extends SnackbarOrigin {
-  open: boolean
 }
 
 const UpdateItem = ({
@@ -47,15 +41,10 @@ const UpdateItem = ({
   handleCloseModal,
 }: Props) => {
   const classes = useStyles()
-  const [state, setState] = useState<State>({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-  })
-  const { vertical, horizontal, open } = state
   const [message, setMessage] = useState({
     text: '',
     severity: 'error' as Color,
+    open: false,
   })
   const [disableBtn, setDisableBtn] = useState(false)
   const [selectedCategories, setSelectedCategories] =
@@ -66,15 +55,11 @@ const UpdateItem = ({
   const cate = { ...categories }
 
   const handleOpenAlert = (text: string, severity: Color) => {
-    setState({ ...state, open: true })
     setMessage({
       text: text,
       severity: severity,
+      open: true,
     })
-  }
-
-  const handleClose = () => {
-    setState({ ...state, open: false })
   }
 
   const handleChangeCategory = (selectedList: number[]) => {
@@ -201,17 +186,7 @@ const UpdateItem = ({
 
   return (
     <>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        autoHideDuration={2000}
-        open={open}
-        key={vertical + horizontal}
-        onClose={handleClose}
-      >
-        <Alert variant="filled" severity={message.severity}>
-          {message.text}
-        </Alert>
-      </Snackbar>
+      <SnackBar message={message} setMessage={setMessage} />
       <Modal
         className={classes.modal}
         open={openModal}
