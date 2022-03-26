@@ -29,6 +29,7 @@ interface Props {
   placeID: string
   openModal: boolean
   handleCloseModal: () => void
+  setItemCategoryList: React.Dispatch<React.SetStateAction<number[]>>
 }
 
 const UpdateItem = ({
@@ -39,6 +40,7 @@ const UpdateItem = ({
   placeID,
   openModal,
   handleCloseModal,
+  setItemCategoryList,
 }: Props) => {
   const classes = useStyles()
   const [message, setMessage] = useState({
@@ -106,7 +108,17 @@ const UpdateItem = ({
         cate[updateList[i]].items.push(itemID)
         cate[updateList[i]].items.sort((a, b) => (a > b ? 1 : -1))
       }
-      updateService.default.updateMenuCategory(placeID, cate)
+      updateService.default.updateMenuCategory(placeID, cate).then(() => {
+        setItemCategoryList(
+          Object.keys(categories)
+            .map(Number)
+            .reduce(
+              (pre: number[], curr) =>
+                categories[curr].items.includes(itemID) ? [...pre, curr] : pre,
+              []
+            )
+        )
+      })
     }
     handleOpenAlert(`Cập nhật thành công`, `success`)
     setDisableBtn(false)

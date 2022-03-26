@@ -97,6 +97,7 @@ export default function FilterByCategory({ categories, menu, placeID }: Props) {
           placeID={placeID}
           openModal={openModalUpdate}
           handleCloseModal={handleCloseModal}
+          setItemCategoryList={setItemCategoryList}
         />
       )}
 
