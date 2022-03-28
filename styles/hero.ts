@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: 'red',
     borderTopRightRadius: '24px',
     borderBottomRightRadius: '24px',
-    height: '100%',
+    height: '3.5em',
     width: '35%',
     color: 'white',
   },
