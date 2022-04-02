@@ -307,6 +307,10 @@ const updatePlaceOrders = (placeID: string, order: string[]) => {
   firebase.firestore().collection('place').doc(placeID).update({ order: order })
 }
 
+const verifyOrder = (billID: string, verify: string) => {
+  firebase.firestore().collection('bill').doc(billID).update({ status: verify })
+}
+
 export default {
   updatePlaceReview,
   updateUserReview,
@@ -323,4 +327,5 @@ export default {
   updateReviewsAfterDeletedPlace,
   updateUserProfile,
   updatePlaceOrders,
+  verifyOrder,
 }
