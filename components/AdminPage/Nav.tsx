@@ -1,7 +1,12 @@
 import { Box, List, ListItem } from '@material-ui/core'
 
 interface Props {
-  setValue: any
+  setValue: React.Dispatch<
+    React.SetStateAction<{
+      val: string
+      selected: number
+    }>
+  >
   selected: number
 }
 

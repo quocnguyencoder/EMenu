@@ -72,6 +72,7 @@ const MenuSection = ({ place }: Props) => {
             price: place.menu[itemID].price,
             quantity: 1,
             discount: place.menu[itemID].discount,
+            image: place.menu[itemID].image,
           },
         })
   }
@@ -96,6 +97,7 @@ const MenuSection = ({ place }: Props) => {
             price: place.menu[itemID].price,
             quantity: (ordersList[itemID].quantity -= 1),
             discount: place.menu[itemID].discount,
+            image: place.menu[itemID].image,
           },
         })
   }

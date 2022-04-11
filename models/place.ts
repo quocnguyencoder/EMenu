@@ -80,12 +80,17 @@ export interface Bill {
   total: number
 }
 
+export interface BillDetail extends Bill {
+  buyerName: string
+}
+
 export interface Order {
   [id: number]: {
     name: string
     price: number
     quantity: number
     discount: number
+    image: string
   }
 }
 

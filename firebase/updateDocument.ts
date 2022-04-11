@@ -307,8 +307,19 @@ const updatePlaceOrders = (placeID: string, order: string[]) => {
   firebase.firestore().collection('place').doc(placeID).update({ order: order })
 }
 
-const verifyOrder = (billID: string, verify: string) => {
-  firebase.firestore().collection('bill').doc(billID).update({ status: verify })
+const verifyOrder = (placeID: string, billID: string, verify: string) => {
+  firebase
+    .firestore()
+    .collection('bill')
+    .doc(billID)
+    .update({ status: verify })
+    .then(() => {
+      firebase
+        .firestore()
+        .collection('place')
+        .doc(placeID)
+        .update({ order: firebase.firestore.FieldValue.arrayRemove(billID) })
+    })
 }
 
 export default {

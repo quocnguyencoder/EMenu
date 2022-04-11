@@ -97,6 +97,7 @@ const createBillInfo = async (
   total: number,
   order: string[]
 ) => {
+  moment.locale('en')
   firebase
     .firestore()
     .collection('bill')
