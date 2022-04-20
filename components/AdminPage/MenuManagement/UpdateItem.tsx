@@ -137,6 +137,7 @@ const UpdateItem = ({
         image: itemInfo.image,
         name: e.target.Name.value,
         price: Number(e.target.Price.value),
+        discount: 0,
       } as MenuItem
       if (
         itemInfo.description === data.description &&
@@ -180,6 +181,7 @@ const UpdateItem = ({
                   image: fireBaseUrl,
                   name: e.target.Name.value,
                   price: Number(e.target.Price.value),
+                  discount: 0,
                 } as MenuItem
                 updateService.default
                   .updateMenuItem(placeID, itemID, data)
