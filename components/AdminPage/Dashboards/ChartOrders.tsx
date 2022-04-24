@@ -7,6 +7,7 @@ import {
   LineElement,
   Legend,
   Tooltip,
+  Title,
 } from 'chart.js'
 import { Chart } from 'react-chartjs-2'
 import { Bill } from '@/models/place'
@@ -18,7 +19,8 @@ ChartJS.register(
   PointElement,
   LineElement,
   Legend,
-  Tooltip
+  Tooltip,
+  Title
 )
 
 interface Props {
@@ -86,7 +88,20 @@ const ChartOrders: React.FC<Props> = ({ orderList, months }: Props) => {
 
   return (
     <div style={{ width: '45%' }}>
-      <Chart type="bar" data={data} />
+      <Chart
+        type="bar"
+        data={data}
+        options={{
+          plugins: {
+            title: {
+              display: true,
+              text: 'SỐ ĐƠN HÀNG THEO THÁNG',
+              position: 'bottom',
+              color: '#D14B28',
+            },
+          },
+        }}
+      />
     </div>
   )
 }

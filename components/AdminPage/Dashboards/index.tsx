@@ -1,7 +1,8 @@
-import ChartOrders from './ChartOrders'
 import { Bill } from '@/models/place'
 import { useLayoutEffect, useState } from 'react'
 import * as getService from '@/firebase/getDocument'
+import ChartOrders from './ChartOrders'
+import ChartIncome from './ChartIncome'
 
 interface Props {
   placeID: string
@@ -37,8 +38,9 @@ const Dashboards: React.FC<Props> = ({ placeID }: Props) => {
     })
   }, [])
   return (
-    <div style={{ width: '83vw' }}>
+    <div style={{ width: '83vw', display: 'flex', gap: '3%' }}>
       <ChartOrders orderList={orderList} months={months} />
+      <ChartIncome orderList={orderList} months={months} />
     </div>
   )
 }
