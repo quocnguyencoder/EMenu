@@ -33,7 +33,7 @@ export const Paypal = ({ userID, items, total, handlePayment }: Props) => {
             items,
             `Phí dịch vụ Paypal ${details.purchase_units[0].amount.value} x 3,49% + 0,49 = ${fee} USD`,
             `Paypal`,
-            details.status,
+            `Waiting`,
             userID,
             (details.purchase_units[0].amount.value - fee) * 22865
           )

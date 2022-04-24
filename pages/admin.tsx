@@ -18,7 +18,7 @@ import isEqual from 'lodash/isEqual'
 import firebase from 'firebase/app'
 
 export default function Admin() {
-  const [value, setValue] = useState({ val: 'Dashboards', selected: 0 })
+  const [value, setValue] = useState({ val: 'Tổng quan', selected: 0 })
   const [place, setPlace] = useState<Place>()
   const router = useRouter()
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function Admin() {
         </Grid>
         <Grid item xs={10}>
           <TabPanel value={value.val} index="Tổng quan">
-            <Dashboards />
+            <Dashboards placeID={place.id} />
           </TabPanel>
           <TabPanel value={value.val} index="Thông tin địa điểm">
             <ProfileRestaurant place={place} />

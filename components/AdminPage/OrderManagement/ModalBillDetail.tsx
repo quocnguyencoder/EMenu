@@ -14,7 +14,6 @@ import ItemOrderedList from './ItemOrderedList'
 import DeleteIcon from '@material-ui/icons/Delete'
 import DoneIcon from '@material-ui/icons/Done'
 import * as updateService from '@/firebase/updateDocument'
-import * as deleteService from '@/firebase/deleteDocument'
 
 interface Props {
   placeID: string
@@ -41,7 +40,11 @@ const ModalBillDetail: React.FC<Props> = ({
   }
 
   const handleDelete = () => {
-    deleteService.default.deleteUserOrder(placeID, infoModal.orderDetail.billID)
+    updateService.default.verifyOrder(
+      placeID,
+      infoModal.orderDetail.billID,
+      'Deleted'
+    )
     handleCloseModal()
   }
 

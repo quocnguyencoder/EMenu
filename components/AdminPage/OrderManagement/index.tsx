@@ -84,10 +84,6 @@ const OrderManagement: React.FC<Props> = ({ place }: Props) => {
             orderDetail: params.row as BillDetail,
           })
         }
-        // const handleConfirm = () => {
-        //   updateService.default.verifyOrder(params.row.billID, 'Confirmed')
-        // }
-
         return (
           <Chip
             onClick={handleOpenModal}
@@ -123,8 +119,8 @@ const OrderManagement: React.FC<Props> = ({ place }: Props) => {
           setOrders(
             billDetailList.filter(
               (billDetail) =>
-                billDetail.placeID == place.id &&
-                billDetail.status !== 'Confirmed'
+                billDetail.placeID === place.id &&
+                billDetail.status === 'Waiting'
             )
           )
         })
