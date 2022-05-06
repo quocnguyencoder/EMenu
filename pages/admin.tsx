@@ -53,7 +53,7 @@ export default function Admin() {
         </Grid>
         <Grid item xs={10}>
           <TabPanel value={value.val} index="Tổng quan">
-            <Dashboards placeID={place.id} />
+            <Dashboards place={place} />
           </TabPanel>
           <TabPanel value={value.val} index="Thông tin địa điểm">
             <ProfileRestaurant place={place} />

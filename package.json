@@ -49,6 +49,7 @@
     "react-dom": "17.0.2",
     "react-firebaseui": "^5.0.2",
     "react-google-charts": "^3.0.15",
+    "react-icons": "^4.3.1",
     "react-loader-spinner": "^4.0.0",
     "react-material-ui-carousel": "^2.2.7",
     "react-paypal-button-v2": "^2.6.3",

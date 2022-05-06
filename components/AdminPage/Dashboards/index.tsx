@@ -1,14 +1,18 @@
-import { Bill } from '@/models/place'
+import { Place, Bill } from '@/models/place'
 import { useLayoutEffect, useState } from 'react'
 import * as getService from '@/firebase/getDocument'
 import ChartOrders from './ChartOrders'
 import ChartIncome from './ChartIncome'
+import AvgRating from './AvgRating'
+import { Box } from '@material-ui/core'
+import NumberOfReviews from './NumberOfReviews'
+import Revenue from './Revenue'
 
 interface Props {
-  placeID: string
+  place: Place
 }
 
-const Dashboards: React.FC<Props> = ({ placeID }: Props) => {
+const Dashboards: React.FC<Props> = ({ place }: Props) => {
   const [orderList, setOrderList] = useState<Bill[]>([])
   const months = [
     'Tháng 1',
@@ -29,7 +33,7 @@ const Dashboards: React.FC<Props> = ({ placeID }: Props) => {
     getService.default.getCollection('bill').then((snapShot) => {
       const orders = snapShot.docs.reduce(
         (pre, data) =>
-          placeID === (data.data() as Bill).placeID
+          place.id === (data.data() as Bill).placeID
             ? [...pre, data.data() as Bill]
             : pre,
         [] as Bill[]
@@ -38,10 +42,18 @@ const Dashboards: React.FC<Props> = ({ placeID }: Props) => {
     })
   }, [])
   return (
-    <div style={{ width: '83vw', display: 'flex', gap: '3%' }}>
-      <ChartOrders orderList={orderList} months={months} />
-      <ChartIncome orderList={orderList} months={months} />
-    </div>
+    <Box style={{ width: '83vw' }}>
+      <Box display="flex" style={{ gap: '3%' }}>
+        <AvgRating ratings={place.rating} />
+        <NumberOfReviews ratings={place.reviews} />
+        <Revenue orderList={orderList} months={months} />
+        <AvgRating ratings={place.rating} />
+      </Box>
+      <Box display="flex" style={{ gap: '3%' }}>
+        <ChartOrders orderList={orderList} months={months} />
+        <ChartIncome orderList={orderList} months={months} />
+      </Box>
+    </Box>
   )
 }
 

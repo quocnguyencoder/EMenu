@@ -11,6 +11,7 @@ import {
 } from 'chart.js'
 import { Chart } from 'react-chartjs-2'
 import { Bill } from '@/models/place'
+import { Paper } from '@material-ui/core'
 
 ChartJS.register(
   LinearScale,
@@ -87,7 +88,7 @@ const ChartOrders: React.FC<Props> = ({ orderList, months }: Props) => {
   }
 
   return (
-    <div style={{ width: '45%' }}>
+    <Paper style={{ width: '45%', marginLeft: '1%', flex: '1' }}>
       <Chart
         type="bar"
         data={data}
@@ -100,9 +101,14 @@ const ChartOrders: React.FC<Props> = ({ orderList, months }: Props) => {
               color: '#D14B28',
             },
           },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
         }}
       />
-    </div>
+    </Paper>
   )
 }
 
