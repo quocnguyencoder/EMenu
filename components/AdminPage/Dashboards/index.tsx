@@ -1,12 +1,14 @@
 import { Place, Bill } from '@/models/place'
 import { useLayoutEffect, useState } from 'react'
+import { Box } from '@material-ui/core'
 import * as getService from '@/firebase/getDocument'
 import ChartOrders from './ChartOrders'
 import ChartIncome from './ChartIncome'
 import AvgRating from './AvgRating'
-import { Box } from '@material-ui/core'
 import NumberOfReviews from './NumberOfReviews'
 import Revenue from './Revenue'
+import TotalRevenue from './TotalRevenue'
+import BestSellingProduct from './BestSellingProduct'
 
 interface Props {
   place: Place
@@ -47,12 +49,15 @@ const Dashboards: React.FC<Props> = ({ place }: Props) => {
         <AvgRating ratings={place.rating} />
         <NumberOfReviews ratings={place.reviews} />
         <Revenue orderList={orderList} months={months} />
-        <AvgRating ratings={place.rating} />
+        <TotalRevenue orderList={orderList} />
       </Box>
       <Box display="flex" style={{ gap: '3%' }}>
         <ChartOrders orderList={orderList} months={months} />
         <ChartIncome orderList={orderList} months={months} />
       </Box>
+      <BestSellingProduct
+        orderList={orderList.filter((order) => order.status === 'Confirmed')}
+      />
     </Box>
   )
 }

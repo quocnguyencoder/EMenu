@@ -37,12 +37,12 @@ const ChartOrders: React.FC<Props> = ({ orderList, months }: Props) => {
     )
   )
 
-  const totalOrdersByMonthPayByCash = totalOrdersByMonth.map((orders) =>
-    orders.filter((order) => order.payment === 'Cash')
+  const totalOrdersByMonthCompleted = totalOrdersByMonth.map((orders) =>
+    orders.filter((order) => order.status === 'Confirmed')
   )
 
-  const totalOrdersByMonthPayByPaypal = totalOrdersByMonth.map((orders) =>
-    orders.filter((order) => order.payment === 'Paypal')
+  const totalOrdersByMonthProcessing = totalOrdersByMonth.map((orders) =>
+    orders.filter((order) => order.status === 'Waiting')
   )
 
   const totalOrdersDestroyedByMonth = totalOrdersByMonth.map((orders) =>
@@ -62,16 +62,16 @@ const ChartOrders: React.FC<Props> = ({ orderList, months }: Props) => {
       },
       {
         type: 'bar' as const,
-        label: 'Số đơn trả bằng tiền mặt',
-        data: totalOrdersByMonthPayByCash.map((total) => total.length),
+        label: 'Số đơn hàng đang chờ',
+        data: totalOrdersByMonthProcessing.map((total) => total.length),
         borderColor: 'rgb(0, 255, 127)',
         backgroundColor: 'rgb(0, 255, 127, 0.5)',
         borderWidth: 2,
       },
       {
         type: 'bar' as const,
-        label: 'Số đơn trả bằng paypal',
-        data: totalOrdersByMonthPayByPaypal.map((total) => total.length),
+        label: 'Số đơn hàng đã hoàn thành',
+        data: totalOrdersByMonthCompleted.map((total) => total.length),
         borderColor: 'rgb(0, 191, 255)',
         backgroundColor: 'rgb(0, 191, 255, 0.5)',
         borderWidth: 2,
