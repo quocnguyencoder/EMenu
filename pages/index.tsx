@@ -1,9 +1,10 @@
 import { Discovery, HeroWithAddressInput } from '@/components/Homepage'
-import { Container } from '@material-ui/core'
+import { Box, Container } from '@material-ui/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { GetStaticProps } from 'next'
 import { Place } from '@/models/place'
+import FeaturedPlace from '@/components/Homepage/FeaturedPlace'
 // import { motion } from 'framer-motion'
 
 interface Props {
@@ -20,8 +21,11 @@ export default function Home({ places_data }: Props) {
   return (
     <>
       <HeroWithAddressInput />
-      <Container maxWidth="lg">
-        <Discovery places_data={placeCanShow} />
+      <Container maxWidth="md" style={{ paddingTop: '4%', minWidth: '70vw' }}>
+        <FeaturedPlace />
+        <Box visibility="hidden">
+          <Discovery places_data={placeCanShow} />
+        </Box>
       </Container>
     </>
   )

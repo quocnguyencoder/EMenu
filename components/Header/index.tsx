@@ -27,6 +27,7 @@ export default function Header() {
           variant="dense"
           style={{
             display: 'flex',
+            minHeight: '9vh',
           }}
         >
           <IconWithDrawer />

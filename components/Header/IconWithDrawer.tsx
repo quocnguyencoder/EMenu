@@ -98,7 +98,7 @@ const IconWithDrawer = () => {
     {
       text: 'Đăng nhập / Đăng ký',
       caption: '',
-      icon: <HomeOutlinedIcon className={classes.drawerButtonIcon} />,
+      icon: <AccountCircleOutlinedIcon className={classes.drawerButtonIcon} />,
       action: goToLogin,
       show: !isLoggedIn,
     },
