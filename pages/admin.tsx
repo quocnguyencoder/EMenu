@@ -58,9 +58,6 @@ export default function Admin() {
           <TabPanel value={value.val} index="Thông tin địa điểm">
             <ProfileRestaurant place={place} />
           </TabPanel>
-          <TabPanel value={value.val} index="Quản lí nhân viên">
-            {value.val}
-          </TabPanel>
           <TabPanel value={value.val} index="Quản lí thực đơn">
             <MenuManagement placeInfo={place} />
           </TabPanel>

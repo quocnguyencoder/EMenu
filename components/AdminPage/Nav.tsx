@@ -36,7 +36,6 @@ export default function Nav({ setValue, selected }: Props) {
 const categories = [
   'Tổng quan',
   'Thông tin địa điểm',
-  'Quản lí nhân viên',
   'Quản lí thực đơn',
   'Quản lí đơn hàng',
 ]
