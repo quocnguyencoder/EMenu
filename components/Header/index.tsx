@@ -27,7 +27,7 @@ export default function Header() {
           variant="dense"
           style={{
             display: 'flex',
-            minHeight: '9vh',
+            minHeight: '3rem',
           }}
         >
           <IconWithDrawer />
@@ -43,7 +43,7 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Toolbar variant="dense" />
+      <Toolbar variant="dense" style={{ minHeight: '3rem' }} />
     </>
   )
 }

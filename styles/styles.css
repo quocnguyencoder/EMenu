@@ -3,6 +3,12 @@
     padding-left: 24px;
     width: 60vw;
   }
+  * {
+    -ms-overflow-style: none;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 .hero-text-input-container {
   width: 100%;
