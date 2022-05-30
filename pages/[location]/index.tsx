@@ -9,7 +9,7 @@ import {
 import React from 'react'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import PlaceList from '@/components/Explore/PlaceList'
-import Breakfast from 'icons/breakfast'
+import Breakfast from 'icons/Breakfast'
 import Desserts from 'icons/Desserts'
 import Sandwiches from 'icons/Sandwiches'
 import Coffee from 'icons/Coffee'
