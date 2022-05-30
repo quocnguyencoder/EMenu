@@ -78,6 +78,8 @@ export interface Bill {
   status: string
   userID: string
   total: number
+  deliveryTo: string
+  phone: string
 }
 
 export interface BillDetail extends Bill {

@@ -95,6 +95,8 @@ const createBillInfo = async (
   status: string,
   userID: string,
   total: number,
+  deliveryTo: string,
+  phone: string,
   order: string[]
 ) => {
   moment.locale('en')
@@ -109,6 +111,8 @@ const createBillInfo = async (
       placeID: placeID,
       status: status,
       userID: userID,
+      deliveryTo: deliveryTo,
+      phone: phone,
       total: total,
     })
     .then((doc) => {

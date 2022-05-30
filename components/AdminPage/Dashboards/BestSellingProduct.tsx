@@ -71,7 +71,7 @@ function Item(props: ItemProps) {
             width: '100%',
           }}
         >
-          Best selling product
+          Sản phẩm bán chạy
         </Typography>
         <Typography
           variant="subtitle2"

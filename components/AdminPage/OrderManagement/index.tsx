@@ -65,7 +65,18 @@ const OrderManagement: React.FC<Props> = ({ place }: Props) => {
       flex: 1.2,
     },
     { field: `payment`, headerName: `Phương thức thanh toán`, flex: 1.45 },
-    { field: `note`, headerName: `Lưu ý`, headerAlign: 'center', flex: 1 },
+    {
+      field: `deliveryTo`,
+      headerName: `Địa chỉ`,
+      headerAlign: 'center',
+      flex: 1.5,
+    },
+    {
+      field: `phone`,
+      headerName: `Số điện thoại`,
+      headerAlign: 'center',
+      flex: 1,
+    },
     {
       field: `datetime`,
       headerName: `Ngày đặt hàng`,

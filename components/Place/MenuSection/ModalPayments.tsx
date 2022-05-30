@@ -6,6 +6,7 @@ import {
   Modal,
   Backdrop,
   Fade,
+  Button,
 } from '@material-ui/core'
 import { useStyles } from '@/styles/place'
 import { Paypal, Cash } from './Payment'
@@ -15,6 +16,8 @@ import * as createService from '@/firebase/createDocument'
 import useUser from '@/firebase/useUser'
 import * as ROUTES from '@/constants/routes'
 import { useRouter } from 'next/router'
+import DeliveryInfo from './DeliveryInfo'
+import { useState } from 'react'
 
 interface Props {
   placeID: string
@@ -36,6 +39,12 @@ const ModalPayments = ({
   const classes = useStyles()
   const { user } = useUser()
   const router = useRouter()
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    address: '',
+    phone: '',
+    submit: false,
+  })
+
   const items = Object.keys(ordersList)
     .map(Number)
     .map((itemID) => ({ [itemID]: ordersList[itemID] } as Order))
@@ -57,6 +66,8 @@ const ModalPayments = ({
         status,
         userID,
         total,
+        deliveryInfo.address,
+        deliveryInfo.phone,
         placeOrders
       )
       .then(() => {
@@ -100,19 +111,41 @@ const ModalPayments = ({
             <Typography variant="h4">Thanh toán hóa đơn</Typography>
             <Typography variant="h4">{moneyFormatter.format(total)}</Typography>
           </Box>
-          <Cash
-            userID={user.id}
-            items={items}
-            total={total}
-            handlePayment={handlePayment}
-          />
-          <Paypal
-            userID={user.id}
-            items={items}
-            total={total}
-            handlePayment={handlePayment}
-          />
-
+          {deliveryInfo.submit ? (
+            <>
+              <Cash
+                userID={user.id}
+                items={items}
+                total={total}
+                handlePayment={handlePayment}
+              />
+              <Paypal
+                userID={user.id}
+                items={items}
+                total={total}
+                handlePayment={handlePayment}
+              />
+              <Button
+                style={{
+                  width: '65%',
+                  textTransform: 'none',
+                  backgroundColor: '#3f37fe',
+                  color: 'white',
+                  fontWeight: 600,
+                }}
+                onClick={() =>
+                  setDeliveryInfo({ ...deliveryInfo, submit: false })
+                }
+              >
+                Quay lại
+              </Button>
+            </>
+          ) : (
+            <DeliveryInfo
+              deliveryInfo={deliveryInfo}
+              setDeliveryInfo={setDeliveryInfo}
+            />
+          )}
           <Typography variant="body2" style={{ fontWeight: 'bold' }}>
             (*)Vui lòng đưa mã QR cho nhân viên địa điểm
           </Typography>

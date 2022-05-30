@@ -62,7 +62,11 @@ const ModalBillDetail: React.FC<Props> = ({
       <Fade in={infoModal.open}>
         <Box className={classes.paper}>
           <Typography>ID hóa đơn: {infoModal.orderDetail.billID}</Typography>
-          <Typography>Tên người mua {infoModal.orderDetail.billID}</Typography>
+          <Typography>
+            Tên người mua: {infoModal.orderDetail.buyerName}
+          </Typography>
+          <Typography>Địa chỉ: {infoModal.orderDetail.deliveryTo}</Typography>
+          <Typography>Số điện thoại: {infoModal.orderDetail.phone}</Typography>
           <Typography>
             Ngày đặt hàng:{' '}
             {moment(infoModal.orderDetail.datetime).format(
