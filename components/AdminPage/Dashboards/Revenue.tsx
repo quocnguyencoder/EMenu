@@ -44,7 +44,7 @@ const Revenue = ({ orderList, months }: Props) => {
       if (revenueLastMonth === 0) return revenueThisMonth / 1000
       else return -revenueLastMonth / 1000
     } else {
-      return (revenueThisMonth - revenueLastMonth) / revenueLastMonth
+      return ((revenueThisMonth - revenueLastMonth) / revenueLastMonth) * 100
     }
   }
 
