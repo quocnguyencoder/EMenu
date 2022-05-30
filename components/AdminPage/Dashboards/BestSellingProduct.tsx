@@ -38,7 +38,7 @@ const BestSellingProduct: React.FC<BestSellProps> = ({
             }}
           >
             {bestSellingList.map((item, i) => (
-              <Item key={item.key} item={item} rank={i} />
+              <Item key={item.key} item={item} rank={i + 1} />
             ))}
           </Carousel>
         ) : (
@@ -77,7 +77,7 @@ function Item(props: ItemProps) {
           variant="subtitle2"
           style={{ fontWeight: 600, margin: '3%' }}
         >
-          #{props.rank + 1}
+          #{props.rank}
         </Typography>
       </Box>
       <Box display="flex" alignItems="center">

@@ -9,6 +9,7 @@ import NumberOfReviews from './NumberOfReviews'
 import Revenue from './Revenue'
 import TotalRevenue from './TotalRevenue'
 import BestSellingProduct from './BestSellingProduct'
+import ChartTotalOrders from './ChartTotalOrders'
 
 interface Props {
   place: Place
@@ -55,9 +56,12 @@ const Dashboards: React.FC<Props> = ({ place }: Props) => {
         <ChartOrders orderList={orderList} months={months} />
         <ChartIncome orderList={orderList} months={months} />
       </Box>
-      <BestSellingProduct
-        orderList={orderList.filter((order) => order.status === 'Confirmed')}
-      />
+      <Box display="flex" style={{ gap: '3%' }}>
+        <BestSellingProduct
+          orderList={orderList.filter((order) => order.status === 'Confirmed')}
+        />
+        <ChartTotalOrders orderList={orderList} />
+      </Box>
     </Box>
   )
 }
