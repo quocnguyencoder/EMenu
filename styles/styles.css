@@ -31,3 +31,9 @@
   -webkit-box-align: center;
   align-items: center;
 }
+
+.MuiPopover-paper{
+  border-radius: 24px !important;
+ 
+}
+ 

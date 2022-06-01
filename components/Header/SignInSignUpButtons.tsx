@@ -24,6 +24,7 @@ const SignInSignUpButtons = () => {
           fontWeight: 'bold',
           borderRadius: '24px',
         }}
+        onClick={goToLogin}
       >
         {'Đăng nhập'}
       </Button>

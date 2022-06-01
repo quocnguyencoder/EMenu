@@ -8,6 +8,7 @@ import useUser from '@/firebase/useUser'
 import Image from 'next/image'
 import IconWithDrawer from './IconWithDrawer'
 import SignInSignUpButtons from './SignInSignUpButtons'
+import CartWithDrawer from './CartWithDrawer'
 
 export default function Header() {
   const classes = useStyles()
@@ -28,6 +29,8 @@ export default function Header() {
           style={{
             display: 'flex',
             minHeight: '3rem',
+            padding: '0.3rem 0',
+            justifyContent: 'space-around',
           }}
         >
           <IconWithDrawer />
@@ -38,12 +41,15 @@ export default function Header() {
           >
             <Image src="/logo.png" height="45px" width="115px" />
           </Box>
-          <Box className={classes.sideBox} justifyContent="flex-end">
-            {!isLoggedIn && <SignInSignUpButtons />}
+          <Box className={classes.sideBox}>
+            {isLoggedIn ? <CartWithDrawer /> : <SignInSignUpButtons />}
           </Box>
         </Toolbar>
       </AppBar>
-      <Toolbar variant="dense" style={{ minHeight: '3rem' }} />
+      <Toolbar
+        variant="dense"
+        style={{ minHeight: '3rem', padding: '0.3rem' }}
+      />
     </>
   )
 }

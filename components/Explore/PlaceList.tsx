@@ -13,7 +13,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 const PlaceList = () => {
   const classes = useStyles()
   return (
-    <Box display="flex" flexDirection="column" mt={3}>
+    <Box display="flex" flexDirection="column" mt={3} style={{ gap: 10 }}>
       <Typography variant="h5" style={{ fontWeight: 'bold' }}>
         {'Gần bạn'}
       </Typography>

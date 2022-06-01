@@ -14,10 +14,10 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       justifyContent: 'space-between',
       gap: '5px',
+      paddingLeft: '10vw',
     },
   },
   sideBox: {
-    flex: 1,
     display: 'flex',
     minWidth: '-webkit-min-content',
   },
@@ -42,5 +42,11 @@ export const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: 'black',
     width: '100%',
+  },
+  responsiveDrawer: {
+    width: '23vw',
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw',
+    },
   },
 }))

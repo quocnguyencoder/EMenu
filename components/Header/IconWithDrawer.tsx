@@ -134,13 +134,17 @@ const IconWithDrawer = () => {
           <MenuIcon />
         </IconButton>
       </Box>
-      <Drawer open={drawerState} onClose={handleCloseDrawer}>
+      <Drawer
+        variant="persistent"
+        open={drawerState}
+        onClose={handleCloseDrawer}
+      >
         <Box>
           <IconButton onClick={handleCloseDrawer}>
             <CloseIcon />
           </IconButton>
         </Box>
-        <List style={{ width: '340px' }}>
+        <List className={classes.responsiveDrawer}>
           {optionList.map(
             (option, index) =>
               option.show && (
