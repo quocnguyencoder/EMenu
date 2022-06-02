@@ -12,6 +12,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn'
 import parse from 'autosuggest-highlight/parse'
 import match from 'autosuggest-highlight/match'
 import { useState } from 'react'
+import router from 'next/router'
 
 interface Location {
   street: string
@@ -86,7 +87,10 @@ const AddressInput = () => {
               <LocationOnOutlinedIcon style={{ margin: '10px' }} />
             }
             endAdornment={
-              <ButtonBase className={classes.searchButton}>
+              <ButtonBase
+                className={classes.searchButton}
+                onClick={() => router.push('/ho-chi-minh')}
+              >
                 <Typography variant="body2" className={classes.buttonFullText}>
                   {'Khám phá khu vực'}
                 </Typography>

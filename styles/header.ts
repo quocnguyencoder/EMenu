@@ -68,7 +68,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     zIndex: 9999,
     [theme.breakpoints.down('sm')]: {
-      minWidth: '100vw',
+      minWidth: '102vw',
     },
   },
 }))

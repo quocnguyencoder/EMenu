@@ -36,6 +36,6 @@
   border-radius: 24px !important;
 }
 
-.search-input:focus-within{
+.search-input:focus-within {
   border: 2px solid black;
 }

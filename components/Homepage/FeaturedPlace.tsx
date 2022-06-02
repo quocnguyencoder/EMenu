@@ -13,6 +13,7 @@ import { useStyles } from '@/styles/featuredPlace'
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import router from 'next/router'
 
 const FeaturedPlace = () => {
   const classes = useStyles()
@@ -44,6 +45,7 @@ const FeaturedPlace = () => {
         <Button
           className={classes.seeMoreButton}
           endIcon={<ArrowForwardIcon />}
+          onClick={() => router.push('/ho-chi-minh')}
         >{`Xem thêm các địa điểm`}</Button>
       </Box>
       <Box display="flex" flexDirection="column" width="100%" gridArea="cards">

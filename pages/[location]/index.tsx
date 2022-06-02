@@ -46,7 +46,7 @@ const index = () => {
       <Box
         padding="1rem 0%"
         display="flex"
-        overflow="auto"
+        overflow="scroll"
         style={{ gap: '3%' }}
       >
         {categories.map((category, index) => (

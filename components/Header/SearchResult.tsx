@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Badge,
   ListItem,
   ListItemAvatar,
   ListItemText,
@@ -36,16 +35,7 @@ const SearchResult = ({ option }: Props) => {
             <Avatar alt={option.name} src={option.image} />
           </StyledBadge>
         ) : (
-          <Badge
-            overlap="circular"
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            variant="dot"
-          >
-            <Avatar alt={option.name} src={option.image} />
-          </Badge>
+          <Avatar alt={option.name} src={option.image} />
         )}
       </ListItemAvatar>
       <ListItemText
