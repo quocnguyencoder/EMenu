@@ -13,8 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       justifyContent: 'space-between',
-      gap: '5px',
-      paddingLeft: '10vw',
+      minWidth: '190px',
     },
   },
   sideBox: {
@@ -23,11 +22,11 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#fff',
-    marginLeft: 0,
-    flexGrow: 0.5,
+    width: '30vw',
+    maxWidth: '450px',
+    [theme.breakpoints.down('sm')]: {
+      width: '60vw',
+    },
   },
   searchIcon: {
     color: 'gray',
@@ -39,14 +38,37 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  inputRoot: {
-    color: 'black',
+  input: {
+    paddingLeft: '10px',
+    borderRadius: '24px',
+    height: '2.4rem',
+    backgroundColor: 'rgb(247, 247, 247)',
+    border: '2px solid transparent',
     width: '100%',
   },
   responsiveDrawer: {
     width: '23vw',
     [theme.breakpoints.down('sm')]: {
       width: '100vw',
+    },
+  },
+  logoFull: {
+    display: 'block',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  logoSmall: {
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+    },
+  },
+  searchResultWrapper: {
+    width: '100%',
+    zIndex: 9999,
+    [theme.breakpoints.down('sm')]: {
+      minWidth: '100vw',
     },
   },
 }))

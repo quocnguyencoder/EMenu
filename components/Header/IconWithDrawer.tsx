@@ -128,6 +128,7 @@ const IconWithDrawer = () => {
           // disable on hover effect
           style={{
             backgroundColor: 'transparent',
+            marginLeft: '2%',
           }}
           onClick={() => toggleDrawer(true)}
         >

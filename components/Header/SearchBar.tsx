@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useStyles } from '../../styles/header'
-import { Typography } from '@material-ui/core'
+import { useStyles } from '@/styles/header'
+import { Box, Popper, Typography } from '@material-ui/core'
 import * as getService from '@/firebase/getDocument'
 import { Place } from '@/models/place'
 import { Autocomplete } from '@material-ui/lab'
@@ -13,6 +13,7 @@ const SearchBar = () => {
   const router = useRouter()
   const classes = useStyles()
   const [placesData, setPlaceData] = useState<Place[]>([])
+  const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     getService.default.getAllPlaces().then((data) => setPlaceData(data))
@@ -24,19 +25,31 @@ const SearchBar = () => {
   }
 
   return (
-    <div className={classes.search}>
+    <Box className={classes.search}>
       <Autocomplete
-        style={{ width: '100%' }}
+        inputValue={inputValue}
         disableListWrap
+        PopperComponent={(props) => (
+          <Popper
+            {...props}
+            className={classes.searchResultWrapper}
+            placement="bottom-start"
+          />
+        )}
         noOptionsText={<Typography>{'Không tìm thấy kết quả'}</Typography>}
-        disablePortal
         options={placesData}
         getOptionLabel={(option) => option.name}
         onChange={(event, value) => goToDetail(value)}
-        renderInput={(params) => <SearchInput params={params} />}
+        renderInput={(params) => (
+          <SearchInput
+            params={params}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+          />
+        )}
         renderOption={(option) => <SearchResult option={option} />}
       />
-    </div>
+    </Box>
   )
 }
 

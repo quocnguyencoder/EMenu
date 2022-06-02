@@ -1,23 +1,16 @@
-import * as ROUTES from '@/constants/routes'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import { useStyles } from '../../styles/header'
 import { Box } from '@material-ui/core'
-import { useRouter } from 'next/router'
 import useUser from '@/firebase/useUser'
-import Image from 'next/image'
 import IconWithDrawer from './IconWithDrawer'
 import SignInSignUpButtons from './SignInSignUpButtons'
 import CartWithDrawer from './CartWithDrawer'
+import SearchBar from './SearchBar'
+
+import Logo from './Logo'
 
 export default function Header() {
-  const classes = useStyles()
-  const router = useRouter()
   const { user } = useUser()
-
-  const gotoHomepage = () => {
-    router.push(ROUTES.HOME)
-  }
 
   const isLoggedIn = user.id !== ''
 
@@ -34,14 +27,9 @@ export default function Header() {
           }}
         >
           <IconWithDrawer />
-          <Box
-            display="block"
-            onClick={gotoHomepage}
-            style={{ cursor: 'pointer' }}
-          >
-            <Image src="/logo.png" height="45px" width="115px" />
-          </Box>
-          <Box className={classes.sideBox}>
+          <Logo />
+          <Box display="flex" alignItems="center" style={{ gap: '5%' }}>
+            <SearchBar />
             {isLoggedIn ? <CartWithDrawer /> : <SignInSignUpButtons />}
           </Box>
         </Toolbar>

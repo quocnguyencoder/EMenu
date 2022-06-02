@@ -21,7 +21,8 @@
       "@/firebase/*": ["firebase/*"],
       "@/constants/*": ["constants/*"],
       "@/styles/*": ["styles/*"],
-      "@/contexts/*": ["contexts/*"]
+      "@/contexts/*": ["contexts/*"],
+      "@/services/*": ["services/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

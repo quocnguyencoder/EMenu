@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '15px',
     maxHeight: '30px',
     '&:hover': {
-      backgroundColor: '#e62a05',
+      backgroundColor: '#de4002',
     },
   },
   checkoutButton: {
@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: '3% 0 4% 0',
     padding: '3% 5%',
     '&:hover': {
-      backgroundColor: '#e62a05',
+      backgroundColor: '#de4002',
     },
   },
   goToPlaceDetailIcon: {

@@ -88,10 +88,10 @@ const AddressInput = () => {
             endAdornment={
               <ButtonBase className={classes.searchButton}>
                 <Typography variant="body2" className={classes.buttonFullText}>
-                  {'Tìm kiếm địa điểm'}
+                  {'Khám phá khu vực'}
                 </Typography>
                 <Typography variant="body2" className={classes.buttonText}>
-                  {'Tìm kiếm'}
+                  {'Khám phá'}
                 </Typography>
               </ButtonBase>
             }

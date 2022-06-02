@@ -32,8 +32,10 @@
   align-items: center;
 }
 
-.MuiPopover-paper{
+.MuiPopover-paper {
   border-radius: 24px !important;
- 
 }
- 
+
+.search-input:focus-within{
+  border: 2px solid black;
+}

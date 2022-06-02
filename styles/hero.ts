@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   searchButton: {
-    backgroundColor: 'red',
+    backgroundColor: '#ed4c07',
     borderTopRightRadius: '24px',
     borderBottomRightRadius: '24px',
     height: '3.5em',
