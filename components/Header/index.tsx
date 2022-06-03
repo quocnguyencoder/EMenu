@@ -21,7 +21,7 @@ export default function Header() {
           variant="dense"
           style={{
             display: 'flex',
-            minHeight: '3rem',
+            minHeight: '3.6rem',
             padding: '0.3rem 0',
             justifyContent: 'space-around',
           }}
@@ -36,7 +36,7 @@ export default function Header() {
       </AppBar>
       <Toolbar
         variant="dense"
-        style={{ minHeight: '3.8rem', padding: '0.3rem' }}
+        style={{ minHeight: '3.6rem', padding: '0.3rem' }}
       />
     </>
   )

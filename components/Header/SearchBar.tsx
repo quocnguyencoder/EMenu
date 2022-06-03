@@ -28,6 +28,7 @@ const SearchBar = () => {
       <Autocomplete
         inputValue={inputValue}
         disableListWrap
+        clearOnEscape
         PopperComponent={(props) => (
           <Popper
             {...props}

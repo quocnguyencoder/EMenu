@@ -2,7 +2,7 @@ import React from 'react'
 import { useStyles } from '@/styles/detail'
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { Box, Chip, Typography } from '@material-ui/core'
+import { Box, Chip, Divider, Typography } from '@material-ui/core'
 import ArrowForwardOutlinedIcon from '@material-ui/icons/ArrowForwardOutlined'
 import StarOutlinedIcon from '@material-ui/icons/StarOutlined'
 import ReviewBlock from './ReviewBlock'
@@ -59,6 +59,7 @@ const TopReviews = () => {
         <ReviewBlock />
         <ReviewBlock />
       </Box>
+      <Divider style={{ marginTop: '1.5rem' }} />
     </Box>
   )
 }

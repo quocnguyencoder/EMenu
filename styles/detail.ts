@@ -31,4 +31,26 @@ export const useStyles = makeStyles((theme) => ({
       padding: '1rem 1rem',
     },
   },
+  menuWrapper: {
+    padding: '0.5rem 0',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 1rem',
+    },
+  },
+  noWrap2Line: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+  },
+  addButton: {
+    position: 'absolute',
+    zIndex: 999,
+    bottom: 8,
+    right: 8,
+    backgroundColor: '#fff',
+    boxShadow:
+      'transparent 0px 0px 0px 1px inset, rgb(0 0 0 / 20%) 0px 8px 24px',
+  },
 }))

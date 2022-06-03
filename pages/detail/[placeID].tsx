@@ -6,6 +6,7 @@ import { Container } from '@material-ui/core'
 import CoverWithLogo from '@/components/Detail/CoverWithLogo'
 import PlaceInfo from '@/components/Detail/PlaceInfo'
 import TopReviews from '@/components/Detail/TopReviews'
+import PlaceMenu from '@/components/Detail/PlaceMenu'
 
 interface Props {
   place_data: Place
@@ -23,6 +24,7 @@ const Detail = ({ place_data, status }: Props) => {
       <CoverWithLogo coverImg={place_data.image} />
       <PlaceInfo place_data={place_data} />
       <TopReviews />
+      <PlaceMenu menu={place_data.menu} categories={place_data.categories} />
       {status}
     </Container>
   )

@@ -1,5 +1,3 @@
-import { Category } from '@material-ui/icons'
-
 export interface Address {
   ward: string
   street: string
