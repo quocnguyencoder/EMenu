@@ -21,10 +21,7 @@ const Navs = ({ province, placeName, placeID }: Props) => {
       <Link as={ROUTES.LOCATION(province)} href="/[location]">
         <a>{province}</a>
       </Link>
-      <Link
-        as={ROUTES.PLACE_DETAIL(province, placeID)}
-        href="/[location]/[place]"
-      >
+      <Link as={ROUTES.PLACE_DETAIL(placeID)} href="/[location]/[place]">
         <a>{placeName}</a>
       </Link>
     </Breadcrumbs>

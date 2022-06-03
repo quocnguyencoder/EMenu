@@ -20,8 +20,7 @@ const SearchBar = () => {
   }, [])
 
   const goToDetail = (placeData: Place | null) => {
-    placeData !== null &&
-      router.push(ROUTES.PLACE_DETAIL(placeData.address.province, placeData.id))
+    placeData !== null && router.push(ROUTES.PLACE_DETAIL(placeData.id))
   }
 
   return (

@@ -21,14 +21,14 @@ const Logo = () => {
         className={classes.logoFull}
         style={{ cursor: 'pointer' }}
       >
-        <Image src="./logo.png" height="45px" width="115px" />
+        <Image src="/logo.png" height="45px" width="115px" />
       </Box>
       <Box
         onClick={gotoHomepage}
         className={classes.logoSmall}
         style={{ cursor: 'pointer' }}
       >
-        <Image src="./logo-small.png" height="30px" width="40px" />
+        <Image src="/logo-small.png" height="30px" width="40px" />
       </Box>
     </>
   )

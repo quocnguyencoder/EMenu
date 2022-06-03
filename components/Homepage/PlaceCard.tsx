@@ -26,7 +26,7 @@ const PlaceCard = ({ info }: Props) => {
 
   const gotoDetail = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    router.push(ROUTES.PLACE_DETAIL(info.address.province, info.id))
+    router.push(ROUTES.PLACE_DETAIL(info.id))
   }
 
   return (
@@ -44,7 +44,7 @@ const PlaceCard = ({ info }: Props) => {
         <ListItemText
           primary={
             <Link
-              href={ROUTES.PLACE_DETAIL(info.address.province, info.id)}
+              href={ROUTES.PLACE_DETAIL(info.id)}
               color="inherit"
               variant="body1"
               onClick={(e) => gotoDetail(e)}

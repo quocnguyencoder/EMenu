@@ -13,4 +13,18 @@ const getAllPlaces = async () => {
   return places_data
 }
 
-export { getAllPlaces }
+const getPlaceDetail = async (placeID: string) => {
+  const place_data = await firebase
+    .firestore()
+    .collection('place')
+    .doc(placeID)
+    .get()
+    .then((snapshot) => {
+      return snapshot.data() as Place
+    })
+
+  place_data.id = placeID
+  return place_data
+}
+
+export { getAllPlaces, getPlaceDetail }

@@ -13,6 +13,7 @@ import parse from 'autosuggest-highlight/parse'
 import match from 'autosuggest-highlight/match'
 import { useState } from 'react'
 import router from 'next/router'
+import * as ROUTES from '@/constants/routes'
 
 interface Location {
   street: string
@@ -89,7 +90,9 @@ const AddressInput = () => {
             endAdornment={
               <ButtonBase
                 className={classes.searchButton}
-                onClick={() => router.push('/ho-chi-minh')}
+                onClick={() =>
+                  router.push(ROUTES.EXPLORE_LOCATION('ho-chi-minh'))
+                }
               >
                 <Typography variant="body2" className={classes.buttonFullText}>
                   {'Khám phá khu vực'}
