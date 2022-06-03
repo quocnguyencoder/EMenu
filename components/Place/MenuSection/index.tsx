@@ -71,6 +71,8 @@ const MenuSection = ({ place }: Props) => {
             name: place.menu[itemID].name,
             price: place.menu[itemID].price,
             quantity: 1,
+            discount: place.menu[itemID].discount,
+            image: place.menu[itemID].image,
           },
         })
   }
@@ -94,6 +96,8 @@ const MenuSection = ({ place }: Props) => {
             name: place.menu[itemID].name,
             price: place.menu[itemID].price,
             quantity: (ordersList[itemID].quantity -= 1),
+            discount: place.menu[itemID].discount,
+            image: place.menu[itemID].image,
           },
         })
   }
@@ -125,6 +129,8 @@ const MenuSection = ({ place }: Props) => {
         removeFromOrders={removeFromOrders}
         clearOrders={clearOrders}
         ordersList={ordersList}
+        placeID={place.id}
+        placeOrders={place.order}
       />
     </>
   )

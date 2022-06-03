@@ -12,7 +12,8 @@ import { Category } from '@/models/place'
 import { useStyles } from '@/styles/modal'
 import * as updateService from '@/firebase/updateDocument'
 import { useState } from 'react'
-
+import SnackBar from '@/components/common/SnackBar'
+import type { Color } from '@material-ui/lab/Alert'
 interface Props {
   categories: Category
   placeID: string
@@ -20,7 +21,18 @@ interface Props {
 
 const DeleteCategory = ({ categories, placeID }: Props) => {
   const classes = useStyles()
-
+  const [message, setMessage] = useState({
+    text: '',
+    severity: 'error' as Color,
+    open: false,
+  })
+  const handleOpenAlert = (text: string, severity: Color) => {
+    setMessage({
+      text: text,
+      severity: severity,
+      open: true,
+    })
+  }
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
   const handleDeleteCategory = (selectedList: number[]) => {
     setSelectedCategories(selectedList.sort((a, b) => (a > b ? 1 : -1)))
@@ -42,53 +54,57 @@ const DeleteCategory = ({ categories, placeID }: Props) => {
         placeID,
         categoryListAfterDeleted
       )
+      handleOpenAlert('Xóa loại món ăn thành công', 'success')
     }
   }
   return (
-    <Box display="flex" style={{ margin: '0 0 1% 1%' }}>
-      <FormControl
-        margin="dense"
-        variant="outlined"
-        style={{ minWidth: '25%' }}
-      >
-        <InputLabel>Các loại món ăn cần xóa</InputLabel>
-        <Select
-          multiple
-          label="Các loại món ăn cần xóa"
-          value={selectedCategories}
-          onChange={(e) => handleDeleteCategory(e.target.value as number[])}
-          renderValue={(selected) => (
-            <Box>
-              {(selected as number[]).map(
-                (value) =>
-                  categories[value] !== undefined && (
-                    <Chip
-                      key={`select ${value}`}
-                      label={categories[value].name}
-                    />
-                  )
-              )}
-            </Box>
-          )}
+    <>
+      <SnackBar message={message} setMessage={setMessage} />
+      <Box display="flex" style={{ margin: '0 0 1% 1%' }}>
+        <FormControl
+          margin="dense"
+          variant="outlined"
+          style={{ minWidth: '25%' }}
         >
-          {Object.keys(categories).map((c) => (
-            <MenuItem key={`category ${c}`} value={Number(c)}>
-              {categories[Number(c)].name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <CardActions>
-        <Button
-          size="large"
-          className={classes.buttonLineGradient}
-          variant="contained"
-          onClick={handleSubmit}
-        >
-          Xác nhận
-        </Button>
-      </CardActions>
-    </Box>
+          <InputLabel>Các loại món ăn cần xóa</InputLabel>
+          <Select
+            multiple
+            label="Các loại món ăn cần xóa"
+            value={selectedCategories}
+            onChange={(e) => handleDeleteCategory(e.target.value as number[])}
+            renderValue={(selected) => (
+              <Box>
+                {(selected as number[]).map(
+                  (value) =>
+                    categories[value] !== undefined && (
+                      <Chip
+                        key={`select ${value}`}
+                        label={categories[value].name}
+                      />
+                    )
+                )}
+              </Box>
+            )}
+          >
+            {Object.keys(categories).map((c) => (
+              <MenuItem key={`category ${c}`} value={Number(c)}>
+                {categories[Number(c)].name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <CardActions>
+          <Button
+            size="large"
+            className={classes.buttonLineGradient}
+            variant="contained"
+            onClick={handleSubmit}
+          >
+            Xác nhận
+          </Button>
+        </CardActions>
+      </Box>
+    </>
   )
 }
 

@@ -41,4 +41,19 @@ const deleteUserReview = (
     )
 }
 
-export default { deleteUserReview }
+const deleteUserOrder = (placeID: string, billID: string) => {
+  firebase
+    .firestore()
+    .collection('bill')
+    .doc(billID)
+    .delete()
+    .then(() => {
+      firebase
+        .firestore()
+        .collection('place')
+        .doc(placeID)
+        .update({ order: firebase.firestore.FieldValue.arrayRemove(billID) })
+    })
+}
+
+export default { deleteUserReview, deleteUserOrder }

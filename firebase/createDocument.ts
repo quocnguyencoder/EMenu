@@ -1,7 +1,9 @@
 import firebase from 'firebase/app'
-import { Coordinate, Place } from '@/models/place'
+import { Coordinate, Place, Order } from '@/models/place'
 import * as getService from './getDocument'
+import * as updateService from './updateDocument'
 import User from '@/models/user'
+import moment from 'moment'
 
 const createUserInfo = (
   uid: string,
@@ -85,4 +87,37 @@ const createPlaceInfo = async (
     })
 }
 
-export default { createUserInfo, createPlaceInfo }
+const createBillInfo = async (
+  items: Order[],
+  note: string,
+  payment: string,
+  placeID: string,
+  status: string,
+  userID: string,
+  total: number,
+  deliveryTo: string,
+  phone: string,
+  order: string[]
+) => {
+  moment.locale('en')
+  firebase
+    .firestore()
+    .collection('bill')
+    .add({
+      items: items,
+      note: note,
+      datetime: moment().format('LLL'),
+      payment: payment,
+      placeID: placeID,
+      status: status,
+      userID: userID,
+      deliveryTo: deliveryTo,
+      phone: phone,
+      total: total,
+    })
+    .then((doc) => {
+      updateService.default.updatePlaceOrders(placeID, [...order, doc.id])
+    })
+}
+
+export default { createUserInfo, createPlaceInfo, createBillInfo }
