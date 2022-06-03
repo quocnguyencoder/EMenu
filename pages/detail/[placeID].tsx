@@ -2,6 +2,10 @@ import React from 'react'
 import { GetServerSideProps } from 'next'
 import { getPlaceDetail } from '@/services/getData'
 import { Place } from '@/models/place'
+import { Container } from '@material-ui/core'
+import CoverWithLogo from '@/components/Detail/CoverWithLogo'
+import PlaceInfo from '@/components/Detail/PlaceInfo'
+import TopReviews from '@/components/Detail/TopReviews'
 
 interface Props {
   place_data: Place
@@ -10,10 +14,17 @@ interface Props {
 
 const Detail = ({ place_data, status }: Props) => {
   return (
-    <div>
-      {place_data.name}
+    <Container
+      style={{
+        maxWidth: '1000px',
+        padding: 0,
+      }}
+    >
+      <CoverWithLogo coverImg={place_data.image} />
+      <PlaceInfo place_data={place_data} />
+      <TopReviews />
       {status}
-    </div>
+    </Container>
   )
 }
 

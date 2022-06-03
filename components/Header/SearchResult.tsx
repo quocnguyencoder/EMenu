@@ -21,7 +21,7 @@ const SearchResult = ({ option }: Props) => {
     now.isBetween(moment(open, 'h:mma'), moment(close, 'h:mma'))
 
   return (
-    <ListItem style={{ padding: 0, width: '100%' }}>
+    <ListItem component="span" style={{ padding: 0, width: '100%' }}>
       <ListItemAvatar>
         {isOpen(option.time.open, option.time.close) ? (
           <StyledBadge

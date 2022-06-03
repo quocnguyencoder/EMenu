@@ -115,7 +115,7 @@ const FeaturedPlace = () => {
               {`Quán ăn gia đình`}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              New York City • Thai • $$
+              Hồ Chí Minh • Quán ăn • $$
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               5 ★ 10 ratings
