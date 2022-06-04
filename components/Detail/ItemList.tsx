@@ -97,7 +97,7 @@ const ItemList = ({ menu, category, categoryID }: Props) => {
                         variant="body2"
                         style={{ fontWeight: 'bold' }}
                       >
-                        Add
+                        Thêm
                       </Typography>
                     </Box>
                   }

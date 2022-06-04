@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useStyles } from '@/styles/header'
 import { useRouter } from 'next/router'
 import useUser from '@/firebase/useUser'
-import { Box, Drawer, IconButton, List } from '@material-ui/core'
+import { Avatar, Box, Drawer, IconButton, List } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
@@ -70,7 +70,13 @@ const IconWithDrawer = () => {
     {
       text: 'Tài khoản',
       caption: user.name,
-      icon: <AccountCircleOutlinedIcon className={classes.drawerButtonIcon} />,
+      icon: (
+        <Avatar
+          alt={user.name}
+          src={user.profilePic}
+          className={classes.drawerButtonIcon}
+        />
+      ),
       action: () => goToPage(ROUTES.USER_PROFILE),
       show: isLoggedIn,
     },

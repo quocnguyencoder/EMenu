@@ -31,7 +31,8 @@ const ReviewBlock = ({ reviewID }: Props) => {
     <Paper
       variant="outlined"
       style={{
-        width: '19rem',
+        minWidth: '19rem',
+        maxWidth: '19rem',
         height: '9rem',
         padding: '2rem 1rem',
         cursor: 'pointer',

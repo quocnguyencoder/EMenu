@@ -2,8 +2,11 @@ import { Paper, Typography } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import React from 'react'
 import StarBorderIcon from '@material-ui/icons/StarBorder'
+import useUser from '@/firebase/useUser'
 
 const AddReview = () => {
+  const { user } = useUser()
+  const isLoggedIn = user.id !== ''
   return (
     <Paper
       elevation={0}
@@ -19,7 +22,7 @@ const AddReview = () => {
       }}
     >
       <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-        QuocN.
+        {isLoggedIn ? user.name : 'Khách'}
       </Typography>
 
       <Rating
@@ -30,7 +33,7 @@ const AddReview = () => {
         emptyIcon={<StarBorderIcon fontSize="inherit" />}
       />
       <Typography variant="body2" color="secondary">
-        Viết đánh giá
+        Viết bài đánh giá
       </Typography>
     </Paper>
   )
