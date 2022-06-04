@@ -23,7 +23,7 @@ const Detail = ({ place_data, status }: Props) => {
     >
       <CoverWithLogo coverImg={place_data.image} />
       <PlaceInfo place_data={place_data} />
-      <TopReviews />
+      <TopReviews ratings={place_data.rating} reviews={place_data.reviews} />
       <PlaceMenu menu={place_data.menu} categories={place_data.categories} />
       {status}
     </Container>

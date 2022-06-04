@@ -22,7 +22,8 @@
       "@/constants/*": ["constants/*"],
       "@/styles/*": ["styles/*"],
       "@/contexts/*": ["contexts/*"],
-      "@/services/*": ["services/*"]
+      "@/services/*": ["services/*"],
+      "@/helpers/*": ["helpers/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

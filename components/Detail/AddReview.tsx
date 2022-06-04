@@ -25,6 +25,7 @@ const AddReview = () => {
       <Rating
         defaultValue={0}
         name="rating input"
+        precision={0.5}
         size="large"
         emptyIcon={<StarBorderIcon fontSize="inherit" />}
       />

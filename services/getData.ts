@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
-import { Place } from '@/models/place'
+import { Place, Review } from '@/models/place'
+import User from '@/models/user'
 
 const getAllPlaces = async () => {
   const querySnapshot = await firebase.firestore().collection('place').get()
@@ -27,4 +28,28 @@ const getPlaceDetail = async (placeID: string) => {
   return place_data
 }
 
-export { getAllPlaces, getPlaceDetail }
+const getReviewByID = async (reviewID: string) => {
+  const data = await firebase
+    .firestore()
+    .collection('review')
+    .doc(reviewID)
+    .get()
+    .then((snapshot) => {
+      return snapshot.data() as Review
+    })
+  return data
+}
+
+const getUserByID = async (userID: string) => {
+  const userData = await firebase
+    .firestore()
+    .collection('user')
+    .doc(userID)
+    .get()
+    .then((snapshot) => {
+      return snapshot.data() as User
+    })
+  return userData
+}
+
+export { getAllPlaces, getPlaceDetail, getReviewByID, getUserByID }

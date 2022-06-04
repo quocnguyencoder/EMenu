@@ -6,6 +6,7 @@ import { useStyles } from '@/styles/detail'
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
+import { toAvgRating } from 'helpers/toAvgRating'
 
 interface Props {
   place_data: Place
@@ -15,6 +16,10 @@ const PlaceInfo = ({ place_data }: Props) => {
   const classes = useStyles()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const ratingsCount = place_data.rating
+    ? Object.keys(place_data.rating).length
+    : 0
+  const avgRating = place_data.rating ? toAvgRating(place_data.rating) : 0
   return (
     <Box className={classes.infoWrapper}>
       <Typography variant="h4" style={{ fontWeight: 'bold' }}>
@@ -23,10 +28,10 @@ const PlaceInfo = ({ place_data }: Props) => {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" className={classes.description}>
           <Typography variant="body2" color="textSecondary" noWrap>
-            {`Nha Trang, Pizza, Coca ${isMobile ? '' : '•'}`}&nbsp;
+            {`${place_data.type} ${isMobile ? '' : '•'}`}&nbsp;
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            {` 5 ★ (10 ratings) • 0.5km • $$`}
+            {` ${avgRating} ★ (${ratingsCount}) • 0.5km • $$`}
           </Typography>
         </Box>
         <Box
@@ -40,7 +45,7 @@ const PlaceInfo = ({ place_data }: Props) => {
                 <InfoOutlinedIcon fontSize="small" />
                 {!isMobile && (
                   <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-                    More Info
+                    Chi tiết
                   </Typography>
                 )}
               </Box>
@@ -54,7 +59,7 @@ const PlaceInfo = ({ place_data }: Props) => {
                 <FavoriteBorderIcon fontSize="small" />
                 {!isMobile && (
                   <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-                    Save
+                    Lưu
                   </Typography>
                 )}
               </Box>

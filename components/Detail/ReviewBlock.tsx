@@ -1,29 +1,59 @@
+import { Review } from '@/models/place'
+import User from '@/models/user'
+import { getReviewByID, getUserByID } from '@/services/getData'
 import { Box, Paper, Typography } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
-import React from 'react'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
 
-const ReviewBlock = () => {
-  return (
+interface Props {
+  reviewID: string
+}
+
+const ReviewBlock = ({ reviewID }: Props) => {
+  const [reviewInfo, setReviewInfo] = useState<Review>()
+  const [userInfo, setUserInfo] = useState<User>()
+
+  useEffect(() => {
+    try {
+      getReviewByID(reviewID).then((reviewData) => {
+        getUserByID(reviewData.userID).then((userData) => {
+          setUserInfo(userData)
+          setReviewInfo(reviewData)
+        })
+      })
+    } catch (err) {
+      console.error(err)
+    }
+  }, [])
+
+  return reviewInfo && userInfo ? (
     <Paper
       variant="outlined"
       style={{
-        minWidth: '19rem',
+        width: '19rem',
         height: '9rem',
         padding: '2rem 1rem',
         cursor: 'pointer',
       }}
     >
       <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-        QuocN.
+        {userInfo.name}
       </Typography>
       <Box display="flex" alignItems="center">
-        <Rating defaultValue={5} name="user rating" size="small" readOnly />
+        <Rating
+          value={reviewInfo.rating}
+          precision={0.5}
+          name="user rating"
+          size="small"
+          readOnly
+        />
         <Typography
           variant="body2"
           color="secondary"
           style={{ marginLeft: '2%' }}
         >
-          9/5/22
+          {moment(reviewInfo.date, 'DD MM YYYY, h:mm:ss a').format('l')}
         </Typography>
       </Box>
 
@@ -36,8 +66,12 @@ const ReviewBlock = () => {
           WebkitLineClamp: 2,
           WebkitBoxOrient: 'vertical',
         }}
-      >{`Quán ngon, rẻ, chất lượng`}</Typography>
+      >
+        {`${reviewInfo.content}`}
+      </Typography>
     </Paper>
+  ) : (
+    <></>
   )
 }
 

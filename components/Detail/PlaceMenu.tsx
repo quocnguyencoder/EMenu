@@ -19,16 +19,17 @@ const PlaceMenu = ({ menu, categories }: Props) => {
       </Typography>
       <CategoryNav categories={categories} />
 
-      {Object.keys(categories)
-        .map(Number)
-        .map((categoryID) => (
-          <ItemList
-            key={categoryID}
-            menu={menu}
-            category={categories[categoryID]}
-            categoryID={categoryID}
-          />
-        ))}
+      {categories &&
+        Object.keys(categories)
+          .map(Number)
+          .map((categoryID) => (
+            <ItemList
+              key={categoryID}
+              menu={menu}
+              category={categories[categoryID]}
+              categoryID={categoryID}
+            />
+          ))}
     </Box>
   )
 }

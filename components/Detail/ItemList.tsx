@@ -49,13 +49,18 @@ const ItemList = ({ menu, category, categoryID }: Props) => {
               >
                 <ListItemText
                   primary={
-                    <Typography variant="body2" style={{ fontWeight: 'bold' }}>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      style={{ fontWeight: 'bold' }}
+                    >
                       {menu[itemID].name}
                     </Typography>
                   }
                   secondary={
                     <>
                       <Typography
+                        component="span"
                         variant="body2"
                         color="secondary"
                         className={classes.noWrap2Line}
@@ -63,6 +68,7 @@ const ItemList = ({ menu, category, categoryID }: Props) => {
                         {menu[itemID].description}
                       </Typography>
                       <Typography
+                        component="span"
                         variant="body2"
                         color="secondary"
                         style={{ fontWeight: 'bold' }}

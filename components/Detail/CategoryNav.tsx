@@ -33,25 +33,26 @@ const CategoryNav = ({ categories }: Props) => {
             padding: 0,
           }}
         >
-          {Object.keys(categories)
-            .map(Number)
-            .map((categoryID) => (
-              <ListItem
-                key={`nav-category-${categoryID}`}
-                style={{
-                  cursor: 'pointer',
-                }}
-              >
-                <ListItemText
-                  style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
-                  primary={
-                    <Typography variant="body2">
-                      {categories[categoryID].name}
-                    </Typography>
-                  }
-                />
-              </ListItem>
-            ))}
+          {categories &&
+            Object.keys(categories)
+              .map(Number)
+              .map((categoryID) => (
+                <ListItem
+                  key={`nav-category-${categoryID}`}
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                >
+                  <ListItemText
+                    style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
+                    primary={
+                      <Typography variant="body2">
+                        {categories[categoryID].name}
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+              ))}
         </List>
       </Box>
       <Divider />
