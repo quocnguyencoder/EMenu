@@ -36,7 +36,7 @@ export default function Header() {
       </AppBar>
       <Toolbar
         variant="dense"
-        style={{ minHeight: '3.6rem', padding: '0.3rem' }}
+        style={{ minHeight: '3.3rem', padding: '0.3rem' }}
       />
     </>
   )

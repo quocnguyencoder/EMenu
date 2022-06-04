@@ -8,6 +8,8 @@ import {
 import { Place } from '@/models/place'
 import moment from 'moment'
 import StyledBadge from '../common/StyledBadge'
+import router from 'next/router'
+import * as ROUTES from '@/constants/routes'
 
 interface Props {
   option: Place
@@ -20,8 +22,16 @@ const SearchResult = ({ option }: Props) => {
   const isOpen = (open: string, close: string) =>
     now.isBetween(moment(open, 'h:mma'), moment(close, 'h:mma'))
 
+  const goToDetail = (placeData: Place) => {
+    router.push(ROUTES.PLACE_DETAIL(placeData.id))
+  }
+
   return (
-    <ListItem component="span" style={{ padding: 0, width: '100%' }}>
+    <ListItem
+      onClick={() => goToDetail(option)}
+      component="span"
+      style={{ padding: 0, width: '100%' }}
+    >
       <ListItemAvatar>
         {isOpen(option.time.open, option.time.close) ? (
           <StyledBadge

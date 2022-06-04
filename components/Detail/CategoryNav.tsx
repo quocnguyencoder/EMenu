@@ -19,7 +19,7 @@ const CategoryNav = ({ categories }: Props) => {
   return (
     <Box
       position="sticky"
-      top="3.6rem"
+      top="3.5rem"
       style={{ backgroundColor: '#fff', zIndex: 2 }}
     >
       <Box display="flex" alignItems="center">
