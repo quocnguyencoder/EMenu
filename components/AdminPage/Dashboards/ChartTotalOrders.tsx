@@ -52,7 +52,7 @@ const ChartTotalOrders = ({ orderList }: Props) => {
   return (
     <Paper style={{ width: '30%', margin: '1%' }}>
       <Chart
-        type="doughnut"
+        type={'doughnut' as const}
         data={data}
         options={{
           plugins: {

@@ -74,7 +74,7 @@ const ChartTotalStars: React.FC<Props> = ({ ratings }: Props) => {
   return (
     <Paper style={{ width: '30%', margin: '1%' }}>
       <Chart
-        type="pie"
+        type={'pie' as const}
         data={data}
         options={{
           plugins: {
