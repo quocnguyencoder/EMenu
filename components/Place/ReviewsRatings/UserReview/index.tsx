@@ -50,47 +50,51 @@ const UserReview = ({
   }
 
   return userReview !== undefined ? (
-    <>
-      <Paper style={{ backgroundColor: '#fff', marginBottom: '20px' }}>
-        <ReviewHeader
-          userID={userReview.userID}
-          date={userReview.date}
-          ratingObj={getRatingObj(userID, reviewID)}
-          reviewID={reviewID}
-          placeID={placeID}
-        />
-        <ReviewContent
-          rating={userReview.rating}
-          subject={userReview.subject}
-          content={userReview.content}
-        />
-        {userReview.files.length !== 0 && (
-          <ReviewImages reviewID={reviewID} files={userReview.files} />
-        )}
-        <ReviewReactInfo
-          likes={userReview.likes}
-          comments={userReview.comments}
-        />
-        <Divider variant="middle" />
-        <ReviewButtons
-          reviewID={reviewID}
-          likes={userReview.likes}
-          setShowComments={setShowComments}
-          setOpenDialog={setOpenDialog}
-        />
-        {showComments && (
-          <>
-            {userReview.comments.map((comment, index) => (
-              <ReviewComment
-                key={`comment-${index}-review-${reviewID}`}
-                comment={comment}
-              />
-            ))}
-            <CommentInput reviewID={reviewID} setOpenDialog={setOpenDialog} />
-          </>
-        )}
-      </Paper>
-    </>
+    <Paper
+      variant="outlined"
+      style={{
+        backgroundColor: '#fff',
+        marginBottom: '20px',
+      }}
+    >
+      <ReviewHeader
+        userID={userReview.userID}
+        date={userReview.date}
+        ratingObj={getRatingObj(userID, reviewID)}
+        reviewID={reviewID}
+        placeID={placeID}
+      />
+      <ReviewContent
+        rating={userReview.rating}
+        subject={userReview.subject}
+        content={userReview.content}
+      />
+      {userReview.files.length !== 0 && (
+        <ReviewImages reviewID={reviewID} files={userReview.files} />
+      )}
+      <ReviewReactInfo
+        likes={userReview.likes}
+        comments={userReview.comments}
+      />
+      <Divider variant="middle" />
+      <ReviewButtons
+        reviewID={reviewID}
+        likes={userReview.likes}
+        setShowComments={setShowComments}
+        setOpenDialog={setOpenDialog}
+      />
+      {showComments && (
+        <>
+          {userReview.comments.map((comment, index) => (
+            <ReviewComment
+              key={`comment-${index}-review-${reviewID}`}
+              comment={comment}
+            />
+          ))}
+          <CommentInput reviewID={reviewID} setOpenDialog={setOpenDialog} />
+        </>
+      )}
+    </Paper>
   ) : (
     <> </>
   )

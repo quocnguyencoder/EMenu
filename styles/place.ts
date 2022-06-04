@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   orderWrapper: {
     backgroundColor: '#fff',
     alignSelf: 'flex-start',
@@ -60,6 +60,11 @@ export const useStyles = makeStyles(() => ({
     height: '80%',
     maxWidth: '700px',
     maxHeight: '500px',
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw',
+      minHeight: '100vh',
+      borderRadius: '0',
+    },
     position: 'relative',
   },
   reviewModalSubmitButton: {
