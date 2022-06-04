@@ -9,6 +9,8 @@ import ReviewBlock from './ReviewBlock'
 import AddReview from './AddReview'
 import { RatingList } from '@/models/place'
 import { toAvgRating } from '@/helpers/toAvgRating'
+import router from 'next/router'
+import * as ROUTES from '@/constants/routes'
 
 interface Props {
   placeID: string
@@ -47,6 +49,7 @@ const TopReviews = ({ placeID, ratings, reviews }: Props) => {
             </Box>
           }
           clickable
+          onClick={() => router.push(ROUTES.PLACE_REVIEWS(placeID))}
           className={classes.chip}
         />
       </Box>

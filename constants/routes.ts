@@ -13,3 +13,4 @@ export const PLACE_DETAIL = (placeID: string) => `/detail/${placeID}`
 export const LOCATION = (province: string) => `/${normalizeText(province)}`
 export const USER_PROFILE = '/user/profile'
 export const EXPLORE_LOCATION = (locationID: string) => `/explore/${locationID}`
+export const PLACE_REVIEWS = (placeID: string) => `/reviews/${placeID}`
