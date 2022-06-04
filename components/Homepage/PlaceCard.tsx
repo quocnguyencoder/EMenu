@@ -55,7 +55,7 @@ const PlaceCard = ({ info }: Props) => {
           }
           secondary={
             <Typography variant="body2">
-              {`${info.address.street}, ${info.address.ward},  ${info.address.city}, ${info.address.province}`}
+              {`${info.address.street}, ${info.address.ward}, ${info.address.city}, ${info.address.province}`}
             </Typography>
           }
         />

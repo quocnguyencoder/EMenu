@@ -7,7 +7,6 @@ import {
   InputLabel,
   CardMedia,
   InputBase,
-  Snackbar,
   ButtonBase,
   Typography,
 } from '@material-ui/core'
@@ -20,14 +19,9 @@ import ItemForm from './ItemForm'
 import SelectCategories from './SelectCategories'
 import * as getService from '@/firebase/getDocument'
 import * as updateService from '@/firebase/updateDocument'
-import { SnackbarOrigin } from '@material-ui/core/Snackbar'
-import Alert from '@material-ui/lab/Alert'
 import type { Color } from '@material-ui/lab/Alert'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
-
-interface State extends SnackbarOrigin {
-  open: boolean
-}
+import SnackBar from '@/components/common/SnackBar'
 
 interface Props {
   categories: Category
@@ -43,15 +37,10 @@ export default function AddItem({ categories, placeID, menu }: Props) {
   const [disableBtn, setDisableBtn] = useState(false)
   const inputEl = useRef(null)
 
-  const [state, setState] = useState<State>({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-  })
-  const { vertical, horizontal, open } = state
   const [message, setMessage] = useState({
     text: '',
     severity: 'error' as Color,
+    open: false,
   })
 
   const handlePreviewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,15 +53,11 @@ export default function AddItem({ categories, placeID, menu }: Props) {
   }
 
   const handleOpenAlert = (text: string, severity: Color) => {
-    setState({ ...state, open: true })
     setMessage({
       text: text,
       severity: severity,
+      open: true,
     })
-  }
-
-  const handleClose = () => {
-    setState({ ...state, open: false })
   }
 
   const handleChange = (selectedOption: string) => {
@@ -122,6 +107,7 @@ export default function AddItem({ categories, placeID, menu }: Props) {
                 image: fireBaseUrl,
                 name: e.target.Name.value,
                 price: Number(e.target.Price.value),
+                discount: 0,
               } as MenuItem
               updateService.default
                 .updateMenuItem(placeID, newItemID, data)
@@ -165,17 +151,7 @@ export default function AddItem({ categories, placeID, menu }: Props) {
 
   return (
     <>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        autoHideDuration={2000}
-        open={open}
-        key={vertical + horizontal}
-        onClose={handleClose}
-      >
-        <Alert variant="filled" severity={message.severity}>
-          {message.text}
-        </Alert>
-      </Snackbar>
+      <SnackBar message={message} setMessage={setMessage} />
       <form onSubmit={handleSubmit}>
         <Box
           display="flex"

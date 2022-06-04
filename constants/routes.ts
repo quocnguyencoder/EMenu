@@ -7,6 +7,7 @@ const normalizeText = (text: string) =>
 export const HOME = '/'
 export const LOGIN = '/login'
 export const ADMIN = '/admin'
+export const NOTIFY = '/notify'
 export const EMenuAdmin = '/e-menu/admin'
 export const EMenuLogin = '/e-menu/login'
 export const PLACE_DETAIL = (placeID: string) => `/detail/${placeID}`

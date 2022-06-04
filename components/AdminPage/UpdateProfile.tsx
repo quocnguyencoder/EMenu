@@ -7,10 +7,8 @@ import {
   Button,
   ButtonBase,
   Typography,
-  Snackbar,
 } from '@material-ui/core'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
-import { SnackbarOrigin } from '@material-ui/core/Snackbar'
 import { useState, useRef } from 'react'
 import { useStyles } from '../../styles/modal'
 import { Address, Place, Time } from '../../models/place'
@@ -20,14 +18,10 @@ import firebase from 'firebase/app'
 import 'firebase/storage'
 import isEqual from 'lodash/isEqual'
 import type { Color } from '@material-ui/lab/Alert'
-import Alert from '@material-ui/lab/Alert'
 import * as updateService from '@/firebase/updateDocument'
 import * as getService from '@/firebase/getDocument'
 import shortcutAddress from '@/functions/shortcutAddress'
-
-interface State extends SnackbarOrigin {
-  open: boolean
-}
+import SnackBar from '../common/SnackBar'
 
 interface Props {
   place: Place
@@ -37,15 +31,10 @@ interface Props {
 
 const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
   const classes = useStyles()
-  const [state, setState] = useState<State>({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-  })
-  const { vertical, horizontal, open } = state
   const [message, setMessage] = useState({
     text: '',
     severity: 'error' as Color,
+    open: false,
   })
 
   const [previewImg, setPreviewImg] = useState<string>(place.image)
@@ -53,15 +42,11 @@ const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
   const [disableBtn, setDisableBtn] = useState(false)
 
   const handleOpenAlert = (text: string, severity: Color) => {
-    setState({ ...state, open: true })
     setMessage({
       text: text,
       severity: severity,
+      open: true,
     })
-  }
-
-  const handleClose = () => {
-    setState({ ...state, open: false })
   }
 
   const handlePreviewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -206,17 +191,7 @@ const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
   }
   return (
     <>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        autoHideDuration={2000}
-        open={open}
-        key={vertical + horizontal}
-        onClose={handleClose}
-      >
-        <Alert variant="filled" severity={message.severity}>
-          {message.text}
-        </Alert>
-      </Snackbar>
+      <SnackBar message={message} setMessage={setMessage} />
       <Modal
         className={classes.modal}
         open={openModal}

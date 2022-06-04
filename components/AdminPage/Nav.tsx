@@ -1,7 +1,12 @@
 import { Box, List, ListItem } from '@material-ui/core'
 
 interface Props {
-  setValue: any
+  setValue: React.Dispatch<
+    React.SetStateAction<{
+      val: string
+      selected: number
+    }>
+  >
   selected: number
 }
 
@@ -31,6 +36,6 @@ export default function Nav({ setValue, selected }: Props) {
 const categories = [
   'Tổng quan',
   'Thông tin địa điểm',
-  'Quản lí nhân viên',
   'Quản lí thực đơn',
+  'Quản lí đơn hàng',
 ]

@@ -146,6 +146,7 @@ const MenuItemList = ({ placeInfo, filter }: Props) => {
           placeID={placeInfo.id}
           openModal={openModal}
           handleCloseModal={handleCloseModal}
+          setItemCategoryList={setItemCategoryList}
         />
       )}
       {modalDeleteMenuItem == true && (

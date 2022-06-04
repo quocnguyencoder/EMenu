@@ -6,19 +6,13 @@ import {
   OutlinedInput,
   Select,
   InputLabel,
-  Snackbar,
 } from '@material-ui/core'
 import { useStyles } from '@/styles/modal'
 import { Category } from '@/models/place'
-import { SnackbarOrigin } from '@material-ui/core/Snackbar'
 import type { Color } from '@material-ui/lab/Alert'
-import Alert from '@material-ui/lab/Alert'
 import { useState } from 'react'
 import * as updateService from '@/firebase/updateDocument'
-
-interface State extends SnackbarOrigin {
-  open: boolean
-}
+import SnackBar from '@/components/common/SnackBar'
 
 interface Props {
   categories: Category
@@ -29,27 +23,18 @@ const UpdateCategory = ({ categories, placeID }: Props) => {
   const classes = useStyles()
   const categoryList = Object.keys(categories).map(Number)
 
-  const [state, setState] = useState<State>({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-  })
-  const { vertical, horizontal, open } = state
   const [message, setMessage] = useState({
     text: '',
     severity: 'error' as Color,
+    open: false,
   })
 
   const handleOpenAlert = (text: string, severity: Color) => {
-    setState({ ...state, open: true })
     setMessage({
       text: text,
       severity: severity,
+      open: true,
     })
-  }
-
-  const handleClose = () => {
-    setState({ ...state, open: false })
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -76,17 +61,7 @@ const UpdateCategory = ({ categories, placeID }: Props) => {
 
   return (
     <>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        autoHideDuration={2000}
-        open={open}
-        key={vertical + horizontal}
-        onClose={handleClose}
-      >
-        <Alert variant="filled" severity={message.severity}>
-          {message.text}
-        </Alert>
-      </Snackbar>
+      <SnackBar message={message} setMessage={setMessage} />
       <Box style={{ margin: '0 0 1% 1%' }}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <FormControl

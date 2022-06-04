@@ -59,7 +59,7 @@ const Admin = ({ places_data }: Props) => {
       field: `Address`,
       headerName: `Địa chỉ`,
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.address.street}, ${params.row.address.ward}, ${params.row.address.city}, ${params.row.address.province},`,
+        `${params.row.address.street}, ${params.row.address.ward}, ${params.row.address.city}, ${params.row.address.province}`,
       flex: 2,
     },
     {
