@@ -81,7 +81,7 @@ const ChartIncome: React.FC<Props> = ({ orderList, months }: Props) => {
   return (
     <Paper style={{ width: '45%', marginRight: '1%', flex: '1' }}>
       <Chart
-        type={'line' as const}
+        type="line"
         data={data}
         options={{
           plugins: {
