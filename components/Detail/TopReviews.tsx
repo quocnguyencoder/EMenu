@@ -11,16 +11,18 @@ import { RatingList } from '@/models/place'
 import { toAvgRating } from '@/helpers/toAvgRating'
 
 interface Props {
+  placeID: string
   reviews: string[]
   ratings: RatingList
 }
 
-const TopReviews = ({ ratings, reviews }: Props) => {
+const TopReviews = ({ placeID, ratings, reviews }: Props) => {
   const classes = useStyles()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const ratingsCount = ratings ? Object.keys(ratings).length : 0
   const avgRating = ratings ? toAvgRating(ratings) : 0
+
   return (
     <Box
       className={classes.topReviewsWrapper}
@@ -62,7 +64,7 @@ const TopReviews = ({ ratings, reviews }: Props) => {
         </Typography>
       </Box>
       <Box display="flex" overflow="scroll auto" pt={2} style={{ gap: '1rem' }}>
-        <AddReview />
+        <AddReview placeID={placeID} />
         {reviews &&
           reviews.map((reviewID) => (
             <ReviewBlock key={`review-${reviewID}`} reviewID={reviewID} />

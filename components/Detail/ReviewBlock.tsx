@@ -68,7 +68,7 @@ const ReviewBlock = ({ reviewID }: Props) => {
           WebkitBoxOrient: 'vertical',
         }}
       >
-        {`${reviewInfo.content}`}
+        {reviewInfo.subject}
       </Typography>
     </Paper>
   ) : (
