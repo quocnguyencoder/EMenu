@@ -23,7 +23,7 @@
       "@/styles/*": ["styles/*"],
       "@/contexts/*": ["contexts/*"],
       "@/services/*": ["services/*"],
-      "@/helpers/*": ["helpers/*"]
+      "@/helpers/*": ["helpers/*"],
       "@/assets/*": ["assets/*"]
 
     }
