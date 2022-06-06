@@ -7,6 +7,7 @@ import CoverWithLogo from '@/components/Detail/CoverWithLogo'
 import PlaceInfo from '@/components/Detail/PlaceInfo'
 import TopReviews from '@/components/Detail/TopReviews'
 import PlaceMenu from '@/components/Detail/PlaceMenu'
+import DefaultErrorPage from 'next/error'
 
 interface Props {
   place_data: Place
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const Detail = ({ place_data, status }: Props) => {
-  return (
+  return status === 200 ? (
     <Container
       style={{
         maxWidth: '1000px',
@@ -35,6 +36,8 @@ const Detail = ({ place_data, status }: Props) => {
       />
       {status}
     </Container>
+  ) : (
+    <DefaultErrorPage statusCode={status} />
   )
 }
 
