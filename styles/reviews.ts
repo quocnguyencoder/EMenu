@@ -42,4 +42,9 @@ export const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
     },
   },
+  userReviewButton: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
 }))

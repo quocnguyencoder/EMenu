@@ -30,7 +30,7 @@ const ReviewComment = ({ comment }: Props) => {
 
   const gotoUserDetail = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    router.push('#')
+    router.push('/')
   }
 
   return userData !== undefined ? (

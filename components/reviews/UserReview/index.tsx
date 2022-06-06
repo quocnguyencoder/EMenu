@@ -83,6 +83,7 @@ const UserReview = ({
       <ReviewButtons
         reviewID={reviewID}
         likes={userReview.likes}
+        showComments={showComments}
         setShowComments={setShowComments}
         setOpenDialog={setOpenDialog}
       />

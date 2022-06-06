@@ -24,6 +24,7 @@ import { MoreVert } from '@material-ui/icons'
 import useUser from '@/firebase/useUser'
 import * as deleteService from '@/firebase/deleteDocument'
 import { RatingInfo } from '@/models/place'
+import 'moment/locale/vi'
 
 interface Props {
   userID: string
@@ -43,6 +44,7 @@ const ReviewHeader = ({
   const [userData, setUserData] = useState<User>()
   const router = useRouter()
   const { user } = useUser()
+  moment.locale('vi')
 
   useEffect(() => {
     getService.default.getUserInfo(userID).then((data) => {
