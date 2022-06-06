@@ -119,7 +119,7 @@ const InfoForm = () => {
           component="span"
           style={{
             backgroundColor: '#e7e7e7',
-            fontSize: '1vw',
+            fontSize: '1rem',
             textTransform: 'none',
           }}
         >
@@ -131,14 +131,14 @@ const InfoForm = () => {
         label="Email"
         variant="outlined"
         value={user.email}
-        style={{ width: '40%' }}
+        style={{ width: '100%', maxWidth: '20rem' }}
       />
 
       <TextField
         label="Tên hiển thị"
         variant="outlined"
         value={displayName}
-        style={{ width: '40%' }}
+        style={{ width: '100%', maxWidth: '20rem' }}
         onChange={(e) => setDisplayName(e.target.value)}
       />
 

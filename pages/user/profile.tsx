@@ -1,5 +1,4 @@
-import { Box, Container } from '@material-ui/core'
-import NavBar from '@/components/User/NavBar'
+import { Container } from '@material-ui/core'
 import InfoForm from '@/components/User/InfoForm'
 
 const profile = () => {
@@ -12,9 +11,6 @@ const profile = () => {
         minHeight: '80vh',
       }}
     >
-      <Box width="20%">
-        <NavBar />
-      </Box>
       <InfoForm />
     </Container>
   )
