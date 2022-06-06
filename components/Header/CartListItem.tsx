@@ -96,11 +96,20 @@ const CartListItem = ({
                   alignItems: 'center',
                 }}
               >
-                <RemoveIcon
-                  onClick={() => decreaseItem(itemID)}
-                  fontSize="small"
-                  style={{ cursor: 'pointer' }}
-                />
+                {cartItem.quantity === 1 ? (
+                  <DeleteIcon
+                    onClick={() => deleteItem(itemID)}
+                    fontSize="small"
+                    style={{ cursor: 'pointer' }}
+                  />
+                ) : (
+                  <RemoveIcon
+                    onClick={() => decreaseItem(itemID)}
+                    fontSize="small"
+                    style={{ cursor: 'pointer' }}
+                  />
+                )}
+
                 <Typography
                   variant="body1"
                   style={{ fontWeight: 'bold', color: 'grey' }}
