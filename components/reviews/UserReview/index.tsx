@@ -11,6 +11,7 @@ import ReviewButtons from './ReviewButtons'
 import ReviewComment from './ReviewComment'
 import CommentInput from './CommentInput'
 import { RatingList } from '@/models/place'
+import ErrorDialog from '@/components/common/ErrorDialog'
 
 interface Props {
   reviewID: string
@@ -29,6 +30,9 @@ const UserReview = ({
 }: Props) => {
   const [userReview, setUserReview] = useState<Review>()
   const [showComments, setShowComments] = useState(false)
+  const [openErrorDialog, setOpenErrorDialog] = useState(false)
+  const [dialogTitle, setDialogTitle] = useState('')
+  const [dialogContent, setDialogContent] = useState('')
 
   useEffect(() => {
     const unsubscribe = firebase
@@ -95,7 +99,19 @@ const UserReview = ({
               comment={comment}
             />
           ))}
-          <CommentInput reviewID={reviewID} setOpenDialog={setOpenDialog} />
+          <CommentInput
+            reviewID={reviewID}
+            setDialogTitle={setDialogTitle}
+            setDialogContent={setDialogContent}
+            setOpenErrorDialog={setOpenErrorDialog}
+            setOpenDialog={setOpenDialog}
+          />
+          <ErrorDialog
+            open={openErrorDialog}
+            title={dialogTitle}
+            content={dialogContent}
+            handleClose={() => setOpenErrorDialog(false)}
+          />
         </>
       )}
     </Paper>

@@ -5,27 +5,31 @@ import {
   InputBase,
   ListItem,
   ListItemAvatar,
-  ListItemSecondaryAction,
   ListItemText,
 } from '@material-ui/core'
 import useUser from '@/firebase/useUser'
 import moment from 'moment'
 import * as updateService from '@/firebase/updateDocument'
-import ErrorDialog from '@/components/common/ErrorDialog'
 import SendIcon from '@material-ui/icons/Send'
 import { useStyles } from '@/styles/reviews'
 
 interface Props {
   reviewID: string
+  setDialogTitle: (title: string) => void
+  setDialogContent: (content: string) => void
+  setOpenErrorDialog: (status: boolean) => void
   setOpenDialog: (state: boolean) => void
 }
 
-const CommentInput = ({ reviewID, setOpenDialog }: Props) => {
+const CommentInput = ({
+  reviewID,
+  setOpenDialog,
+  setDialogTitle,
+  setDialogContent,
+  setOpenErrorDialog,
+}: Props) => {
   const [input, setInput] = useState('')
   const { user } = useUser()
-  const [openErrorDialog, setOpenErrorDialog] = useState(false)
-  const [dialogTitle, setDialogTitle] = useState('')
-  const [dialogContent, setDialogContent] = useState('')
   const classes = useStyles()
 
   const handleChange = (value: string) => {
@@ -101,6 +105,15 @@ const CommentInput = ({ reviewID, setOpenDialog }: Props) => {
             multiline
             minRows={1}
             maxRows={3}
+            endAdornment={
+              <IconButton
+                style={{ padding: 0 }}
+                onClick={() => handleUploadComment()}
+                className={classes.userReviewButton}
+              >
+                <SendIcon />
+              </IconButton>
+            }
             onChange={(e) => handleChange(e.target.value)}
             style={{
               backgroundColor: '#fff',
@@ -111,20 +124,6 @@ const CommentInput = ({ reviewID, setOpenDialog }: Props) => {
             }}
           />
         }
-      />
-      <ListItemSecondaryAction>
-        <IconButton
-          onClick={() => handleUploadComment()}
-          className={classes.userReviewButton}
-        >
-          <SendIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-      <ErrorDialog
-        open={openErrorDialog}
-        title={dialogTitle}
-        content={dialogContent}
-        handleClose={() => setOpenErrorDialog(false)}
       />
     </ListItem>
   )
