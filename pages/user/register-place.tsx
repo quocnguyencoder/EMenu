@@ -58,6 +58,7 @@ const initialPlace: Place = {
   ).fromNow(),
   show: false,
   order: [],
+  tags: [],
 }
 
 const RegisterPlace = () => {
