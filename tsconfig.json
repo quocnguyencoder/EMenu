@@ -24,7 +24,8 @@
       "@/contexts/*": ["contexts/*"],
       "@/services/*": ["services/*"],
       "@/helpers/*": ["helpers/*"],
-      "@/assets/*": ["assets/*"]
+      "@/assets/*": ["assets/*"],
+      "@/hooks/*": ["hooks/*"],
 
     }
   },

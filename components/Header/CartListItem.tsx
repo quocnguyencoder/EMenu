@@ -13,10 +13,27 @@ import formatter from '@/functions/moneyFormatter'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
+import { MenuItem } from '@/models/place'
+import { CartItem } from '@/models/cart'
 
-const CartItem = () => {
+interface Props {
+  menuItem: MenuItem
+  cartItem: CartItem
+  itemID: number
+  increaseItem: (number: number) => void
+  decreaseItem: (number: number) => void
+  deleteItem: (number: number) => void
+}
+
+const CartListItem = ({
+  menuItem,
+  cartItem,
+  itemID,
+  increaseItem,
+  decreaseItem,
+  deleteItem,
+}: Props) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
@@ -43,10 +60,9 @@ const CartItem = () => {
               aria-describedby={id}
               onClick={handleClick}
             >
-              <Typography
-                variant="body1"
-                style={{ fontWeight: 'bold' }}
-              >{`1`}</Typography>
+              <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                {cartItem.quantity}
+              </Typography>
               <Typography
                 variant="body2"
                 style={{ fontWeight: 'bold', paddingLeft: '2%' }}
@@ -80,15 +96,23 @@ const CartItem = () => {
                   alignItems: 'center',
                 }}
               >
-                <RemoveIcon fontSize="small" />
+                <RemoveIcon
+                  onClick={() => decreaseItem(itemID)}
+                  fontSize="small"
+                  style={{ cursor: 'pointer' }}
+                />
                 <Typography
                   variant="body1"
                   style={{ fontWeight: 'bold', color: 'grey' }}
                 >
-                  1
+                  {cartItem.quantity}
                 </Typography>
 
-                <AddIcon fontSize="small" />
+                <AddIcon
+                  onClick={() => increaseItem(itemID)}
+                  fontSize="small"
+                  style={{ cursor: 'pointer' }}
+                />
               </Paper>
             </Popover>
           </>
@@ -96,17 +120,22 @@ const CartItem = () => {
         <ListItemText
           primary={
             <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>
-              {'Cơm sườn trứng'}
+              {menuItem.name}
             </Typography>
           }
           secondary={
             <Typography variant="subtitle2">
-              {`${formatter.format(12000)}`}
+              {`${formatter.format(menuItem.price * cartItem.quantity)}`}
             </Typography>
           }
         />
 
-        <IconButton edge="end" aria-label="delete item" style={{ padding: 0 }}>
+        <IconButton
+          onClick={() => deleteItem(itemID)}
+          edge="end"
+          aria-label="delete item"
+          style={{ padding: 0 }}
+        >
           <DeleteIcon style={{ fontSize: '1.3rem', color: 'black' }} />
         </IconButton>
       </ListItem>
@@ -115,4 +144,4 @@ const CartItem = () => {
   )
 }
 
-export default CartItem
+export default CartListItem

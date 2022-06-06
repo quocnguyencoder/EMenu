@@ -28,7 +28,11 @@ const Detail = ({ place_data, status }: Props) => {
         ratings={place_data.rating}
         reviews={place_data.reviews}
       />
-      <PlaceMenu menu={place_data.menu} categories={place_data.categories} />
+      <PlaceMenu
+        menu={place_data.menu}
+        categories={place_data.categories}
+        placeID={place_data.id}
+      />
       {status}
     </Container>
   )
