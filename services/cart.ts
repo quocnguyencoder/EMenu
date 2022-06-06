@@ -17,7 +17,7 @@ const addItem = async (placeID: string, itemID: number, cartID: string) => {
   const cartInfo = await getCartInfoByID(cartID)
   const cartRef = firebase.firestore().collection('cart').doc(cartID)
   if (placeID !== cartInfo.placeID) {
-    cartRef.update({ placeID: placeID, [`items.${itemID}.quantity`]: 1 })
+    cartRef.set({ placeID: placeID, items: { [`${itemID}`]: { quantity: 1 } } })
   } else {
     const alreadyInCart = Object.prototype.hasOwnProperty.call(
       cartInfo.items,

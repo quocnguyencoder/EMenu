@@ -47,9 +47,9 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   responsiveDrawer: {
-    width: '23vw',
+    width: '20rem',
     [theme.breakpoints.down('sm')]: {
-      width: '100vw',
+      minWidth: '100vw',
     },
   },
   logoFull: {

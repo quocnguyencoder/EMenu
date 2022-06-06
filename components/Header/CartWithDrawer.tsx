@@ -74,6 +74,7 @@ const CartWithDrawer = ({ userID }: Props) => {
             const quantity = cartInfo.items[itemID].quantity
             const price = placeInfo.menu[itemID].price
             const discount = placeInfo.menu[itemID].discount
+
             return total + price * quantity - discount
           }, 0)
       : 0
