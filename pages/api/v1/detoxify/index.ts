@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
+import hasBadWords from '@/functions/hasBadWords'
 
 interface Offensive {
   toxicity: number[]
@@ -24,20 +25,24 @@ export default function handler(
 
     switch (req.method) {
       case 'POST':
-        axios
-          .request({
-            method: 'POST',
-            url: 'https://detoxify.p.rapidapi.com/',
-            headers: {
-              'content-type': 'application/json',
-              'X-RapidAPI-Host': `${process.env.NEXT_PUBLIC_RAPID_API_HOST}`,
-              'X-RapidAPI-Key': `${process.env.NEXT_PUBLIC_RAPID_API_KEY}`,
-            },
-            data: { text: text },
-          })
-          .then(function (response) {
-            return res.status(200).json(isToxic(response.data as Offensive))
-          })
+        if (hasBadWords(text)) {
+          return res.status(200).json(true)
+        } else {
+          axios
+            .request({
+              method: 'POST',
+              url: 'https://detoxify.p.rapidapi.com/',
+              headers: {
+                'content-type': 'application/json',
+                'X-RapidAPI-Host': `${process.env.NEXT_PUBLIC_RAPID_API_HOST}`,
+                'X-RapidAPI-Key': `${process.env.NEXT_PUBLIC_RAPID_API_KEY}`,
+              },
+              data: { text: text },
+            })
+            .then(function (response) {
+              return res.status(200).json(isToxic(response.data as Offensive))
+            })
+        }
         break
       default:
         res.status(501).json({
