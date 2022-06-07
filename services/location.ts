@@ -16,4 +16,19 @@ const getAllLocations = async () => {
   return locationData
 }
 
-export { getAllLocations }
+const getLocationBySlug = async (slug: string) => {
+  const location = await firebase
+    .firestore()
+    .collection('location')
+    .doc(slug)
+    .get()
+    .then((snapshot) => {
+      const data = snapshot.data() as Location
+      data.slug = snapshot.id
+      return data
+    })
+
+  return location
+}
+
+export { getAllLocations, getLocationBySlug }
