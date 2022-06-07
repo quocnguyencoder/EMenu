@@ -16,7 +16,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined'
 import CardGiftcardOutlinedIcon from '@material-ui/icons/CardGiftcardOutlined'
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined'
-
+import HomeWorkIcon from '@material-ui/icons/HomeWork'
 const IconWithDrawer = () => {
   const classes = useStyles()
   const [drawerState, toggleDrawer] = useState(false)
@@ -100,6 +100,20 @@ const IconWithDrawer = () => {
       icon: <CardGiftcardOutlinedIcon className={classes.drawerButtonIcon} />,
       action: () => goToPage(ROUTES.HOME),
       show: isLoggedIn,
+    },
+    {
+      text: 'Cửa hàng của bạn',
+      caption: '',
+      icon: <HomeWorkIcon className={classes.drawerButtonIcon} />,
+      action: () => goToPage(ROUTES.ADMIN),
+      show: isLoggedIn && user.placeID !== '',
+    },
+    {
+      text: 'Đăng ký địa điểm',
+      caption: '',
+      icon: <HomeWorkIcon className={classes.drawerButtonIcon} />,
+      action: () => goToPage(ROUTES.REGISTER_PLACE),
+      show: isLoggedIn && user.placeID === '',
     },
     {
       text: 'Đăng nhập / Đăng ký',

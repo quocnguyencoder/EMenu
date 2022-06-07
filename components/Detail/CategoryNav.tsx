@@ -23,13 +23,13 @@ const CategoryNav = ({ categories }: Props) => {
       style={{ backgroundColor: '#fff', zIndex: 2 }}
     >
       <Box display="flex" alignItems="center">
-        <IconButton style={{ padding: 0, color: 'black' }}>
+        <IconButton style={{ padding: '0px', color: 'black' }}>
           <ListIcon />
         </IconButton>
         <List
           style={{
             display: 'flex',
-            overflow: 'scroll',
+            overflow: 'auto',
             padding: 0,
           }}
         >
