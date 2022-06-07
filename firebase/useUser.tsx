@@ -21,6 +21,7 @@ const initialState: User = {
   profilePic: '',
   placeID: '',
   reviews: [],
+  saved: [],
 }
 
 const useUser = () => {

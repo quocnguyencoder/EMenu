@@ -6,4 +6,5 @@ export default interface User {
   profilePic: string
   placeID: string
   reviews: string[]
+  saved: string[]
 }

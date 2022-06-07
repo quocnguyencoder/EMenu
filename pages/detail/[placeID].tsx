@@ -34,7 +34,6 @@ const Detail = ({ place_data, status }: Props) => {
         categories={place_data.categories}
         placeID={place_data.id}
       />
-      {status}
     </Container>
   ) : (
     <DefaultErrorPage statusCode={status} />

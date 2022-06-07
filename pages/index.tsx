@@ -1,31 +1,34 @@
-import { Discovery, HeroWithAddressInput } from '@/components/Homepage'
-import { Box, Container } from '@material-ui/core'
+import { HeroWithAddressInput } from '@/components/Homepage'
+import { Container } from '@material-ui/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { GetStaticProps } from 'next'
 import { Place } from '@/models/place'
+import { Location } from '@/models/location'
 import FeaturedPlace from '@/components/Homepage/FeaturedPlace'
-// import { motion } from 'framer-motion'
-
+import { getAllLocations } from '@/services/location'
 interface Props {
-  places_data: Place[]
+  places: Place[]
+  locations: Location[]
 }
 
-export default function Home({ places_data }: Props) {
-  // console.log('home', places_data)
-  const placeCanShow = places_data.reduce(
-    (pre, curr) => (curr.show ? [...pre, curr] : pre),
-    [] as Place[]
-  )
-
+export default function Home({ places, locations }: Props) {
   return (
     <>
       <HeroWithAddressInput />
       <Container maxWidth="md" style={{ paddingTop: '4%', minWidth: '70vw' }}>
-        <FeaturedPlace />
-        <Box visibility="hidden">
-          <Discovery places_data={placeCanShow} />
-        </Box>
+        {locations.map((location) => {
+          const placeList = places.filter((place) =>
+            location.places.includes(place.id)
+          )
+          return (
+            <FeaturedPlace
+              key={`featured-${location.slug}`}
+              location={location}
+              places={placeList}
+            />
+          )
+        })}
       </Container>
     </>
   )
@@ -34,14 +37,16 @@ export default function Home({ places_data }: Props) {
 export const getStaticProps: GetStaticProps = async () => {
   const querySnapshot = await firebase.firestore().collection('place').get()
 
-  const places_data = querySnapshot.docs.map((doc) => {
+  const places = querySnapshot.docs.map((doc) => {
     const data = doc.data() as Place
     data.id = doc.id
     return data
   })
 
+  const locations = await getAllLocations()
+
   return {
-    props: { places_data },
+    props: { places, locations },
     revalidate: 600,
   }
 }
