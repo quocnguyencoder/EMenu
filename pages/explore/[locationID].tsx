@@ -38,20 +38,20 @@ interface Props {
 
 const index = ({ status, location, places }: Props) => {
   const categories = [
-    { name: 'Breakfast', icon: <Breakfast /> },
-    { name: 'Dessert', icon: <Desserts /> },
+    { name: 'Ăn sáng', icon: <Breakfast /> },
+    { name: 'Đô ngọt', icon: <Desserts /> },
     { name: 'Sandwiches', icon: <Sandwiches /> },
-    { name: 'Coffee', icon: <Coffee /> },
+    { name: 'Cà phê', icon: <Coffee /> },
     { name: 'Burgers', icon: <Burgers /> },
-    { name: 'Chicken', icon: <Chicken /> },
+    { name: 'Gà', icon: <Chicken /> },
     { name: 'Salad', icon: <Salad /> },
-    { name: 'FastFood', icon: <Fastfood /> },
-    { name: 'Bakery', icon: <Bakery /> },
+    { name: 'Ăn vặt', icon: <Fastfood /> },
+    { name: 'Bánh mì', icon: <Bakery /> },
     { name: 'Smoothie', icon: <Smoothie /> },
     { name: 'Healthy', icon: <Healthy /> },
     { name: 'Pizza', icon: <Pizza /> },
-    { name: 'Soup', icon: <Soup /> },
-    { name: 'Vegan', icon: <Vegan /> },
+    { name: 'Súp', icon: <Soup /> },
+    { name: 'Chay', icon: <Vegan /> },
   ]
   return status === 200 ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>

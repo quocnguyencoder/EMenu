@@ -64,7 +64,7 @@ const IconWithDrawer = () => {
       text: 'Đơn hàng',
       caption: '',
       icon: <ReceiptOutlinedIcon className={classes.drawerButtonIcon} />,
-      action: () => goToPage(ROUTES.HOME),
+      action: () => goToPage(ROUTES.USER_ORDERS),
       show: isLoggedIn,
     },
     {
