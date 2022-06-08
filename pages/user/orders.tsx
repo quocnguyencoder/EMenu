@@ -37,7 +37,7 @@ const Orders = () => {
       maxWidth="md"
       style={{ paddingTop: '2rem', minWidth: '70vw', minHeight: '75vh' }}
     >
-      <Typography variant="h3" style={{ fontWeight: 'bold' }}>
+      <Typography variant="h4" style={{ fontWeight: 'bold' }}>
         Đơn hàng
       </Typography>
       {pageStatus === 'loaded' && orders.length !== 0 ? (

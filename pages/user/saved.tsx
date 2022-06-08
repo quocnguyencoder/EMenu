@@ -31,13 +31,13 @@ const Saved = () => {
       maxWidth="md"
       style={{ paddingTop: '2rem', minWidth: '70vw', minHeight: '75vh' }}
     >
-      <Typography variant="h3" style={{ fontWeight: 'bold' }}>
+      <Typography variant="h4" style={{ fontWeight: 'bold' }}>
         Đã lưu
       </Typography>
       {user.saved && user.saved.length !== 0 ? (
         <Grid container spacing={3}>
           {savedPlaces.map((place) => (
-            <Grid key={`saved-${place.id}`} item xs={12} sm={6} md={6} lg={4}>
+            <Grid key={`saved-${place.id}`} item xs={12} sm={6} md={4} lg={4}>
               <PlaceCard place={place} />
             </Grid>
           ))}
