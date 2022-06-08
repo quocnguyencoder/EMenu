@@ -84,7 +84,7 @@ const IconWithDrawer = () => {
       text: 'Địa điểm đã lưu',
       caption: '',
       icon: <FavoriteBorderOutlinedIcon className={classes.drawerButtonIcon} />,
-      action: () => goToPage(ROUTES.HOME),
+      action: () => goToPage(ROUTES.SAVED_PLACES),
       show: isLoggedIn,
     },
     {

@@ -50,8 +50,6 @@ const PlaceCard = ({ place }: Props) => {
   return (
     <Card
       style={{
-        minWidth: '20rem',
-        maxWidth: '25rem',
         height: '14rem',
         backgroundColor: '#fff',
         cursor: 'pointer',

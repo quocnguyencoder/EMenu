@@ -8,6 +8,7 @@ export const useStyles = makeStyles(() => ({
   },
   link: {
     cursor: 'pointer',
+    maxWidth: '17rem',
     '&:hover': {
       textDecoration: 'underline',
     },
