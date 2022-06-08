@@ -14,6 +14,7 @@ const Orders = () => {
   const { user } = useUser()
   const [orders, setOrders] = useState<Bill[]>([])
   const [places, setPlaces] = useState<Place[]>([])
+  const [pageStatus, setPageStatus] = useState('isLoading')
 
   useEffect(() => {
     const userInfo = JSON.parse(sessionStorage.getItem('userInfo') || '{}')
@@ -26,6 +27,7 @@ const Orders = () => {
         getPlacesByIDList(placeIDs).then((places_data) => {
           setOrders(orders_data)
           setPlaces(places_data)
+          setPageStatus('loaded')
         })
       })
     }
@@ -38,28 +40,29 @@ const Orders = () => {
       <Typography variant="h3" style={{ fontWeight: 'bold' }}>
         Đơn hàng
       </Typography>
-      <Box
-        display="flex"
-        justifyContent="center"
-        width="100%"
-        style={{ backgroundColor: 'yellow' }}
-      >
-        {orders.map((order) => {
-          const placeInfo = places.filter(
-            (place) => place.id === order.placeID
-          )[0]
+      {pageStatus === 'loaded' && orders.length !== 0 ? (
+        <Box display="flex" justifyContent="center" width="100%">
+          {orders.map((order) => {
+            const placeInfo = places.filter(
+              (place) => place.id === order.placeID
+            )[0]
 
-          return (
-            placeInfo && (
-              <OrderItem
-                key={order.billID}
-                order={order}
-                placeInfo={placeInfo}
-              />
+            return (
+              placeInfo && (
+                <OrderItem
+                  key={order.billID}
+                  order={order}
+                  placeInfo={placeInfo}
+                />
+              )
             )
-          )
-        })}
-      </Box>
+          })}
+        </Box>
+      ) : (
+        <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+          Bạn chưa có đơn hàng nào
+        </Typography>
+      )}
     </Container>
   )
 }
