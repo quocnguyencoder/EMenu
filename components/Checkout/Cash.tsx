@@ -19,16 +19,23 @@ interface Props {
 const Cash = ({ userID, items, total, handlePayment }: Props) => {
   return (
     <Button
-      onClick={() => handlePayment(items, '', 'Cash', 'Waiting', userID, total)}
+      onClick={() =>
+        handlePayment(items, '', 'Tiền mặt', 'Waiting', userID, total)
+      }
       variant="contained"
       startIcon={<MoneyRoundedIcon />}
       style={{
         color: '#FFFFFF',
         backgroundColor: '#33CC33',
-        width: '65%',
+        width: '100%',
+        height: '3.3rem',
+        marginBottom: '1rem',
+        textTransform: 'none',
+        fontWeight: 'bold',
+        fontSize: '1.2rem',
       }}
     >
-      Cash
+      Thanh toán tiền mặt
     </Button>
   )
 }

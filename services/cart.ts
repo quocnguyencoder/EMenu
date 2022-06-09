@@ -34,4 +34,9 @@ const addItem = async (placeID: string, itemID: number, cartID: string) => {
   }
 }
 
-export { getCartInfoByID, addItem }
+const clearCart = (cartID: string) => {
+  const cartRef = firebase.firestore().collection('cart').doc(cartID)
+  cartRef.update({ placeID: '', items: {} })
+}
+
+export { getCartInfoByID, addItem, clearCart }

@@ -18,3 +18,4 @@ export const PLACE_REVIEWS = (placeID: string) => `/reviews/${placeID}`
 export const REGISTER_PLACE = '/user/register-place'
 export const SAVED_PLACES = '/user/saved'
 export const USER_ORDERS = '/user/orders'
+export const CHECKOUT = '/checkout'

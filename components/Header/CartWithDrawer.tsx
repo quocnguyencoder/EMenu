@@ -14,11 +14,12 @@ import CartListItem from './CartListItem'
 import CartInfo from './CartInfo'
 import EmptyCartNotice from './EmptyCartNotice'
 import formatter from '@/functions/moneyFormatter'
-import { Menu, Order, Place } from '@/models/place'
+import { Place } from '@/models/place'
 import firebase from 'firebase/app'
-import { Cart, CartItems } from '@/models/cart'
+import { Cart } from '@/models/cart'
 import { getPlaceDetail } from '@/services/getData'
-import ModalPayments from './ModalPayments'
+import router from 'next/router'
+import * as ROUTES from '@/constants/routes'
 
 interface Props {
   userID: string
@@ -29,17 +30,13 @@ const CartWithDrawer = ({ userID }: Props) => {
   const [drawerState, toggleDrawer] = useState(false)
   const [cartInfo, setCartInfo] = useState<Cart>()
   const [placeInfo, setPlaceInfo] = useState<Place>()
-  const [openPaymentModal, setOpenPaymentModal] = useState(false)
+
   const cartRef = firebase.firestore().collection('cart').doc(userID)
 
   const emptyCart = cartInfo && cartInfo.placeID === ''
 
   const handleCloseDrawer = () => {
     toggleDrawer(false)
-  }
-
-  const handleClosePaymentModal = () => {
-    setOpenPaymentModal(false)
   }
 
   const createCart = () => {
@@ -84,22 +81,6 @@ const CartWithDrawer = ({ userID }: Props) => {
             return total + price * quantity - discount
           }, 0)
       : 0
-
-  const placeOrders = (menu: Menu, orderItems: CartItems) => {
-    const order = {} as Order
-    Object.keys(orderItems)
-      .map(Number)
-      .map((itemID) => {
-        order[itemID] = {
-          name: menu[itemID].name,
-          price: menu[itemID].price,
-          quantity: orderItems[itemID].quantity,
-          discount: menu[itemID].discount,
-          image: menu[itemID].image,
-        }
-      })
-    return order
-  }
 
   const increaseItem = (itemID: number) => {
     cartInfo &&
@@ -163,7 +144,7 @@ const CartWithDrawer = ({ userID }: Props) => {
           >
             {placeInfo && <CartInfo placeInfo={placeInfo} />}
             <Button
-              onClick={() => setOpenPaymentModal(true)}
+              onClick={() => router.push(ROUTES.CHECKOUT)}
               className={classes.checkoutButton}
             >
               <Typography
@@ -192,16 +173,6 @@ const CartWithDrawer = ({ userID }: Props) => {
           </Box>
         )}
       </Drawer>
-      {placeInfo && cartInfo && (
-        <ModalPayments
-          placeID={placeInfo.id}
-          placeOrders={placeInfo.order}
-          ordersList={placeOrders(placeInfo.menu, cartInfo.items)}
-          total={totalPayment}
-          openModal={openPaymentModal}
-          handleCloseModal={handleClosePaymentModal}
-        />
-      )}
     </>
   )
 }

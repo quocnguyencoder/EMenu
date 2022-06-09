@@ -32,6 +32,7 @@ const Orders = () => {
       })
     }
   }, [user.id])
+
   return (
     <Container
       maxWidth="md"
@@ -41,7 +42,13 @@ const Orders = () => {
         Đơn hàng
       </Typography>
       {pageStatus === 'loaded' && orders.length !== 0 ? (
-        <Box display="flex" justifyContent="center" width="100%">
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection="column"
+          width="100%"
+          style={{ gap: '1rem' }}
+        >
           {orders.map((order) => {
             const placeInfo = places.filter(
               (place) => place.id === order.placeID

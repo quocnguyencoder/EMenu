@@ -10,8 +10,17 @@ import {
 } from '@material-ui/core'
 import React from 'react'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
+import { Cart } from '@/models/cart'
+import { Place } from '@/models/place'
+import formatter from '@/functions/moneyFormatter'
 
-const OrderDetail = () => {
+interface Props {
+  cartInfo: Cart
+  placeInfo: Place
+  totalPayment: number
+}
+
+const OrderDetail = ({ cartInfo, placeInfo, totalPayment }: Props) => {
   return (
     <Paper variant="outlined" style={{ marginBottom: '1rem' }}>
       <Box display="flex" alignItems="center" p={1}>
@@ -21,21 +30,46 @@ const OrderDetail = () => {
         </Typography>
       </Box>
       <Box>
-        <ListItem component="span">
-          <ListItemAvatar>
-            <Avatar variant="square" src="https://" alt="Q" />
-          </ListItemAvatar>
-          <ListItemText primary="Ten mon" secondary="12000" />
-          <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-            x1
-          </Typography>
-        </ListItem>
+        {cartInfo &&
+          placeInfo &&
+          Object.keys(cartInfo.items)
+            .map(Number)
+            .map((itemID) => (
+              <React.Fragment key={itemID}>
+                <ListItem component="span">
+                  <ListItemAvatar>
+                    <Avatar
+                      variant="square"
+                      src={placeInfo.menu[itemID].image}
+                      alt={placeInfo.menu[itemID].name}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={placeInfo.menu[itemID].name}
+                    secondary={formatter.format(placeInfo.menu[itemID].price)}
+                  />
+                  <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                    x{cartInfo.items[itemID].quantity}
+                  </Typography>
+                </ListItem>
+                <Divider />
+              </React.Fragment>
+            ))}
 
-        <Divider />
         <ListItem component="span">
-          <ListItemText primary="Tổng cộng" />
-          <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-            12000
+          <ListItemText
+            primary={
+              <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                Tổng cộng
+              </Typography>
+            }
+          />
+          <Typography
+            variant="h6"
+            color="primary"
+            style={{ fontWeight: 'bold' }}
+          >
+            {formatter.format(totalPayment)}
           </Typography>
         </ListItem>
       </Box>
