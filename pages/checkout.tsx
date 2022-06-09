@@ -189,7 +189,7 @@ const Checkout = () => {
         </>
       ) : (
         <Box style={{ backgroundColor: 'yellow' }}>
-          Khồng có thông tin giỏ hàng
+          Không có thông tin giỏ hàng
         </Box>
       )}
     </Container>
