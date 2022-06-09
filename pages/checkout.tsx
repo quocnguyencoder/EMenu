@@ -124,6 +124,7 @@ const Checkout = () => {
     <Container maxWidth="sm" style={{ paddingTop: '2rem' }}>
       <NextSeo
         title={'Thanh toán đơn hàng của bạn'}
+        description="Trang thanh toán của EMenu"
         openGraph={{
           type: 'website',
           url: 'https://emenu-green.vercel.app/',

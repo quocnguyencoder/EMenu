@@ -108,7 +108,10 @@ const index = ({ status, location, places }: Props) => {
                 Trên 4.5 ★
               </Typography>
               <Divider orientation="vertical" flexItem />
-              <IconButton style={{ padding: '0', color: 'black' }}>
+              <IconButton
+                aria-label="expand-rating-filter"
+                style={{ padding: '0', color: 'black' }}
+              >
                 <ExpandMoreIcon />
               </IconButton>
             </Box>
@@ -140,6 +143,7 @@ const index = ({ status, location, places }: Props) => {
               </IconButton>
             </Box>
           }
+          aria-label="expand-price-filter"
           clickable
           style={{
             backgroundColor: 'rgb(231, 231, 231)',

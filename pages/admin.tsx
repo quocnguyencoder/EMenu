@@ -15,6 +15,7 @@ import * as getService from '@/firebase/getDocument'
 import * as ROUTES from '@/constants/routes'
 import isEqual from 'lodash/isEqual'
 import firebase from 'firebase/app'
+import { NextSeo } from 'next-seo'
 
 export default function Admin() {
   const [value, setValue] = useState({ val: 'Tổng quan', selected: 0 })
@@ -45,6 +46,10 @@ export default function Admin() {
 
   return place !== undefined ? (
     <>
+      <NextSeo
+        title={`Quản lý - ${place.name}`}
+        description={`Trang quản lý địa điểm - ${place.name}`}
+      />
       <Grid container>
         <Grid item xs={2}>
           <Nav setValue={setValue} selected={value.selected} />

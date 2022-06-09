@@ -40,6 +40,7 @@ const FeaturedPlace = ({ location, places }: Props) => {
       >
         <Typography
           variant="h5"
+          component="h1"
           style={{ fontWeight: 'bold', marginRight: '1%' }}
         >{`Các địa điểm nổi bật ở ${location.name}`}</Typography>
       </Box>
@@ -91,6 +92,7 @@ const FeaturedPlace = ({ location, places }: Props) => {
                       <CardMedia
                         component={'img'}
                         src={place.menu[itemID].image}
+                        alt={`${place.menu[itemID].name} image`}
                         style={{
                           height: '100%',
                           objectFit: 'fill',
