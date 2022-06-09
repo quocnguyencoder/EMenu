@@ -142,9 +142,17 @@ const CartWithDrawer = ({ userID }: Props) => {
             p={2}
             className={classes.responsiveDrawer}
           >
-            {placeInfo && <CartInfo placeInfo={placeInfo} />}
+            {placeInfo && (
+              <CartInfo
+                placeInfo={placeInfo}
+                handleCloseDrawer={handleCloseDrawer}
+              />
+            )}
             <Button
-              onClick={() => router.push(ROUTES.CHECKOUT)}
+              onClick={() => {
+                router.push(ROUTES.CHECKOUT)
+                handleCloseDrawer()
+              }}
               className={classes.checkoutButton}
             >
               <Typography

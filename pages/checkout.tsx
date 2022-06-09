@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from '@material-ui/core'
+import { Button, Container, Typography } from '@material-ui/core'
 import InfoHeader from '@/components/Checkout/InfoHeader'
 import DeliveryInfo from '@/components/Checkout/DeliveryInfo'
 import OrderDetail from '@/components/Checkout/OrderDetail'
@@ -180,7 +180,7 @@ const Checkout = () => {
                 marginBottom: '1rem',
                 textTransform: 'none',
                 fontWeight: 'bold',
-                fontSize: '1.2rem',
+                fontSize: '1rem',
               }}
             >
               Vui lòng nhập địa chỉ và số điện thoại
@@ -188,9 +188,18 @@ const Checkout = () => {
           )}
         </>
       ) : (
-        <Box style={{ backgroundColor: 'yellow' }}>
-          Không có thông tin giỏ hàng
-        </Box>
+        <>
+          <Typography style={{ margin: '2rem 0' }} variant="h5">
+            Không có thông tin giỏ hàng
+          </Typography>
+          <Button
+            onClick={() => router.push('/')}
+            variant="contained"
+            color="primary"
+          >
+            Về trang chủ
+          </Button>
+        </>
       )}
     </Container>
   ) : (

@@ -7,9 +7,10 @@ import * as ROUTES from '@/constants/routes'
 
 interface Props {
   placeInfo: Place
+  handleCloseDrawer: () => void
 }
 
-const CartInfo = ({ placeInfo }: Props) => {
+const CartInfo = ({ placeInfo, handleCloseDrawer }: Props) => {
   const classes = useStyles()
 
   return (
@@ -19,7 +20,10 @@ const CartInfo = ({ placeInfo }: Props) => {
       </Typography>
       <Typography
         variant="h6"
-        onClick={() => router.push(ROUTES.PLACE_DETAIL(placeInfo.id))}
+        onClick={() => {
+          handleCloseDrawer()
+          router.push(ROUTES.PLACE_DETAIL(placeInfo.id))
+        }}
         style={{ fontWeight: 'bold', cursor: 'pointer', maxWidth: '95%' }}
       >
         {placeInfo.name}
