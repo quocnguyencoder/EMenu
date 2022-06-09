@@ -21,6 +21,7 @@ const createUserInfo = (
       profilePic: photoURL != null ? photoURL : '',
       placeID: '',
       reviews: [] as string[],
+      saved: [] as string[],
     })
 }
 const createPlaceInfo = async (
@@ -48,6 +49,7 @@ const createPlaceInfo = async (
       location: location,
       image: '',
       show: false,
+      tags: [] as string[],
     })
     .then((doc) => {
       firebase.firestore().collection('user').doc(uid).update({

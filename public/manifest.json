@@ -1,0 +1,16 @@
+{
+  "name": "EMenu",
+  "short_name": "EMenu",
+  "icons": [
+    {
+      "src": "/logo-small.png",
+      "sizes": "200x200",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#fff",
+  "background_color": "#fa9f66",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

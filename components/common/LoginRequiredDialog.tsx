@@ -38,7 +38,7 @@ const LoginRequiredDialog = ({ open, handleClose }: Props) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="secondary">
           Hủy
         </Button>
         <Button onClick={gotoLogin} color="primary" autoFocus>

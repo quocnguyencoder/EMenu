@@ -12,7 +12,7 @@ import Logo from './Logo'
 export default function Header() {
   const { user } = useUser()
 
-  const isLoggedIn = user.id !== ''
+  const isLoggedIn = user.id !== undefined && user.id !== ''
 
   return (
     <>
@@ -30,7 +30,11 @@ export default function Header() {
           <Logo />
           <Box display="flex" alignItems="center" style={{ gap: '5%' }}>
             <SearchBar />
-            {isLoggedIn ? <CartWithDrawer /> : <SignInSignUpButtons />}
+            {isLoggedIn ? (
+              <CartWithDrawer userID={user.id} />
+            ) : (
+              <SignInSignUpButtons />
+            )}
           </Box>
         </Toolbar>
       </AppBar>

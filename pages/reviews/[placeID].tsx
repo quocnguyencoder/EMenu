@@ -2,16 +2,17 @@ import React, { useState } from 'react'
 import { GetServerSideProps } from 'next'
 import { getPlaceDetail } from '@/services/getData'
 import { Place } from '@/models/place'
-import { Box, Container, Divider, Link, Typography } from '@material-ui/core'
+import { Box, Container, Divider, Typography } from '@material-ui/core'
 import RatingOverview from '@/components/reviews/RatingOverview'
-import UserReview from '@/components/Place/ReviewsRatings/UserReview'
+import UserReview from '@/components/reviews/UserReview'
 import useUser from '@/firebase/useUser'
 import LoginRequiredDialog from '@/components/common/LoginRequiredDialog'
 import { useStyles } from '@/styles/reviews'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import * as ROUTES from '@/constants/routes'
-import NextLink from 'next/link'
-
+import Link from 'next/link'
+import DefaultErrorPage from 'next/error'
+import { NextSeo } from 'next-seo'
 interface Props {
   place_data: Place
   status: number
@@ -24,11 +25,26 @@ const ReviewsPage = ({ place_data, status }: Props) => {
   const handleCloseDialog = () => {
     setOpenDialog(false)
   }
-  return (
+  return status === 200 ? (
     <Container maxWidth="lg" style={{ paddingTop: '1%', maxWidth: '1000px' }}>
+      <NextSeo
+        title={`Đánh giá: ${place_data.name}`}
+        openGraph={{
+          type: 'website',
+          url: `https://emenu-green.vercel.app/reviews/${place_data.id}`,
+          title: `Đánh giá: ${place_data.name}`,
+          description: `Các xếp hạng và đánh giá: ${place_data.name}`,
+          images: [
+            {
+              url: `${place_data.image}`,
+              alt: `${place_data.name} cover`,
+            },
+          ],
+        }}
+      />
       <Box display="flex" alignItems="center" mt={2}>
         <ArrowBackIosIcon style={{ fontSize: '0.5rem', marginRight: '1rem' }} />
-        <Link component={NextLink} href={ROUTES.PLACE_DETAIL(place_data.id)}>
+        <Link href={ROUTES.PLACE_DETAIL(place_data.id)}>
           <Typography className={classes.link} variant="body2">
             {place_data.name}
           </Typography>
@@ -70,9 +86,10 @@ const ReviewsPage = ({ place_data, status }: Props) => {
               ))}
         </Box>
       </Box>
-      {status}
       <LoginRequiredDialog open={openDialog} handleClose={handleCloseDialog} />
     </Container>
+  ) : (
+    <DefaultErrorPage statusCode={status} />
   )
 }
 

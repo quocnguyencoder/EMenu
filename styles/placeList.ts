@@ -6,4 +6,11 @@ export const useStyles = makeStyles(() => ({
       backgroundColor: 'transparent',
     },
   },
+  link: {
+    cursor: 'pointer',
+    maxWidth: '17rem',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
 }))

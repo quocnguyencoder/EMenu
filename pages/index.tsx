@@ -1,31 +1,50 @@
-import { Discovery, HeroWithAddressInput } from '@/components/Homepage'
-import { Box, Container } from '@material-ui/core'
+import { HeroWithAddressInput } from '@/components/Homepage'
+import { Container } from '@material-ui/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { GetStaticProps } from 'next'
 import { Place } from '@/models/place'
+import { Location } from '@/models/location'
 import FeaturedPlace from '@/components/Homepage/FeaturedPlace'
-// import { motion } from 'framer-motion'
-
+import { getAllLocations } from '@/services/location'
+import { NextSeo } from 'next-seo'
 interface Props {
-  places_data: Place[]
+  places: Place[]
+  locations: Location[]
 }
 
-export default function Home({ places_data }: Props) {
-  // console.log('home', places_data)
-  const placeCanShow = places_data.reduce(
-    (pre, curr) => (curr.show ? [...pre, curr] : pre),
-    [] as Place[]
-  )
-
+export default function Home({ places, locations }: Props) {
   return (
     <>
+      <NextSeo
+        title={'Mọi địa điểm trong một menu'}
+        openGraph={{
+          type: 'website',
+          url: 'https://emenu-green.vercel.app/',
+          title: 'EMenu - Mọi địa điểm trong một Menu',
+          description: 'Các địa điểm ăn uống nổi bật',
+          images: [
+            {
+              url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',
+              alt: 'EMenu logo',
+            },
+          ],
+        }}
+      />
       <HeroWithAddressInput />
       <Container maxWidth="md" style={{ paddingTop: '4%', minWidth: '70vw' }}>
-        <FeaturedPlace />
-        <Box visibility="hidden">
-          <Discovery places_data={placeCanShow} />
-        </Box>
+        {locations.map((location) => {
+          const placeList = places.filter((place) =>
+            location.places.includes(place.id)
+          )
+          return (
+            <FeaturedPlace
+              key={`featured-${location.slug}`}
+              location={location}
+              places={placeList}
+            />
+          )
+        })}
       </Container>
     </>
   )
@@ -34,14 +53,16 @@ export default function Home({ places_data }: Props) {
 export const getStaticProps: GetStaticProps = async () => {
   const querySnapshot = await firebase.firestore().collection('place').get()
 
-  const places_data = querySnapshot.docs.map((doc) => {
+  const places = querySnapshot.docs.map((doc) => {
     const data = doc.data() as Place
     data.id = doc.id
     return data
   })
 
+  const locations = await getAllLocations()
+
   return {
-    props: { places_data },
+    props: { places, locations },
     revalidate: 600,
   }
 }

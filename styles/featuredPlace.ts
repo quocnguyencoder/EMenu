@@ -38,9 +38,13 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   heading: {
+    width: '27rem',
     [theme.breakpoints.down('md')]: {
       paddingTop: '7%',
       paddingBottom: '5%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
     },
   },
   caption: {
@@ -50,6 +54,22 @@ export const useStyles = makeStyles((theme) => ({
       paddingBottom: '5%',
       marginLeft: 'auto',
       marginRight: 'auto',
+    },
+  },
+  card: {
+    paddingTop: '1%',
+    marginBottom: '0rem',
+    marginTop: '1%',
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '32rem',
+      marginBottom: '1rem',
+    },
+  },
+  link: {
+    cursor: 'pointer',
+    '&:hover': {
+      textDecoration: 'underline',
     },
   },
 }))

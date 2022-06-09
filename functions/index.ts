@@ -6,7 +6,6 @@ import calcCrow from './distanceCalc'
 import getBestSellingProduct from './getBestSellingProduct'
 import hasBadWords from './hasBadWords'
 
-
 export {
   moneyFormatter,
   nonAccentVietnamese,

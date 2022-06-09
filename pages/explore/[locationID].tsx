@@ -23,30 +23,58 @@ import Healthy from 'icons/Healthy'
 import Pizza from 'icons/Pizza'
 import Soup from 'icons/Soup'
 import Vegan from 'icons/Vegan'
+import { GetStaticProps } from 'next'
+import { getAllLocations, getLocationBySlug } from '@/services/location'
+import { Location } from '@/models/location'
+import { getPlacesByIDList } from '@/services/place'
+import { Place } from '@/models/place'
+import DefaultErrorPage from 'next/error'
+import { NextSeo } from 'next-seo'
 
-const index = () => {
+interface Props {
+  status: number
+  location: Location
+  places: Place[]
+}
+
+const index = ({ status, location, places }: Props) => {
   const categories = [
-    { name: 'Breakfast', icon: <Breakfast /> },
-    { name: 'Dessert', icon: <Desserts /> },
+    { name: 'Ăn sáng', icon: <Breakfast /> },
+    { name: 'Đô ngọt', icon: <Desserts /> },
     { name: 'Sandwiches', icon: <Sandwiches /> },
-    { name: 'Coffee', icon: <Coffee /> },
+    { name: 'Cà phê', icon: <Coffee /> },
     { name: 'Burgers', icon: <Burgers /> },
-    { name: 'Chicken', icon: <Chicken /> },
+    { name: 'Gà', icon: <Chicken /> },
     { name: 'Salad', icon: <Salad /> },
-    { name: 'FastFood', icon: <Fastfood /> },
-    { name: 'Bakery', icon: <Bakery /> },
+    { name: 'Ăn vặt', icon: <Fastfood /> },
+    { name: 'Bánh mì', icon: <Bakery /> },
     { name: 'Smoothie', icon: <Smoothie /> },
     { name: 'Healthy', icon: <Healthy /> },
     { name: 'Pizza', icon: <Pizza /> },
-    { name: 'Soup', icon: <Soup /> },
-    { name: 'Vegan', icon: <Vegan /> },
+    { name: 'Súp', icon: <Soup /> },
+    { name: 'Chay', icon: <Vegan /> },
   ]
-  return (
+  return status === 200 ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>
+      <NextSeo
+        title={`Khám phá các địa điểm ở ${location.name}`}
+        openGraph={{
+          type: 'website',
+          url: 'https://emenu-green.vercel.app/',
+          title: `Khám phá các địa điểm ở ${location.name}`,
+          description: `Khám phá các địa điểm ở ${location.name}`,
+          images: [
+            {
+              url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',
+              alt: 'EMenu logo',
+            },
+          ],
+        }}
+      />
       <Box
         padding="1rem 0%"
         display="flex"
-        overflow="scroll"
+        overflow="scroll auto"
         style={{ gap: '3%' }}
       >
         {categories.map((category, index) => (
@@ -118,9 +146,48 @@ const index = () => {
           }}
         />
       </Box>
-      <PlaceList />
+      <PlaceList title="Gần bạn" places={places} />
+      <PlaceList title={`Nổi bật ở ${location.name}`} places={places} />
     </Container>
+  ) : (
+    <DefaultErrorPage statusCode={status} />
   )
 }
 
 export default index
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const locationID = params ? `${params.locationID}` : ''
+  let location = {} as Location
+  let places = [] as Place[]
+  let status = 200
+
+  if (locationID !== '') {
+    try {
+      location = await getLocationBySlug(locationID)
+      places = await getPlacesByIDList(location.places)
+    } catch {
+      status = 500
+    }
+  } else {
+    status = 404
+  }
+
+  return {
+    props: { places, location, status },
+    revalidate: 600,
+  }
+}
+
+export async function getStaticPaths() {
+  const locations = await getAllLocations()
+
+  const paths = locations.map((location) => ({
+    params: { locationID: location.slug },
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: blocking } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: 'blocking' }
+}

@@ -18,7 +18,7 @@ export default function Footer() {
       >
         <Toolbar>
           <Typography variant="body1" color="inherit">
-            © 2021 EMenu
+            © 2022 EMenu
           </Typography>
         </Toolbar>
       </Container>

@@ -5,22 +5,53 @@ import {
   Grid,
   ListItemText,
   Paper,
+  Snackbar,
   Typography,
 } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { CategoryInfo, Menu } from '@/models/place'
 import formatter from '@/functions/moneyFormatter'
 import AddIcon from '@material-ui/icons/Add'
 import { useStyles } from '@/styles/detail'
-
+import useUser from '@/firebase/useUser'
+import LoginRequiredDialog from '../common/LoginRequiredDialog'
+import Alert from '../common/Alert'
+import { addItem } from '@/services/cart'
 interface Props {
   menu: Menu
   category: CategoryInfo
   categoryID: number
+  placeID: string
 }
 
-const ItemList = ({ menu, category, categoryID }: Props) => {
+const ItemList = ({ menu, category, categoryID, placeID }: Props) => {
   const classes = useStyles()
+  const { user } = useUser()
+  const [openDialog, setOpenDialog] = useState(false)
+  const [openSnackBar, setOpenSnackBar] = useState(false)
+  const isLoggedIn = user.id !== undefined && user.id !== ''
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+  }
+
+  const handleCloseSnackBar = (
+    event?: React.SyntheticEvent,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setOpenSnackBar(false)
+  }
+
+  const addToCart = (itemID: number) => {
+    if (isLoggedIn) {
+      addItem(placeID, itemID, user.id).then(() => setOpenSnackBar(true))
+    } else {
+      setOpenDialog(true)
+    }
+  }
   return (
     <>
       <Typography
@@ -102,6 +133,7 @@ const ItemList = ({ menu, category, categoryID }: Props) => {
                     </Box>
                   }
                   clickable
+                  onClick={() => addToCart(itemID)}
                   className={classes.addButton}
                 />
               </Box>
@@ -109,6 +141,17 @@ const ItemList = ({ menu, category, categoryID }: Props) => {
           </Grid>
         ))}
       </Grid>
+      <LoginRequiredDialog open={openDialog} handleClose={handleCloseDialog} />
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        onClose={handleCloseSnackBar}
+      >
+        <Alert onClose={handleCloseSnackBar} severity="success">
+          Thêm món ăn thành công
+        </Alert>
+      </Snackbar>
     </>
   )
 }

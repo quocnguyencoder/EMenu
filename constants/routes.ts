@@ -15,3 +15,7 @@ export const LOCATION = (province: string) => `/${normalizeText(province)}`
 export const USER_PROFILE = '/user/profile'
 export const EXPLORE_LOCATION = (locationID: string) => `/explore/${locationID}`
 export const PLACE_REVIEWS = (placeID: string) => `/reviews/${placeID}`
+export const REGISTER_PLACE = '/user/register-place'
+export const SAVED_PLACES = '/user/saved'
+export const USER_ORDERS = '/user/orders'
+export const CHECKOUT = '/checkout'

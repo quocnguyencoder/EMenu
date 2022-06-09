@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   responsiveDrawer: {
     width: '100vw',
     [theme.breakpoints.up('sm')]: {
-      width: '24vw',
+      width: '22rem',
     },
   },
   cartIconButton: {

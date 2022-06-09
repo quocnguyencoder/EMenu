@@ -66,6 +66,7 @@ export interface Place {
   createdDate: string
   activeDate: string
   order: string[]
+  tags: string[]
 }
 
 export interface Bill {

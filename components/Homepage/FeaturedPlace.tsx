@@ -15,8 +15,17 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import router from 'next/router'
 import * as ROUTES from '@/constants/routes'
+import { Place } from '@/models/place'
+import { Location } from '@/models/location'
+import { toAvgRating } from 'helpers/toAvgRating'
+import Link from 'next/link'
 
-const FeaturedPlace = () => {
+interface Props {
+  location: Location
+  places: Place[]
+}
+
+const FeaturedPlace = ({ location, places }: Props) => {
   const classes = useStyles()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -32,7 +41,7 @@ const FeaturedPlace = () => {
         <Typography
           variant="h5"
           style={{ fontWeight: 'bold', marginRight: '1%' }}
-        >{`Các địa điểm nổi bật ở TP. Hồ Chí Minh`}</Typography>
+        >{`Các địa điểm nổi bật ở ${location.name}`}</Typography>
       </Box>
       <Box display="flex" flexDirection="column" gridArea="caption">
         <Typography
@@ -41,87 +50,82 @@ const FeaturedPlace = () => {
           color="textSecondary"
           component="p"
         >
-          {`1000 địa điểm ở TP.Hồ Chí Minh`}
+          {`${location.places.length} địa điểm ở ${location.name}`}
         </Typography>
         <Button
           className={classes.seeMoreButton}
           endIcon={<ArrowForwardIcon />}
-          onClick={() => router.push(ROUTES.EXPLORE_LOCATION('ho-chi-minh'))}
+          onClick={() => router.push(ROUTES.EXPLORE_LOCATION(location.slug))}
         >{`Xem thêm các địa điểm`}</Button>
       </Box>
-      <Box display="flex" flexDirection="column" width="100%" gridArea="cards">
-        <Card variant="outlined" style={{ paddingTop: '1%' }}>
-          <Box
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-around',
-              overflow: 'hidden',
-              maxWidth: '100%',
-            }}
-          >
-            <ImageList
-              cols={isMobile ? 2.5 : 4}
-              className={classes.responsiveImgList}
-              rowHeight={110}
-              gap={15}
-            >
-              <ImageListItem style={{ display: 'block' }}>
-                <CardMedia
-                  component={'img'}
-                  src="https://img.cdn4dd.com/p/fit=cover,width=600,height=300,format=jpeg,quality=75/media/photos/02fec519-14cc-4093-a97f-5cf4b67fdcb9-retina-large.jpg"
-                  style={{
-                    height: '100%',
-                    objectFit: 'fill',
-                    borderRadius: '5px',
-                  }}
-                />
-              </ImageListItem>
-              <ImageListItem style={{ display: 'block' }}>
-                <CardMedia
-                  component={'img'}
-                  src="https://img.cdn4dd.com/p/fit=cover,width=600,height=300,format=jpeg,quality=75/media/photos/02fec519-14cc-4093-a97f-5cf4b67fdcb9-retina-large.jpg"
-                  style={{
-                    height: '100%',
-                    objectFit: 'fill',
-                    borderRadius: '5px',
-                  }}
-                />
-              </ImageListItem>
-              <ImageListItem style={{ display: 'block' }}>
-                <CardMedia
-                  component={'img'}
-                  src="https://img.cdn4dd.com/p/fit=cover,width=600,height=300,format=jpeg,quality=75/media/photos/02fec519-14cc-4093-a97f-5cf4b67fdcb9-retina-large.jpg"
-                  style={{ height: '100%', objectFit: 'fill' }}
-                />
-              </ImageListItem>
-              <ImageListItem style={{ display: 'block' }}>
-                <CardMedia
-                  component={'img'}
-                  src="https://img.cdn4dd.com/p/fit=cover,width=600,height=300,format=jpeg,quality=75/media/photos/02fec519-14cc-4093-a97f-5cf4b67fdcb9-retina-large.jpg"
-                  style={{ height: '100%', objectFit: 'fill' }}
-                />
-              </ImageListItem>
-            </ImageList>
-          </Box>
 
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="h2"
-              style={{ fontWeight: 'bold' }}
+      <Box display="flex" flexDirection="column" width="100%" gridArea="cards">
+        {places.map((place) => (
+          <Card
+            key={`featured-${place.id}`}
+            variant="outlined"
+            className={classes.card}
+          >
+            <Box
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-around',
+                overflow: 'hidden',
+                maxWidth: '100%',
+              }}
             >
-              {`Quán ăn gia đình`}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Hồ Chí Minh • Quán ăn • $$
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              5 ★ 10 ratings
-            </Typography>
-          </CardContent>
-        </Card>
+              <ImageList
+                cols={isMobile ? 2.5 : 4}
+                className={classes.responsiveImgList}
+                rowHeight={110}
+                gap={15}
+              >
+                {Object.keys(place.menu)
+                  .map(Number)
+                  .map((itemID) => (
+                    <ImageListItem
+                      key={`place-${place.id}-${itemID}`}
+                      style={{ display: 'block' }}
+                    >
+                      <CardMedia
+                        component={'img'}
+                        src={place.menu[itemID].image}
+                        style={{
+                          height: '100%',
+                          objectFit: 'fill',
+                          borderRadius: '5px',
+                        }}
+                      />
+                    </ImageListItem>
+                  ))}
+              </ImageList>
+            </Box>
+
+            <CardContent>
+              <Link href={ROUTES.PLACE_DETAIL(place.id)}>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="h2"
+                  className={classes.link}
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {place.name}
+                </Typography>
+              </Link>
+
+              <Typography variant="body2" color="textSecondary" component="p">
+                {place.type}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {` ${toAvgRating(place.rating)} ★ ${
+                  Object.keys(place.rating).length
+                } đánh giá`}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
       </Box>
     </Box>
   )

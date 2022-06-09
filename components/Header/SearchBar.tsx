@@ -31,7 +31,7 @@ const SearchBar = () => {
         )}
         getOptionSelected={(option, value) => option.name === value.name}
         noOptionsText={<Typography>{'Không tìm thấy kết quả'}</Typography>}
-        options={placesData}
+        options={placesData.filter((place) => place.show)}
         getOptionLabel={(option) => option.name}
         renderInput={(params) => (
           <SearchInput

@@ -8,9 +8,10 @@ import ItemList from './ItemList'
 interface Props {
   menu: Menu
   categories: Category
+  placeID: string
 }
 
-const PlaceMenu = ({ menu, categories }: Props) => {
+const PlaceMenu = ({ menu, categories, placeID }: Props) => {
   const classes = useStyles()
   return (
     <Box display="flex" flexDirection="column" className={classes.menuWrapper}>
@@ -28,6 +29,7 @@ const PlaceMenu = ({ menu, categories }: Props) => {
               menu={menu}
               category={categories[categoryID]}
               categoryID={categoryID}
+              placeID={placeID}
             />
           ))}
     </Box>
