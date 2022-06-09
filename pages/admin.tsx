@@ -8,7 +8,6 @@ import {
   OrderManagement,
 } from '../components/AdminPage'
 import TabPanel from '@/components/Homepage/TabPanel'
-import Meta from '@/components/Meta'
 import 'firebase/firestore'
 import { Place } from '@/models/place'
 import { useRouter } from 'next/router'
@@ -46,7 +45,6 @@ export default function Admin() {
 
   return place !== undefined ? (
     <>
-      <Meta title="Admin page" />
       <Grid container>
         <Grid item xs={2}>
           <Nav setValue={setValue} selected={value.selected} />
