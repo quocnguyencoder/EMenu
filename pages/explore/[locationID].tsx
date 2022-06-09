@@ -29,6 +29,7 @@ import { Location } from '@/models/location'
 import { getPlacesByIDList } from '@/services/place'
 import { Place } from '@/models/place'
 import DefaultErrorPage from 'next/error'
+import { NextSeo } from 'next-seo'
 
 interface Props {
   status: number
@@ -55,6 +56,21 @@ const index = ({ status, location, places }: Props) => {
   ]
   return status === 200 ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>
+      <NextSeo
+        title={`Khám phá các địa điểm ở ${location.name}`}
+        openGraph={{
+          type: 'website',
+          url: 'https://emenu-green.vercel.app/',
+          title: `Khám phá các địa điểm ở ${location.name}`,
+          description: `Khám phá các địa điểm ở ${location.name}`,
+          images: [
+            {
+              url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',
+              alt: 'EMenu logo',
+            },
+          ],
+        }}
+      />
       <Box
         padding="1rem 0%"
         display="flex"

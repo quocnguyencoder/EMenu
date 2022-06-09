@@ -8,7 +8,7 @@ import PlaceInfo from '@/components/Detail/PlaceInfo'
 import TopReviews from '@/components/Detail/TopReviews'
 import PlaceMenu from '@/components/Detail/PlaceMenu'
 import DefaultErrorPage from 'next/error'
-
+import { NextSeo } from 'next-seo'
 interface Props {
   place_data: Place
   status: number
@@ -22,6 +22,21 @@ const Detail = ({ place_data, status }: Props) => {
         padding: 0,
       }}
     >
+      <NextSeo
+        title={`${place_data.name}`}
+        openGraph={{
+          type: 'website',
+          url: `https://emenu-green.vercel.app/detail/${place_data.id}`,
+          title: `${place_data.name}`,
+          description: `${place_data.name}`,
+          images: [
+            {
+              url: `${place_data.image}`,
+              alt: `${place_data.name} cover`,
+            },
+          ],
+        }}
+      />
       <CoverWithLogo coverImg={place_data.image} />
       <PlaceInfo place_data={place_data} />
       <TopReviews

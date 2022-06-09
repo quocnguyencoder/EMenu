@@ -7,6 +7,7 @@ import { Place } from '@/models/place'
 import { Location } from '@/models/location'
 import FeaturedPlace from '@/components/Homepage/FeaturedPlace'
 import { getAllLocations } from '@/services/location'
+import { NextSeo } from 'next-seo'
 interface Props {
   places: Place[]
   locations: Location[]
@@ -15,6 +16,21 @@ interface Props {
 export default function Home({ places, locations }: Props) {
   return (
     <>
+      <NextSeo
+        title={'Mọi địa điểm trong một menu'}
+        openGraph={{
+          type: 'website',
+          url: 'https://emenu-green.vercel.app/',
+          title: 'EMenu - Mọi địa điểm trong một Menu',
+          description: 'Các địa điểm ăn uống nổi bật',
+          images: [
+            {
+              url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',
+              alt: 'EMenu logo',
+            },
+          ],
+        }}
+      />
       <HeroWithAddressInput />
       <Container maxWidth="md" style={{ paddingTop: '4%', minWidth: '70vw' }}>
         {locations.map((location) => {

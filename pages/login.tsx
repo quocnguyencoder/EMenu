@@ -1,6 +1,7 @@
 import FirebaseAuth from '@/components/auth/FirebaseAuth'
 import { Box, Paper, Typography } from '@material-ui/core'
 import Image from 'next/image'
+import { NextSeo } from 'next-seo'
 
 const Login = () => {
   return (
@@ -18,6 +19,21 @@ const Login = () => {
         backgroundSize: 'cover',
       }}
     >
+      <NextSeo
+        title={'Đăng nhập'}
+        openGraph={{
+          type: 'website',
+          url: 'https://emenu-green.vercel.app/',
+          title: 'EMenu - Mọi địa điểm trong một Menu',
+          description: 'Các địa điểm ăn uống nổi bật',
+          images: [
+            {
+              url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',
+              alt: 'EMenu logo',
+            },
+          ],
+        }}
+      />
       <Paper
         style={{
           display: 'flex',

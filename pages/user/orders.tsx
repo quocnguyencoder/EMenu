@@ -9,6 +9,7 @@ import { getPlacesByIDList } from '@/services/place'
 import { Box, Container, Typography } from '@material-ui/core'
 
 import OrderItem from '@/components/Orders/OrderItem'
+import { NextSeo } from 'next-seo'
 
 const Orders = () => {
   const { user } = useUser()
@@ -38,6 +39,21 @@ const Orders = () => {
       maxWidth="md"
       style={{ paddingTop: '2rem', minWidth: '70vw', minHeight: '75vh' }}
     >
+      <NextSeo
+        title={'Các đơn hàng của bạn'}
+        openGraph={{
+          type: 'website',
+          url: 'https://emenu-green.vercel.app/',
+          title: 'EMenu - Mọi địa điểm trong một Menu',
+          description: 'Các địa điểm ăn uống nổi bật',
+          images: [
+            {
+              url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',
+              alt: 'EMenu logo',
+            },
+          ],
+        }}
+      />
       <Typography variant="h4" style={{ fontWeight: 'bold' }}>
         Đơn hàng
       </Typography>

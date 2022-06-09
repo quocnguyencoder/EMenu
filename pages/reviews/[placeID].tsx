@@ -12,6 +12,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import * as ROUTES from '@/constants/routes'
 import Link from 'next/link'
 import DefaultErrorPage from 'next/error'
+import { NextSeo } from 'next-seo'
 interface Props {
   place_data: Place
   status: number
@@ -26,6 +27,21 @@ const ReviewsPage = ({ place_data, status }: Props) => {
   }
   return status === 200 ? (
     <Container maxWidth="lg" style={{ paddingTop: '1%', maxWidth: '1000px' }}>
+      <NextSeo
+        title={`Đánh giá: ${place_data.name}`}
+        openGraph={{
+          type: 'website',
+          url: `https://emenu-green.vercel.app/reviews/${place_data.id}`,
+          title: `Đánh giá: ${place_data.name}`,
+          description: `Các xếp hạng và đánh giá: ${place_data.name}`,
+          images: [
+            {
+              url: `${place_data.image}`,
+              alt: `${place_data.name} cover`,
+            },
+          ],
+        }}
+      />
       <Box display="flex" alignItems="center" mt={2}>
         <ArrowBackIosIcon style={{ fontSize: '0.5rem', marginRight: '1rem' }} />
         <Link href={ROUTES.PLACE_DETAIL(place_data.id)}>
