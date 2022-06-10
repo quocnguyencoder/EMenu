@@ -10,6 +10,7 @@ import { Box, Container, Typography } from '@material-ui/core'
 
 import OrderItem from '@/components/Orders/OrderItem'
 import { NextSeo } from 'next-seo'
+import moment from 'moment'
 
 const Orders = () => {
   const { user } = useUser()
@@ -66,21 +67,23 @@ const Orders = () => {
           width="100%"
           style={{ gap: '1rem' }}
         >
-          {orders.map((order) => {
-            const placeInfo = places.filter(
-              (place) => place.id === order.placeID
-            )[0]
+          {orders
+            .sort((a, b) => -moment(a.datetime).diff(moment(b.datetime)))
+            .map((order) => {
+              const placeInfo = places.filter(
+                (place) => place.id === order.placeID
+              )[0]
 
-            return (
-              placeInfo && (
-                <OrderItem
-                  key={order.billID}
-                  order={order}
-                  placeInfo={placeInfo}
-                />
+              return (
+                placeInfo && (
+                  <OrderItem
+                    key={order.billID}
+                    order={order}
+                    placeInfo={placeInfo}
+                  />
+                )
               )
-            )
-          })}
+            })}
         </Box>
       ) : (
         <Typography variant="h6" style={{ fontWeight: 'bold' }}>
