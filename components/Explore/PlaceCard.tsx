@@ -83,6 +83,7 @@ const PlaceCard = ({ place }: Props) => {
           </Typography>
         </CardContent>
         <IconButton
+          aria-label="save-button"
           onClick={() => handleToggleSave()}
           className={classes.disableHoverEffect}
         >

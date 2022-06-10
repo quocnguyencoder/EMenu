@@ -10,6 +10,7 @@ import { Box, Container, Typography } from '@material-ui/core'
 
 import OrderItem from '@/components/Orders/OrderItem'
 import { NextSeo } from 'next-seo'
+import moment from 'moment'
 
 const Orders = () => {
   const { user } = useUser()
@@ -41,11 +42,12 @@ const Orders = () => {
     >
       <NextSeo
         title={'Các đơn hàng của bạn'}
+        description="Trang lịch sử đơn hàng của người dùng"
         openGraph={{
           type: 'website',
           url: 'https://emenu-green.vercel.app/',
           title: 'EMenu - Mọi địa điểm trong một Menu',
-          description: 'Các địa điểm ăn uống nổi bật',
+          description: 'Welcome to EMenu',
           images: [
             {
               url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',
@@ -65,21 +67,23 @@ const Orders = () => {
           width="100%"
           style={{ gap: '1rem' }}
         >
-          {orders.map((order) => {
-            const placeInfo = places.filter(
-              (place) => place.id === order.placeID
-            )[0]
+          {orders
+            .sort((a, b) => -moment(a.datetime).diff(moment(b.datetime)))
+            .map((order) => {
+              const placeInfo = places.filter(
+                (place) => place.id === order.placeID
+              )[0]
 
-            return (
-              placeInfo && (
-                <OrderItem
-                  key={order.billID}
-                  order={order}
-                  placeInfo={placeInfo}
-                />
+              return (
+                placeInfo && (
+                  <OrderItem
+                    key={order.billID}
+                    order={order}
+                    placeInfo={placeInfo}
+                  />
+                )
               )
-            )
-          })}
+            })}
         </Box>
       ) : (
         <Typography variant="h6" style={{ fontWeight: 'bold' }}>

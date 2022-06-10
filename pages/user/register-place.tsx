@@ -183,12 +183,13 @@ const RegisterPlace = () => {
   return (
     <>
       <NextSeo
-        title={'Đăng ký địa điểm của bạn'}
+        title={'Đăng ký địa điểm mới'}
+        description={`Trang đăng ký địa điểm mới trong hệ thống EMenu`}
         openGraph={{
           type: 'website',
           url: 'https://emenu-green.vercel.app/',
           title: 'EMenu - Mọi địa điểm trong một Menu',
-          description: 'Các địa điểm ăn uống nổi bật',
+          description: 'Welcome to EMenu',
           images: [
             {
               url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',

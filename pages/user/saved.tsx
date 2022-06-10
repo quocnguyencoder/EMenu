@@ -8,6 +8,7 @@ import { Place } from '@/models/place'
 import { getPlacesByIDList } from '@/services/place'
 import PlaceCard from '@/components/Saved/PlaceCard'
 import Image from 'next/image'
+import { NextSeo } from 'next-seo'
 
 const Saved = () => {
   const { user } = useUser()
@@ -31,6 +32,22 @@ const Saved = () => {
       maxWidth="md"
       style={{ paddingTop: '2rem', minWidth: '70vw', minHeight: '75vh' }}
     >
+      <NextSeo
+        title={'Địa điểm đã lưu '}
+        description={`Trang liệt kê địa điểm đã lưu của người dùng`}
+        openGraph={{
+          type: 'website',
+          url: 'https://emenu-green.vercel.app/',
+          title: 'EMenu - Mọi địa điểm trong một Menu',
+          description: 'Welcome to EMenu',
+          images: [
+            {
+              url: 'https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938',
+              alt: 'EMenu logo',
+            },
+          ],
+        }}
+      />
       <Typography variant="h4" style={{ fontWeight: 'bold' }}>
         Đã lưu
       </Typography>

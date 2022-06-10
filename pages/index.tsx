@@ -18,6 +18,7 @@ export default function Home({ places, locations }: Props) {
     <>
       <NextSeo
         title={'Mọi địa điểm trong một menu'}
+        description="Trang chủ Emenu"
         openGraph={{
           type: 'website',
           url: 'https://emenu-green.vercel.app/',

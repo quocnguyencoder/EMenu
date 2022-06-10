@@ -21,6 +21,7 @@ const Login = () => {
     >
       <NextSeo
         title={'Đăng nhập'}
+        description="Trang đăng nhập của EMenu"
         openGraph={{
           type: 'website',
           url: 'https://emenu-green.vercel.app/',

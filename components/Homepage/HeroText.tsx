@@ -10,7 +10,7 @@ const HeroText = () => {
       </Typography>
       <Typography
         variant="body2"
-        style={{ fontWeight: 'bold', color: 'grey', marginTop: '1%' }}
+        style={{ fontWeight: 'bold', color: '#1a0e01', marginTop: '1%' }}
       >
         {'Khám phá những địa điểm nổi bật gần bạn'}
       </Typography>
