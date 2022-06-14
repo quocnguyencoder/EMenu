@@ -4,11 +4,8 @@ import {
   Fade,
   Backdrop,
   Typography,
-  CardMedia,
   Button,
-  ButtonBase,
 } from '@material-ui/core'
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 import { Category, MenuItem } from '@/models/place'
 import { useStyles } from '@/styles/modal'
 import { useRef, useState } from 'react'
@@ -20,6 +17,9 @@ import firebase from 'firebase/app'
 import 'firebase/storage'
 import type { Color } from '@material-ui/lab/Alert'
 import SnackBar from '@/components/common/SnackBar'
+import ImagePreview from './ImagePreview'
+import Incredients from './Incredients'
+import { MenuItemIncredients } from '@/models/incredient'
 
 interface Props {
   categories: Category
@@ -51,7 +51,9 @@ const UpdateItem = ({
   const [disableBtn, setDisableBtn] = useState(false)
   const [selectedCategories, setSelectedCategories] =
     useState<number[]>(itemCategoryList)
-
+  const [itemIncredient, setItemIncredient] = useState<MenuItemIncredients>(
+    itemInfo.incredients
+  )
   const [previewImg, setPreviewImg] = useState<string>(itemInfo.image)
   const inputEl = useRef(null)
   const cate = { ...categories }
@@ -138,6 +140,7 @@ const UpdateItem = ({
         name: e.target.Name.value,
         price: Number(e.target.Price.value),
         discount: 0,
+        incredients: itemIncredient,
       } as MenuItem
       if (
         itemInfo.description === data.description &&
@@ -182,6 +185,7 @@ const UpdateItem = ({
                   name: e.target.Name.value,
                   price: Number(e.target.Price.value),
                   discount: 0,
+                  incredients: itemIncredient,
                 } as MenuItem
                 updateService.default
                   .updateMenuItem(placeID, itemID, data)
@@ -212,7 +216,10 @@ const UpdateItem = ({
         }}
       >
         <Fade in={openModal}>
-          <Box className={classes.paper}>
+          <Box
+            className={classes.paper}
+            style={{ overflow: 'auto', maxHeight: '100%' }}
+          >
             <form onSubmit={handleSubmit}>
               <Box
                 display="flex"
@@ -233,39 +240,16 @@ const UpdateItem = ({
                     />
                   </Box>
                 </Box>
-                <Box flex={1}>
-                  <CardMedia
-                    component="img"
-                    image={`${previewImg}`}
-                    style={{
-                      maxWidth: '100%',
-                      height: '50%',
-                      objectFit: 'scale-down',
-                    }}
-                  />
-                  <input
-                    id="icon-button-file"
-                    type="file"
-                    ref={inputEl}
-                    style={{ display: 'none' }}
-                    onChange={(e) => handlePreviewImg(e)}
-                  />
-                  <Box display="flex" flexDirection="column">
-                    <label htmlFor="icon-button-file">
-                      <ButtonBase
-                        component="span"
-                        style={{
-                          backgroundColor: '#e7e7e7',
-                          width: '100%',
-                        }}
-                      >
-                        <AddAPhotoIcon fontSize="large" />
-                        <Typography variant="body2">Thêm ảnh</Typography>
-                      </ButtonBase>
-                    </label>
-                  </Box>
-                </Box>
+                <ImagePreview
+                  previewImg={previewImg}
+                  inputEl={inputEl}
+                  handlePreviewImg={handlePreviewImg}
+                />
               </Box>
+              <Incredients
+                itemIncredient={itemIncredient}
+                setItemIncredient={setItemIncredient}
+              />
               <Box style={{ textAlign: 'center' }}>
                 <Button
                   className={classes.button}

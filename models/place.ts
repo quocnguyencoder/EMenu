@@ -1,3 +1,5 @@
+import { MenuItemIncredients } from './incredient'
+
 export interface Address {
   ward: string
   street: string
@@ -15,6 +17,7 @@ export interface MenuItem {
   name: string
   price: number
   discount: number
+  incredients: MenuItemIncredients
 }
 
 export interface Time {
