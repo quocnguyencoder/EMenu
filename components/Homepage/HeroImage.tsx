@@ -1,6 +1,7 @@
 import { Box } from '@material-ui/core'
 import React from 'react'
 import { useStyles } from '@/styles/hero'
+import Image from 'next/image'
 
 const HeroImage = () => {
   const classes = useStyles()
@@ -12,10 +13,12 @@ const HeroImage = () => {
       position="relative"
       overflow="hidden"
     >
-      <img
+      <Image
         alt="route-image"
         src="https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=600,height=,format=jpeg,quality=100/https://cdn.doordash.com/static/img/seo/multicuisinea.jpg"
-        srcSet="https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=600,height=,format=jpeg,quality=100/https://cdn.doordash.com/static/img/seo/multicuisinea.jpg"
+        layout="responsive"
+        width="100%"
+        height="100%"
         className={classes.heroImage}
       />
       <Box

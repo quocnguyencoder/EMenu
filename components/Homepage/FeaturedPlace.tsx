@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardMedia,
   ImageList,
   ImageListItem,
   Typography,
@@ -19,6 +18,7 @@ import { Place } from '@/models/place'
 import { Location } from '@/models/location'
 import { toAvgRating } from 'helpers/toAvgRating'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface Props {
   location: Location
@@ -89,15 +89,13 @@ const FeaturedPlace = ({ location, places }: Props) => {
                       key={`place-${place.id}-${itemID}`}
                       style={{ display: 'block' }}
                     >
-                      <CardMedia
-                        component={'img'}
+                      <Image
                         src={place.menu[itemID].image}
                         alt={`${place.menu[itemID].name} image`}
-                        style={{
-                          height: '100%',
-                          objectFit: 'fill',
-                          borderRadius: '5px',
-                        }}
+                        layout="responsive"
+                        height="100%"
+                        width="100%"
+                        className={classes.image}
                       />
                     </ImageListItem>
                   ))}
