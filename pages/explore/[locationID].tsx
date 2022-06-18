@@ -1,35 +1,17 @@
-import {
-  Box,
-  Container,
-  Chip,
-  Typography,
-  Divider,
-  IconButton,
-} from '@material-ui/core'
+import { Container } from '@material-ui/core'
 import React from 'react'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import PlaceList from '@/components/Explore/PlaceList'
-import Breakfast from 'icons/Breakfast'
-import Desserts from 'icons/Desserts'
-import Sandwiches from 'icons/Sandwiches'
-import Coffee from 'icons/Coffee'
-import Burgers from 'icons/Burgers'
-import Chicken from 'icons/Chicken'
-import Salad from 'icons/Salad'
-import Fastfood from 'icons/Fastfood'
-import Bakery from 'icons/Bakery'
-import Smoothie from 'icons/Smoothie'
-import Healthy from 'icons/Healthy'
-import Pizza from 'icons/Pizza'
-import Soup from 'icons/Soup'
-import Vegan from 'icons/Vegan'
 import { GetStaticProps } from 'next'
 import { getAllLocations, getLocationBySlug } from '@/services/location'
 import { Location } from '@/models/location'
 import { getPlacesByIDList } from '@/services/place'
-import { Place } from '@/models/place'
+import { Coordinate, Place } from '@/models/place'
 import DefaultErrorPage from 'next/error'
 import { NextSeo } from 'next-seo'
+import CategoryList from '@/components/Explore/CategoryList'
+import FilterButtons from '@/components/Explore/FilterButtons'
+import { useRouter } from 'next/router'
+import { orderByDistance, orderByRating } from '@/functions/sortPlace'
 
 interface Props {
   status: number
@@ -38,26 +20,27 @@ interface Props {
 }
 
 const index = ({ status, location, places }: Props) => {
-  const categories = [
-    { name: 'Ăn sáng', icon: <Breakfast /> },
-    { name: 'Đô ngọt', icon: <Desserts /> },
-    { name: 'Sandwiches', icon: <Sandwiches /> },
-    { name: 'Cà phê', icon: <Coffee /> },
-    { name: 'Burgers', icon: <Burgers /> },
-    { name: 'Gà', icon: <Chicken /> },
-    { name: 'Salad', icon: <Salad /> },
-    { name: 'Ăn vặt', icon: <Fastfood /> },
-    { name: 'Bánh mì', icon: <Bakery /> },
-    { name: 'Smoothie', icon: <Smoothie /> },
-    { name: 'Healthy', icon: <Healthy /> },
-    { name: 'Pizza', icon: <Pizza /> },
-    { name: 'Súp', icon: <Soup /> },
-    { name: 'Chay', icon: <Vegan /> },
-  ]
-  return status === 200 ? (
+  const router = useRouter()
+  const locationFound = status === 200
+  const lat = router.query.lat
+  const lng = router.query.lng
+  const currentPosition: Coordinate = locationFound
+    ? lat && lng
+      ? {
+          lat: Number(lat),
+          lng: Number(lng),
+        }
+      : location.coordinate
+    : {
+        lat: 1,
+        lng: 1,
+      }
+
+  return locationFound ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>
       <NextSeo
         title={`Khám phá các địa điểm ở ${location.name}`}
+        description={`Khám phá các địa điểm ở ${location.name}`}
         openGraph={{
           type: 'website',
           url: 'https://emenu-green.vercel.app/',
@@ -71,87 +54,18 @@ const index = ({ status, location, places }: Props) => {
           ],
         }}
       />
-      <Box
-        padding="1rem 0%"
-        display="flex"
-        overflow="scroll auto"
-        style={{ gap: '3%' }}
-      >
-        {categories.map((category, index) => (
-          <Box
-            key={`${index}-${category.name}`}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              cursor: 'pointer',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            {category.icon}
-            <Typography variant="caption" style={{ marginTop: '0.5rem' }}>
-              {category.name}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
-      <Box
-        display="flex"
-        overflow="auto"
-        paddingTop="1rem"
-        style={{ gap: '2%' }}
-      >
-        <Chip
-          label={
-            <Box display="flex" alignItems="center" style={{ gap: '4%' }}>
-              <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-                Trên 4.5 ★
-              </Typography>
-              <Divider orientation="vertical" flexItem />
-              <IconButton
-                aria-label="expand-rating-filter"
-                style={{ padding: '0', color: 'black' }}
-              >
-                <ExpandMoreIcon />
-              </IconButton>
-            </Box>
-          }
-          clickable
-          style={{
-            backgroundColor: 'rgb(231, 231, 231)',
-          }}
-        />
-        <Chip
-          label={
-            <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-              Gần bạn
-            </Typography>
-          }
-          clickable
-          style={{
-            backgroundColor: 'rgb(231, 231, 231)',
-          }}
-        />
-        <Chip
-          label={
-            <Box display="flex" alignItems="center" style={{ gap: '4%' }}>
-              <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-                Giá
-              </Typography>
-              <IconButton style={{ padding: '0', color: 'black' }}>
-                <ExpandMoreIcon />
-              </IconButton>
-            </Box>
-          }
-          aria-label="expand-price-filter"
-          clickable
-          style={{
-            backgroundColor: 'rgb(231, 231, 231)',
-          }}
-        />
-      </Box>
-      <PlaceList title="Gần bạn" places={places} />
-      <PlaceList title={`Nổi bật ở ${location.name}`} places={places} />
+      <CategoryList />
+      <FilterButtons />
+      <PlaceList
+        title={`Gần trung tâm ${location.name}`}
+        places={orderByDistance(places, location.coordinate)}
+        currentPosition={currentPosition}
+      />
+      <PlaceList
+        title={`Nổi bật ở ${location.name}`}
+        places={orderByRating(places)}
+        currentPosition={currentPosition}
+      />
     </Container>
   ) : (
     <DefaultErrorPage statusCode={status} />

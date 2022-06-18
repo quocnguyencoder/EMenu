@@ -13,4 +13,15 @@ export const useStyles = makeStyles(() => ({
       textDecoration: 'underline',
     },
   },
+  cardWrapper: {
+    minWidth: '20rem',
+    maxWidth: '25rem',
+    height: '14rem',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
+  },
+  cardImage: {
+    maxHeight: '10rem !important',
+    borderRadius: '5px',
+  },
 }))
