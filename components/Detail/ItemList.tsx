@@ -33,9 +33,11 @@ const ItemList = ({ menu, category, categoryID, placeID }: Props) => {
     setOpenSnackBar(false)
   }
 
-  const addToCart = (itemID: number) => {
+  const addToCart = (itemID: number, quantity: number) => {
     if (isLoggedIn) {
-      addItem(placeID, itemID, user.id).then(() => setOpenSnackBar(true))
+      addItem(placeID, itemID, user.id, quantity).then(() =>
+        setOpenSnackBar(true)
+      )
     } else {
       setOpenDialog(true)
     }

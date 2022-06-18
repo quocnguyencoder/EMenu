@@ -54,4 +54,23 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       'transparent 0px 0px 0px 1px inset, rgb(0 0 0 / 20%) 0px 8px 24px',
   },
+  detailModalWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  detailModalPaper: {
+    backgroundColor: '#fff',
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: '15px',
+    height: '95vh',
+    width: '35rem',
+    outline: 'none',
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw',
+      minHeight: '100vh',
+      borderRadius: '0',
+    },
+  },
 }))
