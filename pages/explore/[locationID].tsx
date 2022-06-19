@@ -40,7 +40,7 @@ interface Props {
 const index = ({ status, location, places }: Props) => {
   const categories = [
     { name: 'Ăn sáng', icon: <Breakfast /> },
-    { name: 'Đô ngọt', icon: <Desserts /> },
+    { name: 'Đồ ngọt', icon: <Desserts /> },
     { name: 'Sandwiches', icon: <Sandwiches /> },
     { name: 'Cà phê', icon: <Coffee /> },
     { name: 'Burgers', icon: <Burgers /> },

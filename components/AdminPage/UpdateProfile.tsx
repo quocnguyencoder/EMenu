@@ -1,14 +1,4 @@
-import {
-  Box,
-  Modal,
-  Fade,
-  Backdrop,
-  CardMedia,
-  Button,
-  ButtonBase,
-  Typography,
-} from '@material-ui/core'
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
+import { Box, Modal, Fade, Backdrop, Button } from '@material-ui/core'
 import { useState, useRef } from 'react'
 import { useStyles } from '../../styles/modal'
 import { Address, Place, Time } from '../../models/place'
@@ -17,11 +7,14 @@ import axios from 'axios'
 import firebase from 'firebase/app'
 import 'firebase/storage'
 import isEqual from 'lodash/isEqual'
+import sortBy from 'lodash/sortBy'
 import type { Color } from '@material-ui/lab/Alert'
 import * as updateService from '@/firebase/updateDocument'
 import * as getService from '@/firebase/getDocument'
 import shortcutAddress from '@/functions/shortcutAddress'
 import SnackBar from '../common/SnackBar'
+import ImagePreview from './MenuManagement/ImagePreview'
+import SelectTags from './SelectTags'
 
 interface Props {
   place: Place
@@ -37,6 +30,8 @@ const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
     open: false,
   })
 
+  const [tags, setTags] = useState<string[]>(place.tags)
+
   const [previewImg, setPreviewImg] = useState<string>(place.image)
   const inputEl = useRef(null)
   const [disableBtn, setDisableBtn] = useState(false)
@@ -48,6 +43,8 @@ const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
       open: true,
     })
   }
+
+  const changeTags = (selectedTags: string[]) => setTags(selectedTags)
 
   const handlePreviewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files[0] === undefined) {
@@ -129,6 +126,7 @@ const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
       phone: e.target.phone.value,
       type: e.target.type.value,
       time: time,
+      tags: tags,
     } as Place
 
     // @ts-expect-error: to stop error
@@ -140,7 +138,8 @@ const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
         data.phone === place.phone &&
         data.type === place.type &&
         isEqual(data.time, place.time) &&
-        isEqual(data.address, place.address)
+        isEqual(data.address, place.address) &&
+        isEqual(sortBy(data.tags), sortBy(place.tags))
       ) {
         handleOpenAlert(`Không thể cập nhật vì dữ liệu giống nhau`, `warning`)
         setDisableBtn(false)
@@ -215,39 +214,13 @@ const UpdateProfile = ({ place, openModal, handleCloseModal }: Props) => {
               >
                 <Box flex={2}>
                   <PlaceForm place={place} />
+                  <SelectTags tags={tags} changeTags={changeTags} />
                 </Box>
-                <Box flex={1} paddingTop={1}>
-                  <CardMedia
-                    component="img"
-                    image={`${previewImg}`}
-                    style={{
-                      width: '100%',
-                      height: '50%',
-                      objectFit: 'scale-down',
-                    }}
-                  />
-                  <input
-                    id="icon-button-file"
-                    type="file"
-                    ref={inputEl}
-                    style={{ display: 'none' }}
-                    onChange={(e) => handlePreviewImg(e)}
-                  />
-                  <Box display="flex" flexDirection="column">
-                    <label htmlFor="icon-button-file">
-                      <ButtonBase
-                        component="span"
-                        style={{
-                          backgroundColor: '#e7e7e7',
-                          width: '100%',
-                        }}
-                      >
-                        <AddAPhotoIcon fontSize="large" />
-                        <Typography variant="body2">Thêm ảnh</Typography>
-                      </ButtonBase>
-                    </label>
-                  </Box>
-                </Box>
+                <ImagePreview
+                  previewImg={previewImg}
+                  inputEl={inputEl}
+                  handlePreviewImg={handlePreviewImg}
+                />
               </Box>
               <Box style={{ textAlign: 'center' }}>
                 <Button

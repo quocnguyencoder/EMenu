@@ -1,13 +1,5 @@
-import {
-  Box,
-  Button,
-  ButtonBase,
-  CardMedia,
-  Snackbar,
-  Typography,
-} from '@material-ui/core'
+import { Box, Button, Snackbar } from '@material-ui/core'
 import { Address, Place, Time } from '@/models/place'
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 import PlaceForm from '@/components/AdminPage/PlaceForm'
 import moment from 'moment'
 import { useEffect, useRef, useState } from 'react'
@@ -23,6 +15,8 @@ import * as ROUTES from '@/constants/routes'
 import isEqual from 'lodash/isEqual'
 import shortcutAddress from '@/functions/shortcutAddress'
 import { NextSeo } from 'next-seo'
+import ImagePreview from '@/components/AdminPage/MenuManagement/ImagePreview'
+import SelectTags from '@/components/AdminPage/SelectTags'
 
 interface State extends SnackbarOrigin {
   open: boolean
@@ -66,6 +60,7 @@ const RegisterPlace = () => {
   const { user } = useUser()
   const router = useRouter()
   const classes = useStyles()
+  const [tags, setTags] = useState<string[]>([])
   const [state, setState] = useState<State>({
     open: false,
     vertical: 'top',
@@ -88,6 +83,8 @@ const RegisterPlace = () => {
       userInfo.placeID !== '' && router.push(ROUTES.ADMIN)
     }
   }, [])
+
+  const changeTags = (selectedTags: string[]) => setTags(selectedTags)
 
   const handlePreviewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files[0] === undefined) {
@@ -142,6 +139,7 @@ const RegisterPlace = () => {
       phone: e.target.phone.value,
       type: e.target.type.value,
       time: time,
+      tags: tags,
     } as Place
 
     // @ts-expect-error: to stop error
@@ -221,40 +219,13 @@ const RegisterPlace = () => {
         >
           <Box flex={2}>
             <PlaceForm place={initialPlace} />
+            <SelectTags tags={tags} changeTags={changeTags} />
           </Box>
-          <Box flex={1} paddingTop={1}>
-            <CardMedia
-              component="img"
-              image={`${previewImg}`}
-              style={{
-                maxWidth: '100%',
-                height: '50%',
-                objectFit: 'scale-down',
-              }}
-            />
-            <input
-              id="icon-button-file"
-              type="file"
-              required
-              ref={inputEl}
-              style={{ display: 'none' }}
-              onChange={(e) => handlePreviewImg(e)}
-            />
-            <Box display="flex" flexDirection="column">
-              <label htmlFor="icon-button-file">
-                <ButtonBase
-                  component="span"
-                  style={{
-                    backgroundColor: '#e7e7e7',
-                    width: '100%',
-                  }}
-                >
-                  <AddAPhotoIcon fontSize="large" />
-                  <Typography variant="body2">Thêm ảnh</Typography>
-                </ButtonBase>
-              </label>
-            </Box>
-          </Box>
+          <ImagePreview
+            previewImg={previewImg}
+            inputEl={inputEl}
+            handlePreviewImg={handlePreviewImg}
+          />
         </Box>
         <Box style={{ textAlign: 'center' }}>
           <Button
