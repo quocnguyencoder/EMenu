@@ -15,10 +15,15 @@ import Soup from 'icons/Soup'
 import Vegan from 'icons/Vegan'
 import { Box, Typography } from '@material-ui/core'
 
-const CategoryList = () => {
+interface Props {
+  selectedCategory: string
+  setSelectedCategory: (value: string) => void
+}
+
+const CategoryList = ({ selectedCategory, setSelectedCategory }: Props) => {
   const categories = [
     { name: 'Ăn sáng', icon: <Breakfast /> },
-    { name: 'Đô ngọt', icon: <Desserts /> },
+    { name: 'Đồ ngọt', icon: <Desserts /> },
     { name: 'Sandwiches', icon: <Sandwiches /> },
     { name: 'Cà phê', icon: <Coffee /> },
     { name: 'Burgers', icon: <Burgers /> },
@@ -32,6 +37,9 @@ const CategoryList = () => {
     { name: 'Súp', icon: <Soup /> },
     { name: 'Chay', icon: <Vegan /> },
   ]
+
+  const isSelected = (name: string) => name === selectedCategory
+
   return (
     <Box
       padding="1rem 0%"
@@ -49,9 +57,20 @@ const CategoryList = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
+          onClick={() =>
+            isSelected(category.name)
+              ? setSelectedCategory('')
+              : setSelectedCategory(category.name)
+          }
         >
           {category.icon}
-          <Typography variant="caption" style={{ marginTop: '0.5rem' }}>
+          <Typography
+            variant="caption"
+            style={{
+              marginTop: '0.5rem',
+              color: isSelected(category.name) ? 'red' : 'black',
+            }}
+          >
             {category.name}
           </Typography>
         </Box>

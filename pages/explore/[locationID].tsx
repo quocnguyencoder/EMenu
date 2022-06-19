@@ -1,5 +1,5 @@
 import { Container } from '@material-ui/core'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PlaceList from '@/components/Explore/PlaceList'
 import { GetStaticProps } from 'next'
 import { getAllLocations, getLocationBySlug } from '@/services/location'
@@ -36,6 +36,16 @@ const index = ({ status, location, places }: Props) => {
         lng: 1,
       }
 
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [results, setResults] = useState<Place[]>([])
+
+  useEffect(() => {
+    selectedCategory !== '' &&
+      setResults(
+        places.filter((place) => place.tags.includes(selectedCategory))
+      )
+  }, [selectedCategory])
+
   return locationFound ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>
       <NextSeo
@@ -54,16 +64,27 @@ const index = ({ status, location, places }: Props) => {
           ],
         }}
       />
-      <CategoryList />
-      <FilterButtons />
-      <PlaceList
-        title={`Gần trung tâm ${location.name}`}
-        places={orderByDistance(places, location.coordinate)}
-        currentPosition={currentPosition}
+      <CategoryList
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
+      <FilterButtons />
+      {selectedCategory !== '' && (
+        <PlaceList
+          title={`${results.length} kết quả cho ${selectedCategory}`}
+          places={results}
+          currentPosition={currentPosition}
+        />
+      )}
+
       <PlaceList
         title={`Nổi bật ở ${location.name}`}
         places={orderByRating(places)}
+        currentPosition={currentPosition}
+      />
+      <PlaceList
+        title={`Gần trung tâm ${location.name}`}
+        places={orderByDistance(places, location.coordinate)}
         currentPosition={currentPosition}
       />
     </Container>
