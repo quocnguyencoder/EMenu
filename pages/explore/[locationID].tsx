@@ -10,8 +10,9 @@ import DefaultErrorPage from 'next/error'
 import { NextSeo } from 'next-seo'
 import CategoryList from '@/components/Explore/CategoryList'
 import FilterButtons from '@/components/Explore/FilterButtons'
-import { useRouter } from 'next/router'
 import { orderByDistance, orderByRating } from '@/functions/sortPlace'
+import { Address } from '@/models/address'
+import isEqual from 'lodash/isEqual'
 
 interface Props {
   status: number
@@ -20,17 +21,20 @@ interface Props {
 }
 
 const index = ({ status, location, places }: Props) => {
-  const router = useRouter()
   const locationFound = status === 200
-  const lat = router.query.lat
-  const lng = router.query.lng
+  const [currentAddress, setCurrentAddress] = useState<Address>({} as Address)
+
+  useEffect(() => {
+    setCurrentAddress(
+      JSON.parse(sessionStorage.getItem('currentAddress') || '{}') as Address
+    )
+  }, [])
+
+  const noAddressProvided = isEqual(currentAddress, {})
   const currentPosition: Coordinate = locationFound
-    ? lat && lng
-      ? {
-          lat: Number(lat),
-          lng: Number(lng),
-        }
-      : location.coordinate
+    ? noAddressProvided
+      ? location.coordinate
+      : currentAddress.coordinate
     : {
         lat: 1,
         lng: 1,
@@ -73,6 +77,13 @@ const index = ({ status, location, places }: Props) => {
         <PlaceList
           title={`${results.length} kết quả cho ${selectedCategory}`}
           places={results}
+          currentPosition={currentPosition}
+        />
+      )}
+      {!noAddressProvided && (
+        <PlaceList
+          title={`Gần ${currentAddress.street}, ${currentAddress.ward}`}
+          places={orderByDistance(places, currentAddress.coordinate)}
           currentPosition={currentPosition}
         />
       )}

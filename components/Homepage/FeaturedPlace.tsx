@@ -56,7 +56,10 @@ const FeaturedPlace = ({ location, places }: Props) => {
         <Button
           className={classes.seeMoreButton}
           endIcon={<ArrowForwardIcon />}
-          onClick={() => router.push(ROUTES.EXPLORE_LOCATION(location.slug))}
+          onClick={() => {
+            sessionStorage.removeItem('currentAddress')
+            router.push(ROUTES.EXPLORE_LOCATION(location.slug))
+          }}
         >{`Xem thêm các địa điểm`}</Button>
       </Box>
 

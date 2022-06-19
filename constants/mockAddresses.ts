@@ -7,18 +7,18 @@ const addresses: Address[] = [
     city: 'Hà Nội',
     slug: 'ha-noi',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 21.023678587586748,
+      lng: 105.8093954490063,
     },
   },
   {
-    street: 'T 1, Toà 170 La Thành',
+    street: 'Toà 170 La Thành',
     ward: 'P. Ô Chợ Dừa, Q. Đống Đa',
     city: 'Hà Nội',
     slug: 'ha-noi',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 21.020913582678535,
+      lng: 105.82757349715416,
     },
   },
   {
@@ -27,8 +27,8 @@ const addresses: Address[] = [
     city: 'Hà Nội',
     slug: 'ha-noi',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 21.031278254602107,
+      lng: 105.81348851249842,
     },
   },
   {
@@ -37,8 +37,8 @@ const addresses: Address[] = [
     city: 'Hà Nội',
     slug: 'ha-noi',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 21.00298711050782,
+      lng: 105.85795258180968,
     },
   },
   {
@@ -47,8 +47,8 @@ const addresses: Address[] = [
     city: 'Hà Nội',
     slug: 'ha-noi',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 21.042268513751893,
+      lng: 105.86993756831846,
     },
   },
   {
@@ -57,8 +57,8 @@ const addresses: Address[] = [
     city: 'Nha Trang',
     slug: 'nha-trang',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 12.24348295727918,
+      lng: 109.19068575469274,
     },
   },
   {
@@ -67,18 +67,18 @@ const addresses: Address[] = [
     city: 'Nha Trang',
     slug: 'nha-trang',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 12.251958580900409,
+      lng: 109.1952873681847,
     },
   },
   {
     street: '166 Nguyễn Thái Học',
-    ward: 'P.Tân Lập',
+    ward: 'P.Vạn Thạnh',
     city: 'Nha Trang',
     slug: 'nha-trang',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 12.257647392118217,
+      lng: 109.19008143934884,
     },
   },
   {
@@ -87,18 +87,18 @@ const addresses: Address[] = [
     city: 'Nha Trang',
     slug: 'nha-trang',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 12.206070772124976,
+      lng: 109.20283345469237,
     },
   },
   {
-    street: '18 Hai Bà Trưng ',
+    street: '18 Hai Bà Trưng',
     ward: 'Phường Bến Nghé, Quận 1',
     city: 'TP Hồ Chí Minh',
     slug: 'tp-ho-chi-minh',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 10.777037163688448,
+      lng: 106.7050423393331,
     },
   },
   {
@@ -107,8 +107,8 @@ const addresses: Address[] = [
     city: 'TP Hồ Chí Minh',
     slug: 'tp-ho-chi-minh',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 10.762350714504608,
+      lng: 106.68915108166105,
     },
   },
   {
@@ -117,8 +117,8 @@ const addresses: Address[] = [
     city: 'TP Hồ Chí Minh',
     slug: 'tp-ho-chi-minh',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 10.770409469583077,
+      lng: 106.68583832584115,
     },
   },
   {
@@ -127,8 +127,8 @@ const addresses: Address[] = [
     city: 'TP Hồ Chí Minh',
     slug: 'tp-ho-chi-minh',
     coordinate: {
-      lat: 1000,
-      lng: 100,
+      lat: 10.780285421686042,
+      lng: 106.67790969515303,
     },
   },
 ]
