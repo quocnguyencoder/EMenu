@@ -117,7 +117,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       location = await getLocationBySlug(locationID)
       places = await getPlacesByIDList(location.places)
     } catch {
-      status = 500
+      status = 404
     }
   } else {
     status = 404

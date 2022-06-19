@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   coverImg: {
     borderRadius: '16px',
+    objectFit: 'cover',
     [theme.breakpoints.down('sm')]: {
       borderRadius: '0',
     },
@@ -73,4 +74,5 @@ export const useStyles = makeStyles((theme) => ({
       borderRadius: '0',
     },
   },
+  menuItemImage: { borderRadius: '4px', zIndex: 1 },
 }))

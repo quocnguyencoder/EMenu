@@ -1,6 +1,5 @@
 import {
   Box,
-  CardMedia,
   Chip,
   Grid,
   ListItemText,
@@ -13,6 +12,7 @@ import formatter from '@/functions/moneyFormatter'
 import AddIcon from '@material-ui/icons/Add'
 import { useStyles } from '@/styles/detail'
 import ItemDetailModal from './ItemDetailModal'
+import Image from 'next/image'
 
 interface Props {
   itemID: number
@@ -68,11 +68,15 @@ const MenuItemCard = ({ itemID, itemInfo, addToCart }: Props) => {
             />
           </Box>
           <Box width="9rem" position="relative" zIndex={1}>
-            <CardMedia
-              component="img"
-              image={itemInfo.image}
-              style={{ height: '9rem', borderRadius: '4px', zIndex: 1 }}
-            />
+            <Box height="9rem">
+              <Image
+                src={itemInfo.image}
+                alt={`${itemInfo.name} image`}
+                layout="fill"
+                className={classes.menuItemImage}
+              />
+            </Box>
+
             <Chip
               label={
                 <Box

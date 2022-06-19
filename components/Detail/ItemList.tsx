@@ -1,19 +1,27 @@
 import { Grid, Snackbar, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CategoryInfo, Menu } from '@/models/place'
 import useUser from '@/firebase/useUser'
 import LoginRequiredDialog from '../common/LoginRequiredDialog'
 import Alert from '../common/Alert'
 import { addItem } from '@/services/cart'
 import MenuItemCard from './MenuItemCard'
+import useInView from 'react-cool-inview'
 interface Props {
   menu: Menu
   category: CategoryInfo
   categoryID: number
   placeID: string
+  setSelectedCategory: (value: number) => void
 }
 
-const ItemList = ({ menu, category, categoryID, placeID }: Props) => {
+const ItemList = ({
+  menu,
+  category,
+  categoryID,
+  placeID,
+  setSelectedCategory,
+}: Props) => {
   const { user } = useUser()
   const [openDialog, setOpenDialog] = useState(false)
   const [openSnackBar, setOpenSnackBar] = useState(false)
@@ -42,8 +50,18 @@ const ItemList = ({ menu, category, categoryID, placeID }: Props) => {
       setOpenDialog(true)
     }
   }
+
+  const { observe, inView } = useInView({
+    delay: 100,
+    threshold: 0.5,
+  })
+
+  useEffect(() => {
+    inView && setSelectedCategory(categoryID)
+  }, [inView])
+
   return (
-    <>
+    <div id={`menu-category-${categoryID}`} ref={observe}>
       <Typography
         variant="h6"
         style={{ fontWeight: 'bold', margin: '1rem 0 0.5rem 0' }}
@@ -71,7 +89,7 @@ const ItemList = ({ menu, category, categoryID, placeID }: Props) => {
           Thêm món ăn thành công
         </Alert>
       </Snackbar>
-    </>
+    </div>
   )
 }
 

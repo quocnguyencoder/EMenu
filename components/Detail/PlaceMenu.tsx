@@ -1,6 +1,6 @@
 import { Category, Menu } from '@/models/place'
 import { Box, Typography } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { useStyles } from '@/styles/detail'
 import CategoryNav from './CategoryNav'
 import ItemList from './ItemList'
@@ -13,12 +13,19 @@ interface Props {
 
 const PlaceMenu = ({ menu, categories, placeID }: Props) => {
   const classes = useStyles()
+  const [selectedCategory, setSelectedCategory] = useState(
+    Object.keys(categories).map(Number)[0]
+  )
   return (
     <Box display="flex" flexDirection="column" className={classes.menuWrapper}>
       <Typography variant="h6" style={{ fontWeight: 'bold' }}>
         Thực đơn
       </Typography>
-      <CategoryNav categories={categories} />
+      <CategoryNav
+        categories={categories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
 
       {categories &&
         Object.keys(categories)
@@ -30,6 +37,7 @@ const PlaceMenu = ({ menu, categories, placeID }: Props) => {
               category={categories[categoryID]}
               categoryID={categoryID}
               placeID={placeID}
+              setSelectedCategory={setSelectedCategory}
             />
           ))}
     </Box>
