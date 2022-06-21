@@ -28,8 +28,8 @@ const CategoryNav = ({
   useEffect(() => {
     scroller.scrollTo(`category-nav-item-${selectedCategory}`, {
       duration: 500,
-      delay: 100,
-      offset: -50,
+      delay: 300,
+      offset: -100,
       smooth: true,
       containerId: 'categories-nav-list',
       horizontal: true,

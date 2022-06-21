@@ -6,6 +6,8 @@ import * as ROUTES from '@/constants/routes'
 import { useStyles } from '@/styles/orders'
 import moment from 'moment'
 import 'moment/locale/vi'
+import OrderDetail from './OrderDetail'
+import { useState } from 'react'
 
 interface Props {
   placeInfo: Place
@@ -60,62 +62,68 @@ const OrderItem = ({ order, placeInfo }: Props) => {
       ),
     },
   } as Status
-
+  const [showDetail, setShowDetail] = useState(false)
   return (
-    <Paper className={classes.itemWrapper}>
-      <Box className={classes.avatarWrapper}>
-        <Avatar
-          variant="square"
-          src={placeInfo.image}
-          alt={placeInfo.name}
-          style={{ width: '100%', height: '100%' }}
+    <Paper>
+      <Box className={classes.itemWrapper}>
+        <Box className={classes.avatarWrapper}>
+          <Avatar
+            variant="square"
+            src={placeInfo.image}
+            alt={placeInfo.name}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </Box>
+        <Box display="flex" flexDirection="column">
+          <Link href={ROUTES.PLACE_DETAIL(placeInfo.id)}>
+            <Typography
+              variant="body1"
+              style={{ fontWeight: 'bold' }}
+              className={classes.link}
+            >
+              {placeInfo.name}
+            </Typography>
+          </Link>
+          <Box display="flex" alignItems="center" style={{ gap: '1rem' }}>
+            {status[order.status].display}
+            <Typography variant="body2">
+              {moment(order.datetime).format('lll')}
+            </Typography>
+          </Box>
+          <Box display="flex" alignItems="center" style={{ gap: '1rem' }}>
+            <Typography
+              variant="body2"
+              style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
+            >
+              {order.payment}
+            </Typography>
+            <Typography variant="body2">{order.deliveryTo}</Typography>
+          </Box>
+          <Typography variant="body2">{order.note}</Typography>
+        </Box>
+
+        <ListItemText
+          style={{ textAlign: 'right', padding: '1rem' }}
+          primary={
+            <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+              {formatter.format(order.total)}
+            </Typography>
+          }
+          secondary={
+            <Typography
+              variant="body2"
+              color="secondary"
+              className={classes.link}
+              onClick={() => setShowDetail(!showDetail)}
+            >
+              {showDetail ? 'Ẩn chi tiết' : 'Xem chi tiết'}
+            </Typography>
+          }
         />
       </Box>
-      <Box display="flex" flexDirection="column">
-        <Link href={ROUTES.PLACE_DETAIL(placeInfo.id)}>
-          <Typography
-            variant="body1"
-            style={{ fontWeight: 'bold' }}
-            className={classes.link}
-          >
-            {placeInfo.name}
-          </Typography>
-        </Link>
-        <Box display="flex" alignItems="center" style={{ gap: '1rem' }}>
-          {status[order.status].display}
-          <Typography variant="body2">
-            {moment(order.datetime).format('lll')}
-          </Typography>
-        </Box>
-        <Box display="flex" alignItems="center" style={{ gap: '1rem' }}>
-          <Typography
-            variant="body2"
-            style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-          >
-            {order.payment}
-          </Typography>
-          <Typography variant="body2">{order.deliveryTo}</Typography>
-        </Box>
-        <Typography variant="body2">{order.note}</Typography>
-      </Box>
-
-      <ListItemText
-        style={{ textAlign: 'right', padding: '1rem' }}
-        primary={
-          <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-            {formatter.format(order.total)}
-          </Typography>
-        }
-        secondary={
-          <Typography
-            variant="body2"
-            color="secondary"
-            className={classes.link}
-          >
-            {'Xem chi tiết'}
-          </Typography>
-        }
-      />
+      {showDetail && (
+        <OrderDetail orderItems={order.items} total={order.total} />
+      )}
     </Paper>
   )
 }
