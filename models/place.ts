@@ -81,10 +81,10 @@ export interface Bill {
   total: number
   deliveryTo: string
   phone: string
-  // feedback : {
-  //   content: string
-  //   rating: number
-  // }
+  feedback: {
+    content: string
+    rating: number
+  }
 }
 
 export interface BillDetail extends Bill {
