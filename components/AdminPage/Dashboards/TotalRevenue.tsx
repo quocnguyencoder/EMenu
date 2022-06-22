@@ -18,7 +18,7 @@ const TotalRevenue = ({ orderList }: Props) => {
   return (
     <Box flex="1" m="1%">
       <Paper style={{ padding: '5%' }}>
-        <Typography variant="subtitle2">Tổng doanh thu</Typography>
+        <Typography variant="subtitle2">Tổng doanh thu năm 2022</Typography>
         <Box display="flex">
           <Typography
             variant="h6"

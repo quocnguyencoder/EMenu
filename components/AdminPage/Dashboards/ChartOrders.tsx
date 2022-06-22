@@ -98,7 +98,7 @@ const ChartOrders: React.FC<Props> = ({ orderList, months }: Props) => {
           plugins: {
             title: {
               display: true,
-              text: 'SỐ ĐƠN HÀNG THEO THÁNG',
+              text: 'SỐ ĐƠN HÀNG THEO THÁNG TRONG NĂM 2022',
               position: 'bottom',
               color: '#D14B28',
             },

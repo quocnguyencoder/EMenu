@@ -11,6 +11,8 @@ import TotalRevenue from './TotalRevenue'
 import BestSellingProduct from './BestSellingProduct'
 import ChartTotalOrders from './ChartTotalOrders'
 import ChartTotalStars from './ChartTotalStars'
+import ChartIncomeWeekly from './ChartIncomeWeekly'
+import ChartOrderDaily from './ChartOrderDaily'
 
 interface Props {
   place: Place
@@ -52,6 +54,10 @@ const Dashboards: React.FC<Props> = ({ place }: Props) => {
         <NumberOfReviews ratings={place.reviews} />
         <Revenue orderList={orderList} months={months} />
         <TotalRevenue orderList={orderList} />
+      </Box>
+      <Box mb="1%" display="flex" style={{ gap: '2%' }}>
+        <ChartOrderDaily orderList={orderList} />
+        <ChartIncomeWeekly orderList={orderList} />
       </Box>
       <Box display="flex" style={{ gap: '2%' }}>
         <ChartOrders orderList={orderList} months={months} />
