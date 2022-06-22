@@ -23,7 +23,7 @@ const Cash = ({ userID, items, total, handlePayment }: Props) => {
         handlePayment(items, '', 'Tiền mặt', 'Waiting', userID, total)
       }
       variant="contained"
-      startIcon={<MoneyRoundedIcon />}
+      startIcon={<MoneyRoundedIcon style={{ fontSize: '2rem' }} />}
       style={{
         color: '#FFFFFF',
         backgroundColor: '#33CC33',

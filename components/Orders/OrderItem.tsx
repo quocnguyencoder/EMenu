@@ -111,6 +111,7 @@ const OrderItem = ({ order, placeInfo }: Props) => {
             </Typography>
             <Typography variant="body2">{order.deliveryTo}</Typography>
           </Box>
+          <Typography variant="body2">{order.note}</Typography>
           <Box display="flex" alignItems="center" style={{ gap: '1rem' }}>
             <Typography
               variant="body2"
@@ -146,7 +147,6 @@ const OrderItem = ({ order, placeInfo }: Props) => {
               </Typography>
             )}
           </Box>
-          <Typography variant="body2">{order.note}</Typography>
         </Box>
 
         <ListItemText
