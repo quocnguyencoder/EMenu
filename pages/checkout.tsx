@@ -13,6 +13,7 @@ import firebase from 'firebase/app'
 import { getPlaceDetail } from '@/services/getData'
 import Cash from '@/components/Checkout/Cash'
 import Paypal from '@/components/Checkout/Paypal'
+import Crypto from '@/components/Checkout/Crypto'
 import * as createService from '@/firebase/createDocument'
 import { clearCart } from '@/services/cart'
 import { NextSeo } from 'next-seo'
@@ -157,6 +158,12 @@ const Checkout = () => {
           {showPaymentButtons ? (
             <>
               <Cash
+                userID={user.id}
+                items={items}
+                total={totalPayment}
+                handlePayment={handlePayment}
+              />
+              <Crypto
                 userID={user.id}
                 items={items}
                 total={totalPayment}

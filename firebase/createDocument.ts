@@ -116,6 +116,10 @@ const createBillInfo = async (
       deliveryTo: deliveryTo,
       phone: phone,
       total: total,
+      feedback: {
+        content: '',
+        rating: 0,
+      },
     })
     .then((doc) => {
       updateService.default.updatePlaceOrders(placeID, [...order, doc.id])
