@@ -13,11 +13,19 @@ const getCartInfoByID = async (cartID: string) => {
   return userData
 }
 
-const addItem = async (placeID: string, itemID: number, cartID: string) => {
+const addItem = async (
+  placeID: string,
+  itemID: number,
+  cartID: string,
+  quantity: number
+) => {
   const cartInfo = await getCartInfoByID(cartID)
   const cartRef = firebase.firestore().collection('cart').doc(cartID)
   if (placeID !== cartInfo.placeID) {
-    cartRef.set({ placeID: placeID, items: { [`${itemID}`]: { quantity: 1 } } })
+    cartRef.set({
+      placeID: placeID,
+      items: { [`${itemID}`]: { quantity: quantity } },
+    })
   } else {
     const alreadyInCart = Object.prototype.hasOwnProperty.call(
       cartInfo.items,
@@ -26,10 +34,11 @@ const addItem = async (placeID: string, itemID: number, cartID: string) => {
 
     alreadyInCart
       ? await cartRef.update({
-          [`items.${itemID}.quantity`]: cartInfo.items[itemID].quantity + 1,
+          [`items.${itemID}.quantity`]:
+            cartInfo.items[itemID].quantity + quantity,
         })
       : await cartRef.update({
-          [`items.${itemID}.quantity`]: 1,
+          [`items.${itemID}.quantity`]: quantity,
         })
   }
 }

@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/core/styles'
 export const useStyles = makeStyles((theme) => ({
   heroImage: {
     objectFit: 'cover',
-    height: '100%',
-    width: '100%',
     clipPath: 'polygon(100% 0%, 100% 100%, calc(300px + 0%) 100%, 0% 0%)',
     objectPosition: 'center center',
   },

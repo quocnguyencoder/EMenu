@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { getPlaceDetail } from '@/services/getData'
 import { Place } from '@/models/place'
 import { Container } from '@material-ui/core'
@@ -9,6 +9,7 @@ import TopReviews from '@/components/Detail/TopReviews'
 import PlaceMenu from '@/components/Detail/PlaceMenu'
 import DefaultErrorPage from 'next/error'
 import { NextSeo } from 'next-seo'
+import { getAllPlaceID } from '@/services/place'
 interface Props {
   place_data: Place
   status: number
@@ -24,6 +25,7 @@ const Detail = ({ place_data, status }: Props) => {
     >
       <NextSeo
         title={`${place_data.name}`}
+        description={`Chi tiết về ${place_data.name}`}
         openGraph={{
           type: 'website',
           url: `https://emenu-green.vercel.app/detail/${place_data.id}`,
@@ -57,20 +59,36 @@ const Detail = ({ place_data, status }: Props) => {
 
 export default Detail
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { placeID } = context.query || ''
-
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const placeID = params ? `${params.placeID}` : ''
   let place_data = {} as Place
   let status = 200
-  try {
-    place_data = await getPlaceDetail(`${placeID}`)
-  } catch {
+
+  if (placeID !== '') {
+    try {
+      place_data = await getPlaceDetail(`${placeID}`)
+    } catch {
+      status = 404
+    }
+  } else {
     status = 404
   }
+
   return {
-    props: {
-      place_data,
-      status,
-    },
+    props: { place_data, status },
+    revalidate: 600,
   }
+}
+
+export async function getStaticPaths() {
+  const IDs = await getAllPlaceID()
+
+  const paths = IDs.map((id) => ({
+    params: { placeID: id },
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: blocking } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: 'blocking' }
 }

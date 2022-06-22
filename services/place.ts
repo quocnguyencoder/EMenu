@@ -18,4 +18,16 @@ const getPlacesByIDList = async (ids: string[]) => {
   return places
 }
 
-export { getPlacesByIDList }
+const getAllPlaceID = async () => {
+  const querySnapshot = await firebase.firestore().collection('place').get()
+
+  const places_data = querySnapshot.docs.map((doc) => {
+    const data = doc.data() as Place
+    data.id = doc.id
+    return data
+  })
+
+  return places_data.map((place) => place.id)
+}
+
+export { getPlacesByIDList, getAllPlaceID }

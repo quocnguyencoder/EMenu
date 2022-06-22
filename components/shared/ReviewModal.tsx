@@ -221,7 +221,6 @@ const ReviewModal = ({
                     <Rating
                       name="user-ratings"
                       value={ratingValue}
-                      precision={0.5}
                       onChange={(event, newValue) =>
                         setRatingValue(newValue || 0)
                       }
