@@ -248,6 +248,7 @@ const updatePlaceInfo = async (
       type: placeInfo.type,
       time: placeInfo.time,
       image: imgUrl,
+      tags: placeInfo.tags,
       activeDate: moment(
         moment().format('LLL'),
         'MMMM Do YYYY, hh:mm:ss A'

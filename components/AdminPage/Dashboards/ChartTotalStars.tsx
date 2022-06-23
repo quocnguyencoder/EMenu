@@ -82,7 +82,7 @@ const ChartTotalStars: React.FC<Props> = ({ ratings }: Props) => {
           plugins: {
             title: {
               display: true,
-              text: 'TỔNG SỐ SAO ĐƯỢC ĐÁNH GIÁ',
+              text: 'SỐ SAO ĐƯỢC ĐÁNH GIÁ',
               position: 'top',
               color: '#D14B28',
             },

@@ -52,7 +52,7 @@ const Revenue = ({ orderList, months }: Props) => {
     <Box flex="1" m="1%">
       <Paper style={{ padding: '5%' }}>
         <Typography variant="subtitle2">
-          Doanh thu tháng {moment().format('M')}
+          Doanh thu tháng {moment().format('M')}/2022
         </Typography>
         <Box display="flex">
           <Typography

@@ -1,0 +1,1882 @@
+[
+  {
+    "id": 1,
+    "name": "Trứng gà sống",
+    "carb": 1,
+    "fat": 10,
+    "sFat": 3,
+    "protein": 13,
+    "calo": 143,
+    "fiber": 0
+  },
+  {
+    "id": 2,
+    "name": "Trứng gà luộc",
+    "carb": 1,
+    "fat": 11,
+    "sFat": 3,
+    "protein": 13,
+    "calo": 155,
+    "fiber": 0
+  },
+  {
+    "id": 3,
+    "name": "Trứng gà rán",
+    "carb": 1,
+    "fat": 15,
+    "sFat": 4,
+    "protein": 14,
+    "calo": 196,
+    "fiber": 0
+  },
+  {
+    "id": 4,
+    "name": "Trứng gà luộc",
+    "carb": 1,
+    "fat": 11,
+    "sFat": 3,
+    "protein": 13,
+    "calo": 155,
+    "fiber": 0
+  },
+  {
+    "id": 5,
+    "name": "Trứng gà omelet",
+    "carb": 1,
+    "fat": 12,
+    "sFat": 3,
+    "protein": 11,
+    "calo": 157,
+    "fiber": 0
+  },
+  {
+    "id": 6,
+    "name": "Trứng gà kho, rim",
+    "carb": 1,
+    "fat": 10,
+    "sFat": 3,
+    "protein": 13,
+    "calo": 142,
+    "fiber": 0
+  },
+  {
+    "id": 7,
+    "name": "Trứng gà bác",
+    "carb": 1,
+    "fat": 12,
+    "sFat": 4,
+    "protein": 11,
+    "calo": 167,
+    "fiber": 0
+  },
+  {
+    "id": 8,
+    "name": "Trứng gà sống - Lòng trắng",
+    "carb": 1,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 10,
+    "calo": 47,
+    "fiber": 0
+  },
+  {
+    "id": 9,
+    "name": "Trứng gà sống - Lòng đỏ",
+    "carb": 4,
+    "fat": 27,
+    "sFat": 10,
+    "protein": 16,
+    "calo": 317,
+    "fiber": 0
+  },
+  {
+    "id": 10,
+    "name": "Trứng vịt lộn",
+    "carb": 1,
+    "fat": 12,
+    "sFat": 0,
+    "protein": 17,
+    "calo": 226,
+    "fiber": 0
+  },
+  {
+    "id": 11,
+    "name": "Trứng vịt sống",
+    "carb": 1,
+    "fat": 14,
+    "sFat": 4,
+    "protein": 13,
+    "calo": 185,
+    "fiber": 0
+  },
+  {
+    "id": 12,
+    "name": "Trứng ngỗng sống",
+    "carb": 1,
+    "fat": 13,
+    "sFat": 4,
+    "protein": 14,
+    "calo": 185,
+    "fiber": 0
+  },
+  {
+    "id": 13,
+    "name": "Trứng chim cút sống",
+    "carb": 0,
+    "fat": 11,
+    "sFat": 4,
+    "protein": 13,
+    "calo": 158,
+    "fiber": 0
+  },
+  {
+    "id": 14,
+    "name": "Trứng gà tây",
+    "carb": 1,
+    "fat": 12,
+    "sFat": 4,
+    "protein": 12,
+    "calo": 171,
+    "fiber": 0
+  },
+  {
+    "id": 15,
+    "name": "Ba chỉ/Ba rọi (Việt)",
+    "carb": 0,
+    "fat": 21.5,
+    "sFat": 0,
+    "protein": 16.5,
+    "calo": 260,
+    "fiber": 0
+  },
+  {
+    "id": 16,
+    "name": "Ba chỉ/Ba rọi (nước ngoài)",
+    "carb": 0,
+    "fat": 53,
+    "sFat": 19,
+    "protein": 9,
+    "calo": 518,
+    "fiber": 0
+  },
+  {
+    "id": 17,
+    "name": "Thắt thăn lợn (nạc)",
+    "carb": 0,
+    "fat": 6,
+    "sFat": 2,
+    "protein": 21,
+    "calo": 143,
+    "fiber": 0
+  },
+  {
+    "id": 18,
+    "name": "Thắt thăn lợn (nạc và mỡ)",
+    "carb": 0,
+    "fat": 13,
+    "sFat": 4,
+    "protein": 20,
+    "calo": 198,
+    "fiber": 0
+  },
+  {
+    "id": 19,
+    "name": "Thịt vai (nạc)",
+    "carb": 0,
+    "fat": 7,
+    "sFat": 2,
+    "protein": 20,
+    "calo": 148,
+    "fiber": 0
+  },
+  {
+    "id": 20,
+    "name": "Thịt vai (nạc và mỡ)",
+    "carb": 0,
+    "fat": 18,
+    "sFat": 6,
+    "protein": 17,
+    "calo": 236,
+    "fiber": 0
+  },
+  {
+    "id": 21,
+    "name": "Thịt chân lợn (nạc)",
+    "carb": 0,
+    "fat": 5.5,
+    "sFat": 2,
+    "protein": 20.5,
+    "calo": 136,
+    "fiber": 0
+  },
+  {
+    "id": 22,
+    "name": "Thịt chân lợn (nạc và mỡ)",
+    "carb": 0,
+    "fat": 19,
+    "sFat": 7,
+    "protein": 17.5,
+    "calo": 245,
+    "fiber": 0
+  },
+  {
+    "id": 23,
+    "name": "Thịt chân lợn (nạc - phần phía hông)",
+    "carb": 0,
+    "fat": 5,
+    "sFat": 2,
+    "protein": 21,
+    "calo": 137,
+    "fiber": 0
+  },
+  {
+    "id": 24,
+    "name": "Thịt chân lợn (nạc và mỡ - phần phía hông)",
+    "carb": 0,
+    "fat": 16,
+    "sFat": 5.5,
+    "protein": 19,
+    "calo": 100,
+    "fiber": 0
+  },
+  {
+    "id": 25,
+    "name": "Thịt sườn (nạc và mỡ)",
+    "carb": 0,
+    "fat": 23,
+    "sFat": 7.5,
+    "protein": 15.5,
+    "calo": 277,
+    "fiber": 0
+  },
+  {
+    "id": 26,
+    "name": "Móng lợn",
+    "carb": 0,
+    "fat": 13,
+    "sFat": 4,
+    "protein": 23,
+    "calo": 212,
+    "fiber": 0
+  },
+  {
+    "id": 27,
+    "name": "Óc lợn",
+    "carb": 0,
+    "fat": 9,
+    "sFat": 2,
+    "protein": 10,
+    "calo": 127,
+    "fiber": 0
+  },
+  {
+    "id": 28,
+    "name": "Tai lợn",
+    "carb": 1,
+    "fat": 15,
+    "sFat": 5,
+    "protein": 22,
+    "calo": 234,
+    "fiber": 0
+  },
+  {
+    "id": 29,
+    "name": "Tim lợn",
+    "carb": 1,
+    "fat": 4,
+    "sFat": 1,
+    "protein": 17,
+    "calo": 118,
+    "fiber": 0
+  },
+  {
+    "id": 30,
+    "name": "Thịt má lợn",
+    "carb": 0,
+    "fat": 70,
+    "sFat": 25,
+    "protein": 6,
+    "calo": 655,
+    "fiber": 0
+  },
+  {
+    "id": 31,
+    "name": "Mỡ lá lợn",
+    "carb": 0,
+    "fat": 94,
+    "sFat": 45,
+    "protein": 2,
+    "calo": 857,
+    "fiber": 0
+  },
+  {
+    "id": 32,
+    "name": "Thận lợn",
+    "carb": 0,
+    "fat": 3,
+    "sFat": 1,
+    "protein": 16,
+    "calo": 100,
+    "fiber": 0
+  },
+  {
+    "id": 33,
+    "name": "Gan lợn",
+    "carb": 2,
+    "fat": 4,
+    "sFat": 1,
+    "protein": 21,
+    "calo": 134,
+    "fiber": 0
+  },
+  {
+    "id": 34,
+    "name": "Phổi lợn",
+    "carb": 0,
+    "fat": 3,
+    "sFat": 1,
+    "protein": 14,
+    "calo": 85,
+    "fiber": 0
+  },
+  {
+    "id": 35,
+    "name": "Lá lách lợn",
+    "carb": 0,
+    "fat": 3,
+    "sFat": 1,
+    "protein": 18,
+    "calo": 100,
+    "fiber": 0
+  },
+  {
+    "id": 36,
+    "name": "Dạ dày lợn",
+    "carb": 0,
+    "fat": 10,
+    "sFat": 4,
+    "protein": 17,
+    "calo": 159,
+    "fiber": 0
+  },
+  {
+    "id": 37,
+    "name": "Đuôi lợn",
+    "carb": 0,
+    "fat": 33,
+    "sFat": 12,
+    "protein": 18,
+    "calo": 378,
+    "fiber": 0
+  },
+  {
+    "id": 38,
+    "name": "Lưỡi lợn",
+    "carb": 0,
+    "fat": 17,
+    "sFat": 6,
+    "protein": 16,
+    "calo": 225,
+    "fiber": 0
+  },
+  {
+    "id": 39,
+    "name": "Ruột non lợn",
+    "carb": 0,
+    "fat": 17,
+    "sFat": 8,
+    "protein": 6,
+    "calo": 182,
+    "fiber": 0
+  },
+  {
+    "id": 40,
+    "name": "Thịt thăn bò (nạc)",
+    "carb": 0,
+    "fat": 6,
+    "sFat": 2,
+    "protein": 21,
+    "calo": 142,
+    "fiber": 0
+  },
+  {
+    "id": 41,
+    "name": "Thịt bò tươi (nạc va mỡ)",
+    "carb": 0,
+    "fat": 22.5,
+    "sFat": 9,
+    "protein": 17.5,
+    "calo": 278,
+    "fiber": 0
+  },
+  {
+    "id": 42,
+    "name": "Thịt ức bò (nạc)",
+    "carb": 0,
+    "fat": 7,
+    "sFat": 2.5,
+    "protein": 21,
+    "calo": 155,
+    "fiber": 0
+  },
+  {
+    "id": 43,
+    "name": "Thịt ức bò (nạc và mỡ)",
+    "carb": 0,
+    "fat": 19,
+    "sFat": 7.5,
+    "protein": 18.5,
+    "calo": 251,
+    "fiber": 0
+  },
+  {
+    "id": 44,
+    "name": "Sườn bò (nạc và mỡ)",
+    "carb": 0,
+    "fat": 26,
+    "sFat": 11,
+    "protein": 17,
+    "calo": 306,
+    "fiber": 0
+  },
+  {
+    "id": 45,
+    "name": "Bắp bò",
+    "carb": 0,
+    "fat": 6,
+    "sFat": 2.5,
+    "protein": 34,
+    "calo": 201,
+    "fiber": 0
+  },
+  {
+    "id": 46,
+    "name": "Lưỡi bò",
+    "carb": 4,
+    "fat": 16,
+    "sFat": 5,
+    "protein": 15,
+    "calo": 224,
+    "fiber": 0
+  },
+  {
+    "id": 47,
+    "name": "Dạ dày bò",
+    "carb": 0,
+    "fat": 3.5,
+    "sFat": 1,
+    "protein": 12.5,
+    "calo": 85,
+    "fiber": 0
+  },
+  {
+    "id": 48,
+    "name": "Mỡ bò",
+    "carb": 0,
+    "fat": 94,
+    "sFat": 52,
+    "protein": 2,
+    "calo": 854,
+    "fiber": 0
+  },
+  {
+    "id": 49,
+    "name": "Phổi bò",
+    "carb": 0,
+    "fat": 3,
+    "sFat": 1,
+    "protein": 16,
+    "calo": 92,
+    "fiber": 0
+  },
+  {
+    "id": 50,
+    "name": "Gan bò",
+    "carb": 4,
+    "fat": 4,
+    "sFat": 1,
+    "protein": 20,
+    "calo": 135,
+    "fiber": 0
+  },
+  {
+    "id": 51,
+    "name": "Thận bò",
+    "carb": 0,
+    "fat": 3,
+    "sFat": 1,
+    "protein": 18,
+    "calo": 103,
+    "fiber": 0
+  },
+  {
+    "id": 52,
+    "name": "Tim bò",
+    "carb": 0,
+    "fat": 3.5,
+    "sFat": 1.7,
+    "protein": 18,
+    "calo": 112,
+    "fiber": 0
+  },
+  {
+    "id": 53,
+    "name": "Đùi gà, thịt",
+    "carb": 0,
+    "fat": 4,
+    "sFat": 1,
+    "protein": 20,
+    "calo": 119,
+    "fiber": 0
+  },
+  {
+    "id": 54,
+    "name": "Đùi gà, thịt và da",
+    "carb": 0,
+    "fat": 15,
+    "sFat": 4,
+    "protein": 17,
+    "calo": 211,
+    "fiber": 0
+  },
+  {
+    "id": 55,
+    "name": "Cánh gà, thịt",
+    "carb": 0,
+    "fat": 4,
+    "sFat": 1,
+    "protein": 22,
+    "calo": 126,
+    "fiber": 0
+  },
+  {
+    "id": 56,
+    "name": "Cánh gà, thịt và da",
+    "carb": 0,
+    "fat": 16,
+    "sFat": 4,
+    "protein": 18,
+    "calo": 222,
+    "fiber": 0
+  },
+  {
+    "id": 57,
+    "name": "Cẳng gà, thịt",
+    "carb": 0,
+    "fat": 3,
+    "sFat": 1,
+    "protein": 21,
+    "calo": 119,
+    "fiber": 0
+  },
+  {
+    "id": 58,
+    "name": "Cẳng gà, thịt và da",
+    "carb": 0,
+    "fat": 9,
+    "sFat": 2,
+    "protein": 19,
+    "calo": 161,
+    "fiber": 0
+  },
+  {
+    "id": 59,
+    "name": "Chân gà, thịt",
+    "carb": 0,
+    "fat": 4,
+    "sFat": 1,
+    "protein": 20,
+    "calo": 120,
+    "fiber": 0
+  },
+  {
+    "id": 60,
+    "name": "Chân gà, thịt và da",
+    "carb": 0,
+    "fat": 12,
+    "sFat": 3,
+    "protein": 18,
+    "calo": 187,
+    "fiber": 0
+  },
+  {
+    "id": 61,
+    "name": "Cổ gà, thịt",
+    "carb": 0,
+    "fat": 9,
+    "sFat": 2,
+    "protein": 18,
+    "calo": 154,
+    "fiber": 0
+  },
+  {
+    "id": 62,
+    "name": "Cổ gà, thịt và da",
+    "carb": 0,
+    "fat": 26,
+    "sFat": 7,
+    "protein": 14,
+    "calo": 297,
+    "fiber": 0
+  },
+  {
+    "id": 63,
+    "name": "Ức gà, thịt",
+    "carb": 0,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 23,
+    "calo": 110,
+    "fiber": 0
+  },
+  {
+    "id": 64,
+    "name": "Ức gà, thịt và da",
+    "carb": 0,
+    "fat": 9,
+    "sFat": 3,
+    "protein": 21,
+    "calo": 172,
+    "fiber": 0
+  },
+  {
+    "id": 65,
+    "name": "Lưng gà, thịt",
+    "carb": 0,
+    "fat": 6,
+    "sFat": 2,
+    "protein": 20,
+    "calo": 137,
+    "fiber": 0
+  },
+  {
+    "id": 66,
+    "name": "Lưng gà, thịt và mỡ",
+    "carb": 0,
+    "fat": 29,
+    "sFat": 8,
+    "protein": 14,
+    "calo": 219,
+    "fiber": 0
+  },
+  {
+    "id": 67,
+    "name": "Tim gà",
+    "carb": 1,
+    "fat": 9,
+    "sFat": 3,
+    "protein": 16,
+    "calo": 153,
+    "fiber": 0
+  },
+  {
+    "id": 68,
+    "name": "Gan gà",
+    "carb": 0,
+    "fat": 5,
+    "sFat": 2,
+    "protein": 17,
+    "calo": 116,
+    "fiber": 0
+  },
+  {
+    "id": 69,
+    "name": "Thịt gà xay",
+    "carb": 0,
+    "fat": 8,
+    "sFat": 2,
+    "protein": 17,
+    "calo": 143,
+    "fiber": 0
+  },
+  {
+    "id": 70,
+    "name": "Da gà",
+    "carb": 0,
+    "fat": 32,
+    "sFat": 9,
+    "protein": 13,
+    "calo": 349,
+    "fiber": 0
+  },
+  {
+    "id": 71,
+    "name": "Vịt nuôi, thịt",
+    "carb": 0,
+    "fat": 6,
+    "sFat": 2,
+    "protein": 18,
+    "calo": 132,
+    "fiber": 0
+  },
+  {
+    "id": 72,
+    "name": "Vịt nuôi, thịt và da",
+    "carb": 0,
+    "fat": 39,
+    "sFat": 13,
+    "protein": 11,
+    "calo": 404,
+    "fiber": 0
+  },
+  {
+    "id": 73,
+    "name": "Vịt hoang dã, thịt và da",
+    "carb": 0,
+    "fat": 15,
+    "sFat": 5,
+    "protein": 17,
+    "calo": 211,
+    "fiber": 0
+  },
+  {
+    "id": 74,
+    "name": "Gan vịt",
+    "carb": 4,
+    "fat": 5,
+    "sFat": 1,
+    "protein": 19,
+    "calo": 136,
+    "fiber": 0
+  },
+  {
+    "id": 75,
+    "name": "Đậu rồng (lá)",
+    "carb": 14,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 6,
+    "calo": 74,
+    "fiber": 0
+  },
+  {
+    "id": 76,
+    "name": "Đậu phụ lụa mềm",
+    "carb": 3,
+    "fat": 3,
+    "sFat": 0,
+    "protein": 5,
+    "calo": 55,
+    "fiber": 0
+  },
+  {
+    "id": 77,
+    "name": "Đậu phụ lụa rắn",
+    "carb": 2,
+    "fat": 3,
+    "sFat": 0,
+    "protein": 7,
+    "calo": 62,
+    "fiber": 0
+  },
+  {
+    "id": 78,
+    "name": "Đậu phụ okara",
+    "carb": 13,
+    "fat": 2,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 77,
+    "fiber": 0
+  },
+  {
+    "id": 79,
+    "name": "Đậu phụ rán",
+    "carb": 10,
+    "fat": 20,
+    "sFat": 0,
+    "protein": 17,
+    "calo": 271,
+    "fiber": 4
+  },
+  {
+    "id": 80,
+    "name": "Đu đủ",
+    "carb": 10,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 39,
+    "fiber": 2
+  },
+  {
+    "id": 81,
+    "name": "Giá đỗ",
+    "carb": 7.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 5.5,
+    "calo": 44,
+    "fiber": 2
+  },
+  {
+    "id": 82,
+    "name": "Gừng",
+    "carb": 18,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 2,
+    "calo": 80,
+    "fiber": 2
+  },
+  {
+    "id": 83,
+    "name": "Gạo nâu/gạo lức",
+    "carb": 77,
+    "fat": 3,
+    "sFat": 0,
+    "protein": 8,
+    "calo": 370,
+    "fiber": 4
+  },
+  {
+    "id": 84,
+    "name": "Gạo nếp",
+    "carb": 82,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 7,
+    "calo": 370,
+    "fiber": 3
+  },
+  {
+    "id": 85,
+    "name": "Gạo trắng",
+    "carb": 79,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 6,
+    "calo": 360,
+    "fiber": 3
+  },
+  {
+    "id": 86,
+    "name": "Húng quế",
+    "carb": 3,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 23,
+    "fiber": 2
+  },
+  {
+    "id": 87,
+    "name": "Hoa chuối",
+    "carb": 5.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1.5,
+    "calo": 20,
+    "fiber": 2
+  },
+  {
+    "id": 88,
+    "name": "Hẹ lá",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 2,
+    "calo": 16,
+    "fiber": 1
+  },
+  {
+    "id": 89,
+    "name": "Hồng xiêm/Sa bô chê",
+    "carb": 20,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 0,
+    "calo": 83,
+    "fiber": 5
+  },
+  {
+    "id": 90,
+    "name": "Hành lá",
+    "carb": 7,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 2,
+    "calo": 3,
+    "fiber": 3
+  },
+  {
+    "id": 91,
+    "name": "Hạt điều",
+    "carb": 33,
+    "fat": 44,
+    "sFat": 0,
+    "protein": 8,
+    "calo": 553,
+    "fiber": 3
+  },
+  {
+    "id": 92,
+    "name": "Hạnh nhân",
+    "carb": 22,
+    "fat": 49,
+    "sFat": 0,
+    "protein": 21,
+    "calo": 575,
+    "fiber": 12
+  },
+  {
+    "id": 93,
+    "name": "Hạt sen",
+    "carb": 17,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 4,
+    "calo": 89,
+    "fiber": 0
+  },
+  {
+    "id": 94,
+    "name": "Hạt hướng dương (phơi khô)",
+    "carb": 20,
+    "fat": 51,
+    "sFat": 0,
+    "protein": 21,
+    "calo": 584,
+    "fiber": 9
+  },
+  {
+    "id": 95,
+    "name": "Hột é",
+    "carb": 44,
+    "fat": 31,
+    "sFat": 0,
+    "protein": 16,
+    "calo": 490,
+    "fiber": 38
+  },
+  {
+    "id": 96,
+    "name": "Khoai sọ",
+    "carb": 26,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 112,
+    "fiber": 4
+  },
+  {
+    "id": 97,
+    "name": "Khế",
+    "carb": 7,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 31,
+    "fiber": 3
+  },
+  {
+    "id": 98,
+    "name": "Khổ qua (quả)",
+    "carb": 4,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 17,
+    "fiber": 3
+  },
+  {
+    "id": 99,
+    "name": "Rau ngót",
+    "carb": 6,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 5.3,
+    "calo": 36,
+    "fiber": 2.5
+  },
+  {
+    "id": 100,
+    "name": "Rau bí",
+    "carb": 3.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 2.7,
+    "calo": 18,
+    "fiber": 1.7
+  },
+  {
+    "id": 101,
+    "name": "Rau húng",
+    "carb": 5.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 2.2,
+    "calo": 18,
+    "fiber": 3.5
+  },
+  {
+    "id": 102,
+    "name": "Rau khoai lang",
+    "carb": 4,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 2.6,
+    "calo": 22,
+    "fiber": 1.5
+  },
+  {
+    "id": 103,
+    "name": "Rau kinh giới",
+    "carb": 6.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 2.7,
+    "calo": 23,
+    "fiber": 3.5
+  },
+  {
+    "id": 104,
+    "name": "Rau ngổ",
+    "carb": 4.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1.5,
+    "calo": 16,
+    "fiber": 2
+  },
+  {
+    "id": 105,
+    "name": "Rau diếp xanh (xà lách xanh)",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 0,
+    "calo": 15,
+    "fiber": 1
+  },
+  {
+    "id": 106,
+    "name": "Rau diếp đỏ (xà lách đỏ)",
+    "carb": 2,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 16,
+    "fiber": 1
+  },
+  {
+    "id": 107,
+    "name": "Rau mùi tây (ngò tây)",
+    "carb": 6,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 36,
+    "fiber": 3
+  },
+  {
+    "id": 108,
+    "name": "Rau bina (bó xôi)",
+    "carb": 4,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 23,
+    "fiber": 2
+  },
+  {
+    "id": 109,
+    "name": "Rau thì là",
+    "carb": 7,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 43,
+    "fiber": 2
+  },
+  {
+    "id": 110,
+    "name": "Rong biển/thạch trắng agar tươi",
+    "carb": 7,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 26,
+    "fiber": 0
+  },
+  {
+    "id": 111,
+    "name": "Rong biển agar khô",
+    "carb": 81,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 6,
+    "calo": 306,
+    "fiber": 8
+  },
+  {
+    "id": 112,
+    "name": "Rong biển xoắn ốc tươi",
+    "carb": 2,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 6,
+    "calo": 26,
+    "fiber": 0
+  },
+  {
+    "id": 113,
+    "name": "Rong biển xoắn ốc khô",
+    "carb": 24,
+    "fat": 8,
+    "sFat": 0,
+    "protein": 57,
+    "calo": 290,
+    "fiber": 4
+  },
+  {
+    "id": 114,
+    "name": "Rong biển kelp (tảo biển) tươi",
+    "carb": 10,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 2,
+    "calo": 43,
+    "fiber": 1
+  },
+  {
+    "id": 115,
+    "name": "Cá chép",
+    "carb": 0,
+    "fat": 5.5,
+    "sFat": 1,
+    "protein": 18,
+    "calo": 127,
+    "fiber": 0
+  },
+  {
+    "id": 116,
+    "name": "Cá đối",
+    "carb": 0,
+    "fat": 4,
+    "sFat": 1,
+    "protein": 19,
+    "calo": 117,
+    "fiber": 0
+  },
+  {
+    "id": 117,
+    "name": "Cá thu đại tây dương",
+    "carb": 0,
+    "fat": 14,
+    "sFat": 3.5,
+    "protein": 19,
+    "calo": 205,
+    "fiber": 0
+  },
+  {
+    "id": 118,
+    "name": "Cá thu thái bình dương",
+    "carb": 0,
+    "fat": 8,
+    "sFat": 2,
+    "protein": 20,
+    "calo": 158,
+    "fiber": 0
+  },
+  {
+    "id": 119,
+    "name": "Cá thu tây ban nha",
+    "carb": 0,
+    "fat": 6,
+    "sFat": 2,
+    "protein": 19,
+    "calo": 139,
+    "fiber": 0
+  },
+  {
+    "id": 120,
+    "name": "Cá thu vua",
+    "carb": 0,
+    "fat": 2,
+    "sFat": 0,
+    "protein": 20,
+    "calo": 105,
+    "fiber": 0
+  },
+  {
+    "id": 121,
+    "name": "Cá rô phi",
+    "carb": 0,
+    "fat": 2,
+    "sFat": 1,
+    "protein": 20,
+    "calo": 96,
+    "fiber": 0
+  },
+  {
+    "id": 122,
+    "name": "Cá nục",
+    "carb": 0.5,
+    "fat": 7,
+    "sFat": 0,
+    "protein": 24,
+    "calo": 114,
+    "fiber": 0
+  },
+  {
+    "id": 123,
+    "name": "Cá basa",
+    "carb": 0,
+    "fat": 7,
+    "sFat": 2,
+    "protein": 28,
+    "calo": 170,
+    "fiber": 0
+  },
+  {
+    "id": 124,
+    "name": "Cá mè",
+    "carb": 0,
+    "fat": 6,
+    "sFat": 1,
+    "protein": 18,
+    "calo": 127,
+    "fiber": 0
+  },
+  {
+    "id": 125,
+    "name": "Lươn, cá chình",
+    "carb": 0,
+    "fat": 12,
+    "sFat": 2.5,
+    "protein": 19,
+    "calo": 184,
+    "fiber": 0
+  },
+  {
+    "id": 126,
+    "name": "Trứng cá",
+    "carb": 4,
+    "fat": 18,
+    "sFat": 4,
+    "protein": 25,
+    "calo": 252,
+    "fiber": 0
+  },
+  {
+    "id": 127,
+    "name": "Tôm",
+    "carb": 0,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 16,
+    "calo": 100,
+    "fiber": 0
+  },
+  {
+    "id": 128,
+    "name": "Tôm hùm phương bắc",
+    "carb": 0.7,
+    "fat": 0.7,
+    "sFat": 0,
+    "protein": 19,
+    "calo": 90,
+    "fiber": 0
+  },
+  {
+    "id": 129,
+    "name": "Tôm hùm gai",
+    "carb": 2.4,
+    "fat": 1.5,
+    "sFat": 0,
+    "protein": 20.5,
+    "calo": 112,
+    "fiber": 0
+  },
+  {
+    "id": 130,
+    "name": "Cua biển (xanh)",
+    "carb": 0,
+    "fat": 2,
+    "sFat": 0,
+    "protein": 18,
+    "calo": 87,
+    "fiber": 0
+  },
+  {
+    "id": 131,
+    "name": "Cua vua Alaska",
+    "carb": 0,
+    "fat": 0.6,
+    "sFat": 0,
+    "protein": 18,
+    "calo": 84,
+    "fiber": 0
+  },
+  {
+    "id": 132,
+    "name": "Cua nữ hoàng",
+    "carb": 0,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 19,
+    "calo": 91,
+    "fiber": 0
+  },
+  {
+    "id": 133,
+    "name": "Mực ống",
+    "carb": 3.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 14,
+    "calo": 93,
+    "fiber": 0
+  },
+  {
+    "id": 134,
+    "name": "Mực nang",
+    "carb": 1.2,
+    "fat": 1.2,
+    "sFat": 0,
+    "protein": 16.5,
+    "calo": 79,
+    "fiber": 0
+  },
+  {
+    "id": 135,
+    "name": "Ốc",
+    "carb": 3.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 18,
+    "calo": 89,
+    "fiber": 0
+  },
+  {
+    "id": 136,
+    "name": "Hến",
+    "carb": 4,
+    "fat": 2,
+    "sFat": 0.7,
+    "protein": 12,
+    "calo": 86,
+    "fiber": 0
+  },
+  {
+    "id": 137,
+    "name": "Sò",
+    "carb": 5,
+    "fat": 0,
+    "sFat": 1,
+    "protein": 13,
+    "calo": 79,
+    "fiber": 0
+  },
+  {
+    "id": 138,
+    "name": "Nghêu",
+    "carb": 3,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 13,
+    "calo": 74,
+    "fiber": 0
+  },
+  {
+    "id": 139,
+    "name": "Bí đao",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 0,
+    "calo": 14,
+    "fiber": 1
+  },
+  {
+    "id": 140,
+    "name": "Bí xanh (mùa hè)",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 16,
+    "fiber": 1
+  },
+  {
+    "id": 141,
+    "name": "Bí xanh (baby)",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 21,
+    "fiber": 1
+  },
+  {
+    "id": 142,
+    "name": "Bưởi",
+    "carb": 10,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 38,
+    "fiber": 1
+  },
+  {
+    "id": 143,
+    "name": "Bưởi chủm",
+    "carb": 8,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 33,
+    "fiber": 1.3
+  },
+  {
+    "id": 144,
+    "name": "Bắp ngô ngọt",
+    "carb": 19,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 86,
+    "fiber": 3
+  },
+  {
+    "id": 145,
+    "name": "Bầu",
+    "carb": 4,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 20,
+    "fiber": 0
+  },
+  {
+    "id": 146,
+    "name": "Bông hẹ",
+    "carb": 4,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 30,
+    "fiber": 3
+  },
+  {
+    "id": 147,
+    "name": "Củ hành",
+    "carb": 9,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 40,
+    "fiber": 2
+  },
+  {
+    "id": 148,
+    "name": "Cần tây",
+    "carb": 4,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 16,
+    "fiber": 2
+  },
+  {
+    "id": 149,
+    "name": "Cây bạc hà lục",
+    "carb": 8,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 44,
+    "fiber": 7
+  },
+  {
+    "id": 150,
+    "name": "Cây bạc hà cay",
+    "carb": 15,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 4,
+    "calo": 70,
+    "fiber": 8
+  },
+  {
+    "id": 151,
+    "name": "Củ diếp xoắn",
+    "carb": 18,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 73,
+    "fiber": 0
+  },
+  {
+    "id": 152,
+    "name": "Cải thìa",
+    "carb": 2,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 9,
+    "fiber": 1
+  },
+  {
+    "id": 153,
+    "name": "Cải bắp",
+    "carb": 6,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 25,
+    "fiber": 3
+  },
+  {
+    "id": 154,
+    "name": "Cải thảo",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 16,
+    "fiber": 1
+  },
+  {
+    "id": 155,
+    "name": "Cải xoong/xà lách xoong",
+    "carb": 1,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 2,
+    "calo": 11,
+    "fiber": 0
+  },
+  {
+    "id": 156,
+    "name": "Cải cúc/râu tần ô",
+    "carb": 3,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 24,
+    "fiber": 3
+  },
+  {
+    "id": 157,
+    "name": "Cải xoăn Kale",
+    "carb": 10.5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 49,
+    "fiber": 1.5
+  },
+  {
+    "id": 158,
+    "name": "Cải ngồng/Cải rổ",
+    "carb": 4,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 22,
+    "fiber": 3
+  },
+  {
+    "id": 159,
+    "name": "Cải xanh turnips",
+    "carb": 7,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 32,
+    "fiber": 3
+  },
+  {
+    "id": 160,
+    "name": "Cà tím",
+    "carb": 6,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 24,
+    "fiber": 3
+  },
+  {
+    "id": 161,
+    "name": "Cây đại hoàng",
+    "carb": 5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 0.8,
+    "calo": 21,
+    "fiber": 1.5
+  },
+  {
+    "id": 162,
+    "name": "Cây atisô",
+    "carb": 11,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 47,
+    "fiber": 5
+  },
+  {
+    "id": 163,
+    "name": "Củ đậu",
+    "carb": 9,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 0.8,
+    "calo": 38,
+    "fiber": 5
+  },
+  {
+    "id": 164,
+    "name": "Cà chua xanh",
+    "carb": 5,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 23,
+    "fiber": 1
+  },
+  {
+    "id": 165,
+    "name": "Cà chua vàng/cam",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 15,
+    "fiber": 1
+  },
+  {
+    "id": 166,
+    "name": "Củ cải trắng",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 14,
+    "fiber": 1
+  },
+  {
+    "id": 167,
+    "name": "Chanh (quả)",
+    "carb": 11,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 30,
+    "fiber": 3
+  },
+  {
+    "id": 168,
+    "name": "Chanh dây",
+    "carb": 23,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 2,
+    "calo": 97,
+    "fiber": 10
+  },
+  {
+    "id": 169,
+    "name": "Cam (quả)",
+    "carb": 12,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 47,
+    "fiber": 2
+  },
+  {
+    "id": 170,
+    "name": "Chuối",
+    "carb": 23,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 89,
+    "fiber": 3
+  },
+  {
+    "id": 171,
+    "name": "Chôm chôm",
+    "carb": 21,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 82,
+    "fiber": 1
+  },
+  {
+    "id": 172,
+    "name": "Củ nghệ (gia vị)",
+    "carb": 65,
+    "fat": 10,
+    "sFat": 0,
+    "protein": 8,
+    "calo": 354,
+    "fiber": 21
+  },
+  {
+    "id": 173,
+    "name": "Củ dền",
+    "carb": 10,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 2,
+    "calo": 43,
+    "fiber": 3
+  },
+  {
+    "id": 174,
+    "name": "Sầu riêng",
+    "carb": 27,
+    "fat": 5,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 147,
+    "fiber": 4
+  },
+  {
+    "id": 175,
+    "name": "Tỏi",
+    "carb": 33,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 6,
+    "calo": 149,
+    "fiber": 2
+  },
+  {
+    "id": 176,
+    "name": "Tỏi tây",
+    "carb": 14,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 61,
+    "fiber": 2
+  },
+  {
+    "id": 177,
+    "name": "Trái cóc",
+    "carb": 13,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 57,
+    "fiber": 3
+  },
+  {
+    "id": 178,
+    "name": "Táo",
+    "carb": 14,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 0,
+    "calo": 52,
+    "fiber": 2
+  },
+  {
+    "id": 179,
+    "name": "Thanh long",
+    "carb": 9,
+    "fat": 1.5,
+    "sFat": 0,
+    "protein": 2,
+    "calo": 60,
+    "fiber": 1
+  },
+  {
+    "id": 180,
+    "name": "Tía tô",
+    "carb": 7,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 3,
+    "calo": 26,
+    "fiber": 3.5
+  },
+  {
+    "id": 181,
+    "name": "Vải",
+    "carb": 17,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 66,
+    "fiber": 1
+  },
+  {
+    "id": 182,
+    "name": "Vải khô",
+    "carb": 71,
+    "fat": 1,
+    "sFat": 0,
+    "protein": 4,
+    "calo": 277,
+    "fiber": 5
+  },
+  {
+    "id": 183,
+    "name": "Xà lách búp Mỹ",
+    "carb": 3,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 14,
+    "fiber": 1
+  },
+  {
+    "id": 184,
+    "name": "Xoài",
+    "carb": 17,
+    "fat": 0,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 65,
+    "fiber": 2
+  },
+  {
+    "id": 185,
+    "name": "Yến mạch",
+    "carb": 66,
+    "fat": 7,
+    "sFat": 0,
+    "protein": 17,
+    "calo": 389,
+    "fiber": 11
+  },
+  {
+    "id": 186,
+    "name": "Bánh mì",
+    "carb": 48,
+    "fat": 4,
+    "sFat": 0,
+    "protein": 1,
+    "calo": 266,
+    "fiber": 11
+  },
+  {
+    "id": 187,
+    "name": "Bánh mì đen",
+    "carb": 48,
+    "fat": 3,
+    "sFat": 0,
+    "protein": 9,
+    "calo": 250,
+    "fiber": 7
+  },
+  {
+    "id": 188,
+    "name": "Óc bò",
+    "carb": 1,
+    "fat": 11,
+    "sFat": 2.5,
+    "protein": 11,
+    "calo": 143,
+    "fiber": 0
+  }
+]

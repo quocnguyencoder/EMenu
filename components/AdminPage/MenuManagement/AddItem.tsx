@@ -5,10 +5,8 @@ import {
   RadioGroup,
   FormControlLabel,
   InputLabel,
-  CardMedia,
   InputBase,
-  ButtonBase,
-  Typography,
+  Paper,
 } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import { useState, useRef } from 'react'
@@ -20,8 +18,10 @@ import SelectCategories from './SelectCategories'
 import * as getService from '@/firebase/getDocument'
 import * as updateService from '@/firebase/updateDocument'
 import type { Color } from '@material-ui/lab/Alert'
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 import SnackBar from '@/components/common/SnackBar'
+import Incredients from './Incredients'
+import { MenuItemIncredients } from '@/models/incredient'
+import ImagePreview from './ImagePreview'
 
 interface Props {
   categories: Category
@@ -32,6 +32,7 @@ interface Props {
 export default function AddItem({ categories, placeID, menu }: Props) {
   const classes = useStyles()
   const [option, setOption] = useState('select')
+  const [itemIncredient, setItemIncredient] = useState<MenuItemIncredients>({})
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
   const [previewImg, setPreviewImg] = useState('')
   const [disableBtn, setDisableBtn] = useState(false)
@@ -108,6 +109,7 @@ export default function AddItem({ categories, placeID, menu }: Props) {
                 name: e.target.Name.value,
                 price: Number(e.target.Price.value),
                 discount: 0,
+                incredients: itemIncredient,
               } as MenuItem
               updateService.default
                 .updateMenuItem(placeID, newItemID, data)
@@ -154,93 +156,72 @@ export default function AddItem({ categories, placeID, menu }: Props) {
       <SnackBar message={message} setMessage={setMessage} />
       <form onSubmit={handleSubmit}>
         <Box
-          display="flex"
+          mr="1rem"
           style={{
             gap: '3%',
-            height: '60vh',
           }}
         >
-          <Box flex={2}>
-            <ItemForm
-              item={{ name: '', description: '', price: 0 } as MenuItem}
-            />
-            <RadioGroup
-              row
-              defaultValue="select"
-              onChange={(e) => handleChange(e.target.value)}
-            >
-              <FormControlLabel
-                value="select"
-                control={<Radio />}
-                label="Chọn loại có sẵn"
-              />
-              <FormControlLabel
-                value="new"
-                control={<Radio />}
-                label="Loại món ăn mới"
-              />
-            </RadioGroup>
-            <InputLabel>Loại</InputLabel>
-            {option == 'select' ? (
-              <SelectCategories
-                selectedCategories={selectedCategories}
-                handleChangeCategory={handleChangeCategory}
-                categories={categories}
-              />
-            ) : (
-              <InputBase
-                style={{
-                  border: '1px solid',
-                  borderRadius: '5px',
-                  padding: '0 1% 0 1%',
-                }}
-                required
-                name="newCategory"
-              />
-            )}
-            <Box mt={2}>
-              <Button
-                className={classes.button}
-                type="submit"
-                variant="contained"
-                disabled={disableBtn}
-              >
-                Xác nhận
-              </Button>
-            </Box>
-          </Box>
-          <Box flex={1}>
-            <CardMedia
-              component="img"
-              image={`${previewImg}`}
-              style={{
-                maxWidth: '100%',
-                height: '50%',
-                objectFit: 'scale-down',
-              }}
-            />
-            <input
-              id="icon-button-file"
-              type="file"
-              required
-              ref={inputEl}
-              style={{ display: 'none' }}
-              onChange={(e) => handlePreviewImg(e)}
-            />
-            <Box display="flex" flexDirection="column">
-              <label htmlFor="icon-button-file">
-                <ButtonBase
-                  component="span"
-                  style={{
-                    backgroundColor: '#e7e7e7',
-                    width: '100%',
-                  }}
+          <Paper variant="outlined" style={{ marginTop: '1rem' }}>
+            <Box display="flex" p={1}>
+              <Box flex={2}>
+                <ItemForm
+                  item={{ name: '', description: '', price: 0 } as MenuItem}
+                />
+                <RadioGroup
+                  row
+                  defaultValue="select"
+                  onChange={(e) => handleChange(e.target.value)}
                 >
-                  <AddAPhotoIcon fontSize="large" />
-                  <Typography variant="body2">Thêm ảnh</Typography>
-                </ButtonBase>
-              </label>
+                  <FormControlLabel
+                    value="select"
+                    control={<Radio />}
+                    label="Chọn loại có sẵn"
+                  />
+                  <FormControlLabel
+                    value="new"
+                    control={<Radio />}
+                    label="Loại món ăn mới"
+                  />
+                </RadioGroup>
+                <InputLabel>Loại</InputLabel>
+                {option == 'select' ? (
+                  <SelectCategories
+                    selectedCategories={selectedCategories}
+                    handleChangeCategory={handleChangeCategory}
+                    categories={categories}
+                  />
+                ) : (
+                  <InputBase
+                    style={{
+                      border: '1px solid',
+                      borderRadius: '5px',
+                      padding: '0 1% 0 1%',
+                    }}
+                    required
+                    name="newCategory"
+                  />
+                )}
+              </Box>
+              <ImagePreview
+                previewImg={previewImg}
+                inputEl={inputEl}
+                handlePreviewImg={handlePreviewImg}
+              />
             </Box>
+          </Paper>
+          <Incredients
+            itemIncredient={itemIncredient}
+            setItemIncredient={setItemIncredient}
+          />
+          <Box mt={2}>
+            <Button
+              className={classes.button}
+              type="submit"
+              variant="contained"
+              disabled={disableBtn}
+            >
+              Xác nhận
+            </Button>
           </Box>
         </Box>
       </form>

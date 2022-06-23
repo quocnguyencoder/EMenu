@@ -49,7 +49,7 @@ const createPlaceInfo = async (
       location: location,
       image: '',
       show: false,
-      tags: [] as string[],
+      tags: data.tags,
     })
     .then((doc) => {
       firebase.firestore().collection('user').doc(uid).update({

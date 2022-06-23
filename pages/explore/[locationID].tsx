@@ -21,6 +21,7 @@ interface Props {
 }
 
 const index = ({ status, location, places }: Props) => {
+
   const locationFound = status === 200
   const [currentAddress, setCurrentAddress] = useState<Address>({} as Address)
 

@@ -13,6 +13,9 @@ import {
 import { Chart } from 'react-chartjs-2'
 import { Bill } from '@/models/place'
 import { Paper } from '@material-ui/core'
+import moment from 'moment'
+import dayjs from 'dayjs'
+import getDatesInRange from '@/functions/getDatesInRange'
 
 ChartJS.register(
   LinearScale,
@@ -26,11 +29,6 @@ ChartJS.register(
   Title
 )
 
-interface Props {
-  orderList: Bill[]
-  months: string[]
-}
-
 interface ChartCtx {
   datasetIndex: number
   p0: PointElement
@@ -40,15 +38,31 @@ interface ChartCtx {
   type: string
 }
 
-const ChartIncome: React.FC<Props> = ({ orderList, months }: Props) => {
-  const totalOrdersByMonth = months.map((month) =>
-    orderList.filter(
-      (order) =>
-        new Date(month).getMonth() === new Date(order.datetime).getMonth()
+interface Props {
+  orderList: Bill[]
+}
+
+const ChartIncomeWeekly: React.FC<Props> = ({ orderList }: Props) => {
+  const startDate = moment(
+    new Date(dayjs().startOf('week').format('YYYY-MM-DD'))
+  ).format('L')
+  const endDate = moment(
+    new Date(dayjs().endOf('week').format('YYYY-MM-DD'))
+  ).format('L')
+
+  const labelDates = getDatesInRange(startDate, endDate)
+
+  const weeklyOrders = orderList.filter((order) =>
+    moment(order.datetime).isBetween(startDate, endDate)
+  )
+
+  const totalOrdersByDate = labelDates.map((date) =>
+    weeklyOrders.filter(
+      (order) => date === moment(order.datetime).format('DD-MM-yyyy')
     )
   )
 
-  const totalIncomeByMonth = totalOrdersByMonth.map((orders) =>
+  const totalIncome = totalOrdersByDate.map((orders) =>
     orders.reduce(
       (pre, income) =>
         income.status === 'Confirmed' ? pre + income.total : pre,
@@ -56,13 +70,21 @@ const ChartIncome: React.FC<Props> = ({ orderList, months }: Props) => {
     )
   )
 
+  const labels = labelDates.reduce(
+    (pre, curr) =>
+      curr === moment().format('DD-MM-yyyy')
+        ? [...pre, 'Today']
+        : [...pre, curr],
+    [] as string[]
+  )
+
   const data = {
-    labels: months,
+    labels: labels,
     datasets: [
       {
         type: 'line' as const,
-        label: 'Tổng doanh thu',
-        data: totalIncomeByMonth.map((total) => total.toFixed(2)),
+        label: 'Doanh thu trong tuần',
+        data: totalIncome.map((total) => total.toFixed(2)),
         borderColor: 'rgb(128,0,128)',
         borderWidth: 2,
         tension: 0.4,
@@ -87,9 +109,12 @@ const ChartIncome: React.FC<Props> = ({ orderList, months }: Props) => {
           plugins: {
             title: {
               display: true,
-              text: 'DOANH THU THEO THÁNG TRONG NĂM 2022',
-              position: 'bottom',
+              text: 'DOANH THU TRONG TUẦN',
+              position: 'top',
               color: '#D14B28',
+            },
+            legend: {
+              display: false,
             },
           },
           scales: {
@@ -103,4 +128,4 @@ const ChartIncome: React.FC<Props> = ({ orderList, months }: Props) => {
   )
 }
 
-export default ChartIncome
+export default ChartIncomeWeekly
