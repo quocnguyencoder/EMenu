@@ -38,22 +38,23 @@ const useUser = () => {
     // both kept up to date
     const cancelAuthListener = firebase.auth().onIdTokenChanged((user) => {
       if (user) {
-        mapUserData(user)
-        unsubscribe = firebase
-          .firestore()
-          .collection('user')
-          .doc(user.uid)
-          .onSnapshot((snapshot) => {
-            const userID = user.uid
-            const user_data = snapshot.data() as User
-            user_data.id = userID
-            user_data.token = user.refreshToken
-            sessionStorage.setItem('userInfo', JSON.stringify(user_data))
-            setUser(user_data)
-            setUserCookie(user_data)
-          })
-        const userID = { userID: user.uid }
-        sessionStorage.setItem('userID', JSON.stringify(userID))
+        mapUserData(user).then(() => {
+          unsubscribe = firebase
+            .firestore()
+            .collection('user')
+            .doc(user.uid)
+            .onSnapshot((snapshot) => {
+              const userID = user.uid
+              const user_data = snapshot.data() as User
+              user_data.id = userID
+              user_data.token = user.refreshToken
+              sessionStorage.setItem('userInfo', JSON.stringify(user_data))
+              setUser(user_data)
+              setUserCookie(user_data)
+            })
+          const userID = { userID: user.uid }
+          sessionStorage.setItem('userID', JSON.stringify(userID))
+        })
       } else {
         unsubscribe && unsubscribe()
         removeUserCookie()

@@ -26,11 +26,12 @@ const Orders = () => {
     if (user && user.id && user.id !== '') {
       getGetAllUserOrders(user.id).then((orders_data) => {
         const placeIDs = orders_data.map((place) => place.placeID)
-        getPlacesByIDList(placeIDs).then((places_data) => {
-          setOrders(orders_data)
-          setPlaces(places_data)
-          setPageStatus('loaded')
-        })
+        placeIDs.length !== 0 &&
+          getPlacesByIDList(placeIDs).then((places_data) => {
+            setOrders(orders_data)
+            setPlaces(places_data)
+            setPageStatus('loaded')
+          })
       })
     }
   }, [user.id])
