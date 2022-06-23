@@ -1,9 +1,9 @@
 import firebase from 'firebase/app'
 import * as createService from './createDocument'
 
-export const mapUserData = (user: firebase.User) => {
+export const mapUserData = async (user: firebase.User) => {
   const { uid, email, displayName, photoURL } = user
-  firebase
+  await firebase
     .firestore()
     .collection('user')
     .doc(uid)

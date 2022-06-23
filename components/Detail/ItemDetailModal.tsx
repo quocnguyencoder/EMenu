@@ -18,6 +18,14 @@ import Image from 'next/image'
 import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined'
 import formatter from '@/functions/moneyFormatter'
+import {
+  totalCalo,
+  totalCarb,
+  totalFat,
+  totalFiber,
+  totalProtein,
+  totalSFat,
+} from '@/helpers/toNutritionInfo'
 
 interface Props {
   open: boolean
@@ -100,101 +108,102 @@ const ItemDetailModal = ({
               {itemInfo.description}
             </Typography>
           )}
-
-          <Box>
-            <Typography
-              variant="h6"
-              component="h2"
-              style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}
-            >
-              {'Dinh dưỡng'}
-            </Typography>
-            <Grid container>
-              <Grid
-                item
-                xs={2}
-                className={classes.nutritionCard}
-                style={{
-                  backgroundColor: '#ffa952',
-                }}
+          {Object.keys(itemInfo.incredients).length !== 0 && (
+            <Box>
+              <Typography
+                variant="h6"
+                component="h2"
+                style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}
               >
-                <Typography variant="body2">{'Calo'}</Typography>
-                <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-                  {'280'}
-                </Typography>
+                {'Dinh dưỡng'}
+              </Typography>
+              <Grid container>
+                <Grid
+                  item
+                  xs={2}
+                  className={classes.nutritionCard}
+                  style={{
+                    backgroundColor: '#ffa952',
+                  }}
+                >
+                  <Typography variant="body2">{'Calo'}</Typography>
+                  <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                    {totalCalo(itemInfo.incredients)}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={2}
+                  className={classes.nutritionCard}
+                  style={{
+                    backgroundColor: '#0abfc8',
+                    maxWidth: '4rem',
+                  }}
+                >
+                  <Typography variant="body2">{'Carb'}</Typography>
+                  <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                    {totalCarb(itemInfo.incredients)}g
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  md={2}
+                  xs={3}
+                  className={classes.nutritionCard}
+                  style={{
+                    backgroundColor: '#ffcccb',
+                  }}
+                >
+                  <Typography variant="body2">{'Chất béo'}</Typography>
+                  <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                    {totalFat(itemInfo.incredients)}g
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  md={2}
+                  xs={3}
+                  className={classes.nutritionCard}
+                  style={{
+                    backgroundColor: '#f84',
+                  }}
+                >
+                  <Typography variant="body2">{'Béo bão hòa'}</Typography>
+                  <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                    {totalSFat(itemInfo.incredients)}g
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={2}
+                  className={classes.nutritionCard}
+                  style={{
+                    backgroundColor: '#CF9FFF',
+                    maxWidth: '4rem',
+                  }}
+                >
+                  <Typography variant="body2">{'Protein'}</Typography>
+                  <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                    {totalProtein(itemInfo.incredients)}g
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={2}
+                  className={classes.nutritionCard}
+                  style={{
+                    backgroundColor: '#90ee90',
+                    maxWidth: '4rem',
+                  }}
+                >
+                  <Typography variant="body2">{'Chất xơ'}</Typography>
+                  <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                    {totalFiber(itemInfo.incredients)}g
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid
-                item
-                xs={2}
-                className={classes.nutritionCard}
-                style={{
-                  backgroundColor: '#0abfc8',
-                  maxWidth: '3.5rem',
-                }}
-              >
-                <Typography variant="body2">{'Carb'}</Typography>
-                <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-                  {'21g'}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                md={2}
-                xs={3}
-                className={classes.nutritionCard}
-                style={{
-                  backgroundColor: '#ffcccb',
-                }}
-              >
-                <Typography variant="body2">{'Chất béo'}</Typography>
-                <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-                  {'2g'}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                md={2}
-                xs={3}
-                className={classes.nutritionCard}
-                style={{
-                  backgroundColor: '#f84',
-                }}
-              >
-                <Typography variant="body2">{'Béo bão hòa'}</Typography>
-                <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-                  {'25g'}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                xs={2}
-                className={classes.nutritionCard}
-                style={{
-                  backgroundColor: '#CF9FFF',
-                  maxWidth: '4rem',
-                }}
-              >
-                <Typography variant="body2">{'Protein'}</Typography>
-                <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-                  {'23g'}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                xs={2}
-                className={classes.nutritionCard}
-                style={{
-                  backgroundColor: '#90ee90',
-                  maxWidth: '4rem',
-                }}
-              >
-                <Typography variant="body2">{'Chất xơ'}</Typography>
-                <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-                  {'12g'}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
+            </Box>
+          )}
         </div>
 
         <AppBar
