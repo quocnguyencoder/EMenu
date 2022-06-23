@@ -72,7 +72,6 @@ const AddReview = ({ placeID }: Props) => {
         <Rating
           value={ratingValue}
           name="rating input"
-          precision={0.5}
           size="large"
           onChange={(event, newValue) => {
             openModalWithRating(newValue || 0)

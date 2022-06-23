@@ -18,4 +18,16 @@ const getGetAllUserOrders = async (userID: string) => {
   return orders
 }
 
-export { getGetAllUserOrders }
+const uploadFeedback = async (
+  billID: string,
+  rating: number,
+  content: string
+) => {
+  firebase
+    .firestore()
+    .collection('bill')
+    .doc(billID)
+    .update({ [`feedback.content`]: content, [`feedback.rating`]: rating })
+}
+
+export { getGetAllUserOrders, uploadFeedback }

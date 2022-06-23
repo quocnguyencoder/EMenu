@@ -2,7 +2,6 @@ import {
   Box,
   Card,
   CardContent,
-  CardMedia,
   IconButton,
   Typography,
 } from '@material-ui/core'
@@ -10,23 +9,33 @@ import React, { useState } from 'react'
 import { useStyles } from '@/styles/placeList'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import { Place } from '@/models/place'
+import { Coordinate, Place } from '@/models/place'
 import { toAvgRating } from 'helpers/toAvgRating'
 import Link from 'next/link'
 import * as ROUTES from '@/constants/routes'
 import useUser from '@/firebase/useUser'
 import { addToSaved, removeFromSaved } from '@/services/user'
 import LoginRequiredDialog from '../common/LoginRequiredDialog'
+import Image from 'next/image'
+import calcCrow from '@/functions/distanceCalc'
 
 interface Props {
   place: Place
+  currentPosition: Coordinate
 }
 
-const PlaceCard = ({ place }: Props) => {
+const PlaceCard = ({ place, currentPosition }: Props) => {
   const classes = useStyles()
   const { user } = useUser()
   const [openDialog, setOpenDialog] = useState(false)
-  const distance = 0.1
+  const distance = Math.floor(
+    calcCrow(
+      currentPosition.lat,
+      currentPosition.lng,
+      place.location.lat,
+      place.location.lng
+    )
+  )
   const ratingsCount = place.rating ? Object.keys(place.rating).length : 0
   const avgRating = place.rating ? toAvgRating(place.rating) : 0
 
@@ -48,22 +57,14 @@ const PlaceCard = ({ place }: Props) => {
   }
 
   return (
-    <Card
-      style={{
-        minWidth: '20rem',
-        maxWidth: '25rem',
-        height: '14rem',
-        backgroundColor: '#fff',
-        cursor: 'pointer',
-      }}
-      elevation={0}
-    >
-      <CardMedia
+    <Card className={classes.cardWrapper} elevation={0}>
+      <Image
         src={place.image}
-        title={`${place.name}`}
-        component="img"
-        height="100%"
-        style={{ maxHeight: '10rem', borderRadius: '5px' }}
+        alt={`${place.name}`}
+        height="50%"
+        width="100%"
+        layout="responsive"
+        className={classes.cardImage}
       />
       <Box display="flex" justifyContent="space-between">
         <CardContent style={{ padding: '0.7rem 0 0 0' }}>

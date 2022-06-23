@@ -14,13 +14,8 @@ import match from 'autosuggest-highlight/match'
 import { useState } from 'react'
 import router from 'next/router'
 import * as ROUTES from '@/constants/routes'
-
-interface Location {
-  street: string
-  ward: string
-  city: string
-  slug: string
-}
+import { addresses } from '@/constants/mockAddresses'
+import { Address } from '@/models/address'
 
 interface Highlight {
   text: string
@@ -29,88 +24,7 @@ interface Highlight {
 
 const AddressInput = () => {
   const classes = useStyles()
-  const location: Location[] = [
-    {
-      street: '54A Nguyễn Chí Thanh',
-      ward: 'Phường Láng Thượng, Quận Đống Đa',
-      city: 'Hà Nội',
-      slug: 'ha-noi',
-    },
-    {
-      street: 'T 1, Toà 170 La Thành',
-      ward: 'P. Ô Chợ Dừa, Q. Đống Đa',
-      city: 'Hà Nội',
-      slug: 'ha-noi',
-    },
-    {
-      street: '29 Liễu Giai',
-      ward: 'P. Ngọc Khánh, Q. Ba Đình',
-      city: 'Hà Nội',
-      slug: 'ha-noi',
-    },
-    {
-      street: '46 Thanh Nhàn',
-      ward: 'Hai Bà Trưng',
-      city: 'Hà Nội',
-      slug: 'ha-noi',
-    },
-    {
-      street: '131 Nguyễn Văn Cừ',
-      ward: 'Phường Ngọc Lâm, Quận Long Biên',
-      city: 'Hà Nội',
-      slug: 'ha-noi',
-    },
-    {
-      street: '101 Huỳnh Thúc Kháng',
-      ward: 'P.Tân Lập',
-      city: 'Nha Trang',
-      slug: 'nha-trang',
-    },
-    {
-      street: '09 Pasteur',
-      ward: 'P. Xương Huân',
-      city: 'Nha Trang',
-      slug: 'nha-trang',
-    },
-    {
-      street: '166 Nguyễn Thái Học',
-      ward: 'P.Tân Lập',
-      city: 'Nha Trang',
-      slug: 'nha-trang',
-    },
-    {
-      street: '1/6 Võ Thị Sáu',
-      ward: 'P.Vĩnh Trường',
-      city: 'Nha Trang',
-      slug: 'nha-trang',
-    },
-    {
-      street: '18 Hai Bà Trưng ',
-      ward: 'Phường Bến Nghé, Quận 1',
-      city: 'TP Hồ Chí Minh',
-      slug: 'tp-ho-chi-minh',
-    },
-    {
-      street: '114 Trần Đình Xu',
-      ward: 'Phường Nguyễn Cư Trinh, Quận 1',
-      city: 'TP Hồ Chí Minh',
-      slug: 'tp-ho-chi-minh',
-    },
-    {
-      street: '424 Nguyễn Thị Minh Khai',
-      ward: 'Phường 5, Quận 3',
-      city: 'TP Hồ Chí Minh',
-      slug: 'tp-ho-chi-minh',
-    },
-    {
-      street: '226 Cách Mạng Tháng 8',
-      ward: 'Phường 10, Quận 3',
-      city: 'TP Hồ Chí Minh',
-      slug: 'tp-ho-chi-minh',
-    },
-  ]
-
-  const [searchValue, setSearchValue] = useState<Location | null>(null)
+  const [searchValue, setSearchValue] = useState<Address | null>(null)
   const [inputValue, setInputValue] = useState('')
 
   return (
@@ -120,11 +34,11 @@ const AddressInput = () => {
         disableListWrap
         selectOnFocus
         noOptionsText={<Typography>{'Không tìm thấy kết quả'}</Typography>}
-        options={location}
+        options={addresses}
         getOptionLabel={(option) =>
           `${option.street}, ${option.ward}, ${option.city}`
         }
-        onChange={(event, newSearchValue: Location | null) => {
+        onChange={(event, newSearchValue: Address | null) => {
           setSearchValue(newSearchValue)
         }}
         getOptionSelected={(option, value) =>
@@ -164,10 +78,15 @@ const AddressInput = () => {
             endAdornment={
               <ButtonBase
                 className={classes.searchButton}
-                onClick={() =>
-                  searchValue &&
-                  router.push(ROUTES.EXPLORE_LOCATION(searchValue.slug))
-                }
+                onClick={() => {
+                  if (searchValue) {
+                    sessionStorage.setItem(
+                      'currentAddress',
+                      JSON.stringify(searchValue)
+                    )
+                    router.push(ROUTES.EXPLORE_LOCATION(searchValue.slug))
+                  }
+                }}
               >
                 <Typography variant="body2" className={classes.buttonFullText}>
                   {'Khám phá khu vực'}

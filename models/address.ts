@@ -1,8 +1,9 @@
 import { Coordinate } from './place'
 
-export interface Location {
+export interface Address {
+  street: string
+  ward: string
+  city: string
   slug: string
-  name: string
   coordinate: Coordinate
-  places: string[]
 }

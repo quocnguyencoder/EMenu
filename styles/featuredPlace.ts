@@ -72,4 +72,8 @@ export const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
     },
   },
+  image: {
+    objectFit: 'fill',
+    borderRadius: '5px',
+  },
 }))
