@@ -16,6 +16,7 @@ import * as ROUTES from '@/constants/routes'
 import isEqual from 'lodash/isEqual'
 import firebase from 'firebase/app'
 import { NextSeo } from 'next-seo'
+import RatedOrder from '@/components/AdminPage/RatedOrder'
 
 export default function Admin() {
   const [value, setValue] = useState({ val: 'Tổng quan', selected: 0 })
@@ -66,6 +67,9 @@ export default function Admin() {
           </TabPanel>
           <TabPanel value={value.val} index="Quản lí đơn hàng">
             <OrderManagement place={place} />
+          </TabPanel>
+          <TabPanel value={value.val} index="Thống kê đơn hàng">
+            <RatedOrder place={place} />
           </TabPanel>
         </Grid>
       </Grid>
