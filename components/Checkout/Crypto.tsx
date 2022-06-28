@@ -26,7 +26,7 @@ const Crypto = ({ userID, items, total, handlePayment }: Props) => {
   const handleCryptoPayment = async () => {
     try {
       if (!(window as any).ethereum) {
-        setErrorMessage('KHông tìm thấy ví tiền ảo. Vui lòng cài đặt Metamask!')
+        setErrorMessage('Không tìm thấy ví tiền ảo. Vui lòng cài đặt Metamask!')
         setOpenErrorDialog(true)
       } else {
         await (window as any).ethereum.send('eth_requestAccounts')

@@ -1,6 +1,6 @@
 import { Place } from '@/models/place'
 import { Box, Chip, Divider, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import { useStyles } from '@/styles/detail'
 import { useTheme } from '@material-ui/core/styles'
@@ -12,6 +12,9 @@ import { addToSaved, removeFromSaved } from '@/services/user'
 import LoginRequiredDialog from '../common/LoginRequiredDialog'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import PlaceInfoModal from './PlaceInfoModal'
+import { Address } from '@/models/address'
+import isEqual from 'lodash/isEqual'
+import calcCrow from '@/functions/distanceCalc'
 
 interface Props {
   place_data: Place
@@ -47,6 +50,16 @@ const PlaceInfo = ({ place_data }: Props) => {
     setOpenDialog(false)
   }
 
+  const [currentAddress, setCurrentAddress] = useState<Address>({} as Address)
+
+  useEffect(() => {
+    setCurrentAddress(
+      JSON.parse(sessionStorage.getItem('currentAddress') || '{}') as Address
+    )
+  }, [])
+
+  const noAddressProvided = isEqual(currentAddress, {})
+
   return (
     <Box className={classes.infoWrapper}>
       <Typography variant="h4" style={{ fontWeight: 'bold' }}>
@@ -58,7 +71,18 @@ const PlaceInfo = ({ place_data }: Props) => {
             {`${place_data.type} ${isMobile ? '' : '•'}`}&nbsp;
           </Typography>
           <Typography variant="body2">
-            {` ${avgRating} ★ (${ratingsCount}) • 0.5km • $$`}
+            {` ${avgRating} ★ (${ratingsCount})  ${
+              !noAddressProvided
+                ? `• ${Math.floor(
+                    calcCrow(
+                      currentAddress.coordinate.lat,
+                      currentAddress.coordinate.lng,
+                      place_data.location.lat,
+                      place_data.location.lng
+                    )
+                  )}km `
+                : ''
+            }• ₫₫`}
           </Typography>
         </Box>
         <Box
