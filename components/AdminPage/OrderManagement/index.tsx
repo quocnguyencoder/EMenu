@@ -12,8 +12,6 @@ import moneyFormatter from '@/functions/moneyFormatter'
 import AutorenewIcon from '@material-ui/icons/Autorenew'
 import Chip, { ChipProps } from '@material-ui/core/Chip'
 import { blue, green } from '@material-ui/core/colors'
-// import CheckCircleIcon from '@material-ui/icons/CheckCircle'
-// import * as updateService from '@/firebase/updateDocument'
 import moment from 'moment'
 import ModalBillDetail from './ModalBillDetail'
 
@@ -53,11 +51,6 @@ const OrderManagement: React.FC<Props> = ({ place }: Props) => {
     })
   }
   const columns: GridColDef[] = [
-    // {
-    //   field: `billID`,
-    //   headerName: `Đơn đặt hàng`,
-    //   flex: 1,
-    // },
     {
       field: `buyerName`,
       headerName: `Người đặt hàng`,
