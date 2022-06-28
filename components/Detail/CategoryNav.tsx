@@ -55,6 +55,7 @@ const CategoryNav = ({
             overflow: 'auto',
             padding: 0,
           }}
+          component="div"
           id="categories-nav-list"
         >
           {categories &&

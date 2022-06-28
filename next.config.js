@@ -11,4 +11,5 @@ module.exports = withPWA({
     loader: 'imgix',
     path: '',
   },
+  productionBrowserSourceMaps: true,
 })
