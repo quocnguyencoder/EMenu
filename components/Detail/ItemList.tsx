@@ -64,6 +64,7 @@ const ItemList = ({
     <div id={`menu-category-${categoryID}`} ref={observe}>
       <Typography
         variant="h6"
+        component="h4"
         style={{ fontWeight: 'bold', margin: '1rem 0 0.5rem 0' }}
       >
         {category.name}

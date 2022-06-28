@@ -32,7 +32,7 @@ const TopReviews = ({ placeID, ratings, reviews }: Props) => {
       flexDirection="column"
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+        <Typography variant="h6" component="h2" style={{ fontWeight: 'bold' }}>
           {ratingsCount !== 0
             ? 'Các bài đánh giá hàng đầu'
             : 'Hãy là người đầu tiên đánh giá địa điểm này'}
@@ -51,6 +51,7 @@ const TopReviews = ({ placeID, ratings, reviews }: Props) => {
           clickable
           onClick={() => router.push(ROUTES.PLACE_REVIEWS(placeID))}
           className={classes.chip}
+          aria-label="view more reviews"
         />
       </Box>
       <Box display="flex" alignItems="center">
@@ -60,7 +61,6 @@ const TopReviews = ({ placeID, ratings, reviews }: Props) => {
         <StarOutlinedIcon fontSize="small" style={{ color: '#f7ac0a' }} />
         <Typography
           variant="body1"
-          color="secondary"
           style={{ marginLeft: '0.5rem', fontWeight: 500 }}
         >
           {`${ratingsCount} đánh giá`}

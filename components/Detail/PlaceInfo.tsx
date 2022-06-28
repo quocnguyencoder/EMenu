@@ -54,10 +54,10 @@ const PlaceInfo = ({ place_data }: Props) => {
       </Typography>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" className={classes.description}>
-          <Typography variant="body2" color="textSecondary" noWrap>
+          <Typography variant="body2" noWrap>
             {`${place_data.type} ${isMobile ? '' : '•'}`}&nbsp;
           </Typography>
-          <Typography variant="body2" color="textSecondary">
+          <Typography variant="body2">
             {` ${avgRating} ★ (${ratingsCount}) • 0.5km • $$`}
           </Typography>
         </Box>
@@ -80,6 +80,7 @@ const PlaceInfo = ({ place_data }: Props) => {
             clickable
             onClick={() => setOpenModal(true)}
             className={classes.chip}
+            aria-label="more info"
           />
           <Chip
             label={
@@ -99,6 +100,7 @@ const PlaceInfo = ({ place_data }: Props) => {
             clickable
             onClick={() => handleToggleSave()}
             className={classes.chip}
+            aria-label="save"
           />
         </Box>
       </Box>

@@ -76,11 +76,11 @@ const AddReview = ({ placeID }: Props) => {
           onChange={(event, newValue) => {
             openModalWithRating(newValue || 0)
           }}
-          emptyIcon={<StarBorderIcon fontSize="inherit" />}
+          emptyIcon={
+            <StarBorderIcon style={{ color: 'black' }} fontSize="inherit" />
+          }
         />
-        <Typography variant="body2" color="secondary">
-          Viết bài đánh giá
-        </Typography>
+        <Typography variant="body2">Viết bài đánh giá</Typography>
       </Paper>
       <ReviewModal
         placeID={placeID}

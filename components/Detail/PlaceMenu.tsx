@@ -18,7 +18,7 @@ const PlaceMenu = ({ menu, categories, placeID }: Props) => {
   )
   return (
     <Box display="flex" flexDirection="column" className={classes.menuWrapper}>
-      <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+      <Typography variant="h5" component="h3" style={{ fontWeight: 'bold' }}>
         Thực đơn
       </Typography>
       <CategoryNav

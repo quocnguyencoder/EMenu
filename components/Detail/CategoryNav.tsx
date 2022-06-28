@@ -70,11 +70,14 @@ const CategoryNav = ({
                   smooth={true}
                   offset={-100}
                   duration={500}
+                  href={`#menu-category-${categoryID}`}
+                  style={{ textDecoration: 'none', color: 'black' }}
                 >
                   <ListItem
                     style={{
                       cursor: 'pointer',
                     }}
+                    component="nav"
                     id={`category-nav-item-${categoryID}`}
                     onClick={() => setSelectedCategory(categoryID)}
                   >
