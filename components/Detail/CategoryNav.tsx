@@ -88,6 +88,7 @@ const CategoryNav = ({
                           variant="body2"
                           style={{
                             fontWeight: isSelected(categoryID) ? 'bold' : 500,
+                            color: isSelected(categoryID) ? '#D4451B' : '#000',
                           }}
                         >
                           {categories[categoryID].name}

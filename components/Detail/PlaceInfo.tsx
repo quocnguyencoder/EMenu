@@ -15,6 +15,7 @@ import PlaceInfoModal from './PlaceInfoModal'
 import { Address } from '@/models/address'
 import isEqual from 'lodash/isEqual'
 import calcCrow from '@/functions/distanceCalc'
+import { toAvgPrice } from '@/helpers/toAvgPrice'
 
 interface Props {
   place_data: Place
@@ -82,7 +83,7 @@ const PlaceInfo = ({ place_data }: Props) => {
                     )
                   )}km `
                 : ''
-            }• ₫₫`}
+            }• ${'₫'.repeat(toAvgPrice(place_data.menu))}`}
           </Typography>
         </Box>
         <Box
