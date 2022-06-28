@@ -11,6 +11,7 @@ import useUser from '@/firebase/useUser'
 import { addToSaved, removeFromSaved } from '@/services/user'
 import LoginRequiredDialog from '../common/LoginRequiredDialog'
 import FavoriteIcon from '@material-ui/icons/Favorite'
+import PlaceInfoModal from './PlaceInfoModal'
 
 interface Props {
   place_data: Place
@@ -22,6 +23,7 @@ const PlaceInfo = ({ place_data }: Props) => {
   const { user } = useUser()
   const [openDialog, setOpenDialog] = useState(false)
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const [openModal, setOpenModal] = useState(false)
 
   const ratingsCount = place_data.rating
     ? Object.keys(place_data.rating).length
@@ -76,6 +78,7 @@ const PlaceInfo = ({ place_data }: Props) => {
               </Box>
             }
             clickable
+            onClick={() => setOpenModal(true)}
             className={classes.chip}
           />
           <Chip
@@ -101,6 +104,11 @@ const PlaceInfo = ({ place_data }: Props) => {
       </Box>
       <LoginRequiredDialog open={openDialog} handleClose={handleCloseDialog} />
       <Divider style={{ marginTop: '2.3rem' }} />
+      <PlaceInfoModal
+        open={openModal}
+        handleClose={() => setOpenModal(false)}
+        placeInfo={place_data}
+      />
     </Box>
   )
 }
