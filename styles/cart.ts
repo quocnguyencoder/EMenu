@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   cartIconButton: {
-    backgroundColor: '#ed4c07',
+    backgroundColor: '#D4451B',
     color: '#fff',
     borderRadius: '15px',
     maxHeight: '30px',
