@@ -14,11 +14,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { useStyles } from '@/styles/explore'
 
 interface Props {
-  distanceFilter: { show: boolean; distance: number }
-  setDistanceFilter: (ratingFilter: { show: boolean; distance: number }) => void
+  priceFilter: { show: boolean; price: number }
+  setPriceFilter: (priceFilter: { show: boolean; price: number }) => void
 }
 
-const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
+const PriceFilter = ({ priceFilter, setPriceFilter }: Props) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
@@ -31,28 +31,32 @@ const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
   }
 
   const open = Boolean(anchorEl)
-  const id = open ? 'filter-by-distance' : undefined
+  const id = open ? 'filter-by-price' : undefined
 
   const marks = [
     {
-      value: 1,
-      label: '1',
+      value: 20000,
+      label: '20k',
     },
     {
-      value: 2,
-      label: '2',
+      value: 80000,
+      label: '80k',
     },
     {
-      value: 3,
-      label: '3',
+      value: 150000,
+      label: '150k',
     },
     {
-      value: 4,
-      label: '4',
+      value: 250000,
+      label: '250k',
     },
     {
-      value: 5,
-      label: '5',
+      value: 350000,
+      label: '350k',
+    },
+    {
+      value: 450000,
+      label: '450k',
     },
   ]
 
@@ -60,9 +64,7 @@ const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
     return `under ${value}`
   }
 
-  const [selectedDistance, setSelectedDistance] = useState(
-    distanceFilter.distance
-  )
+  const [selectedPrice, setSelectedPrice] = useState(priceFilter.price)
 
   return (
     <Box>
@@ -73,20 +75,12 @@ const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
               variant="body2"
               style={{
                 fontWeight: 'bold',
-                color: distanceFilter.show ? 'white' : 'black',
+                color: priceFilter.show ? 'white' : 'black',
               }}
             >
-              {`Dưới ${distanceFilter.distance}km`}
+              {`Giá`}
             </Typography>
-            <Divider
-              orientation="vertical"
-              flexItem
-              style={{
-                backgroundColor: distanceFilter.show
-                  ? 'white'
-                  : 'rgba(0, 0, 0, 0.12)',
-              }}
-            />
+
             <IconButton
               aria-label="expand-rating-filter"
               onClick={(e) => {
@@ -95,7 +89,7 @@ const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
               }}
               style={{
                 padding: '0',
-                color: distanceFilter.show ? 'white' : 'black',
+                color: priceFilter.show ? 'white' : 'black',
               }}
             >
               <ExpandMoreIcon />
@@ -105,13 +99,11 @@ const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
         clickable
         component="span"
         onClick={() =>
-          setDistanceFilter({ ...distanceFilter, show: !distanceFilter.show })
+          setPriceFilter({ ...priceFilter, show: !priceFilter.show })
         }
         aria-describedby={id}
         style={{
-          backgroundColor: distanceFilter.show
-            ? '#D4451B'
-            : 'rgb(231, 231, 231)',
+          backgroundColor: priceFilter.show ? '#D4451B' : 'rgb(231, 231, 231)',
         }}
       />
       <Popover
@@ -130,24 +122,24 @@ const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
       >
         <Paper className={classes.popoverPaper}>
           <Typography variant="h6" style={{ fontWeight: 'bold' }}>
-            Khoảng cách
+            Giá
           </Typography>
           <Typography
             variant="body2"
             style={{ fontWeight: 'bold', color: 'gray' }}
           >
-            {`Dưới ${selectedDistance} km`}
+            {`Trung bình dưới ${selectedPrice / 1000}k`}
           </Typography>
           <Slider
-            value={selectedDistance}
+            value={selectedPrice}
             aria-labelledby="rating-slider"
-            step={null}
+            step={1000}
             valueLabelDisplay="off"
             marks={marks}
             getAriaValueText={valuetext}
-            min={1}
-            max={5}
-            onChange={(event, value) => setSelectedDistance(Number(value))}
+            min={20000}
+            max={500000}
+            onChange={(event, value) => setSelectedPrice(Number(value))}
           />
           <Divider />
           <Box
@@ -170,7 +162,7 @@ const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
               color="primary"
               aria-label="Apply rating filter"
               onClick={() => {
-                setDistanceFilter({ show: true, distance: selectedDistance })
+                setPriceFilter({ show: true, price: selectedPrice })
                 handleClose()
               }}
               style={{ textTransform: 'none', borderRadius: '16px' }}
@@ -184,4 +176,4 @@ const DistanceFilter = ({ distanceFilter, setDistanceFilter }: Props) => {
   )
 }
 
-export default DistanceFilter
+export default PriceFilter

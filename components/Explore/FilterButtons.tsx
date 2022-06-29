@@ -1,8 +1,8 @@
-import { Box, Chip, Typography, IconButton } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import React from 'react'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import RatingFilter from './RatingFilter'
 import DistanceFilter from './DistanceFilter'
+import PriceFilter from './PriceFilter'
 
 interface Props {
   ratingFilter: { show: boolean; rating: number }
@@ -12,6 +12,8 @@ interface Props {
     show: boolean
     distance: number
   }) => void
+  priceFilter: { show: boolean; price: number }
+  setPriceFilter: (priceFilter: { show: boolean; price: number }) => void
 }
 
 const FilterButtons = ({
@@ -19,6 +21,8 @@ const FilterButtons = ({
   setRatingFilter,
   distanceFilter,
   setDistanceFilter,
+  priceFilter,
+  setPriceFilter,
 }: Props) => {
   return (
     <Box display="flex" overflow="auto" paddingTop="1rem" style={{ gap: '2%' }}>
@@ -30,26 +34,7 @@ const FilterButtons = ({
         distanceFilter={distanceFilter}
         setDistanceFilter={setDistanceFilter}
       />
-      <Chip
-        label={
-          <Box display="flex" alignItems="center" style={{ gap: '4%' }}>
-            <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-              Giá
-            </Typography>
-            <IconButton
-              aria-label="expand-price-filter"
-              style={{ padding: '0', color: 'black' }}
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </Box>
-        }
-        aria-label="expand-price-filter"
-        clickable
-        style={{
-          backgroundColor: 'rgb(231, 231, 231)',
-        }}
-      />
+      <PriceFilter priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
     </Box>
   )
 }

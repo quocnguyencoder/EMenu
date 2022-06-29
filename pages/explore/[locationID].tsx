@@ -15,6 +15,7 @@ import { Address } from '@/models/address'
 import isEqual from 'lodash/isEqual'
 import { toAvgRating } from '@/helpers/toAvgRating'
 import calcCrow from '@/functions/distanceCalc'
+import { toAvgPriceNum } from '@/helpers/toAvgPrice'
 
 interface Props {
   status: number
@@ -48,10 +49,14 @@ const index = ({ status, location, places }: Props) => {
     show: false,
     distance: 1,
   })
+  const [priceFilter, setPriceFilter] = useState({ show: false, price: 50000 })
   const [results, setResults] = useState<Place[]>([])
 
   const showResults =
-    selectedCategory !== '' || ratingFilter.show || distanceFilter.show
+    selectedCategory !== '' ||
+    ratingFilter.show ||
+    distanceFilter.show ||
+    priceFilter.show
   const filterResults = () => {
     let res = [...places]
     if (selectedCategory !== '') {
@@ -71,6 +76,11 @@ const index = ({ status, location, places }: Props) => {
             place.location.lat,
             place.location.lng
           ) <= distanceFilter.distance
+      )
+    }
+    if (priceFilter.show) {
+      res = res.filter(
+        (place) => toAvgPriceNum(place.menu) <= priceFilter.price
       )
     }
     return res
@@ -107,6 +117,8 @@ const index = ({ status, location, places }: Props) => {
         setRatingFilter={setRatingFilter}
         distanceFilter={distanceFilter}
         setDistanceFilter={setDistanceFilter}
+        priceFilter={priceFilter}
+        setPriceFilter={setPriceFilter}
       />
       {showResults && (
         <PlaceList
