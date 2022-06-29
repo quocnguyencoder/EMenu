@@ -46,7 +46,7 @@ const Login = () => {
         }}
       >
         <Image
-          src="./logo.png"
+          src="https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Flogo.png?alt=media&token=7d77c9ca-efa5-41be-8070-7d28a9999938"
           alt="Picture of the author"
           width={110}
           height={50}
