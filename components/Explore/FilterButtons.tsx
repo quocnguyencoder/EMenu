@@ -2,29 +2,33 @@ import { Box, Chip, Typography, IconButton } from '@material-ui/core'
 import React from 'react'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import RatingFilter from './RatingFilter'
+import DistanceFilter from './DistanceFilter'
 
 interface Props {
   ratingFilter: { show: boolean; rating: number }
   setRatingFilter: (ratingFilter: { show: boolean; rating: number }) => void
+  distanceFilter: { show: boolean; distance: number }
+  setDistanceFilter: (distanceFilter: {
+    show: boolean
+    distance: number
+  }) => void
 }
 
-const FilterButtons = ({ ratingFilter, setRatingFilter }: Props) => {
+const FilterButtons = ({
+  ratingFilter,
+  setRatingFilter,
+  distanceFilter,
+  setDistanceFilter,
+}: Props) => {
   return (
     <Box display="flex" overflow="auto" paddingTop="1rem" style={{ gap: '2%' }}>
       <RatingFilter
         ratingFilter={ratingFilter}
         setRatingFilter={setRatingFilter}
       />
-      <Chip
-        label={
-          <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-            Gần bạn
-          </Typography>
-        }
-        clickable
-        style={{
-          backgroundColor: 'rgb(231, 231, 231)',
-        }}
+      <DistanceFilter
+        distanceFilter={distanceFilter}
+        setDistanceFilter={setDistanceFilter}
       />
       <Chip
         label={

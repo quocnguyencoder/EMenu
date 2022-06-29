@@ -14,6 +14,7 @@ import { orderByDistance, orderByRating } from '@/functions/sortPlace'
 import { Address } from '@/models/address'
 import isEqual from 'lodash/isEqual'
 import { toAvgRating } from '@/helpers/toAvgRating'
+import calcCrow from '@/functions/distanceCalc'
 
 interface Props {
   status: number
@@ -43,9 +44,14 @@ const index = ({ status, location, places }: Props) => {
 
   const [selectedCategory, setSelectedCategory] = useState('')
   const [ratingFilter, setRatingFilter] = useState({ show: false, rating: 4 })
+  const [distanceFilter, setDistanceFilter] = useState({
+    show: false,
+    distance: 1,
+  })
   const [results, setResults] = useState<Place[]>([])
 
-  const showResults = selectedCategory !== '' || ratingFilter.show
+  const showResults =
+    selectedCategory !== '' || ratingFilter.show || distanceFilter.show
   const filterResults = () => {
     let res = [...places]
     if (selectedCategory !== '') {
@@ -56,12 +62,23 @@ const index = ({ status, location, places }: Props) => {
         (place) => toAvgRating(place.rating) >= ratingFilter.rating
       )
     }
+    if (distanceFilter.show) {
+      res = res.filter(
+        (place) =>
+          calcCrow(
+            currentPosition.lat,
+            currentPosition.lng,
+            place.location.lat,
+            place.location.lng
+          ) <= distanceFilter.distance
+      )
+    }
     return res
   }
 
   useEffect(() => {
     showResults && setResults(filterResults())
-  }, [selectedCategory, ratingFilter])
+  }, [selectedCategory, ratingFilter, distanceFilter])
 
   return locationFound ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>
@@ -88,6 +105,8 @@ const index = ({ status, location, places }: Props) => {
       <FilterButtons
         ratingFilter={ratingFilter}
         setRatingFilter={setRatingFilter}
+        distanceFilter={distanceFilter}
+        setDistanceFilter={setDistanceFilter}
       />
       {showResults && (
         <PlaceList
