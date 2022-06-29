@@ -1,29 +1,19 @@
-import { Box, Chip, Typography, Divider, IconButton } from '@material-ui/core'
+import { Box, Chip, Typography, IconButton } from '@material-ui/core'
 import React from 'react'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import RatingFilter from './RatingFilter'
 
-const FilterButtons = () => {
+interface Props {
+  ratingFilter: { show: boolean; rating: number }
+  setRatingFilter: (ratingFilter: { show: boolean; rating: number }) => void
+}
+
+const FilterButtons = ({ ratingFilter, setRatingFilter }: Props) => {
   return (
     <Box display="flex" overflow="auto" paddingTop="1rem" style={{ gap: '2%' }}>
-      <Chip
-        label={
-          <Box display="flex" alignItems="center" style={{ gap: '4%' }}>
-            <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-              Trên 4.5 ★
-            </Typography>
-            <Divider orientation="vertical" flexItem />
-            <IconButton
-              aria-label="expand-rating-filter"
-              style={{ padding: '0', color: 'black' }}
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </Box>
-        }
-        clickable
-        style={{
-          backgroundColor: 'rgb(231, 231, 231)',
-        }}
+      <RatingFilter
+        ratingFilter={ratingFilter}
+        setRatingFilter={setRatingFilter}
       />
       <Chip
         label={

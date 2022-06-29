@@ -13,6 +13,7 @@ import FilterButtons from '@/components/Explore/FilterButtons'
 import { orderByDistance, orderByRating } from '@/functions/sortPlace'
 import { Address } from '@/models/address'
 import isEqual from 'lodash/isEqual'
+import { toAvgRating } from '@/helpers/toAvgRating'
 
 interface Props {
   status: number
@@ -41,14 +42,26 @@ const index = ({ status, location, places }: Props) => {
       }
 
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [ratingFilter, setRatingFilter] = useState({ show: false, rating: 4 })
   const [results, setResults] = useState<Place[]>([])
 
-  useEffect(() => {
-    selectedCategory !== '' &&
-      setResults(
-        places.filter((place) => place.tags.includes(selectedCategory))
+  const showResults = selectedCategory !== '' || ratingFilter.show
+  const filterResults = () => {
+    let res = [...places]
+    if (selectedCategory !== '') {
+      res = res.filter((place) => place.tags.includes(selectedCategory))
+    }
+    if (ratingFilter.show) {
+      res = res.filter(
+        (place) => toAvgRating(place.rating) >= ratingFilter.rating
       )
-  }, [selectedCategory])
+    }
+    return res
+  }
+
+  useEffect(() => {
+    showResults && setResults(filterResults())
+  }, [selectedCategory, ratingFilter])
 
   return locationFound ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>
@@ -72,11 +85,14 @@ const index = ({ status, location, places }: Props) => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <FilterButtons />
-      {selectedCategory !== '' && (
+      <FilterButtons
+        ratingFilter={ratingFilter}
+        setRatingFilter={setRatingFilter}
+      />
+      {showResults && (
         <PlaceList
-          title={`${results.length} kết quả cho ${selectedCategory}`}
-          places={results}
+          title={`${results.length} kết quả`}
+          places={filterResults()}
           currentPosition={currentPosition}
         />
       )}
