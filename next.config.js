@@ -6,9 +6,10 @@ module.exports = withPWA({
     register: true,
     skipWaiting: true,
   },
-
   images: {
     loader: 'imgix',
     path: '',
   },
+  productionBrowserSourceMaps: true,
+  swcMinify: true,
 })

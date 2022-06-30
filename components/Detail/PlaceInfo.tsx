@@ -1,6 +1,6 @@
 import { Place } from '@/models/place'
 import { Box, Chip, Divider, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import { useStyles } from '@/styles/detail'
 import { useTheme } from '@material-ui/core/styles'
@@ -11,6 +11,11 @@ import useUser from '@/firebase/useUser'
 import { addToSaved, removeFromSaved } from '@/services/user'
 import LoginRequiredDialog from '../common/LoginRequiredDialog'
 import FavoriteIcon from '@material-ui/icons/Favorite'
+import PlaceInfoModal from './PlaceInfoModal'
+import { Address } from '@/models/address'
+import isEqual from 'lodash/isEqual'
+import calcCrow from '@/functions/distanceCalc'
+import { toAvgPrice } from '@/helpers/toAvgPrice'
 
 interface Props {
   place_data: Place
@@ -22,6 +27,7 @@ const PlaceInfo = ({ place_data }: Props) => {
   const { user } = useUser()
   const [openDialog, setOpenDialog] = useState(false)
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const [openModal, setOpenModal] = useState(false)
 
   const ratingsCount = place_data.rating
     ? Object.keys(place_data.rating).length
@@ -45,6 +51,16 @@ const PlaceInfo = ({ place_data }: Props) => {
     setOpenDialog(false)
   }
 
+  const [currentAddress, setCurrentAddress] = useState<Address>({} as Address)
+
+  useEffect(() => {
+    setCurrentAddress(
+      JSON.parse(sessionStorage.getItem('currentAddress') || '{}') as Address
+    )
+  }, [])
+
+  const noAddressProvided = isEqual(currentAddress, {})
+
   return (
     <Box className={classes.infoWrapper}>
       <Typography variant="h4" style={{ fontWeight: 'bold' }}>
@@ -52,11 +68,22 @@ const PlaceInfo = ({ place_data }: Props) => {
       </Typography>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" className={classes.description}>
-          <Typography variant="body2" color="textSecondary" noWrap>
+          <Typography variant="body2" noWrap>
             {`${place_data.type} ${isMobile ? '' : '•'}`}&nbsp;
           </Typography>
-          <Typography variant="body2" color="textSecondary">
-            {` ${avgRating} ★ (${ratingsCount}) • 0.5km • $$`}
+          <Typography variant="body2">
+            {` ${avgRating} ★ (${ratingsCount})  ${
+              !noAddressProvided
+                ? `• ${Math.floor(
+                    calcCrow(
+                      currentAddress.coordinate.lat,
+                      currentAddress.coordinate.lng,
+                      place_data.location.lat,
+                      place_data.location.lng
+                    )
+                  )}km `
+                : ''
+            }• ${'₫'.repeat(toAvgPrice(place_data.menu))}`}
           </Typography>
         </Box>
         <Box
@@ -76,7 +103,9 @@ const PlaceInfo = ({ place_data }: Props) => {
               </Box>
             }
             clickable
+            onClick={() => setOpenModal(true)}
             className={classes.chip}
+            aria-label="more info"
           />
           <Chip
             label={
@@ -96,11 +125,17 @@ const PlaceInfo = ({ place_data }: Props) => {
             clickable
             onClick={() => handleToggleSave()}
             className={classes.chip}
+            aria-label="save"
           />
         </Box>
       </Box>
       <LoginRequiredDialog open={openDialog} handleClose={handleCloseDialog} />
       <Divider style={{ marginTop: '2.3rem' }} />
+      <PlaceInfoModal
+        open={openModal}
+        handleClose={() => setOpenModal(false)}
+        placeInfo={place_data}
+      />
     </Box>
   )
 }

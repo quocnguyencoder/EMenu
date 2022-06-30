@@ -19,6 +19,7 @@ import { Location } from '@/models/location'
 import { toAvgRating } from 'helpers/toAvgRating'
 import Link from 'next/link'
 import Image from 'next/image'
+import { toAvgPrice } from '@/helpers/toAvgPrice'
 
 interface Props {
   location: Location
@@ -124,7 +125,7 @@ const FeaturedPlace = ({ location, places }: Props) => {
               <Typography variant="body2" color="textSecondary" component="p">
                 {` ${toAvgRating(place.rating)} ★ ${
                   Object.keys(place.rating).length
-                } đánh giá`}
+                } đánh giá • ${'₫'.repeat(toAvgPrice(place.menu))}`}
               </Typography>
             </CardContent>
           </Card>

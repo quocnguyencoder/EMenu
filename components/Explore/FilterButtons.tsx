@@ -1,61 +1,40 @@
-import { Box, Chip, Typography, Divider, IconButton } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import React from 'react'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import RatingFilter from './RatingFilter'
+import DistanceFilter from './DistanceFilter'
+import PriceFilter from './PriceFilter'
 
-const FilterButtons = () => {
+interface Props {
+  ratingFilter: { show: boolean; rating: number }
+  setRatingFilter: (ratingFilter: { show: boolean; rating: number }) => void
+  distanceFilter: { show: boolean; distance: number }
+  setDistanceFilter: (distanceFilter: {
+    show: boolean
+    distance: number
+  }) => void
+  priceFilter: { show: boolean; price: number }
+  setPriceFilter: (priceFilter: { show: boolean; price: number }) => void
+}
+
+const FilterButtons = ({
+  ratingFilter,
+  setRatingFilter,
+  distanceFilter,
+  setDistanceFilter,
+  priceFilter,
+  setPriceFilter,
+}: Props) => {
   return (
     <Box display="flex" overflow="auto" paddingTop="1rem" style={{ gap: '2%' }}>
-      <Chip
-        label={
-          <Box display="flex" alignItems="center" style={{ gap: '4%' }}>
-            <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-              Trên 4.5 ★
-            </Typography>
-            <Divider orientation="vertical" flexItem />
-            <IconButton
-              aria-label="expand-rating-filter"
-              style={{ padding: '0', color: 'black' }}
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </Box>
-        }
-        clickable
-        style={{
-          backgroundColor: 'rgb(231, 231, 231)',
-        }}
+      <RatingFilter
+        ratingFilter={ratingFilter}
+        setRatingFilter={setRatingFilter}
       />
-      <Chip
-        label={
-          <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-            Gần bạn
-          </Typography>
-        }
-        clickable
-        style={{
-          backgroundColor: 'rgb(231, 231, 231)',
-        }}
+      <DistanceFilter
+        distanceFilter={distanceFilter}
+        setDistanceFilter={setDistanceFilter}
       />
-      <Chip
-        label={
-          <Box display="flex" alignItems="center" style={{ gap: '4%' }}>
-            <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-              Giá
-            </Typography>
-            <IconButton
-              aria-label="expand-price-filter"
-              style={{ padding: '0', color: 'black' }}
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </Box>
-        }
-        aria-label="expand-price-filter"
-        clickable
-        style={{
-          backgroundColor: 'rgb(231, 231, 231)',
-        }}
-      />
+      <PriceFilter priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
     </Box>
   )
 }

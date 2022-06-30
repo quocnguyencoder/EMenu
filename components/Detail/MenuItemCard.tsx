@@ -50,7 +50,7 @@ const MenuItemCard = ({ itemID, itemInfo, addToCart }: Props) => {
                   <Typography
                     component="span"
                     variant="body2"
-                    color="secondary"
+                    style={{ color: 'black' }}
                     className={classes.noWrap2Line}
                   >
                     {itemInfo.description}
@@ -58,8 +58,7 @@ const MenuItemCard = ({ itemID, itemInfo, addToCart }: Props) => {
                   <Typography
                     component="span"
                     variant="body2"
-                    color="secondary"
-                    style={{ fontWeight: 'bold' }}
+                    style={{ fontWeight: 'bold', color: '#D4451B' }}
                   >
                     {`${formatter.format(itemInfo.price)}`}
                   </Typography>

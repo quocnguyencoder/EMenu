@@ -13,6 +13,9 @@ import FilterButtons from '@/components/Explore/FilterButtons'
 import { orderByDistance, orderByRating } from '@/functions/sortPlace'
 import { Address } from '@/models/address'
 import isEqual from 'lodash/isEqual'
+import { toAvgRating } from '@/helpers/toAvgRating'
+import calcCrow from '@/functions/distanceCalc'
+import { toAvgPriceNum } from '@/helpers/toAvgPrice'
 
 interface Props {
   status: number
@@ -41,14 +44,51 @@ const index = ({ status, location, places }: Props) => {
       }
 
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [ratingFilter, setRatingFilter] = useState({ show: false, rating: 4 })
+  const [distanceFilter, setDistanceFilter] = useState({
+    show: false,
+    distance: 1,
+  })
+  const [priceFilter, setPriceFilter] = useState({ show: false, price: 50000 })
   const [results, setResults] = useState<Place[]>([])
 
-  useEffect(() => {
-    selectedCategory !== '' &&
-      setResults(
-        places.filter((place) => place.tags.includes(selectedCategory))
+  const showResults =
+    selectedCategory !== '' ||
+    ratingFilter.show ||
+    distanceFilter.show ||
+    priceFilter.show
+  const filterResults = () => {
+    let res = [...places]
+    if (selectedCategory !== '') {
+      res = res.filter((place) => place.tags.includes(selectedCategory))
+    }
+    if (ratingFilter.show) {
+      res = res.filter(
+        (place) => toAvgRating(place.rating) >= ratingFilter.rating
       )
-  }, [selectedCategory])
+    }
+    if (distanceFilter.show) {
+      res = res.filter(
+        (place) =>
+          calcCrow(
+            currentPosition.lat,
+            currentPosition.lng,
+            place.location.lat,
+            place.location.lng
+          ) <= distanceFilter.distance
+      )
+    }
+    if (priceFilter.show) {
+      res = res.filter(
+        (place) => toAvgPriceNum(place.menu) <= priceFilter.price
+      )
+    }
+    return res
+  }
+
+  useEffect(() => {
+    showResults && setResults(filterResults())
+  }, [selectedCategory, ratingFilter, distanceFilter])
 
   return locationFound ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>
@@ -72,11 +112,18 @@ const index = ({ status, location, places }: Props) => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <FilterButtons />
-      {selectedCategory !== '' && (
+      <FilterButtons
+        ratingFilter={ratingFilter}
+        setRatingFilter={setRatingFilter}
+        distanceFilter={distanceFilter}
+        setDistanceFilter={setDistanceFilter}
+        priceFilter={priceFilter}
+        setPriceFilter={setPriceFilter}
+      />
+      {showResults && (
         <PlaceList
-          title={`${results.length} kết quả cho ${selectedCategory}`}
-          places={results}
+          title={`${results.length} kết quả`}
+          places={filterResults()}
           currentPosition={currentPosition}
         />
       )}

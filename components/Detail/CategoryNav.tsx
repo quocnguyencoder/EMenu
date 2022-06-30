@@ -55,6 +55,7 @@ const CategoryNav = ({
             overflow: 'auto',
             padding: 0,
           }}
+          component="div"
           id="categories-nav-list"
         >
           {categories &&
@@ -69,11 +70,14 @@ const CategoryNav = ({
                   smooth={true}
                   offset={-100}
                   duration={500}
+                  href={`#menu-category-${categoryID}`}
+                  style={{ textDecoration: 'none', color: 'black' }}
                 >
                   <ListItem
                     style={{
                       cursor: 'pointer',
                     }}
+                    component="nav"
                     id={`category-nav-item-${categoryID}`}
                     onClick={() => setSelectedCategory(categoryID)}
                   >
@@ -84,6 +88,7 @@ const CategoryNav = ({
                           variant="body2"
                           style={{
                             fontWeight: isSelected(categoryID) ? 'bold' : 500,
+                            color: isSelected(categoryID) ? '#D4451B' : '#000',
                           }}
                         >
                           {categories[categoryID].name}

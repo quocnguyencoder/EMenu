@@ -49,11 +49,7 @@ const ReviewBlock = ({ reviewID }: Props) => {
           size="small"
           readOnly
         />
-        <Typography
-          variant="body2"
-          color="secondary"
-          style={{ marginLeft: '2%' }}
-        >
+        <Typography variant="body2" style={{ marginLeft: '2%' }}>
           {moment(reviewInfo.date, 'DD MM YYYY, h:mm:ss a').format('l')}
         </Typography>
       </Box>

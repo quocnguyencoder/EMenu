@@ -15,7 +15,7 @@ const HeroImage = () => {
     >
       <Image
         alt="route-image"
-        src="https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=600,height=,format=jpeg,quality=100/https://cdn.doordash.com/static/img/seo/multicuisinea.jpg"
+        src="https://firebasestorage.googleapis.com/v0/b/emenu-43dc6.appspot.com/o/emenu%2Fmulticuisinea.webp?alt=media&token=5454e3d8-89bb-44c5-a771-6597d2ab1dde"
         layout="responsive"
         width="100%"
         height="100%"

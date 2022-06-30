@@ -18,6 +18,7 @@ import { addToSaved, removeFromSaved } from '@/services/user'
 import LoginRequiredDialog from '../common/LoginRequiredDialog'
 import Image from 'next/image'
 import calcCrow from '@/functions/distanceCalc'
+import { toAvgPrice } from '@/helpers/toAvgPrice'
 
 interface Props {
   place: Place
@@ -80,7 +81,9 @@ const PlaceCard = ({ place, currentPosition }: Props) => {
           </Link>
 
           <Typography variant="body2" color="textSecondary">
-            {`${avgRating} ★ ${ratingsCount} đánh giá • ${distance}km • $$`}
+            {`${avgRating} ★ ${ratingsCount} đánh giá • ${distance}km • ${'₫'.repeat(
+              toAvgPrice(place.menu)
+            )}`}
           </Typography>
         </CardContent>
         <IconButton
