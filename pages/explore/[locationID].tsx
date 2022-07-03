@@ -123,7 +123,7 @@ const index = ({ status, location, places }: Props) => {
       {showResults && (
         <PlaceList
           title={`${results.length} kết quả`}
-          places={filterResults()}
+          places={results}
           currentPosition={currentPosition}
         />
       )}
