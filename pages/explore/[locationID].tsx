@@ -88,7 +88,7 @@ const index = ({ status, location, places }: Props) => {
 
   useEffect(() => {
     showResults && setResults(filterResults())
-  }, [selectedCategory, ratingFilter, distanceFilter])
+  }, [selectedCategory, ratingFilter, distanceFilter, priceFilter])
 
   return locationFound ? (
     <Container maxWidth="md" style={{ minWidth: '80vw', minHeight: '85vh' }}>
