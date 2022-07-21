@@ -17,6 +17,7 @@ import Crypto from '@/components/Checkout/Crypto'
 import * as createService from '@/firebase/createDocument'
 import { clearCart } from '@/services/cart'
 import { NextSeo } from 'next-seo'
+import { regexPhoneNumber } from '@/helpers/checkPhoneNum'
 
 const Checkout = () => {
   const [address, setAddress] = useState('Tại quán')
@@ -108,8 +109,8 @@ const Checkout = () => {
           status,
           userID,
           total,
-          address,
-          phone,
+          address.trim(),
+          phone.trim(),
           placeInfo.order
         )
         .then(() => {
@@ -119,7 +120,9 @@ const Checkout = () => {
         })
   }
 
-  const showPaymentButtons = phone !== '' && address !== ''
+  const isValidPhoneNumber = regexPhoneNumber(phone.trim())
+  const isEmptyInputs = phone.trim() === '' || address.trim() === ''
+  const showPaymentButtons = !isEmptyInputs && isValidPhoneNumber
 
   return placeInfo && cartInfo ? (
     <Container maxWidth="sm" style={{ paddingTop: '2rem' }}>
@@ -191,7 +194,13 @@ const Checkout = () => {
                 fontSize: '1rem',
               }}
             >
-              Vui lòng nhập địa chỉ và số điện thoại
+              {isEmptyInputs
+                ? 'Vui lòng nhập đầy đủ địa chỉ và số điện thoại'
+                : address.trim() === ''
+                ? 'Vui lòng nhập địa chỉ'
+                : phone.trim() === ''
+                ? 'Vui lòng nhập số điện thoại'
+                : 'Số điện thoại không hợp lệ'}
             </Button>
           )}
         </>
